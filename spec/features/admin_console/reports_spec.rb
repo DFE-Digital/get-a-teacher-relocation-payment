@@ -11,7 +11,7 @@ describe "Reports - export to CSV" do
 
     and_i_click_on_the_home_office_csv_link
 
-    expect(page.response_headers["Content-Type"]).to match /text\/csv/
+    expect(page.response_headers["Content-Type"]).to match(/text\/csv/)
     expect(page.response_headers["Content-Disposition"]).to include "attachment"
     expect(page.response_headers["Content-Disposition"]).to include 'filename="Home-Office-Report.csv"'
   end
