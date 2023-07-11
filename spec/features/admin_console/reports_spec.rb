@@ -17,7 +17,9 @@ describe "Reports - export to CSV" do
   end
 
   def and_i_click_on_the_home_office_csv_link
-    click_on "Download home office report"
+    within ".home-office" do
+      click_on "Download"
+    end
   end
 
   def when_i_am_in_the_reports_page
