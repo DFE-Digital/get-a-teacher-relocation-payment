@@ -6,12 +6,41 @@ module Reports
       "Home-Office-Report.csv"
     end
 
-    def data
+    def csv
       CSV.generate do |csv|
-        # Add your CSV content here
-        csv << ["Header 1", "Header 2", "Header 3"]
-        csv << ["Data 1", "Data 2", "Data 3"]
+        csv << header
+        rows.each { |row| csv << row }
       end
+    end
+
+  private
+
+    def rows
+      Applicant.all.map do |applicant|
+        [
+          applicant.application.urn,
+          applicant.given_name,
+          applicant.family_name,
+          applicant.date_of_birth,
+          applicant.nationality,
+          applicant.passport_number,
+          applicant.application.visa_type,
+          applicant.application.date_of_entry,
+        ]
+      end
+    end
+
+    def header
+      [
+        "URN",
+        "Forename",
+        "Surname",
+        "DOB",
+        "Nationality",
+        "Passport Number",
+        "Visa Type",
+        "Date of UK entry",
+      ]
     end
   end
 end
