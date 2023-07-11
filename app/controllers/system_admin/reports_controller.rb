@@ -3,7 +3,6 @@ module SystemAdmin
     def index; end
 
     def show
-      headers["Content-Type"] = "text/csv"
       report = find_report(params[:id])
 
       send_data(report.csv, filename: report.name)
