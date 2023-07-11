@@ -16,18 +16,16 @@ module Reports
   private
 
     def rows
-      candidates.all.map do |application|
-        [
-          application.urn,
-          application.applicant.given_name,
-          application.applicant.family_name,
-          application.applicant.date_of_birth,
-          application.applicant.nationality,
-          application.applicant.passport_number,
-          application.visa_type,
-          application.date_of_entry,
-        ]
-      end
+      candidates.pluck(
+        :urn,
+        "applicants.given_name",
+        "applicants.family_name",
+        "applicants.date_of_birth",
+        "applicants.nationality",
+        "applicants.passport_number",
+        :visa_type,
+        :date_of_entry,
+      )
     end
 
     def candidates
