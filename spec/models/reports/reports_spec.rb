@@ -12,8 +12,29 @@ module Reports
     end
 
     describe "#csv" do
+      it "returns applicants who have completed initial checks but not home office checks" do
+        app = create(:application, application_progress: build(:application_progress, :home_office_pending))
+
+        expect(report.csv).to include(app.urn)
+      end
+
+      it "does not return applicants who have not completed initial checks" do
+        app = create(:application, application_progress: build(:application_progress, initial_checks_completed_at: nil))
+
+        expect(report.csv).to_not include(app.urn)
+      end
+
+      it "does not return applicants who have completed home office checks" do
+        app = create(:application, application_progress: build(:application_progress, :initial_checks_completed, home_office_checks_completed_at: Time.zone.now))
+
+        expect(report.csv).to_not include(app.urn)
+      end
+
       it "returns the data in CSV format" do
-        application = create(:application)
+        application = create(
+          :application,
+          application_progress: build(:application_progress, :home_office_pending),
+        )
 
         expect(report.csv).to include([
           application.urn,
