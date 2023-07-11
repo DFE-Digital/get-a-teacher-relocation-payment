@@ -3,10 +3,10 @@ module SystemAdmin
     def index; end
 
     def show
-        headers["Content-Type"] = "text/csv"
-        headers["Content-Disposition"] = 'attachment; filename="Home-Office-Report.csv"'
+      report = Reports::HomeOffice.new
+      headers["Content-Type"] = "text/csv"
 
-        send_data(csv_data, filename: 'Home-Office-Report.csv')
+      send_data(csv_data, filename: report.name)
     end
 
     def csv_data
