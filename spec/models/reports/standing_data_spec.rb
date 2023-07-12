@@ -2,7 +2,6 @@
 
 require "rails_helper"
 
-# rubocop:disable Metrics/ExampleLength
 module Reports
   describe StandingData do
     subject(:report) { described_class.new }
@@ -12,36 +11,30 @@ module Reports
     end
 
     describe "#csv" do
+      let(:progress) { build(:application_progress, school_checks_completed_at: Time.zone.now, banking_approval_completed_at: nil) }
+
       it "returns applicants who have completed initial checks but not home office checks" do
-        progress = build(:application_progress, school_checks_completed_at: Time.zone.now, banking_approval_completed_at: nil)
-        app = create(:application,
-                     application_progress: progress)
+        app = create(:application, application_progress: progress)
 
         expect(report.csv).to include(app.urn)
       end
 
       it "does not return applicants who have not completed initial checks" do
-        app = create(:application,
-                     application_progress: build(:application_progress,
-                                                 school_checks_completed_at: nil))
+        progress.school_checks_completed_at = nil
+        app = create(:application, application_progress: progress)
 
         expect(report.csv).not_to include(app.urn)
       end
 
       it "does not return applicants who have completed home office checks" do
-        app = create(:application,
-                     application_progress: build(:application_progress,
-                                                 school_checks_completed_at: Time.zone.now,
-                                                 banking_approval_completed_at: Time.zone.now))
+        progress.banking_approval_completed_at = Time.zone.now
+        app = create(:application, application_progress: progress)
 
         expect(report.csv).not_to include(app.urn)
       end
 
       it "returns the data in CSV format" do
-        application = create(:application,
-                             application_progress: build(:application_progress,
-                                                         school_checks_completed_at: Time.zone.now,
-                                                         banking_approval_completed_at: nil))
+        application = create(:application, application_progress: progress)
 
         expect(report.csv).to include([
           application.urn,
@@ -70,4 +63,3 @@ module Reports
     end
   end
 end
-# rubocop:enable Metrics/ExampleLength
