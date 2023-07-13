@@ -9,4 +9,7 @@
 #  updated_at         :datetime         not null
 #
 class Setting < ApplicationRecord
+  def self.current
+    Setting.first
+  end
 end
