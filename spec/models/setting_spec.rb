@@ -17,5 +17,9 @@ RSpec.describe Setting do
 
       expect(described_class.current).to eq(setting)
     end
+
+    it "creates a new setting if none exists" do
+      expect { described_class.current }.to change(described_class, :count).by(1)
+    end
   end
 end

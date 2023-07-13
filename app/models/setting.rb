@@ -10,6 +10,6 @@
 #
 class Setting < ApplicationRecord
   def self.current
-    Setting.first
+    Setting.first_or_create!
   end
 end
