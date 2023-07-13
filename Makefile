@@ -31,6 +31,10 @@ staging:
 	$(eval include global_config/staging.sh)
 	$(eval DEPLOY_ENV=staging)
 
+production:
+	$(eval include global_config/production.sh)
+	$(eval DEPLOY_ENV=production)
+
 ci:	## Run in automation environment
 	$(eval export AUTO_APPROVE=-auto-approve)
 
