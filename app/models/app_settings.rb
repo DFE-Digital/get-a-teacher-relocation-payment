@@ -8,9 +8,9 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
-class Setting < ApplicationRecord
+class AppSettings < ApplicationRecord
   def self.current
-    Setting.first_or_create!
+    AppSettings.first_or_create!
   end
 
   private_class_method :new

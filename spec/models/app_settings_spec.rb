@@ -10,10 +10,10 @@
 #
 require "rails_helper"
 
-RSpec.describe Setting do
+RSpec.describe AppSettings do
   describe ".current" do
     it "returns the current setting" do
-      expect(described_class.current).to eq(Setting.first)
+      expect(described_class.current).to eq(described_class.first)
     end
 
     it "creates a new setting if none exists" do

@@ -27,6 +27,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_19_153032) do
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable"
   end
 
+  create_table "app_settings", force: :cascade do |t|
+    t.date "service_start_date"
+    t.date "service_end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "applicants", force: :cascade do |t|
     t.text "given_name"
     t.text "family_name"
@@ -79,6 +86,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_19_153032) do
   end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   create_table "users", force: :cascade do |t|
     t.citext "email"
 =======
@@ -89,6 +97,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_19_153032) do
     t.datetime "updated_at", null: false
   end
 
+=======
+>>>>>>> 300a2ea (Rename Settings to AppSettings)
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "first_name"

@@ -22,7 +22,7 @@ require "factory_bot_rails"
 end
 
 if Rails.env.development?
-  Setting.create!(
+  AppSettings.create!(
     service_start_date: 1.day.ago,
     service_end_date: 1.year.from_now,
   )
