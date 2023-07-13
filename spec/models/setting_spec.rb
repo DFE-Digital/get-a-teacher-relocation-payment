@@ -11,5 +11,11 @@
 require "rails_helper"
 
 RSpec.describe Setting do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe ".current" do
+    it "returns the current setting" do
+      setting = create(:setting)
+
+      expect(described_class.current).to eq(setting)
+    end
+  end
 end
