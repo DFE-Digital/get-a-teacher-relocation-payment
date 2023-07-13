@@ -9,7 +9,7 @@
 #  updated_at         :datetime         not null
 #
 FactoryBot.define do
-  factory :setting do
+  factory :settings, class: "AppSettings" do
     service_start_date { 1.day.ago.to_date }
     service_end_date { 1.year.from_now.to_date }
   end
