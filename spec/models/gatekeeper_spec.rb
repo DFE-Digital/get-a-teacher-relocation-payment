@@ -19,4 +19,10 @@ describe "Gatekeeper" do
 
     expect(Gatekeeper.application_open?).to be(false)
   end
+
+  it "returns false when service end date is nil" do
+    AppSettings.current.update!(service_end_date: nil)
+
+    expect(Gatekeeper.application_open?).to be(false)
+  end
 end
