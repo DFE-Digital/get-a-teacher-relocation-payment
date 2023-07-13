@@ -3,6 +3,19 @@
 A service to collect details from teachers and trainees applying for the
 International Relocation Payment.
 
+## Robots.txt
+
+A robots.txt file is located at `public/robots.txt` and prevents all robots from
+crawling the site. This is to prevent the site from being indexed by search engines
+while we are doing pen-testing in production for 2 days.
+
+We should remove the lines below before moving to production.
+
+```txt
+User-agent: *
+Disallow: /
+```
+
 ## Development
 
 ### Install build dependencies
