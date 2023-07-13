@@ -13,13 +13,15 @@ require "rails_helper"
 RSpec.describe Setting do
   describe ".current" do
     it "returns the current setting" do
-      setting = create(:setting)
-
-      expect(described_class.current).to eq(setting)
+      expect(described_class.current).to eq(Setting.first)
     end
 
     it "creates a new setting if none exists" do
       expect { described_class.current }.to change(described_class, :count).by(1)
+    end
+
+    it "does not allow default constructor" do
+      expect { described_class.new }.to raise_error(NoMethodError)
     end
   end
 end
