@@ -12,4 +12,6 @@ class Setting < ApplicationRecord
   def self.current
     Setting.first_or_create!
   end
+
+  private_class_method :new
 end
