@@ -5,7 +5,7 @@ module SystemAdmin
     default_form_builder GOVUKDesignSystemFormBuilder::FormBuilder
 
     def edit
-      @settings = AppSettings.current
+      @app_settings = AppSettings.current
     end
   end
 end

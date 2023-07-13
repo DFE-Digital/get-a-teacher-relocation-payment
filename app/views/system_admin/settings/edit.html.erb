@@ -1,9 +1,22 @@
-<div class="govuk-width-container">
-  <main class="govuk-main-wrapper " id="main-content" role="main">
-    <div class="govuk-grid-row">
-      <div class="govuk-grid-column-two-thirds-from-desktop">
-        <h1 class="govuk-heading-l">Application Settings</h1>
-      </div>
-    </div>
-  </main>
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+    <h1 class="govuk-heading-l">Application Settings</h1>
+  </div>
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+    <%= form_with(model: @app_settings, local: true, url: edit_settings_path) do |f| %>
+
+      <%= f.govuk_error_summary %>
+
+        <%= f.govuk_date_field :service_start_date,
+          legend: { text: "Service start date" },
+          hint: { text: "Sets the start date for the service. If this date is blank or in the future, the application will not be open to applicants" }
+        %>,
+        <%= f.govuk_date_field :service_end_date,
+          legend: { text: "Service end date" },
+          hint: { text: "Sets the end date for the service. If this date is blank or in the past, the application will not be open to applicants" }
+        %>
+
+      <%= f.govuk_submit %>
+    <% end %>
+  </div>
 </div>
