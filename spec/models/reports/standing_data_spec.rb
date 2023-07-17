@@ -4,10 +4,20 @@ require "rails_helper"
 
 module Reports
   describe StandingData do
+    include ActiveSupport::Testing::TimeHelpers
+
     subject(:report) { described_class.new }
 
     it "returns the name of the Report" do
-      expect(report.name).to eq("Standing-Data-Report.csv")
+      frozen_time = Time.zone.local(2023, 7, 17, 12, 30, 45)
+      travel_to frozen_time do
+        expected_name = "Standing-Data-Report-20230717-123045.csv"
+
+        report = described_class.new
+        actual_name = report.name
+
+        expect(actual_name).to eq(expected_name)
+      end
     end
 
     describe "#csv" do
