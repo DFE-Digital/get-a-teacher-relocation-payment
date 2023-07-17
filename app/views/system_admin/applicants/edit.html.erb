@@ -2,7 +2,7 @@
   <%= govuk_breadcrumbs(breadcrumbs: [
     govuk_breadcrumb_link_to("Applications", applicants_path),
     govuk_breadcrumb_link_to(@applicant.full_name, applicant_path(@applicant)),
-    govuk_breadcrumb_link_to("Update Progress", "#")
+    "Update Progress"
   ]) %>
 <% end %>
 

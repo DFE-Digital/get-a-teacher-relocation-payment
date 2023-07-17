@@ -1,7 +1,7 @@
 <%= content_for(:breadcrumbs) do %>
   <%= govuk_breadcrumbs(breadcrumbs: [
     govuk_breadcrumb_link_to("Applications", applicants_path),
-    govuk_breadcrumb_link_to(@applicant.full_name, applicant_path(@applicant)),
+    @applicant.full_name,
   ]) %>
 <% end %>
 
