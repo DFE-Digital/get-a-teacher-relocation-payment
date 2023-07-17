@@ -3,7 +3,9 @@
 module Reports
   class StandingData
     def name
-      "Standing-Data-Report.csv"
+      current_time = Time.zone.now.strftime("%Y%m%d-%H%M%S")
+
+      "Standing-Data-Report-#{current_time}.csv"
     end
 
     def csv
