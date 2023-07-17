@@ -5,10 +5,20 @@ require "rails_helper"
 # rubocop:disable Metrics/ExampleLength
 module Reports
   describe HomeOffice do
+    include ActiveSupport::Testing::TimeHelpers
+
     subject(:report) { described_class.new }
 
     it "returns the name of the Report" do
-      expect(report.name).to eq("Home-Office-Report.csv")
+      frozen_time = Time.zone.local(2023, 7, 17, 12, 30, 45)
+      travel_to frozen_time do
+        expected_name = "Home-Office-Report-20230717-123045.csv"
+
+        report = described_class.new
+        actual_name = report.name
+
+        expect(actual_name).to eq(expected_name)
+      end
     end
 
     describe "#csv" do

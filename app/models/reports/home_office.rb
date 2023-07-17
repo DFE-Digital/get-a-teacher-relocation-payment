@@ -3,7 +3,9 @@
 module Reports
   class HomeOffice
     def name
-      "Home-Office-Report.csv"
+      current_time = Time.zone.now.strftime("%Y%m%d-%H%M%S")
+
+      "Home-Office-Report-#{current_time}.csv"
     end
 
     def csv
