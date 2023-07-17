@@ -28,5 +28,6 @@ Rails.application.routes.draw do
   scope module: :system_admin, path: "system-admin" do
     resources :applicants, only: %i[index show edit update]
     get "/dashboard", to: "dashboard#show"
+    resources "reports", only: %i[show index]
   end
 end

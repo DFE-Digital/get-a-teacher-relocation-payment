@@ -34,6 +34,7 @@
     <%= govuk_header(service_name: "System Admin") do |header| %>
       <%= header.with_navigation_item(text: "Dashboard", href: dashboard_path, active: false) %>
       <%= header.with_navigation_item(text: "Applications", href: applicants_path, active: false) %>
+      <%= header.with_navigation_item(text: "Reports", href: reports_path, active: false) %>
     <% end %>
 
     <div class="govuk-width-container app-width-container--wide">

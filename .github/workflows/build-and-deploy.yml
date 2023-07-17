@@ -170,3 +170,23 @@ jobs:
         azure-credentials: ${{ secrets[format('AZURE_CREDENTIALS_{0}', matrix.environment)] }}
         environment: ${{ matrix.environment }}
         sha: ${{ github.sha }}
+
+  deploy-production:
+    name: Production deployment
+    environment:
+      name: production
+      url: ${{ steps.deploy_production.outputs.deploy-url }}
+    if: ${{ success() && github.ref == 'refs/heads/main' }}
+    needs: [deploy-before-production]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Deploy app to production
+      id: deploy_production
+      uses: ./.github/actions/deploy/
+      with:
+        azure-credentials: ${{ secrets.AZURE_CREDENTIALS_PRODUCTION }}
+        environment: production
+        sha: ${{ github.sha }}
