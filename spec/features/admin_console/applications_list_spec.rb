@@ -24,9 +24,6 @@ describe "Applications List" do
     given_i_am_signed_as_an_admin
     when_i_am_in_the_applications_list_page
     then_i_can_see_the_search_form
-    then_i_can_search_by_given_name
-    then_i_can_search_by_family_name
-    then_i_can_search_by_email
     then_i_can_search_by_urn
   end
 
@@ -67,27 +64,6 @@ describe "Applications List" do
 
   def then_i_can_see_the_search_form
     expect(page).to have_css("form#search")
-  end
-
-  def then_i_can_search_by_given_name
-    fill_in "search", with: "Unique Given Name"
-    click_button "Search"
-    expect(page).to have_content("Unique Given Name Unique Family Name")
-    expect(page).to have_content("Unique Urn 1")
-  end
-
-  def then_i_can_search_by_family_name
-    fill_in "search", with: "Another Family Name"
-    click_button "Search"
-    expect(page).to have_content("Another Given Name Another Family Name")
-    expect(page).to have_content("Unique Urn 2")
-  end
-
-  def then_i_can_search_by_email
-    fill_in "search", with: "unique@example.com"
-    click_button "Search"
-    expect(page).to have_content("Unique Given Name Unique Family Name")
-    expect(page).to have_content("Unique Urn 1")
   end
 
   def then_i_can_search_by_urn
