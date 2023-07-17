@@ -1,8 +1,9 @@
 <%= content_for(:breadcrumbs) do %>
-  <%= render GovukComponent::BackLinkComponent.new(
-    text: "Back to application",
-    href: applicant_path(@applicant),
-  ) %>
+  <%= govuk_breadcrumbs(breadcrumbs: [
+    govuk_breadcrumb_link_to("Applications", applicants_path),
+    govuk_breadcrumb_link_to(@applicant.full_name, applicant_path(@applicant)),
+    "Update Progress"
+  ]) %>
 <% end %>
 
 <div class="govuk-grid-row">
