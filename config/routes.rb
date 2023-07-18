@@ -23,11 +23,15 @@ Rails.application.routes.draw do
     resources :salaried_course_details, only: %i[new create edit]
     resource :submission, only: %i[show]
   end
+  devise_for :users,
+             controllers: {
+               sessions: "users/sessions",
+               omniauth_callbacks: "users/omniauth_callbacks",
+             }
 
-  # TODO: route constraint, only signed-in admins should be able to access
   scope module: :system_admin, path: "system-admin" do
     resources :applicants, only: %i[index show edit update]
-    resources :users
+    resources :users, except: %i[show]
     get "/dashboard", to: "dashboard#show"
   end
 end
