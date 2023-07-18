@@ -55,9 +55,9 @@ en:
       title: Employment information
       school_name:
         title:
-          teacher: Enter the name of the school where you are employed as a teacher
+          teacher: Enter the name of the school
           salaried_trainee: Enter the name of the school where you are employed as a trainee teacher
-      headteacher: Enter the name of the headteacher or principal of the school
+      headteacher: Enter the name of the headteacher of the school where you are employed as a teacher
       address: Enter the school address
       address_line_1: Address line 1
       address_line_2: Address line 2 (optional)
@@ -92,10 +92,9 @@ en:
           must make up at least 50% of your time in the classroom. This will be validated by the Department for Education with your school.
         salaried_trainee:
           Physics or languages can be combined with other subjects but must make up at least 50% of your course content. 
-          This will be validated by DfE with your school.
+          This will be validated by Department for Education with the school where you are training.
     salaried_course:
-      title: Are you currently employed in a school as a trainee teacher, on a teacher training course in England which meets the following conditions?
-      hint: Check with your training provider if you're not sure. You will still be eligible for the international relocation payment if your course leads to PGCE + QTS or PGDE + QTS.
+      title: Are you on a teacher training course in England which meets the following conditions?
     teaching_details:
       title:
         teacher: Do you teach this subject for at least 50% of your teaching timetable?
