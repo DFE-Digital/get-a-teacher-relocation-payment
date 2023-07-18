@@ -16,7 +16,7 @@ module SystemAdmin
       @user = User.new(user_params)
 
       if @user.save
-        redirect_to(users_path, notice: "User was successfully created.")
+        redirect_to(users_path, notice: t("users.create.success"))
       else
         render(:new, status: :unprocessable_entity)
       end
@@ -24,7 +24,7 @@ module SystemAdmin
 
     def update
       if @user.update(user_params)
-        redirect_to(users_path, notice: "User was successfully updated.")
+        redirect_to(users_path, notice: t("users.update.success"))
       else
         render(:edit, status: :unprocessable_entity)
       end
@@ -33,7 +33,7 @@ module SystemAdmin
     def destroy
       @user.destroy
 
-      redirect_to(users_path, notice: "User was successfully destroyed.")
+      redirect_to(users_path, notice: t("users.destroy.success"))
     end
 
   private

@@ -26,7 +26,7 @@ describe "CRUD USERS" do
   end
 
   it "Delete User" do
-    given_there_is_a_user
+    given_there_is_are_users
     given_i_am_signed_as_an_admin
     when_i_am_in_the_users_page
     then_i_can_delete_a_user
@@ -34,13 +34,9 @@ describe "CRUD USERS" do
 
 private
 
-  def given_there_is_a_user
-    @user_john = create(:user, email: "john@example.com")
-  end
-
   def given_there_are_users
-    @user_john = create(:user, email: "john@example.com")
-    @user_jane = create(:user, email: "jane@example.com")
+    create(:user, email: "john@example.com")
+    create(:user, email: "jane@example.com")
   end
 
   def when_i_am_in_the_users_page
@@ -49,8 +45,8 @@ private
 
   def then_i_can_see_the_users_list
     within ".users-table" do
-      expect(page).to have_content(@user_jane.email)
-      expect(page).to have_content(@user_john.email)
+      expect(page).to have_content("jane@example.com")
+      expect(page).to have_content("john@example.com")
     end
   end
 
@@ -63,7 +59,7 @@ private
   end
 
   def then_i_can_update_a_user
-    click_on @user_john.email
+    click_on "john@example.com"
     fill_in "Email", with: "new_user@example.com"
     click_on "Save"
     expect(page).to have_content("User was successfully updated.")
@@ -75,6 +71,6 @@ private
       click_on "Delete"
     end
     expect(page).to have_content("User was successfully destroyed.")
-    expect(page).not_to have_content(@user_john.email)
+    expect(page).not_to have_content("john@example.com")
   end
 end
