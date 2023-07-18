@@ -26,6 +26,11 @@ FactoryBot.define do
       initial_checks_completed_at { rand(31..40).days.ago.to_date }
     end
 
+    trait :home_office_pending do
+      initial_checks_completed
+      home_office_checks_completed_at { nil }
+    end
+
     trait :rejection_completed do
       rejection_completed_at { rand(1..2).days.ago.to_date }
     end

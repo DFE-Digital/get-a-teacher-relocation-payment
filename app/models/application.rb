@@ -29,12 +29,12 @@ class Application < ApplicationRecord
 
                    term = "%#{term.downcase}%"
                    joins(:applicant).where(
-                     "LOWER(applications.urn) LIKE :term OR
-       LOWER(applicants.email_address) LIKE :term OR
-       LOWER(applicants.passport_number) LIKE :term OR
-       LOWER(CONCAT(applicants.given_name, ' ', applicants.family_name)) LIKE :term OR
-       LOWER(applicants.given_name) LIKE :term OR
-       LOWER(applicants.family_name) LIKE :term",
+                     "applications.urn ILIKE :term OR
+       applicants.email_address ILIKE :term OR
+       applicants.passport_number ILIKE :term OR
+       CONCAT(applicants.given_name, ' ', applicants.family_name) ILIKE :term OR
+       applicants.given_name ILIKE :term OR
+       applicants.family_name ILIKE :term",
                      term:,
                    )
                  }
