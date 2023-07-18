@@ -32,25 +32,5 @@ class ApplicationProgress < ApplicationRecord
     rejected: 6,
   }
 
-  before_save :update_status
-
-private
-
-  def update_status
-    self.status = if rejection_completed_at.present?
-                    :rejected
-                  elsif payment_confirmation_completed_at.present?
-                    :paid
-                  elsif banking_approval_completed_at.present?
-                    :payment_confirmation
-                  elsif school_checks_completed_at.present?
-                    :bank_approval
-                  elsif home_office_checks_completed_at.present?
-                    :school_checks
-                  elsif initial_checks_completed_at.present?
-                    :home_office_checks
-                  else
-                    :initial_checks
-                  end
-  end
+  before_save -> { self.status = StatusQuery.new(self).current_status }
 end
