@@ -19,8 +19,24 @@ describe "Applications List" do
     then_i_can_see_the_pagination
   end
 
+  it "allows searching" do
+    given_there_are_few_applications
+    given_i_am_signed_as_an_admin
+    when_i_am_in_the_applications_list_page
+    then_i_can_see_the_search_form
+    then_i_can_search_by_urn
+  end
+
   def given_there_are_few_applications
-    create_list(:application, 21) # pagy default pagination is 20
+    # Create 2 specific applications for search tests
+    unique_applicant = create(:applicant, given_name: "Unique Given Name", family_name: "Unique Family Name", email_address: "unique@example.com")
+    create(:application, applicant: unique_applicant, urn: "Unique Urn 1")
+
+    another_applicant = create(:applicant, given_name: "Another Given Name", family_name: "Another Family Name", email_address: "another@example.com")
+    create(:application, applicant: another_applicant, urn: "Unique Urn 2")
+
+    # Create 19 more applications for pagination test
+    create_list(:application, 19)
   end
 
   def when_i_am_in_the_applications_list_page
@@ -44,5 +60,16 @@ describe "Applications List" do
     within "nav.govuk-pagination" do
       expect(page).to have_content("1")
     end
+  end
+
+  def then_i_can_see_the_search_form
+    expect(page).to have_css("form#search")
+  end
+
+  def then_i_can_search_by_urn
+    fill_in "search", with: "Unique Urn 2"
+    click_button "Search"
+    expect(page).to have_content("Another Given Name Another Family Name")
+    expect(page).to have_content("Unique Urn 2")
   end
 end

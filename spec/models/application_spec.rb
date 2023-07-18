@@ -81,4 +81,65 @@ RSpec.describe Application do
       expect(application.reload.urn).to match(/^IRPST[A-Z0-9]{5}$/)
     end
   end
+
+  describe ".search" do
+    let(:applicant_john) { create(:applicant, given_name: "John", family_name: "Doe", email_address: "john.doe@example.com", passport_number: "123456") }
+    let(:application_john) { create(:application, urn: "APP123", applicant: applicant_john) }
+    let(:applicant_jane) { create(:applicant, given_name: "Jane", family_name: "Doe", email_address: "jane.doe@example.com", passport_number: "7891011") }
+    let(:application_jane) { create(:application, urn: "APP456", applicant: applicant_jane) }
+
+    context "when searching by urn" do
+      it "returns applications with matching urn", :aggregate_failures do
+        expect(described_class.search("APP123")).to include(application_john)
+        expect(described_class.search("APP123")).not_to include(application_jane)
+      end
+    end
+
+    context "when searching by email address" do
+      it "returns applications for applicants with matching email address", :aggregate_failures do
+        expect(described_class.search("john.doe@example.com")).to include(application_john)
+        expect(described_class.search("john.doe@example.com")).not_to include(application_jane)
+      end
+    end
+
+    context "when searching by passport number" do
+      it "returns applications for applicants with matching passport number", :aggregate_failures do
+        expect(described_class.search("123456")).to include(application_john)
+        expect(described_class.search("123456")).not_to include(application_jane)
+      end
+    end
+
+    context "when searching by full name" do
+      it "returns applications for applicants with matching full name", :aggregate_failures do
+        expect(described_class.search("John Doe")).to include(application_john)
+        expect(described_class.search("John Doe")).not_to include(application_jane)
+      end
+    end
+
+    context "when searching by given name" do
+      it "returns applications for applicants with matching given name", :aggregate_failures do
+        expect(described_class.search("John")).to include(application_john)
+        expect(described_class.search("John")).not_to include(application_jane)
+      end
+    end
+
+    context "when searching by family name" do
+      it "returns applications for applicants with matching family name" do
+        expect(described_class.search("Doe")).to include(application_john, application_jane)
+      end
+    end
+
+    context "when searching with case insensitive" do
+      it "returns applications for applicants with case insensitive matching", :aggregate_failures do
+        expect(described_class.search("jOhN DoE")).to include(application_john)
+        expect(described_class.search("jOhN DoE")).not_to include(application_jane)
+      end
+    end
+
+    context "when search term is empty" do
+      it "returns all applications" do
+        expect(described_class.search("")).to include(application_john, application_jane)
+      end
+    end
+  end
 end

@@ -10,7 +10,7 @@ module SystemAdmin
     include Pagy::Backend
 
     def index
-      @pagy, @applications = pagy(Application.submitted.order(created_at: :desc))
+      @pagy, @applications = pagy(Application.submitted.search(params[:search]).order(created_at: :desc))
 
       respond_to do |format|
         format.html
