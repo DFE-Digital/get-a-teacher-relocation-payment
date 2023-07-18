@@ -1,0 +1,22 @@
+<p style="color: green"><%= notice %></p>
+
+<%= govuk_link_to "New user", new_user_path %>
+
+<%= govuk_table(classes: "users-table") do |table|
+      table.with_caption(size: 'm', text: 'List of Users')
+      table.with_head do |head|
+        head.with_row do |row|
+          row.with_cell(text: 'Email')
+          row.with_cell(text: 'Actions')
+        end
+      end 
+
+      table.with_body do |body|
+        @users.each do |user|
+          body.with_row do |row|
+            row.with_cell(text: govuk_link_to(user.email, edit_user_path(user)))
+            row.with_cell(text: button_to("Delete", user_path(user), method: :delete, class: 'govuk-button govuk-button--warning'))
+          end 
+        end 
+      end
+ end %>

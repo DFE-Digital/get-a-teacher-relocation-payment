@@ -32,8 +32,9 @@
 
     <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
     <%= govuk_header(service_name: "System Admin") do |header| %>
-      <%= header.with_navigation_item(text: "Dashboard", href: dashboard_path, active: false) %>
-      <%= header.with_navigation_item(text: "Applicants", href: applicants_path, active: false) %>
+      <%= header.with_navigation_item(text: "Dashboard", href: dashboard_path, active: request.path.include?('/system-admin/dashboard') ) %>
+      <%= header.with_navigation_item(text: "Applicants", href: applicants_path, active: request.path.include?('system-admin/applicants') ) %>
+      <%= header.with_navigation_item(text: "Users", href: users_path, active: request.path.include?('/system-admin/users') ) %>
     <% end %>
 
     <div class="govuk-width-container app-width-container--wide">
