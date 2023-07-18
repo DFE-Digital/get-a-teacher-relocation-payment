@@ -1,6 +1,6 @@
-<p style="color: green"><%= notice %></p>
+<%= render 'shared/notices' %>
 
-<%= govuk_link_to "New user", new_user_path %>
+<%= govuk_link_to "New user", new_user_path, class: "govuk-button"%>
 
 <%= govuk_table(classes: "users-table") do |table|
       table.with_caption(size: 'm', text: 'List of Users')

@@ -26,7 +26,7 @@ describe "CRUD USERS" do
   end
 
   it "Delete User" do
-    given_there_is_are_users
+    given_there_are_users
     given_i_am_signed_as_an_admin
     when_i_am_in_the_users_page
     then_i_can_delete_a_user

@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
   root to: "pages#start"
 
   get "/ineligible", to: "pages#ineligible"
@@ -23,11 +20,11 @@ Rails.application.routes.draw do
     resources :salaried_course_details, only: %i[new create edit]
     resource :submission, only: %i[show]
   end
-  devise_for :users,
-             controllers: {
-               sessions: "users/sessions",
-               omniauth_callbacks: "users/omniauth_callbacks",
-             }
+
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+  devise_scope :user do
+    get "/users/sign_out", to: "devise/sessions#destroy", as: :destroy_user_session
+  end
 
   scope module: :system_admin, path: "system-admin" do
     resources :applicants, only: %i[index show edit update]

@@ -192,5 +192,5 @@ en:
       success: 'User was successfully updated.'
     destroy:
       success: 'User was successfully destroyed.'
-    omniauth_callbacks:
-      no_account: 'You have not yet an account!'
+  omniauth_callbacks:
+    no_account: 'You have not yet an account!'
