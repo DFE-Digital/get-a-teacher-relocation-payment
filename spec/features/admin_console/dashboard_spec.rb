@@ -237,7 +237,7 @@ describe "Dashboard" do
   def then_i_can_see_the_subject_breakdown_widget
     within ".kpi-widget.subjects" do
       expect(page).to have_content("Subject")
-      expect(page).to have_content("General/combined science, including physics")
+      expect(page).to have_content("General or combined science, including physics")
       expect(page).to have_content("Languages")
       expect(page).to have_content("Physics")
       expect(page).to have_content("1")
