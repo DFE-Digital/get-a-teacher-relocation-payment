@@ -33,5 +33,6 @@ Rails.application.routes.draw do
     resources :applicants, only: %i[index show edit update]
     resources :users, except: %i[show]
     get "/dashboard", to: "dashboard#show"
+    resources "reports", only: %i[show index]
   end
 end

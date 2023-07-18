@@ -15,3 +15,8 @@ staging:
   <<: *default
   RAILS_ENV: staging
   RACK_ENV: staging
+
+production:
+  <<: *default
+  RAILS_ENV: production
+  RACK_ENV: production

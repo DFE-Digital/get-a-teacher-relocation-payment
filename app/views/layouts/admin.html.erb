@@ -35,6 +35,7 @@
       <%= header.with_navigation_item(text: "Dashboard", href: dashboard_path, active: request.path.include?('/system-admin/dashboard') ) %>
       <%= header.with_navigation_item(text: "Applicants", href: applicants_path, active: request.path.include?('system-admin/applicants') ) %>
       <%= header.with_navigation_item(text: "Users", href: users_path, active: request.path.include?('/system-admin/users') ) %>
+      <%= header.with_navigation_item(text: "Reports", href: reports_path, active: false) %>
     <% end %>
 
     <div class="govuk-width-container app-width-container--wide">
