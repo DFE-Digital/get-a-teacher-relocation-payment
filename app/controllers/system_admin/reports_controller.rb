@@ -13,6 +13,8 @@ module SystemAdmin
     def find_report(report_id)
       {
         home_office: Reports::HomeOffice.new,
+        standing_data: Reports::StandingData.new,
+        payroll: Reports::Payroll.new,
       }.with_indifferent_access.fetch(report_id)
     end
   end

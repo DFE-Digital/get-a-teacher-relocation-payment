@@ -6,6 +6,7 @@
 <%= form_with(url: applicants_path, method: :get, id: :search) do |f| %>
   <%= f.govuk_text_field :search, value: params[:search], label: { text: 'Search' }, hint: { text: 'Search by full name, email, passport number or URN' } %>
   <%= f.govuk_select :status, statuses, label: { text: "Status" }, hint: { text: "Filter by Application Status" } %>
+
   <%= f.govuk_submit 'Search', secondary: true %>
 <% end %>
 
