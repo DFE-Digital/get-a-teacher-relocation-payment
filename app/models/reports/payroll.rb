@@ -3,7 +3,9 @@
 module Reports
   class Payroll
     def name
-      "Payroll-Report.csv"
+      current_time = Time.zone.now.strftime("%Y%m%d-%H%M%S")
+
+      "Payroll-Report-#{current_time}.csv"
     end
 
     def csv
