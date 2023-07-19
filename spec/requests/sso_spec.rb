@@ -52,5 +52,21 @@ RSpec.describe "SSO" do
 
       expect(response.body).to include("Signed out successfully.")
     end
+
+    it "accepts user email with insensitive case" do
+      create(:user, email: "ExaMPle@examPLE.com")
+
+      OmniAuth.config.test_mode = true
+      OmniAuth.config.mock_auth[:azure_activedirectory_v2] = OmniAuth::AuthHash.new({
+        info: { email: "example@EXAMPLE.COM" },
+      })
+
+      get users_path
+      post user_azure_activedirectory_v2_omniauth_callback_path
+
+      expect(response).to redirect_to(users_path)
+      get users_path
+      expect(response).to be_successful
+    end
   end
 end

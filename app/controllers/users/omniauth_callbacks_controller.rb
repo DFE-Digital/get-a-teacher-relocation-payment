@@ -1,7 +1,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def azure_activedirectory_v2
     response_params = request.env["omniauth.auth"]["info"]
-    @user = User.find_by(email: response_params["email"].downcase)
+    @user = User.find_by(email: response_params["email"])
 
     if @user
       sign_in_and_redirect(@user, event: :authentication)
