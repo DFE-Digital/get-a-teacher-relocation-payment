@@ -88,10 +88,10 @@ en:
         salaried_trainee: What subject are you training to teach?
       hint:
         teacher:
-          Physics, general or combined science including physics, and languages can be combined with other subjects but 
+          Physics, general or combined science including physics, and languages can be combined with other subjects but
           must make up at least 50% of your time in the classroom. This will be validated by the Department for Education with your school.
         salaried_trainee:
-          Physics or languages can be combined with other subjects but must make up at least 50% of your course content. 
+          Physics or languages can be combined with other subjects but must make up at least 50% of your course content.
           This will be validated by Department for Education with the school where you are training.
     salaried_course:
       title: Are you on a teacher training course in England which meets the following conditions?
@@ -186,3 +186,12 @@ en:
       validators:
         postcode:
           invalid: Enter a valid postcode (for example, BN1 1AA)
+  users:
+    create:
+      success: 'User was successfully created.'
+    update:
+      success: 'User was successfully updated.'
+    destroy:
+      success: 'User was successfully destroyed.'
+  omniauth_callbacks:
+    no_account: 'You have not yet an account!'
