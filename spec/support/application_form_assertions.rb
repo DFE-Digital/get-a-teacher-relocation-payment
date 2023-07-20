@@ -45,6 +45,10 @@ RSpec.shared_context "with common application form assertions" do
     choose_yes
   end
 
+  def then_i_can_see_the_landing_page
+    expect(page).to have_text("Apply for the international relocation payment")
+  end
+
   def assert_i_am_in_the_state_school_question
     expect(page).to have_text(I18n.t("applicants.school_details.title"))
   end

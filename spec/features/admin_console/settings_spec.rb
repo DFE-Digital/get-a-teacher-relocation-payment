@@ -4,6 +4,7 @@ require "rails_helper"
 
 describe "Settings" do
   include AdminHelpers
+  include_context "with common application form steps"
 
   it "shows the app_settings page" do
     given_i_am_signed_as_an_admin
@@ -18,7 +19,21 @@ describe "Settings" do
     then_i_should_see_the_settings_updated
   end
 
+  it "does allow access to non-admin if Service is closed" do
+    given_the_service_is_closed
+    visit root_path
+    then_i_should_see_the_service_closed_page
+  end
+
 private
+
+  def given_the_service_is_closed
+    AppSettings.current.update!(service_start_date: 2.days.from_now)
+  end
+
+  def then_i_should_see_the_service_closed_page
+    expect(page).to have_content("The IRP application window is currently closed.")
+  end
 
   def when_i_visit_the_settings_page
     visit edit_settings_path

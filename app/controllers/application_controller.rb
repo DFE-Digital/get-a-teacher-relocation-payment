@@ -3,6 +3,8 @@
 class ApplicationController < ActionController::Base
   default_form_builder GOVUKDesignSystemFormBuilder::FormBuilder
 
+  before_action :check_service_open!
+
   delegate :application_route, to: :current_application
   helper_method :application_route
 
@@ -32,5 +34,11 @@ class ApplicationController < ActionController::Base
     return unless application_route != "salaried_trainee"
 
     redirect_to(new_applicants_application_route_path)
+  end
+
+  def check_service_open!
+    return if Gatekeeper.application_open?
+
+    redirect_to(closed_path)
   end
 end
