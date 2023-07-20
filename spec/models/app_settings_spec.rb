@@ -12,6 +12,10 @@ require "rails_helper"
 
 RSpec.describe AppSettings do
   describe ".current" do
+    before do
+      described_class.delete_all
+    end
+
     it "returns the current setting" do
       expect(described_class.current).to eq(described_class.first)
     end
