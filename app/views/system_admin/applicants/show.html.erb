@@ -15,7 +15,7 @@
 </div>
 
 <%= govuk_summary_card(title: "Application Progress") do |card|
-  card.with_action { govuk_link_to("Update Progress", edit_admin_applicant_path(@applicant)) }
+  card.with_action { govuk_link_to("Update Progress", edit_applicant_path(@applicant)) }
   card.with_summary_list do |summary_list|
     summary_list.with_row do |row|
       row.with_key(text: 'Application Received')
