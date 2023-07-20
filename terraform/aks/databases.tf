@@ -12,7 +12,7 @@ module "postgres" {
 
   use_azure               = var.deploy_azure_backing_services
   azure_enable_monitoring = var.enable_monitoring
-#  azure_extensions        = ["PGCRYPTO","BTREE_GIST","CITEXT","PG_TRGM"]
+  azure_extensions        = ["CITEXT"]
   server_version          = var.postgres_version
   azure_sku_name          = var.postgres_flexible_server_sku
 
