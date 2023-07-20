@@ -25,7 +25,10 @@ module SystemAdmin
     def edit; end
 
     def update
-      if @progress.update(applicant_params)
+      @validator = ApplicationProgressValidator.new(@progress, applicant_params)
+
+      if @validator.valid?
+        @progress.update!(applicant_params)
         redirect_to(applicant_path(@applicant))
       else
         render(:edit)
