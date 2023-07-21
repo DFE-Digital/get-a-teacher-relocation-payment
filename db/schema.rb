@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_19_153032) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_21_082851) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -85,11 +85,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_19_153032) do
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  create_table "users", force: :cascade do |t|
-    t.citext "email"
-=======
   create_table "settings", force: :cascade do |t|
     t.date "service_start_date"
     t.date "service_end_date"
@@ -97,13 +92,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_19_153032) do
     t.datetime "updated_at", null: false
   end
 
-=======
->>>>>>> 300a2ea (Rename Settings to AppSettings)
   create_table "users", force: :cascade do |t|
-    t.string "email"
-    t.string "first_name"
-    t.string "last_name"
->>>>>>> 852a72c (Add Settings model to hold: start and end service dates)
+    t.citext "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
