@@ -1,0 +1,7 @@
+<%= form_with(model: user) do |f| %>
+  <%= f.govuk_error_summary %>
+
+  <%= f.govuk_text_field :email, label: { text: 'Email' }, hint: { text: 'The email address of the user' } %>
+
+  <%= f.govuk_submit("Save") %>
+<% end %>
