@@ -10,7 +10,6 @@
 
       <%= f.govuk_radio_buttons_fieldset(
         :eligible_course,
-        hint: { text: t("applicants.salaried_course.hint") },
         legend: { text: t("applicants.salaried_course.title"), tag: "h1", size: "l" }
       ) do %>
 
@@ -20,9 +19,13 @@
 
         <ul class="govuk-list govuk-list--bullet">
           <li>pay a salary</li>
-          <li>lead to QTS</li>
+          <li>lead to qualified teacher status (QTS)</li>
           <li>be accredited by the UK government</li>
         </ul>
+
+        <p class="govuk-body">
+          Check with your training provider if you're not sure.
+        </p>
 
         <% Applicants::SalariedCourseDetail::ELIGIBLE_COURSE_OPTIONS.each_with_index do |value, i| %>
           <%= f.govuk_radio_button :eligible_course, value, label: { text: value.humanize }, link_errors: i.zero? %>

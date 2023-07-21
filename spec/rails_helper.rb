@@ -73,6 +73,9 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include FactoryBot::Syntax::Methods
+
+  # Devise
+  config.include Devise::Test::IntegrationHelpers, type: :feature
 end
 
 Shoulda::Matchers.configure do |config|
