@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: settings
+# Table name: app_settings
 #
 #  id                 :bigint           not null, primary key
 #  service_end_date   :date
