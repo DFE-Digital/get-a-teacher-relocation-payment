@@ -25,7 +25,7 @@ module GetAnInternationalRelocationPayment
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults(7.0)
 
-    config.autoload_paths << Rails.root.join('app/services')
+    config.autoload_paths << Rails.root.join("app/services")
 
     # Configuration for the application, engines, and railties goes here.
     #
