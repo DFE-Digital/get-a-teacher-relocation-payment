@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "Application Progress", type: :feature do
+describe "Application Progress" do
   include AdminHelpers
   let(:application) { create(:application) }
 
@@ -22,7 +22,7 @@ describe "Application Progress", type: :feature do
     then_the_submission_is_successful
   end
 
-  private
+private
 
   def given_i_am_on_the_edit_application_page
     visit edit_applicant_path(application.applicant)
@@ -47,7 +47,7 @@ describe "Application Progress", type: :feature do
   end
 
   def then_the_submission_is_successful
-    expect(current_path).to eq(applicant_path(application.applicant))
+    expect(page).to have_current_path(applicant_path(application.applicant), ignore_query: true)
     expect(page).not_to have_content("is not a valid date")
   end
 
