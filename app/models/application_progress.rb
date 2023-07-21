@@ -20,4 +20,8 @@
 #
 class ApplicationProgress < ApplicationRecord
   belongs_to :application
+
+  def sla_breached?
+    SlaChecker.new(self).breached?
+  end
 end

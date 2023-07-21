@@ -27,6 +27,13 @@ describe "Applications List" do
     then_i_can_search_by_urn
   end
 
+  it "highlights applications that breached SLA" do
+    given_there_is_an_application_that_breached_sla
+    given_i_am_signed_as_an_admin
+    when_i_am_in_the_applications_list_page
+    then_i_can_see_the_application_is_highlighted
+  end
+
   def given_there_are_few_applications
     # Create 2 specific applications for search tests
     unique_applicant = create(:applicant, given_name: "Unique Given Name", family_name: "Unique Family Name", email_address: "unique@example.com")
@@ -37,6 +44,12 @@ describe "Applications List" do
 
     # Create 19 more applications for pagination test
     create_list(:application, 19)
+  end
+
+  def given_there_is_an_application_that_breached_sla
+    applicant = create(:applicant)
+    application = create(:application, applicant:)
+    application.application_progress.update(initial_checks_completed_at: 4.days.ago)
   end
 
   def when_i_am_in_the_applications_list_page
@@ -71,5 +84,9 @@ describe "Applications List" do
     click_button "Search"
     expect(page).to have_content("Another Given Name Another Family Name")
     expect(page).to have_content("Unique Urn 2")
+  end
+
+  def then_i_can_see_the_application_is_highlighted
+    expect(page).to have_css("tr.sla-breached")
   end
 end

@@ -22,6 +22,8 @@ class Application < ApplicationRecord
   belongs_to :applicant, optional: true
   has_one :application_progress, dependent: :destroy
 
+  delegate :sla_breached?, to: :application_progress
+
   scope :submitted, -> { where.not(urn: nil) }
 
   scope :search, lambda { |term|
