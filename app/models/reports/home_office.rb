@@ -20,8 +20,7 @@ module Reports
     def rows
       candidates.pluck(
         :urn,
-        "applicants.given_name",
-        "applicants.family_name",
+        Arel.sql("CONCAT(applicants.given_name, ' ', applicants.family_name)"),
         "applicants.date_of_birth",
         "applicants.nationality",
         "applicants.passport_number",
@@ -41,8 +40,7 @@ module Reports
     def header
       [
         "URN",
-        "Forename",
-        "Surname",
+        "Full Name",
         "DOB",
         "Nationality",
         "Passport Number",
