@@ -48,8 +48,7 @@ module Reports
 
         expect(report.csv).to include([
           application.urn,
-          application.applicant.given_name,
-          application.applicant.family_name,
+          application.applicant.full_name,
           application.applicant.date_of_birth,
           application.applicant.nationality,
           application.applicant.passport_number,
@@ -61,8 +60,7 @@ module Reports
       it "returns the header in CSV format" do
         expected_header = [
           "URN",
-          "Forename",
-          "Surname",
+          "Full Name",
           "DOB",
           "Nationality",
           "Passport Number",
