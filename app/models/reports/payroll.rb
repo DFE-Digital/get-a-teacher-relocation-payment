@@ -19,16 +19,25 @@ module Reports
 
     def rows
       candidates.pluck(
-        "urn",
         "given_name",
         "family_name",
-        "date_of_birth",
         "sex",
+        "date_of_birth",
         "email_address",
         "address_line_1",
-        "postcode",
-        "phone_number",
-      )
+        "address_line_2",
+      ).map do |row|
+        Array.new(34, nil).tap do |array|
+          array[2] = row[0]
+          array[4] = row[1]
+          array[6] = row[2]
+          array[10] = row[3]
+          array[11] = row[4]
+          array[12] = row[5]
+          array[13] = row[6]
+          array[18] = "United Kingdom"
+        end
+      end
     end
 
     def candidates
@@ -40,15 +49,40 @@ module Reports
 
     def header
       %w[
-        URN
-        Forename
-        Surname
-        DOB
-        Gender
-        Email
-        Address
-        Postcode
-        Telephone
+        No.
+        TITLE
+        FORENAME
+        FORENAME2
+        SURNAME
+        SS_NO
+        GENDER
+        MARITAL_STATUS
+        START_DATE
+        END_DATE
+        BIRTH_DATE
+        EMAIL
+        ADDR_LINE_1
+        ADDR_LINE_2
+        ADDR_LINE_3
+        ADDR_LINE_4
+        ADDR_LINE_5
+        ADDR_LINE_6
+        ADDRESS_COUNTRY
+        TAX_CODE
+        TAX_BASIS
+        NI_CATEGORY
+        CON_STU_LOAN_I
+        PLAN_TYPE
+        PAYMENT_METHOD
+        PAYMENT_FREQUENCY
+        BANK_NAME
+        SORT_CODE
+        ACCOUNT_NUMBER
+        ROLL_NUMBER
+        SCHEME_AMOUNT
+        PAYMENT_ID
+        CLAIM_POLICIES
+        RIGHT_TO_WORK_CONFIRM_STATUS
       ]
     end
   end
