@@ -27,7 +27,7 @@ module Reports
       it "returns applicants who have banking details approved" do
         app = create(:application, application_progress: progress)
 
-        expect(report.csv).to include(app.urn)
+        expect(report.csv).to include(app.applicant.family_name)
       end
 
       it "does not return applicants who have not the bankind details approved" do
@@ -41,29 +41,79 @@ module Reports
         application = create(:application, application_progress: progress)
 
         expect(report.csv).to include([
-          application.urn,
-          application.applicant.given_name,
-          application.applicant.family_name,
-          application.applicant.date_of_birth,
-          application.applicant.sex,
-          application.applicant.email_address,
-          application.applicant.address.address_line_1,
-          application.applicant.address.postcode,
-          application.applicant.phone_number,
+          "", # No.
+          "", # TITLE
+          application.applicant.given_name, # FORENAME
+          "", # FORENAME2
+          application.applicant.family_name, # SURNAME
+          "", # SS_NO
+          application.applicant.sex, # GENDER
+          "", # MARITAL_STATUS
+          "", # START_DATE
+          "", # END_DATE
+          application.applicant.date_of_birth, # BIRTH_DATE
+          application.applicant.email_address, # EMAIL
+          application.applicant.address.address_line_1, # ADDR_LINE_1
+          application.applicant.address.address_line_2, # ADDR_LINE_2
+          "", # ADDR_LINE_3
+          "", # ADDR_LINE_4
+          "", # ADDR_LINE_5
+          "", # ADDR_LINE_6
+          "United Kingdom", # ADDRESS_COUNTRY
+          "", # TAX_CODE
+          "", # TAX_BASIS
+          "", # NI_CATEGORY
+          "", # CON_STU_LOAN_I
+          "", # PLAN_TYPE
+          "", # PAYMENT_METHOD
+          "", # PAYMENT_FREQUENCY
+          "", # BANK_NAME
+          "", # SORT_CODE
+          "", # ACCOUNT_NUMBER
+          "", # ROLL_NUMBER
+          "", # SCHEME_AMOUNT
+          "", # PAYMENT_ID
+          "", # CLAIM_POLICIES
+          "", # RIGHT_TO_WORK_CONFIRM_STATUS
         ].join(","))
       end
 
       it "returns the header in CSV format" do
         expected_header = %w[
-          URN
-          Forename
-          Surname
-          DOB
-          Gender
-          Email
-          Address
-          Postcode
-          Telephone
+          No.
+          TITLE
+          FORENAME
+          FORENAME2
+          SURNAME
+          SS_NO
+          GENDER
+          MARITAL_STATUS
+          START_DATE
+          END_DATE
+          BIRTH_DATE
+          EMAIL
+          ADDR_LINE_1
+          ADDR_LINE_2
+          ADDR_LINE_3
+          ADDR_LINE_4
+          ADDR_LINE_5
+          ADDR_LINE_6
+          ADDRESS_COUNTRY
+          TAX_CODE
+          TAX_BASIS
+          NI_CATEGORY
+          CON_STU_LOAN_I
+          PLAN_TYPE
+          PAYMENT_METHOD
+          PAYMENT_FREQUENCY
+          BANK_NAME
+          SORT_CODE
+          ACCOUNT_NUMBER
+          ROLL_NUMBER
+          SCHEME_AMOUNT
+          PAYMENT_ID
+          CLAIM_POLICIES
+          RIGHT_TO_WORK_CONFIRM_STATUS
         ].join(",")
 
         expect(report.csv).to include(expected_header)
