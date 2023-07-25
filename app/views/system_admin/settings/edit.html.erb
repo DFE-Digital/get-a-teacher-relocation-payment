@@ -1,0 +1,24 @@
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+    <h1 class="govuk-heading-l">Application Settings</h1>
+  </div>
+  <div class="govuk-grid-column-two-thirds-from-desktop">
+    <%= form_for @app_settings, url: settings_path, method: :patch do |f| %>
+
+      <%= f.govuk_error_summary %>
+
+      <%= f.govuk_date_field :service_start_date,
+        legend: { text: "Service start date" },
+        hint: { text: "Sets the start date for the service. If this date is blank or in the future, the application will not be open to applicants" },
+        class: "service-start-date"
+      %>
+      <%= f.govuk_date_field :service_end_date,
+        legend: { text: "Service end date" },
+        hint: { text: "Sets the end date for the service. If this date is blank or in the past, the application will not be open to applicants" },
+        class: "service-end-date"
+      %>
+
+      <%= f.govuk_submit "Save" %>
+    <% end %>
+  </div>
+</div>
