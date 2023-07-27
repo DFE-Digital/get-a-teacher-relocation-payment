@@ -29,6 +29,13 @@ module Reports
         expect(report.csv).to include(app.urn)
       end
 
+      it "does not return rejected applicants" do
+        progress.rejection_completed_at = Time.zone.now
+        app = create(:application, application_progress: progress)
+
+        expect(report.csv).not_to include(app.urn)
+      end
+
       it "does not return applicants who have not completed initial checks" do
         progress.school_checks_completed_at = nil
         app = create(:application, application_progress: progress)
