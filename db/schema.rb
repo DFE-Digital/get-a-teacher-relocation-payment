@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema[7.0].define(version: 2023_07_21_082851) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -62,6 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_21_082851) do
     t.date "rejection_completed_at"
     t.date "banking_approval_completed_at"
     t.text "rejection_reason"
+    t.integer "status", default: 0
   end
 
   create_table "applications", force: :cascade do |t|
