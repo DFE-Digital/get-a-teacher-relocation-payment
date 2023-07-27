@@ -50,7 +50,7 @@ module Reports
           application.urn,
           application.applicant.given_name,
           application.applicant.family_name,
-          application.applicant.phone_number,
+          "tel: #{application.applicant.phone_number}",
           application.applicant.email_address,
           application.applicant.address.address_line_1,
           application.applicant.address.postcode,
