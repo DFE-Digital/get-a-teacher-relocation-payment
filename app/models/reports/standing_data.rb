@@ -22,7 +22,7 @@ module Reports
         "urn",
         "given_name",
         "family_name",
-        "phone_number",
+        Arel.sql("CONCAT('tel: ', applicants.phone_number)"),
         "email_address",
         "address_line_1",
         "postcode",
