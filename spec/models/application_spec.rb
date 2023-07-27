@@ -56,6 +56,32 @@ RSpec.describe Application do
         expect(described_class.submitted.count).to eq 0
       end
     end
+
+    describe ".filter_by_status" do
+      it "returns applications with the specified status" do
+        initial_checks_application = build(:application)
+        create(:application_progress, :initial_checks_completed, application: initial_checks_application, status: :initial_checks)
+
+        home_office_checks_application = build(:application)
+        create(:application_progress, :home_office_checks_completed, application: home_office_checks_application, status: :home_office_checks)
+
+        filtered_applications = described_class.filter_by_status("home_office_checks")
+
+        expect(filtered_applications).to contain_exactly(initial_checks_application)
+      end
+
+      it "returns all applications if status is blank" do
+        initial_checks_application = build(:application)
+        create(:application_progress, application: initial_checks_application, status: :initial_checks)
+
+        home_office_checks_application = build(:application)
+        create(:application_progress, application: home_office_checks_application, status: :home_office_checks)
+
+        filtered_applications = described_class.filter_by_status("")
+
+        expect(filtered_applications).to contain_exactly(initial_checks_application, home_office_checks_application)
+      end
+    end
   end
 
   describe "#urn" do

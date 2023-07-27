@@ -41,6 +41,12 @@ class Application < ApplicationRecord
                    )
                  }
 
+  scope :filter_by_status, lambda { |status|
+                             return if status.blank?
+
+                             joins(:application_progress).where(application_progresses: { status: ApplicationProgress.statuses[status] })
+                           }
+
   with_options if: :submitted? do
     validates(:application_date, presence: true)
     validates(:application_route, presence: true)

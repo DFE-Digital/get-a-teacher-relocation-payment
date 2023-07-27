@@ -34,6 +34,21 @@ describe "Applications List" do
     then_i_can_see_the_application_is_highlighted
   end
 
+  it "allows filtering by status" do
+    given_there_are_applications_with_different_dates
+    given_i_am_signed_as_an_admin
+    when_i_am_in_the_applications_list_page
+    then_i_can_see_the_status_filter_form
+    then_i_can_filter_by_status
+  end
+
+  it "displays timestamps correctly" do
+    given_there_is_an_application_with_all_dates
+    given_i_am_signed_as_an_admin
+    when_i_am_in_the_applications_list_page
+    then_i_can_see_correct_timestamps
+  end
+
   def given_there_are_few_applications
     # Create 2 specific applications for search tests
     unique_applicant = create(:applicant, given_name: "Unique Given Name", family_name: "Unique Family Name", email_address: "unique@example.com")
@@ -50,6 +65,22 @@ describe "Applications List" do
     applicant = create(:applicant)
     application = create(:application, applicant:)
     application.application_progress.update(initial_checks_completed_at: 4.days.ago)
+  end
+
+  def given_there_are_applications_with_different_dates
+    create(:application, application_progress: build(:application_progress, :initial_checks_completed, status: :initial_checks))
+    create(:application, application_progress: build(:application_progress, :home_office_checks_completed, status: :home_office_checks))
+  end
+
+  def given_there_is_an_application_with_all_dates
+    create(:application, application_progress: build(:application_progress,
+                                                     :payment_confirmation_completed,
+                                                     initial_checks_completed_at: 5.days.ago,
+                                                     home_office_checks_completed_at: 4.days.ago,
+                                                     school_checks_completed_at: 3.days.ago,
+                                                     banking_approval_completed_at: 2.days.ago,
+                                                     payment_confirmation_completed_at: 1.day.ago,
+                                                     rejection_completed_at: 6.days.ago))
   end
 
   def when_i_am_in_the_applications_list_page
@@ -88,5 +119,20 @@ describe "Applications List" do
 
   def then_i_can_see_the_application_is_highlighted
     expect(page).to have_css("tr.sla-breached")
+  end
+
+  def then_i_can_see_the_status_filter_form
+    expect(page).to have_select("status-field")
+  end
+
+  def then_i_can_filter_by_status
+    select "Home office checks", from: "status"
+    click_button "Search"
+    expect(page).to have_content("Home office checks")
+  end
+
+  def then_i_can_see_correct_timestamps
+    within(".applicants-table td:nth-child(4)") { expect(page).to have_content(5.days.ago.to_date.to_fs(:govuk_date)) }
+    within(".applicants-table td:nth-child(5)") { expect(page).to have_content(4.days.ago.to_date.to_fs(:govuk_date)) }
   end
 end
