@@ -34,7 +34,10 @@ module Reports
         .joins(:application_progress)
         .joins(:applicant)
         .where.not(application_progresses: { initial_checks_completed_at: nil })
-        .where(application_progresses: { home_office_checks_completed_at: nil })
+        .where(application_progresses: {
+          home_office_checks_completed_at: nil,
+          rejection_completed_at: nil,
+        })
     end
 
     def header
