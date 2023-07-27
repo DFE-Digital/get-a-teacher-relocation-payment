@@ -74,7 +74,7 @@ en:
       date_of_birth: Enter your date of birth, as it appears on your passport
       address:
         text: Enter your address
-        hint: Please give us your address in England
+        hint: Enter your address in England
       address_line_1: Address line 1
       address_line_2: Address line 2 (optional)
       city: Town or city
