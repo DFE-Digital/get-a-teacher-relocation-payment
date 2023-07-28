@@ -33,4 +33,8 @@ class ApplicationProgress < ApplicationRecord
   }
 
   before_save -> { self.status = StatusQuery.new(self).current_status }
+
+  def sla_breached?
+    SlaChecker.new(self).breached?
+  end
 end
