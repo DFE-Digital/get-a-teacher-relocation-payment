@@ -22,7 +22,7 @@ module Reports
         "urn",
         "given_name",
         "family_name",
-        "phone_number",
+        Arel.sql("CONCAT('tel: ', applicants.phone_number)"),
         "email_address",
         "address_line_1",
         "postcode",
@@ -34,7 +34,10 @@ module Reports
         .joins(:application_progress)
         .joins(applicant: :address)
         .where.not(application_progresses: { school_checks_completed_at: nil })
-        .where(application_progresses: { banking_approval_completed_at: nil })
+        .where(application_progresses: {
+          banking_approval_completed_at: nil,
+          rejection_completed_at: nil,
+        })
     end
 
     def header
