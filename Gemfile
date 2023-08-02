@@ -22,7 +22,7 @@ gem "pagy"
 # GOVUK GEMS ##
 ###############
 # Used to build our forms and style them using govuk-frontend class names
-gem "govuk-components", "4.0.0"
+gem "govuk-components", "4.1.0"
 gem "govuk_design_system_formbuilder"
 gem "notifications-ruby-client"
 # UK postcode parsing and validation for Ruby
