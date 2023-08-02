@@ -75,7 +75,7 @@ module Applicants
       )
     end
 
-    private
+  private
 
     def date_of_birth_not_in_future
       return unless date_of_birth.present? && date_of_birth > Date.current
@@ -90,7 +90,7 @@ module Applicants
     end
 
     def minimum_age
-      return unless date_of_birth.present?
+      return if date_of_birth.blank?
 
       errors.add(:date_of_birth, "must be at least #{MIN_AGE} years") if date_of_birth > MIN_AGE.years.ago.to_date
     end

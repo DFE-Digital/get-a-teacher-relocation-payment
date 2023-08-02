@@ -44,17 +44,20 @@ module Applicants
         before { model.valid? }
 
         context "invalid when younger than 18 years old" do
-        let(:age) { minimun_age.years.ago + 1.day }
+          let(:age) { minimun_age.years.ago + 1.day }
+
           it { is_expected.to be_present }
         end
 
         context "valid when exactly 18 years old" do
           let(:age) { minimun_age.years.ago }
+
           it { is_expected.to be_blank }
         end
 
         context "valid when older than 18 years old" do
           let(:age) { minimun_age.years.ago - 1.day }
+
           it { is_expected.to be_blank }
         end
       end
