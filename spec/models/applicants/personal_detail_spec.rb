@@ -29,6 +29,35 @@ module Applicants
 
       include_examples "a valid UK postcode", described_class
       include_examples "validates phone number with international prefix", described_class, :phone_number
+      describe "date_of_birth minimum age" do
+        subject { model.errors.messages_for(:date_of_birth) }
+        let(:model) { described_class.new(params) }
+        let(:minimun_age) { 22 }
+        let(:params) do
+          {
+            day: age.day.to_s,
+            month: age.month.to_s,
+            year: age.year.to_s,
+          }
+        end
+
+        before { model.valid? }
+
+        context "invalid when younger than 18 years old" do
+        let(:age) { minimun_age.years.ago + 1.day }
+          it { is_expected.to be_present }
+        end
+
+        context "valid when exactly 18 years old" do
+          let(:age) { minimun_age.years.ago }
+          it { is_expected.to be_blank }
+        end
+
+        context "valid when older than 18 years old" do
+          let(:age) { minimun_age.years.ago - 1.day }
+          it { is_expected.to be_blank }
+        end
+      end
 
       describe "#applicant=" do
         let(:applicant) do
