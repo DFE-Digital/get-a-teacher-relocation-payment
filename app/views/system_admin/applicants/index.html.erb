@@ -28,7 +28,7 @@
 
       table.with_body do |body|
         @applications.each do |application|
-          body.with_row do |row|
+          body.with_row(html_attributes: {class: application.sla_breached? ? 'sla-breached' : ''}) do |row|
             row.with_cell(text: govuk_link_to(application.urn, applicant_path(application.applicant)))
             row.with_cell(text: application.applicant.full_name)
             row.with_cell(text: application.application_progress.created_at&.to_date&.to_fs(:govuk_date))
