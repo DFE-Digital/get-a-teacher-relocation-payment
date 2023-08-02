@@ -42,13 +42,13 @@ module Reports
 
         expect(report.csv).to include([
           "", # No.
-          "", # TITLE
+          "Prof", # TITLE
           application.applicant.given_name, # FORENAME
           "", # FORENAME2
           application.applicant.family_name, # SURNAME
           "", # SS_NO
           application.applicant.sex, # GENDER
-          "", # MARITAL_STATUS
+          "Other", # MARITAL_STATUS
           "", # START_DATE
           "", # END_DATE
           application.applicant.date_of_birth, # BIRTH_DATE
@@ -60,21 +60,21 @@ module Reports
           "", # ADDR_LINE_5
           "", # ADDR_LINE_6
           "United Kingdom", # ADDRESS_COUNTRY
-          "", # TAX_CODE
+          "BR", # TAX_CODE
           "", # TAX_BASIS
-          "", # NI_CATEGORY
+          "0", # NI_CATEGORY
           "", # CON_STU_LOAN_I
           "", # PLAN_TYPE
-          "", # PAYMENT_METHOD
-          "", # PAYMENT_FREQUENCY
+          "Direct BACS", # PAYMENT_METHOD
+          "Weekly", # PAYMENT_FREQUENCY
           "", # BANK_NAME
           "", # SORT_CODE
           "", # ACCOUNT_NUMBER
           "", # ROLL_NUMBER
-          "", # SCHEME_AMOUNT
+          10_000, # SCHEME_AMOUNT
           "", # PAYMENT_ID
-          "", # CLAIM_POLICIES
-          "", # RIGHT_TO_WORK_CONFIRM_STATUS
+          "Get an International Relocation Payment", # CLAIM_POLICIES
+          "2", # RIGHT_TO_WORK_CONFIRM_STATUS
         ].join(","))
       end
 
