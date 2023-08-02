@@ -22,9 +22,6 @@
       <%= f.govuk_date_field :date_of_birth, date_of_birth: true, legend: { text: t("applicants.personal_details.date_of_birth"), size: "s" } %>
 
       <%= f.govuk_fieldset legend: { text: t("applicants.personal_details.address.text"), size: 's' } do %>
-        <p class="govuk-hint">
-          <%= t("applicants.personal_details.address.hint") %>
-        </p>
         <%= f.govuk_text_field :address_line_1, label: { text: t("applicants.personal_details.address_line_1"), size: "s" } %>
         <%= f.govuk_text_field :address_line_2, label: { text: t("applicants.personal_details.address_line_2"), size: "s" } %>
         <%= f.govuk_text_field :city, label: { text: t("applicants.personal_details.city"), size: "s" } %>
