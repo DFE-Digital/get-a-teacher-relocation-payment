@@ -90,7 +90,9 @@ module Applicants
     end
 
     def minimum_age
-      return if date_of_birth.blank?
+      # rubocop:disable Rails/Blank
+      return unless date_of_birth.present?
+      # rubocop:enable Rails/Blank
 
       errors.add(:date_of_birth, "must be at least #{MIN_AGE} years") if date_of_birth > MIN_AGE.years.ago.to_date
     end
