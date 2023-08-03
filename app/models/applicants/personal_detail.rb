@@ -17,6 +17,7 @@ module Applicants
     validates :date_of_birth, presence: true
     validate :date_of_birth_not_in_future
     validate :age_less_than_maximum
+    validate :minimum_age
     validates :sex, presence: true, inclusion: { in: SEX_OPTIONS }
     validates :passport_number, presence: true
     validates :nationality, presence: true, inclusion: { in: NATIONALITIES }
@@ -87,8 +88,17 @@ module Applicants
 
       errors.add(:date_of_birth)
     end
+
+    def minimum_age
+      # rubocop:disable Rails/Blank
+      return unless date_of_birth.present?
+      # rubocop:enable Rails/Blank
+
+      errors.add(:date_of_birth, "must be at least #{MIN_AGE} years") if date_of_birth > MIN_AGE.years.ago.to_date
+    end
   end
 
   MAX_AGE = 80
-  private_constant :MAX_AGE
+  MIN_AGE = 22
+  private_constant :MAX_AGE, :MIN_AGE
 end
