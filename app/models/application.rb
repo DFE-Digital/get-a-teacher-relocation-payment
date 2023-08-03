@@ -21,6 +21,7 @@
 class Application < ApplicationRecord
   belongs_to :applicant, optional: true
   has_one :application_progress, dependent: :destroy
+  has_many :duplicates, inverse_of: :application, primary_key: :id, class_name: "DuplicateApplication"
 
   delegate :sla_breached?, to: :application_progress
 

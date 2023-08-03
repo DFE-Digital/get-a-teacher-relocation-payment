@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[7.0].define(version: 2023_07_21_082851) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_31_151719) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -102,4 +101,66 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_21_082851) do
 
   add_foreign_key "applicants", "schools"
   add_foreign_key "applications", "applicants"
+
+  create_view "duplicate_applications", sql_definition: <<-SQL
+      SELECT applications.id,
+      applications.application_date,
+      applications.urn,
+      applications.applicant_id,
+      applications.created_at,
+      applications.updated_at,
+      applications.subject,
+      applications.visa_type,
+      applications.date_of_entry,
+      applications.start_date,
+      applications.application_route,
+      dup_email.email_address AS duplicate_email
+     FROM ((applications
+       JOIN applicants ON ((applications.applicant_id = applicants.id)))
+       JOIN ( SELECT applicants_1.email_address,
+              count(applicants_1.email_address) AS count
+             FROM applicants applicants_1
+            GROUP BY applicants_1.email_address
+           HAVING (count(applicants_1.email_address) > 1)) dup_email ON ((applicants.email_address = dup_email.email_address)))
+  UNION
+   SELECT applications.id,
+      applications.application_date,
+      applications.urn,
+      applications.applicant_id,
+      applications.created_at,
+      applications.updated_at,
+      applications.subject,
+      applications.visa_type,
+      applications.date_of_entry,
+      applications.start_date,
+      applications.application_route,
+      dup_phone.phone_number AS duplicate_email
+     FROM ((applications
+       JOIN applicants ON ((applications.applicant_id = applicants.id)))
+       JOIN ( SELECT applicants_1.phone_number,
+              count(applicants_1.phone_number) AS count
+             FROM applicants applicants_1
+            GROUP BY applicants_1.phone_number
+           HAVING (count(applicants_1.phone_number) > 1)) dup_phone ON ((applicants.phone_number = dup_phone.phone_number)))
+  UNION
+   SELECT applications.id,
+      applications.application_date,
+      applications.urn,
+      applications.applicant_id,
+      applications.created_at,
+      applications.updated_at,
+      applications.subject,
+      applications.visa_type,
+      applications.date_of_entry,
+      applications.start_date,
+      applications.application_route,
+      dup_passport.passport_number AS duplicate_email
+     FROM ((applications
+       JOIN applicants ON ((applications.applicant_id = applicants.id)))
+       JOIN ( SELECT applicants_1.passport_number,
+              count(applicants_1.passport_number) AS count
+             FROM applicants applicants_1
+            GROUP BY applicants_1.passport_number
+           HAVING (count(applicants_1.passport_number) > 1)) dup_passport ON ((applicants.passport_number = dup_passport.passport_number)));
+  SQL
 end
