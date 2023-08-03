@@ -28,14 +28,23 @@ module Reports
         "address_line_2",
       ).map do |row|
         Array.new(34, nil).tap do |array|
+          array[1] = "Prof"
           array[2] = row[0]
           array[4] = row[1]
           array[6] = row[2]
+          array[7] = "Other"
           array[10] = row[3]
           array[11] = row[4]
           array[12] = row[5]
           array[13] = row[6]
           array[18] = "United Kingdom"
+          array[19] = "BR"
+          array[21] = "0"
+          array[24] = "Direct BACS"
+          array[25] = "Weekly"
+          array[30] = 10_000
+          array[32] = "Get an International Relocation Payment"
+          array[33] = "2"
         end
       end
     end
