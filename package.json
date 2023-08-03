@@ -14,7 +14,7 @@
     "govuk-frontend": "^4.7.0",
     "rails-ujs": "^5.2.8",
     "turbolinks": "^5.2.0",
-    "webpack": "^4.46.0",
+    "webpack": "^5.88.2",
     "webpack-cli": "^4.10.0"
   },
   "devDependencies": {
