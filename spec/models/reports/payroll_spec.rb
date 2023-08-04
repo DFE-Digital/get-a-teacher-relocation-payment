@@ -61,8 +61,8 @@ module Reports
           "", # ADDR_LINE_6
           "United Kingdom", # ADDRESS_COUNTRY
           "BR", # TAX_CODE
-          "", # TAX_BASIS
-          "0", # NI_CATEGORY
+          "0", # TAX_BASIS
+          "", # NI_CATEGORY
           "", # CON_STU_LOAN_I
           "", # PLAN_TYPE
           "Direct BACS", # PAYMENT_METHOD

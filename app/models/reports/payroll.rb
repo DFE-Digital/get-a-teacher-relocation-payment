@@ -39,7 +39,7 @@ module Reports
           array[13] = row[6]
           array[18] = "United Kingdom"
           array[19] = "BR"
-          array[21] = "0"
+          array[20] = "0"
           array[24] = "Direct BACS"
           array[25] = "Weekly"
           array[30] = 10_000
