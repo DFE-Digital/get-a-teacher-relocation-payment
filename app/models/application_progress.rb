@@ -13,6 +13,7 @@
 #  rejection_reason                  :text
 #  school_checks_completed_at        :date
 #  school_investigation_required     :boolean          default(FALSE), not null
+#  status                            :integer          default("initial_checks")
 #  visa_investigation_required       :boolean          default(FALSE), not null
 #  created_at                        :datetime         not null
 #  updated_at                        :datetime         not null
@@ -22,4 +23,19 @@ class ApplicationProgress < ApplicationRecord
   belongs_to :application
 
   validates :rejection_reason, presence: true, if: :rejection_completed_at?
+  enum status: {
+    initial_checks: 0,
+    home_office_checks: 1,
+    school_checks: 2,
+    bank_approval: 3,
+    payment_confirmation: 4,
+    paid: 5,
+    rejected: 6,
+  }
+
+  before_save -> { self.status = StatusQuery.new(self).current_status }
+
+  def sla_breached?
+    SlaChecker.new(self).breached?
+  end
 end

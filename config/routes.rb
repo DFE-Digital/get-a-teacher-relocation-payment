@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get "/ineligible", to: "pages#ineligible"
   get "/ineligible-salaried-course", to: "pages#ineligible_salaried_course"
+  get "/closed", to: "pages#closed"
 
   namespace :applicants do
     resources :application_routes, only: %i[new create]
@@ -29,6 +30,7 @@ Rails.application.routes.draw do
   scope module: :system_admin, path: "system-admin" do
     resources :applicants, only: %i[index show edit update]
     resources :users, except: %i[show]
+    resource :settings, only: %i[edit update]
     get "/dashboard", to: "dashboard#show"
     resources "reports", only: %i[show index]
   end

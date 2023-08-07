@@ -20,8 +20,7 @@ module Reports
     def rows
       candidates.pluck(
         :urn,
-        "applicants.given_name",
-        "applicants.family_name",
+        Arel.sql("CONCAT(applicants.given_name, ' ', applicants.family_name)"),
         "applicants.date_of_birth",
         "applicants.nationality",
         "applicants.passport_number",
@@ -35,14 +34,16 @@ module Reports
         .joins(:application_progress)
         .joins(:applicant)
         .where.not(application_progresses: { initial_checks_completed_at: nil })
-        .where(application_progresses: { home_office_checks_completed_at: nil })
+        .where(application_progresses: {
+          home_office_checks_completed_at: nil,
+          rejection_completed_at: nil,
+        })
     end
 
     def header
       [
         "URN",
-        "Forename",
-        "Surname",
+        "Full Name",
         "DOB",
         "Nationality",
         "Passport Number",

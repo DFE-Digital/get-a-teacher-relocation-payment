@@ -22,6 +22,8 @@ class Application < ApplicationRecord
   belongs_to :applicant, optional: true
   has_one :application_progress, dependent: :destroy
 
+  delegate :sla_breached?, to: :application_progress
+
   scope :submitted, -> { where.not(urn: nil) }
 
   scope :search, lambda { |term|
@@ -38,6 +40,12 @@ class Application < ApplicationRecord
                      term:,
                    )
                  }
+
+  scope :filter_by_status, lambda { |status|
+                             return if status.blank?
+
+                             joins(:application_progress).where(application_progresses: { status: ApplicationProgress.statuses[status] })
+                           }
 
   with_options if: :submitted? do
     validates(:application_date, presence: true)

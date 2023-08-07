@@ -28,6 +28,15 @@ module Reports
         expect(report.csv).to include(app.urn)
       end
 
+      it "does not return rejected applicants" do
+        progress = build(:application_progress,
+                         :home_office_pending,
+                         rejection_completed_at: Time.zone.now)
+        app = create(:application, application_progress: progress)
+
+        expect(report.csv).not_to include(app.urn)
+      end
+
       it "does not return applicants who have not completed initial checks" do
         app = create(:application, application_progress: build(:application_progress, initial_checks_completed_at: nil))
 
@@ -48,8 +57,7 @@ module Reports
 
         expect(report.csv).to include([
           application.urn,
-          application.applicant.given_name,
-          application.applicant.family_name,
+          application.applicant.full_name,
           application.applicant.date_of_birth,
           application.applicant.nationality,
           application.applicant.passport_number,
@@ -61,8 +69,7 @@ module Reports
       it "returns the header in CSV format" do
         expected_header = [
           "URN",
-          "Forename",
-          "Surname",
+          "Full Name",
           "DOB",
           "Nationality",
           "Passport Number",

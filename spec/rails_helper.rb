@@ -73,9 +73,14 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include FactoryBot::Syntax::Methods
-
   # Devise
   config.include Devise::Test::IntegrationHelpers, type: :feature
+  config.before do
+    AppSettings.current.update!(
+      service_start_date: Time.zone.yesterday,
+      service_end_date: Time.zone.today + 1.year,
+    )
+  end
 end
 
 Shoulda::Matchers.configure do |config|

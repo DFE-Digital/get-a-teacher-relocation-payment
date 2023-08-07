@@ -1,5 +1,12 @@
+<% statuses = options_for_select(
+        ApplicationProgress.statuses.keys.map { |status| [status.humanize, status] }.unshift(['All statuses', '']),
+        selected: params[:status]
+      )
+%>
 <%= form_with(url: applicants_path, method: :get, id: :search) do |f| %>
   <%= f.govuk_text_field :search, value: params[:search], label: { text: 'Search' }, hint: { text: 'Search by full name, email, passport number or URN' } %>
+  <%= f.govuk_select :status, statuses, label: { text: "Status" }, hint: { text: "Filter by Application Status" } %>
+
   <%= f.govuk_submit 'Search', secondary: true %>
 <% end %>
 
@@ -21,7 +28,7 @@
 
       table.with_body do |body|
         @applications.each do |application|
-          body.with_row do |row|
+          body.with_row(html_attributes: {class: application.sla_breached? ? 'sla-breached' : ''}) do |row|
             row.with_cell(text: govuk_link_to(application.urn, applicant_path(application.applicant)))
             row.with_cell(text: application.applicant.full_name)
             row.with_cell(text: application.application_progress.created_at&.to_date&.to_fs(:govuk_date))
