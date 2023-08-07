@@ -55,10 +55,10 @@ module Reports
           application.applicant.email_address, # EMAIL
           application.applicant.address.address_line_1, # ADDR_LINE_1
           application.applicant.address.address_line_2, # ADDR_LINE_2
-          "", # ADDR_LINE_3
+          application.applicant.address.city, # CITY
           "", # ADDR_LINE_4
           "", # ADDR_LINE_5
-          "", # ADDR_LINE_6
+          application.applicant.address.postcode, # POSTCODE
           "United Kingdom", # ADDRESS_COUNTRY
           "BR", # TAX_CODE
           "0", # TAX_BASIS
@@ -94,10 +94,10 @@ module Reports
           EMAIL
           ADDR_LINE_1
           ADDR_LINE_2
-          ADDR_LINE_3
+          CITY
           ADDR_LINE_4
           ADDR_LINE_5
-          ADDR_LINE_6
+          POSTCODE
           ADDRESS_COUNTRY
           TAX_CODE
           TAX_BASIS
