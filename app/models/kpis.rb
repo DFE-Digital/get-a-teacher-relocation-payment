@@ -39,6 +39,10 @@ class Kpis
     GenderBreakdownQuery.new.call
   end
 
+  def rejection_reason_breakdown
+    RejectionReasonBreakdownQuery.new.call
+  end
+
   def time_to_initial_checks
     TimeToInitialChecksQuery.new.call
   end

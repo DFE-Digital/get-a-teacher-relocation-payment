@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: application_progresses
+#
+#  id                                :bigint           not null, primary key
+#  banking_approval_completed_at     :date
+#  home_office_checks_completed_at   :date
+#  initial_checks_completed_at       :date
+#  payment_confirmation_completed_at :date
+#  rejection_completed_at            :date
+#  rejection_details                 :text
+#  rejection_reason                  :integer
+#  school_checks_completed_at        :date
+#  school_investigation_required     :boolean          default(FALSE), not null
+#  status                            :integer          default("initial_checks")
+#  visa_investigation_required       :boolean          default(FALSE), not null
+#  created_at                        :datetime         not null
+#  updated_at                        :datetime         not null
+#  application_id                    :bigint
+#
 require "rails_helper"
 
 RSpec.describe ApplicationProgress do
@@ -7,7 +27,7 @@ RSpec.describe ApplicationProgress do
     context "when rejection_completed_at is present" do
       it "updates status to rejected" do
         application_progress.rejection_completed_at = Time.current
-        application_progress.rejection_reason = "rejected"
+        application_progress.rejection_reason = :suspected_fraud
         application_progress.save
         expect(application_progress.reload.status).to eq("rejected")
       end

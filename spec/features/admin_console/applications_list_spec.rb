@@ -81,7 +81,7 @@ describe "Applications List" do
                                                      banking_approval_completed_at: 2.days.ago,
                                                      payment_confirmation_completed_at: 1.day.ago,
                                                      rejection_completed_at: 6.days.ago,
-                                                     rejection_reason: "Rejected"))
+                                                     rejection_reason: :suspected_fraud))
   end
 
   def when_i_am_in_the_applications_list_page

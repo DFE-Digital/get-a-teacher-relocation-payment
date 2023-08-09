@@ -48,6 +48,7 @@ module SystemAdmin
         :payment_confirmation_completed_at,
         :rejection_completed_at,
         :rejection_reason,
+        :rejection_details,
       )
     end
 

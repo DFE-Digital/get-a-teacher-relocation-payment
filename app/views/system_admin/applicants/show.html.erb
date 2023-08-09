@@ -55,7 +55,11 @@
     end
     summary_list.with_row do |row|
       row.with_key(text: 'Rejection Reason')
-      row.with_value(text: @progress.rejection_reason ) 
+      row.with_value(text: @progress.rejection_reason&.humanize ) 
+    end
+    summary_list.with_row do |row|
+      row.with_key(text: 'Rejection Details')
+      row.with_value(text: @progress.rejection_details ) 
     end
   end
 end %>
