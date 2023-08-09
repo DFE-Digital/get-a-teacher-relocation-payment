@@ -26,6 +26,8 @@ module Reports
         "email_address",
         "address_line_1",
         "address_line_2",
+        "city",
+        "postcode",
       ).map do |row|
         Array.new(34, nil).tap do |array|
           array[1] = "Prof"
@@ -37,9 +39,11 @@ module Reports
           array[11] = row[4]
           array[12] = row[5]
           array[13] = row[6]
+          array[14] = row[7]
+          array[17] = row[8]
           array[18] = "United Kingdom"
           array[19] = "BR"
-          array[21] = "0"
+          array[20] = "0"
           array[24] = "Direct BACS"
           array[25] = "Weekly"
           array[30] = 10_000
@@ -72,10 +76,10 @@ module Reports
         EMAIL
         ADDR_LINE_1
         ADDR_LINE_2
-        ADDR_LINE_3
+        CITY
         ADDR_LINE_4
         ADDR_LINE_5
-        ADDR_LINE_6
+        POSTCODE
         ADDRESS_COUNTRY
         TAX_CODE
         TAX_BASIS

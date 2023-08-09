@@ -12,7 +12,7 @@ module Applicants
             "phone_number" => "07702496000",
             "sex" => "male",
             "passport_number" => "123456789",
-            "nationality" => "British",
+            "nationality" => "British National Overseas",
             "address_line_1" => "7 McLeud",
             "address_line_2" => "second line",
             "city" => "London",
