@@ -33,6 +33,7 @@ FactoryBot.define do
 
     trait :rejection_completed do
       rejection_completed_at { rand(1..2).days.ago.to_date }
+      rejection_reason { "Rejection reason" }
     end
 
     trait :visa_investigation_required do

@@ -22,6 +22,7 @@
 class ApplicationProgress < ApplicationRecord
   belongs_to :application
 
+  validates :rejection_reason, presence: true, if: :rejection_completed_at?
   enum status: {
     initial_checks: 0,
     home_office_checks: 1,
