@@ -7,8 +7,9 @@ RSpec.describe ApplicationProgress do
     context "when rejection_completed_at is present" do
       it "updates status to rejected" do
         application_progress.rejection_completed_at = Time.current
+        application_progress.rejection_reason = "rejected"
         application_progress.save
-        expect(application_progress.status).to eq("rejected")
+        expect(application_progress.reload.status).to eq("rejected")
       end
     end
 

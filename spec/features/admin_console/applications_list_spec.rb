@@ -80,7 +80,8 @@ describe "Applications List" do
                                                      school_checks_completed_at: 3.days.ago,
                                                      banking_approval_completed_at: 2.days.ago,
                                                      payment_confirmation_completed_at: 1.day.ago,
-                                                     rejection_completed_at: 6.days.ago))
+                                                     rejection_completed_at: 6.days.ago,
+                                                     rejection_reason: "Rejected"))
   end
 
   def when_i_am_in_the_applications_list_page
