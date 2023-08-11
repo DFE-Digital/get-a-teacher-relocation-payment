@@ -4,10 +4,27 @@
       )
 %>
 <%= form_with(url: applicants_path, method: :get, id: :search) do |f| %>
-  <%= f.govuk_text_field :search, value: params[:search], label: { text: 'Search' }, hint: { text: 'Search by full name, email, passport number or URN' } %>
-  <%= f.govuk_select :status, statuses, label: { text: "Status" }, hint: { text: "Filter by Application Status" } %>
+  <div class="full-width">
+    <%= f.govuk_text_field :search, value: params[:search], label: { text: 'Search' }, hint: { text: 'Search by full name, email, passport number or URN' } %>
+  </div>
 
-  <%= f.govuk_submit 'Search', secondary: true %>
+  <div class="row">
+    <div class="column">
+      <%= f.govuk_select :status, statuses, label: { text: "Status" }, hint: { text: "Filter by Application Status" } %>
+    </div>
+
+    <div class="column">
+      <label class="govuk-form-group">
+        <%= f.label "SLA", class:"govuk-label" %>
+        <div class="govuk-hint" id="status-hint">Filter by Breached SLA</div>
+        <%= f.govuk_check_box :sla_breached?, true, multiple: false, label: { text: "SLA Breached?" }, checked: params[:sla_breached] == "true" %>
+      </label>
+    </div>
+  </div>
+
+  <div class="full-width">
+    <%= f.govuk_submit 'Search', secondary: true %>
+  </div>
 <% end %>
 
 <%= govuk_table(classes: "applicants-table") do |table|
