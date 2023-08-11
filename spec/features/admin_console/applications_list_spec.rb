@@ -49,16 +49,24 @@ describe "Applications List" do
     then_i_can_see_correct_timestamps
   end
 
+  it "allows filtering by breached SLA" do
+    given_there_is_an_application_that_breached_sla
+    given_i_am_signed_as_an_admin
+    when_i_am_in_the_applications_list_page
+    then_i_can_see_the_sla_filter_form
+    then_i_can_filter_by_sla_breach
+  end
+
   def given_there_are_few_applications
     # Create 2 specific applications for search tests
     unique_applicant = create(:applicant, given_name: "Unique Given Name", family_name: "Unique Family Name", email_address: "unique@example.com")
-    create(:application, applicant: unique_applicant, urn: "Unique Urn 1")
+    create(:application, :submitted, applicant: unique_applicant, urn: "Unique Urn 1")
 
     another_applicant = create(:applicant, given_name: "Another Given Name", family_name: "Another Family Name", email_address: "another@example.com")
-    create(:application, applicant: another_applicant, urn: "Unique Urn 2")
+    create(:application, :submitted, applicant: another_applicant, urn: "Unique Urn 2")
 
     # Create 19 more applications for pagination test
-    create_list(:application, 19)
+    create_list(:application, 19, :submitted)
   end
 
   def given_there_is_an_application_that_breached_sla
@@ -135,5 +143,15 @@ describe "Applications List" do
   def then_i_can_see_correct_timestamps
     within(".applicants-table td:nth-child(4)") { expect(page).to have_content(5.days.ago.to_date.to_fs(:govuk_date)) }
     within(".applicants-table td:nth-child(5)") { expect(page).to have_content(4.days.ago.to_date.to_fs(:govuk_date)) }
+  end
+
+  def then_i_can_see_the_sla_filter_form
+    expect(page).to have_css("form#search input#sla-breached-true-field")
+  end
+
+  def then_i_can_filter_by_sla_breach
+    check "sla_breached"
+    click_button "Search"
+    expect(page).to have_content(Application.all.find(&:sla_breached?).urn)
   end
 end

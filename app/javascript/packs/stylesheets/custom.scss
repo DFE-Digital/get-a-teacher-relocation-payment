@@ -117,3 +117,17 @@
     border-color: #f5c6cb;
   }
 }
+
+#search {
+  .row {
+    display: flex;
+  }
+
+  .column {
+    flex: 1;
+  }
+
+  .full-width {
+    width: 100%;
+  }
+}
