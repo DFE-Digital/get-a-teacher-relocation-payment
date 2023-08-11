@@ -129,4 +129,16 @@
     </table>
   </div>
 
+  <div class="kpi-widget rejection-reasons">
+    <h3 class="title">Rejection Reasons</h3>
+    <table class="kpi-table">
+      <% @kpis.rejection_reason_breakdown.each do |k,v|%>
+        <tr>
+          <td><%= k.humanize %></td>
+          <td><%= v %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
 </div>

@@ -68,6 +68,13 @@ describe "Dashboard" do
     then_i_can_see_the_gender_breakdown_widget
   end
 
+  it "shows the Rejection Reason Breakdown widget" do
+    given_there_are_applications_with_rejection_reasons
+    given_i_am_signed_as_an_admin
+    when_i_am_in_the_dashboard_page
+    then_i_can_see_the_rejection_reason_breakdown_widget
+  end
+
   it "shows the Initial Checks Approval time widget" do
     given_there_are_applications_with_initial_checks
     given_i_am_signed_as_an_admin
@@ -139,6 +146,13 @@ describe "Dashboard" do
   def given_there_are_rejected_applications
     application = create(:application)
     create_list(:application_progress, 2, :rejection_completed, application:)
+  end
+
+  def given_there_are_applications_with_rejection_reasons
+    application = create(:application)
+    create(:application_progress, :rejection_completed, application: application, rejection_reason: :suspected_fraud)
+    create(:application_progress, :rejection_completed, application: application, rejection_reason: :ineligible_school)
+    create(:application_progress, :rejection_completed, application: application, rejection_reason: :suspected_fraud)
   end
 
   def given_there_are_3_applicants_with_ages
@@ -273,6 +287,16 @@ describe "Dashboard" do
     within ".kpi-widget.genders" do
       expect(page).to have_content("Gender")
       expect(page).to have_content("Male").or have_content("Female")
+    end
+  end
+
+  def then_i_can_see_the_rejection_reason_breakdown_widget
+    within ".kpi-widget.rejection-reasons" do
+      expect(page).to have_content("Rejection Reasons")
+      expect(page).to have_content("Suspected fraud")
+      expect(page).to have_content("2")
+      expect(page).to have_content("Ineligible school")
+      expect(page).to have_content("1")
     end
   end
 
