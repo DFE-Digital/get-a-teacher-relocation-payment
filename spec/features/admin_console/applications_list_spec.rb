@@ -59,10 +59,10 @@ describe "Applications List" do
 
   def given_there_are_few_applications
     # Create 2 specific applications for search tests
-    unique_applicant = create(:applicant, given_name: "Unique Given Name", family_name: "Unique Family Name", email_address: "unique@example.com")
+    unique_applicant = create(:applicant, given_name: "Unique Given Name", middle_name: "Unique Middle Name", family_name: "Unique Family Name", email_address: "unique@example.com")
     create(:application, :submitted, applicant: unique_applicant, urn: "Unique Urn 1")
 
-    another_applicant = create(:applicant, given_name: "Another Given Name", family_name: "Another Family Name", email_address: "another@example.com")
+    another_applicant = create(:applicant, given_name: "Another Given Name", middle_name: "Another Middle Name", family_name: "Another Family Name", email_address: "another@example.com")
     create(:application, :submitted, applicant: another_applicant, urn: "Unique Urn 2")
 
     # Create 19 more applications for pagination test
@@ -122,7 +122,7 @@ describe "Applications List" do
   def then_i_can_search_by_urn
     fill_in "search", with: "Unique Urn 2"
     click_button "Search"
-    expect(page).to have_content("Another Given Name Another Family Name")
+    expect(page).to have_content("Another Given Name Another Middle Name Another Family Name")
     expect(page).to have_content("Unique Urn 2")
   end
 

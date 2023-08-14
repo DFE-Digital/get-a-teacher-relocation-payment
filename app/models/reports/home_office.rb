@@ -18,21 +18,23 @@ module Reports
   private
 
     def rows
-      candidates.pluck(
-        :urn,
-        Arel.sql("CONCAT(applicants.given_name, ' ', applicants.family_name)"),
-        "applicants.date_of_birth",
-        "applicants.nationality",
-        "applicants.passport_number",
-        :visa_type,
-        :date_of_entry,
-      )
+      applications.map do |application|
+        [
+          application.urn,
+          application.applicant.full_name,
+          application.applicant.date_of_birth,
+          application.applicant.nationality,
+          application.applicant.passport_number,
+          application.visa_type,
+          application.date_of_entry,
+        ]
+      end
     end
 
-    def candidates
+    def applications
       Application
         .joins(:application_progress)
-        .joins(:applicant)
+        .includes(:applicant)
         .where.not(application_progresses: { initial_checks_completed_at: nil })
         .where(application_progresses: {
           home_office_checks_completed_at: nil,

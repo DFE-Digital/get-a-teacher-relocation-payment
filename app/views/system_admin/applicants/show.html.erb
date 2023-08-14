@@ -31,7 +31,7 @@
     end
     summary_list.with_row do |row|
       row.with_key(text: 'Home Office Investigation Required')
-      row.with_value(text: @progress.visa_investigation_required ? 'True' : 'False' ) 
+      row.with_value(text: @progress.visa_investigation_required ? 'Yes' : 'No' ) 
     end
     summary_list.with_row do |row|
       row.with_key(text: 'School Checks Completed')
@@ -39,7 +39,7 @@
     end
     summary_list.with_row do |row|
       row.with_key(text: 'School Investigation Required')
-      row.with_value(text: @progress.school_investigation_required ? 'True' : 'False' ) 
+      row.with_value(text: @progress.school_investigation_required ? 'Yes' : 'No' ) 
     end
     summary_list.with_row do |row|
       row.with_key(text: 'Banking Details Approved')
@@ -73,6 +73,10 @@ end %>
         summary_list.with_row do |row|
           row.with_key(text: 'Given name')
           row.with_value(text: @applicant.given_name)
+        end 
+        summary_list.with_row do |row|
+          row.with_key(text: 'Middle name')
+          row.with_value(text: @applicant.middle_name)
         end 
         summary_list.with_row do |row|
           row.with_key(text: 'Family name')

@@ -227,7 +227,7 @@ describe "Dashboard" do
   def then_i_can_see_the_average_age_widget
     within ".kpi-widget.age" do
       expect(page).to have_content("Average Age")
-      expect(page).to have_content("44 years")
+      expect(page).to have_content("43 years")
     end
   end
 

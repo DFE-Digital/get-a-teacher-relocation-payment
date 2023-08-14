@@ -9,6 +9,7 @@
 #  email_address   :text
 #  family_name     :text
 #  given_name      :text
+#  middle_name     :string
 #  nationality     :text
 #  passport_number :text
 #  phone_number    :text
@@ -22,9 +23,6 @@
 #  fk_rails_...  (school_id => schools.id)
 #
 class Applicant < ApplicationRecord
-  # TODO: Add validations here so that a final check is made on the validity of
-  # the whole application.
-
   has_one :address, as: :addressable, dependent: :destroy
   accepts_nested_attributes_for :address
 
@@ -33,7 +31,7 @@ class Applicant < ApplicationRecord
   has_one :application, dependent: :destroy
 
   def full_name
-    "#{given_name} #{family_name}"
+    [given_name, middle_name, family_name].compact.join(" ")
   end
 
   def self.to_csv
