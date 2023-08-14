@@ -10,7 +10,8 @@
 #  initial_checks_completed_at       :date
 #  payment_confirmation_completed_at :date
 #  rejection_completed_at            :date
-#  rejection_reason                  :text
+#  rejection_details                 :text
+#  rejection_reason                  :integer
 #  school_checks_completed_at        :date
 #  school_investigation_required     :boolean          default(FALSE), not null
 #  status                            :integer          default("initial_checks")
@@ -22,6 +23,7 @@
 class ApplicationProgress < ApplicationRecord
   belongs_to :application
 
+  validates :rejection_reason, presence: true, if: :rejection_completed_at?
   enum status: {
     initial_checks: 0,
     home_office_checks: 1,
@@ -30,6 +32,16 @@ class ApplicationProgress < ApplicationRecord
     payment_confirmation: 4,
     paid: 5,
     rejected: 6,
+  }
+
+  enum rejection_reason: {
+    suspected_fraud: 0,
+    duplicate_submission: 1,
+    ineligible_school: 2,
+    home_office_checks_failed: 3,
+    school_checks_failed: 4,
+    standing_data_checks_failed: 5,
+    no_longer_in_post: 6,
   }
 
   before_save -> { self.status = StatusQuery.new(self).current_status }

@@ -8,7 +8,8 @@
 #  initial_checks_completed_at       :date
 #  payment_confirmation_completed_at :date
 #  rejection_completed_at            :date
-#  rejection_reason                  :text
+#  rejection_details                 :text
+#  rejection_reason                  :integer
 #  school_checks_completed_at        :date
 #  school_investigation_required     :boolean          default(FALSE), not null
 #  status                            :integer          default("initial_checks")
@@ -26,8 +27,9 @@ RSpec.describe ApplicationProgress do
     context "when rejection_completed_at is present" do
       it "updates status to rejected" do
         application_progress.rejection_completed_at = Time.current
+        application_progress.rejection_reason = :suspected_fraud
         application_progress.save
-        expect(application_progress.status).to eq("rejected")
+        expect(application_progress.reload.status).to eq("rejected")
       end
     end
 

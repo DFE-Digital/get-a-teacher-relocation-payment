@@ -5,6 +5,11 @@
     "Update Progress"
   ]) %>
 <% end %>
+<% rejection_reasons = options_for_select(
+        ApplicationProgress.rejection_reasons.keys.map { |reason| [reason.humanize, reason] }.unshift(['None', '']),
+        selected: @progress.rejection_reason
+      )
+%>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds-from-desktop">
@@ -26,7 +31,8 @@
       <%= f.govuk_date_field :banking_approval_completed_at, legend: { text: "Banking Details Aproved", size: "s" } %>
       <%= f.govuk_date_field :payment_confirmation_completed_at, legend: { text: "Payment Confirmation (payslip)", size: "s" } %>
       <%= f.govuk_date_field :rejection_completed_at, legend: { text: "Rejection Date", size: "s" } %>
-      <%= f.govuk_text_area :rejection_reason, label: { text: 'Rejection Reason' }, rows: 3 %>
+      <%= f.govuk_select :rejection_reason, rejection_reasons, label: { text: "Rejection Reason" } %>
+      <%= f.govuk_text_area :rejection_details, label: { text: 'Rejection Details' }, rows: 3 %>
 
       <%= f.govuk_submit("Update") %>
     <% end %>

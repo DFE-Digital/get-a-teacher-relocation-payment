@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# TODO: Policy to allow only signed in admins to access anything in this module.
 module SystemAdmin
   class ApplicantsController < AdminController
     default_form_builder GOVUKDesignSystemFormBuilder::FormBuilder
@@ -10,7 +9,13 @@ module SystemAdmin
     include Pagy::Backend
 
     def index
-      @pagy, @applications = pagy(Application.submitted.search(params[:search]).filter_by_status(params[:status]).order(created_at: :desc))
+      results = Application.submitted
+      .search(params[:search])
+      .filter_by_status(params[:status])
+      .order(created_at: :desc)
+      @pagy, @applications = pagy(results)
+
+      @applications = @applications.select(&:sla_breached?) if params[:sla_breached] == "true"
 
       respond_to do |format|
         format.html
@@ -29,7 +34,10 @@ module SystemAdmin
     def edit; end
 
     def update
-      if @progress.update(applicant_params)
+      @validator = ApplicationProgressValidator.new(@progress, applicant_params)
+
+      if @validator.valid?
+        @progress.update!(applicant_params)
         redirect_to(applicant_path(@applicant))
       else
         render(:edit)
@@ -49,6 +57,7 @@ module SystemAdmin
         :payment_confirmation_completed_at,
         :rejection_completed_at,
         :rejection_reason,
+        :rejection_details,
       )
     end
 

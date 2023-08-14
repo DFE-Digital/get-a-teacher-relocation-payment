@@ -8,7 +8,8 @@
 #  initial_checks_completed_at       :date
 #  payment_confirmation_completed_at :date
 #  rejection_completed_at            :date
-#  rejection_reason                  :text
+#  rejection_details                 :text
+#  rejection_reason                  :integer
 #  school_checks_completed_at        :date
 #  school_investigation_required     :boolean          default(FALSE), not null
 #  status                            :integer          default("initial_checks")
@@ -33,6 +34,7 @@ FactoryBot.define do
 
     trait :rejection_completed do
       rejection_completed_at { rand(1..2).days.ago.to_date }
+      rejection_reason { :suspected_fraud }
     end
 
     trait :visa_investigation_required do
