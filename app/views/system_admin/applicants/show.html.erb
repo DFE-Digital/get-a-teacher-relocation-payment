@@ -7,7 +7,7 @@
 
 <div class="govuk-grid-row">
   <div class ="govuk-grid-column-two-thirds-from-desktop">
-    <span class="govuk-caption-l"><%= @applicant.application.application_route&.humanize %></span>
+    <span class="govuk-caption-l"><%= @applicant.application.application_route&.humanize %> - <%= @application.urn %></span>
     <h1 class="govuk-heading-l">
       <%= @applicant.full_name %>
     </h1>
