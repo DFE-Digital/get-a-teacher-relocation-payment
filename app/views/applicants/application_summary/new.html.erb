@@ -9,14 +9,8 @@
     </h1>
 
     <%= govuk_summary_list(rows: @summary.rows) %>
-    <%= govuk_summary_list(
-        card: @summary.personal_card { link_to(_1, _2) },
-        rows: @summary.personal_rows
-        ) %>
-    <%= govuk_summary_list(
-        card: @summary.employment_card { link_to(_1, _2) },
-        rows: @summary.employment_rows
-        ) %>
+    <%= govuk_summary_list(card: @summary.personal_card, rows: @summary.personal_rows) %>
+    <%= govuk_summary_list(card: @summary.employment_card, rows: @summary.employment_rows) %>
 
     <%= form_with(url: applicants_application_summary_index_path, local: true) do |f| %>
       <%= f.govuk_submit "Submit Application" %>

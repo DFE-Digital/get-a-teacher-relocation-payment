@@ -3,11 +3,6 @@
 class Summary
   include ActiveModel::Model
   include ActionView::Helpers::TranslationHelper
-  include Rails.application.routes.url_helpers
-
-  def url_options
-    { only_path: true }
-  end
 
   def initialize(application:)
     @application = application
@@ -26,10 +21,8 @@ class Summary
   end
 
   def personal_card
-    link = yield("Change", new_applicants_personal_detail_path)
     {
       title: t("applicants.personal_details.title"),
-      actions: [link],
     }
   end
 
@@ -44,10 +37,8 @@ class Summary
   end
 
   def employment_card
-    link = yield("Change", new_applicants_employment_detail_path)
     {
       title: t("applicants.employment_details.title"),
-      actions: [link],
     }
   end
 
@@ -65,12 +56,6 @@ class Summary
     {
       key: { text: t("applicants.application_routes.title") },
       value: { text: t("applicants.application_routes.radio_button.#{application.application_route}.text") },
-      actions: [
-        {
-          href: new_applicants_application_route_path(application_route: application.application_route),
-          visually_hidden_text: "application_route",
-        },
-      ],
     }
   end
 
@@ -78,12 +63,6 @@ class Summary
     {
       key: { text: t("applicants.school_details.title") },
       value: { text: "Yes" },
-      actions: [
-        {
-          href: new_applicants_school_detail_path(state_funded_secondary_school: "yes"),
-          visually_hidden_text: "school details",
-        },
-      ],
     }
   end
 
@@ -91,12 +70,6 @@ class Summary
     {
       key: { text: t("applicants.contract_details.title") },
       value: { text: "Yes" },
-      actions: [
-        {
-          href: new_applicants_contract_detail_path(one_year: "yes"),
-          visually_hidden_text: "contract details",
-        },
-      ],
     }
   end
 
@@ -104,12 +77,6 @@ class Summary
     {
       key: { text: t("applicants.contract_start_dates.title") },
       value: { text: application.start_date },
-      actions: [
-        {
-          href: new_applicants_contract_start_date_path,
-          visually_hidden_text: "contract start dates",
-        },
-      ],
     }
   end
 
@@ -117,12 +84,6 @@ class Summary
     {
       key: { text: t("applicants.subjects.title.#{application.application_route}") },
       value: { text: application.subject },
-      actions: [
-        {
-          href: new_applicants_subject_path,
-          visually_hidden_text: "subjects",
-        },
-      ],
     }
   end
 
@@ -130,12 +91,6 @@ class Summary
     {
       key: { text: t("applicants.visa.title") },
       value: { text: application.visa_type },
-      actions: [
-        {
-          href: new_applicants_visa_path,
-          visually_hidden_text: "visa",
-        },
-      ],
     }
   end
 
@@ -143,12 +98,6 @@ class Summary
     {
       key: { text: t("applicants.entry_dates.title.#{application.application_route}") },
       value: { text: application.date_of_entry },
-      actions: [
-        {
-          href: new_applicants_entry_date_path,
-          visually_hidden_text: "entry date",
-        },
-      ],
     }
   end
 

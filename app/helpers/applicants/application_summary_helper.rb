@@ -1,2 +1,0 @@
-module Applicants::ApplicationSummaryHelper
-end
