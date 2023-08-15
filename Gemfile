@@ -37,6 +37,7 @@ gem "devise", "~> 4.9"
 gem "httparty", "~> 0.21"
 gem "invisible_captcha"
 gem "omniauth-azure-activedirectory-v2"
+gem "sentry-rails", "~> 5.10"
 
 group :test do
   gem "shoulda-matchers", "~> 5.0"
