@@ -7,6 +7,7 @@
 #  email_address   :text
 #  family_name     :text
 #  given_name      :text
+#  middle_name     :string
 #  nationality     :text
 #  passport_number :text
 #  phone_number    :text
@@ -27,6 +28,7 @@ FactoryBot.define do
     email_address { Faker::Internet.email }
     family_name { Faker::Name.last_name }
     given_name { Faker::Name.first_name }
+    middle_name { Faker::Name.middle_name }
     nationality { Faker::Nation.nationality }
     passport_number { Faker::Number.number(digits: 9) }
     phone_number { Faker::PhoneNumber.cell_phone_in_e164 }

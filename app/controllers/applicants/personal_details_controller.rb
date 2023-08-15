@@ -25,6 +25,7 @@ module Applicants
     def personal_detail_params
       params.require(:applicants_personal_detail).permit(
         :given_name,
+        :middle_name,
         :family_name,
         :email_address,
         :phone_number,

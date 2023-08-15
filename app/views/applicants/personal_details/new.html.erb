@@ -13,6 +13,7 @@
       </h1>
 
       <%= f.govuk_text_field :given_name, label: { text: t("applicants.personal_details.given_name")  , size: "s" } %>
+      <%= f.govuk_text_field :middle_name, label: { text: t("applicants.personal_details.middle_name")  , size: "s" } %>
       <%= f.govuk_text_field :family_name, label: { text: t("applicants.personal_details.family_name") , size: "s" } %>
       <%= f.govuk_text_field :email_address, label: { text: t("applicants.personal_details.email_address") , size: "s" }, hint: { text: "We will use this to contact you so please make sure you have entered it correctly." } %>
       <%= f.govuk_text_field :phone_number,

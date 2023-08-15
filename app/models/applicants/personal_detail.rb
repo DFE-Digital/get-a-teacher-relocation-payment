@@ -3,7 +3,7 @@
 module Applicants
   class PersonalDetail
     include ActiveModel::Model
-    attr_accessor :given_name, :family_name, :email_address, :phone_number,
+    attr_accessor :given_name, :middle_name, :family_name, :email_address, :phone_number,
                   :day, :month, :year, :sex, :passport_number, :nationality, :address_line_1,
                   :address_line_2, :city, :postcode
 
@@ -40,6 +40,7 @@ module Applicants
       return unless applicant
 
       self.given_name = applicant.given_name
+      self.middle_name = applicant.middle_name
       self.family_name = applicant.family_name
       self.email_address = applicant.email_address
       self.phone_number = applicant.phone_number
@@ -59,6 +60,7 @@ module Applicants
       Applicant.create!(
         application: application,
         given_name: given_name,
+        middle_name: middle_name,
         family_name: family_name,
         email_address: email_address,
         phone_number: phone_number,
