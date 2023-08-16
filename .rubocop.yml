@@ -76,7 +76,20 @@ RSpec/NoExpectationExample:
     - 'spec/features/**/*'
 
 RSpec/MultipleExpectations:
-  Max: 2
+  Max: 4
   Exclude:
     - 'spec/queries/**/*'
     - 'spec/features/**/*'
+    
+RSpec/StubbedMock:
+  Exclude:
+    - 'spec/models/summary_spec.rb'
+  
+RSpec/MessageSpies:
+  Exclude:
+    - 'spec/models/summary_spec.rb'
+  
+RSpec/SubjectStub:
+  Exclude:
+    - 'spec/models/summary_spec.rb'
+  

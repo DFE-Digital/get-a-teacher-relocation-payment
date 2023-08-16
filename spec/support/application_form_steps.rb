@@ -91,7 +91,11 @@ RSpec.shared_context "with common application form steps" do
     fill_in("applicants_employment_detail[school_city]", with: "Schooltown")
     fill_in("applicants_employment_detail[school_postcode]", with: "SC1 1AA")
 
-    click_button("Submit application")
+    click_button("Continue")
+  end
+
+  def and_i_submit_the_application
+    click_button("Submit Application")
   end
 
   def choose_yes

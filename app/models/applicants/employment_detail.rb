@@ -17,6 +17,17 @@ module Applicants
     validates :school_city, presence: true
     validates :school_postcode, presence: true, postcode: true
 
+    def self.build(school)
+      new(
+        school_name: school.name,
+        school_headteacher_name: school.headteacher_name,
+        school_address_line_1: school.address.address_line_1,
+        school_address_line_2: school.address.address_line_2,
+        school_city: school.address.city,
+        school_postcode: school.address.postcode,
+      )
+    end
+
     def save!
       applicant.create_school!(
         name: school_name,
