@@ -9,7 +9,12 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds-from-desktop">
     <p class="govuk-body">
-      The <%= link_to_irp %> is a single payment of £10,000, funded by the UK government, which is available to eligible non-UK trainees and teachers of languages, physics and general or combined science when that includes physics.
+      The <%= link_to_irp %> is a single payment of £10,000, funded by the UK government, which is available to eligible non-UK trainees and teachers of:
+      <ul class="govuk-list govuk-list--bullet">
+        <li>languages</li>
+        <li>physics</li>
+        <li>general or combined science when that includes physics</li>
+      </ul>
     </p>
     <h2 class="govuk-heading-m">How to apply</h2>
 
@@ -50,7 +55,7 @@
 
     <p class="govuk-body">
       For general enquiries about teaching or training to teach in England, please visit <%= govuk_link_to('Get into Teaching: non-UK teachers.', 'https://getintoteaching.education.gov.uk/non-uk-teachers') %>
-                                                                                             </p>
+    </p>
 
     <p class="govuk-body">
       Please do not send us your CV or enquiries about training places or teaching jobs, as the Department for Education does not directly run training courses or employ teachers.

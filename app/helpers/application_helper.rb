@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  def link_to_irp(name='international relocation payment (IRP)')
+  def link_to_irp(name = "international relocation payment (IRP)")
     govuk_link_to(
       name,
-      'https://www.gov.uk/government/publications/international-relocation-payments/international-relocation-payments',
-      { target: '_blank' },
+      "https://www.gov.uk/government/publications/international-relocation-payments/international-relocation-payments",
+      { target: "_blank" },
     )
   end
 
