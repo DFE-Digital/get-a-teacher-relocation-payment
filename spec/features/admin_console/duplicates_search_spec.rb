@@ -30,6 +30,13 @@ RSpec.describe "Duplicates Search" do
     then_i_see_matching_duplicates_by_passport_number
   end
 
+  it "the view renders even where there are 'in progress' applications" do
+    given_i_am_signed_as_an_admin
+    when_there_are_in_progress_applications
+    when_i_visit_the_duplicates_page
+    then_i_see_the_in_progress_applications
+  end
+
   def when_i_search_for_a_duplicate_by(type)
     visit duplicates_path
     case type
@@ -40,6 +47,18 @@ RSpec.describe "Duplicates Search" do
     when "passport number"
       all("a", text: "123456").first.click
     end
+  end
+
+  def when_there_are_in_progress_applications
+    create(:application, applicant: nil, urn: nil, application_progress: nil)
+  end
+
+  def when_i_visit_the_duplicates_page
+    visit duplicates_path
+  end
+
+  def then_i_see_the_in_progress_applications
+    expect(page).to have_content("Duplicated Applications")
   end
 
   def then_i_see_matching_duplicates

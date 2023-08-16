@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_14_222343) do
+ActiveRecord::Schema[7.0].define(version: 20_230_816_100_957) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -124,6 +124,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_222343) do
              FROM applicants applicants_1
             GROUP BY applicants_1.email_address
            HAVING (count(applicants_1.email_address) > 1)) dup_email ON ((applicants.email_address = dup_email.email_address)))
+    WHERE (applications.urn IS NOT NULL)
   UNION
    SELECT applications.id,
       applications.application_date,
@@ -144,6 +145,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_222343) do
              FROM applicants applicants_1
             GROUP BY applicants_1.phone_number
            HAVING (count(applicants_1.phone_number) > 1)) dup_phone ON ((applicants.phone_number = dup_phone.phone_number)))
+    WHERE (applications.urn IS NOT NULL)
   UNION
    SELECT applications.id,
       applications.application_date,
@@ -163,6 +165,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_222343) do
               count(applicants_1.passport_number) AS count
              FROM applicants applicants_1
             GROUP BY applicants_1.passport_number
-           HAVING (count(applicants_1.passport_number) > 1)) dup_passport ON ((applicants.passport_number = dup_passport.passport_number)));
+           HAVING (count(applicants_1.passport_number) > 1)) dup_passport ON ((applicants.passport_number = dup_passport.passport_number)))
+    WHERE (applications.urn IS NOT NULL);
   SQL
 end
