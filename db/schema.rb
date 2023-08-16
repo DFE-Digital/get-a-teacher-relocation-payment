@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_14_222343) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_15_070052) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -78,6 +78,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_14_222343) do
     t.date "date_of_entry"
     t.date "start_date"
     t.string "application_route"
+    t.datetime "home_office_csv_downloaded_at"
+    t.datetime "standing_data_csv_downloaded_at"
+    t.datetime "payroll_csv_downloaded_at"
     t.index ["applicant_id"], name: "index_applications_on_applicant_id"
   end
 

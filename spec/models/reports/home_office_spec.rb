@@ -2,7 +2,6 @@
 
 require "rails_helper"
 
-# rubocop:disable Metrics/ExampleLength
 module Reports
   describe HomeOffice do
     include ActiveSupport::Testing::TimeHelpers
@@ -50,10 +49,7 @@ module Reports
       end
 
       it "returns the data in CSV format" do
-        application = create(
-          :application,
-          application_progress: build(:application_progress, :home_office_pending),
-        )
+        application = create(:application, application_progress: build(:application_progress, :home_office_pending))
 
         expect(report.csv).to include([
           application.urn,
@@ -79,7 +75,18 @@ module Reports
 
         expect(report.csv).to include(expected_header)
       end
+
+      it "excludes applications from the csv after they've been downloaded once" do
+        app = create(:application, application_progress: build(:application_progress, :home_office_pending))
+
+        first_csv = report.csv
+
+        expect(first_csv).to include(app.urn)
+
+        second_csv = report.csv
+
+        expect(second_csv).not_to include(app.urn)
+      end
     end
   end
 end
-# rubocop:enable Metrics/ExampleLength
