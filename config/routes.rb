@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :personal_details, only: %i[new create edit]
     resources :employment_details, only: %i[new create edit]
     resources :salaried_course_details, only: %i[new create edit]
+    resources :application_summary, only: %i[new create]
     resource :submission, only: %i[show]
   end
 

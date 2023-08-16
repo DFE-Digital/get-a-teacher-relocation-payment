@@ -19,6 +19,7 @@ describe "teacher route: completing the form" do
         and_i_enter_my_entry_date("teacher")
         and_i_enter_my_personal_details
         and_i_enter_my_employment_details
+        and_i_submit_the_application
 
         then_the_application_is_submitted_successfully
       end
