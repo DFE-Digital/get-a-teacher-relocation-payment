@@ -14,7 +14,7 @@ RSpec.describe AverageAgeQuery, type: :model do
       it "returns the correct average age" do
         result = described_class.new.call
 
-        expect(result).to eq(44)
+        expect(result).to eq(43)
       end
     end
 

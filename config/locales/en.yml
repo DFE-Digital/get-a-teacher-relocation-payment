@@ -66,6 +66,7 @@ en:
     personal_details:
       title: Personal information
       given_name: Enter your given name, as it appears on your passport
+      middle_name: Enter your middle name, as it appears on your passport
       family_name: Enter your family name, as it appears on your passport
       email_address: Enter your current email address
       phone_number:
@@ -138,6 +139,8 @@ en:
           attributes:
             given_name:
               blank: Enter your given name(s)
+            middle_name:
+              blank: Enter your middle name(s)
             family_name:
               blank: Enter your family name(s)
             email_address:

@@ -76,10 +76,4 @@ describe "teacher route: completing the form" do
       assert_i_am_in_the_application_route_question
     end
   end
-
-  describe "navigating backwards, then forward" do
-    it "allows the user to navigate back & forth from the first question" do
-      skip "This needs persistence of the first questions"
-    end
-  end
 end
