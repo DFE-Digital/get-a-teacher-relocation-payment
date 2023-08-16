@@ -181,6 +181,8 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
+    invisible_captcha (2.1.0)
+      rails (>= 5.2)
     io-console (0.6.0)
     irb (1.6.4)
       reline (>= 0.3.0)
@@ -429,6 +431,7 @@ DEPENDENCIES
   govuk-components (= 4.1.0)
   govuk_design_system_formbuilder
   httparty (~> 0.21)
+  invisible_captcha
   jbuilder
   launchy
   notifications-ruby-client
