@@ -31,11 +31,14 @@
 
 en:
   applicants:
+    application_summary:
+      title: Application summary
     application_routes:
       title: What is your employment status?
       hint: Select one of the following options
       radio_button:
-        teacher: I am employed as a teacher in a school in England
+        teacher:
+          text: I am employed as a teacher in a school in England
         salaried_trainee:
           text: I am enrolled on a salaried teacher training course in England.
           hint: ‘Salaried’ means a course where you are paid a wage to work while you train.

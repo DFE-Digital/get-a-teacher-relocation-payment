@@ -32,7 +32,7 @@ private
   end
 
   def then_i_should_see_the_service_closed_page
-    expect(page).to have_content("The IRP application window is currently closed.")
+    expect(page).to have_current_path("/closed")
   end
 
   def when_i_visit_the_settings_page

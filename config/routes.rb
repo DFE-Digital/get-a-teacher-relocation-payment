@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :personal_details, only: %i[new create edit]
     resources :employment_details, only: %i[new create edit]
     resources :salaried_course_details, only: %i[new create edit]
+    resources :application_summary, only: %i[new create]
     resource :submission, only: %i[show]
   end
 
@@ -33,5 +34,6 @@ Rails.application.routes.draw do
     resource :settings, only: %i[edit update]
     get "/dashboard", to: "dashboard#show"
     resources "reports", only: %i[show index]
+    get "/duplicates", to: "applicants#duplicates"
   end
 end

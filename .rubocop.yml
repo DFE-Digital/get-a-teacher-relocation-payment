@@ -39,25 +39,29 @@ Lint/ConstantDefinitionInBlock:
   Exclude:
     - 'spec/**/*'
 
-RSpec/LeakyConstantDeclaration:
-  Exclude:
-    - 'spec/**/*'
-
 Lint/AmbiguousBlockAssociation:
   Exclude:
     - 'spec/**/*'
-
-Rails/BulkChangeTable:
-  Exclude:
-    - 'db/migrate/**/*.rb'
 
 Lint/EmptyWhen:
   Exclude:
     - 'db/seeds.rb'
 
+Rails/BulkChangeTable:
+  Exclude:
+    - 'db/migrate/**/*.rb'
+
+Rails/HasManyOrHasOneDependent:
+  Exclude:
+    - 'app/models/application.rb'
+
 Metrics/MethodLength:
   Exclude:
     - 'spec/features/*'
+
+RSpec/LeakyConstantDeclaration:
+  Exclude:
+    - 'spec/**/*'
 
 RSpec/ContextWording:
   Enabled: false
@@ -72,7 +76,20 @@ RSpec/NoExpectationExample:
     - 'spec/features/**/*'
 
 RSpec/MultipleExpectations:
-  Max: 2
+  Max: 4
   Exclude:
     - 'spec/queries/**/*'
     - 'spec/features/**/*'
+    
+RSpec/StubbedMock:
+  Exclude:
+    - 'spec/models/summary_spec.rb'
+  
+RSpec/MessageSpies:
+  Exclude:
+    - 'spec/models/summary_spec.rb'
+  
+RSpec/SubjectStub:
+  Exclude:
+    - 'spec/models/summary_spec.rb'
+  

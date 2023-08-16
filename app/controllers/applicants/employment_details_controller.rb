@@ -4,7 +4,11 @@ module Applicants
   class EmploymentDetailsController < ApplicationController
     before_action :check_application!
     def new
-      @employment_detail = EmploymentDetail.new
+      @employment_detail = if current_application.applicant.school
+                             EmploymentDetail.build(current_application.applicant.school)
+                           else
+                             EmploymentDetail.new
+                           end
     end
 
     def create
@@ -14,9 +18,7 @@ module Applicants
         @employment_detail.applicant = current_applicant
         @employment_detail.save!
 
-        SubmitApplication.new(current_application).run
-
-        redirect_to(applicants_submission_path)
+        redirect_to(new_applicants_application_summary_path)
       else
         render(:new)
       end

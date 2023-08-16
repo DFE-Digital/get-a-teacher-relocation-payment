@@ -21,10 +21,10 @@ module Applicants
       end
 
       context "with valid params" do
-        it "redirects to the submitted path" do
+        it "redirects to the summary path" do
           post "/applicants/employment_details", params: valid_params
 
-          expect(response).to redirect_to(applicants_submission_path)
+          expect(response).to redirect_to(new_applicants_application_summary_path)
         end
 
         it "creates a School" do
