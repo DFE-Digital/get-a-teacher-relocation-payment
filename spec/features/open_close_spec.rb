@@ -34,7 +34,7 @@ describe "Open / Close service" do
     it "does not allow the user access to the landing page" do
       visit root_path
 
-      expect(page).to have_text("The IRP application window is currently closed.")
+      expect(page).to have_current_path("/closed")
     end
 
     it "allows the user access to the admin tool" do
