@@ -25,6 +25,10 @@ module SystemAdmin
       end
     end
 
+    def duplicates
+      @pagy, @duplicates = pagy(DuplicateApplication.search(params[:search]).order(created_at: :desc))
+    end
+
     def show; end
 
     def edit; end

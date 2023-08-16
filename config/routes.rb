@@ -33,5 +33,6 @@ Rails.application.routes.draw do
     resource :settings, only: %i[edit update]
     get "/dashboard", to: "dashboard#show"
     resources "reports", only: %i[show index]
+    get "/duplicates", to: "applicants#duplicates"
   end
 end

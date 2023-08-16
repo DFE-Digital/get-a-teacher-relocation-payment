@@ -39,25 +39,29 @@ Lint/ConstantDefinitionInBlock:
   Exclude:
     - 'spec/**/*'
 
-RSpec/LeakyConstantDeclaration:
-  Exclude:
-    - 'spec/**/*'
-
 Lint/AmbiguousBlockAssociation:
   Exclude:
     - 'spec/**/*'
-
-Rails/BulkChangeTable:
-  Exclude:
-    - 'db/migrate/**/*.rb'
 
 Lint/EmptyWhen:
   Exclude:
     - 'db/seeds.rb'
 
+Rails/BulkChangeTable:
+  Exclude:
+    - 'db/migrate/**/*.rb'
+
+Rails/HasManyOrHasOneDependent:
+  Exclude:
+    - 'app/models/application.rb'
+
 Metrics/MethodLength:
   Exclude:
     - 'spec/features/*'
+
+RSpec/LeakyConstantDeclaration:
+  Exclude:
+    - 'spec/**/*'
 
 RSpec/ContextWording:
   Enabled: false
