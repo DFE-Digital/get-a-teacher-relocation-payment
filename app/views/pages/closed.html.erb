@@ -1,7 +1,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds-from-desktop">
     <h1 class="govuk-heading-l">
-      International Relocation Payment
+      Get an international relocation payment
     </h1>
   </div>
 </div>
@@ -9,28 +9,34 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds-from-desktop">
     <p class="govuk-body">
-      The IRP application window is currently closed.
+      The <%= link_to_irp %> is a single payment of £10,000, funded by the UK government, which is available to eligible non-UK trainees and teachers of:
+      <ul class="govuk-list govuk-list--bullet">
+        <li>languages</li>
+        <li>physics</li>
+        <li>general or combined science when that includes physics</li>
+      </ul>
     </p>
-
-    <h2 class="govuk-heading-m">When to apply for the IRP</h2>
+    <h2 class="govuk-heading-m">How to apply</h2>
 
     <p class="govuk-body">
-      During the application window, eligible languages and physics teachers and salaried trainees can apply for the
-      IRP.
+      Applications for the international relocation payment (IRP) are currently closed.
     </p>
     <p class="govuk-body">
-      You need to apply at different times depending on when you start your job or course:
+      Applications for teachers will re-open:
     </p>
     <ul class="govuk-list govuk-list--bullet">
-      <li>First application window: Between September 2023 and October 2023</li>
-      <li>Second application window: Between January 2024 and February 2024</li>
-      <li>Third application window: Between May 2024 and June 2024.</li>
+      <li>between 1 January 2024 and 29 February 2024 (if your teaching job starts in summer 2024)</li>
+      <li>between 1 May 2024 and 31 June 2024 (if your teaching job starts in autumn 2024)</li>
     </ul>
     <p class="govuk-body">
-      If you miss an application window, you can apply in the next window.
+      You can express your interest in the IRP by emailing us at <%= mailto_irp_express_interest %>. We will email you when you can apply.
     </p>
 
-    <h2 class="govuk-heading-m">Contact</h2>
+    <p class="govuk-body">
+      If you are applying for a fee-paying teacher training course starting in 2024, you do not need to apply to receive the international relocation payment. <%= govuk_link_to('Get an international relocation payment: criteria for trainee teachers gives', 'https://getintoteaching.education.gov.uk/non-uk-teachers/fees-and-funding-for-non-uk-trainees#get-an-international-relocation-payment-irp-worth-10000') %> more information.
+    </p>
+
+    <h2 class="govuk-heading-m">Check your eligibility</h2>
 
     <p class="govuk-body">
       <%= govuk_link_to("Check full eligibility details for teachers.", "https://getintoteaching.education.gov.uk/non-uk-teachers/get-an-international-relocation-payment", { target: "_blank" })%>
@@ -40,8 +46,19 @@
       <%= govuk_link_to("Check full eligibility details for trainees.", "https://getintoteaching.education.gov.uk/non-uk-teachers/get-an-international-relocation-payment", { target: "_blank" })%>
     </p>
 
+    <h2 class="govuk-heading-m">Get help</h2>
+
     <p class="govuk-body">
-      For help, you can email us at <%= govuk_link_to("teach.inengland@education.gov.uk", "mailto:teach.inengland@education.gov.uk")%>.
+      You can get information and advice about the international relocation payment by emailing us at
+      <%= govuk_link_to("irp.mailbox@education.gov.uk", "mailto:irp.mailbox@education.gov.uk") %>.
+    </p>
+
+    <p class="govuk-body">
+      For general enquiries about teaching or training to teach in England, please visit <%= govuk_link_to('Get into Teaching: non-UK teachers.', 'https://getintoteaching.education.gov.uk/non-uk-teachers') %>
+    </p>
+
+    <p class="govuk-body">
+      Please do not send us your CV or enquiries about training places or teaching jobs, as the Department for Education does not directly run training courses or employ teachers.
     </p>
   </div>
 </div>
