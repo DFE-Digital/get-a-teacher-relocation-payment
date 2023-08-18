@@ -1,28 +1,28 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/ruby:3.1",
-  "features": {
-    "ghcr.io/itsmechlark/features/postgresql:1": {},
-    "ghcr.io/devcontainers/features/ruby:1": {"version":"3.1.3"},
-    "ghcr.io/devcontainers/features/node:1": {"version": "16"}
-  },
-  "postStartCommand": [
-    "bin/rails db:migrate"
-  ],
-  "postAttachCommand": {
-    "server": "bin/rails server",
-    "webpack": "bin/webpack-dev-server"
-  },
-  "portsAttributes": {"3000": {"label": "Application port"}},
-  "customizations": {
-		// Configure properties specific to VS Code.
-		"vscode": {
-			// Add the IDs of extensions you want installed when the container is created.
-			"extensions": [
-				"rebornix.Ruby",
-        "groksrc.ruby",
-        "misogi.ruby-rubocop",
-        "esbenp.prettier-vscode"
-			]
-		}
-	}
+    "image": "mcr.microsoft.com/devcontainers/ruby:3.1",
+    "features": {
+        "ghcr.io/itsmechlark/features/postgresql:1": {},
+        "ghcr.io/devcontainers/features/ruby:1": {"version":"3.1.3"},
+        "ghcr.io/devcontainers/features/node:1": {"version": "16"}
+    },
+    "postStartCommand": {
+        "dependencies": "bundle install",
+        "nodejs": "yarn install",
+        "migration": "bin/rails db:migrate"
+    },
+    "postAttachCommand": {
+        "server": "bin/rails server",
+        "webpack": "bin/webpack-dev-server"
+    },
+    "portsAttributes": {"3000": {"label": "Application port"}},
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "rebornix.Ruby",
+                "groksrc.ruby",
+                "misogi.ruby-rubocop",
+                "esbenp.prettier-vscode"
+            ]
+        }
+    }
 }
