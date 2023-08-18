@@ -12,5 +12,17 @@
     "server": "bin/rails server",
     "webpack": "bin/webpack-dev-server"
   },
-  "portsAttributes": {"3000": {"label": "Application port"}}
+  "portsAttributes": {"3000": {"label": "Application port"}},
+  "customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"rebornix.Ruby",
+        "groksrc.ruby",
+        "misogi.ruby-rubocop",
+        "esbenp.prettier-vscode"
+			]
+		}
+	}
 }
