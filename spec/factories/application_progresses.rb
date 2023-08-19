@@ -22,9 +22,16 @@ FactoryBot.define do
   factory :application_progress do
     # association :application, factory: :application, strategy: :build
 
+    transient do
+      sla_created_at { rand(1..2).days }
+      sla_initial_checks_completed_at { rand(1..3).days }
+      sla_home_office_checks_completed_at { rand(1..5).days }
+      sla_school_checks_completed_at { rand(1..15).days }
+    end
+
     trait :initial_checks_completed do
       created_at { rand(41..45).days.ago.to_date }
-      initial_checks_completed_at { rand(31..40).days.ago.to_date }
+      initial_checks_completed_at { created_at + sla_created_at }
     end
 
     trait :home_office_pending do
@@ -33,7 +40,8 @@ FactoryBot.define do
     end
 
     trait :rejection_completed do
-      rejection_completed_at { rand(1..2).days.ago.to_date }
+      created_at { rand(41..45).days.ago.to_date }
+      rejection_completed_at { created_at + rand(3..5).days }
       rejection_reason { :suspected_fraud }
     end
 
@@ -46,7 +54,7 @@ FactoryBot.define do
     trait :home_office_checks_completed do
       visa_investigation_required
 
-      home_office_checks_completed_at { rand(21..30).days.ago.to_date }
+      home_office_checks_completed_at { initial_checks_completed_at + sla_initial_checks_completed_at }
     end
 
     trait :school_investigation_required do
@@ -58,19 +66,19 @@ FactoryBot.define do
     trait :school_checks_completed do
       school_investigation_required
 
-      school_checks_completed_at { rand(11..20).days.ago.to_date }
+      school_checks_completed_at { home_office_checks_completed_at + sla_home_office_checks_completed_at }
     end
 
     trait :banking_approval_completed do
       school_checks_completed
 
-      banking_approval_completed_at { rand(3..11).days.ago.to_date }
+      banking_approval_completed_at { school_checks_completed_at + sla_school_checks_completed_at }
     end
 
     trait :payment_confirmation_completed do
       banking_approval_completed
 
-      payment_confirmation_completed_at { rand(1..2).days.ago.to_date }
+      payment_confirmation_completed_at { banking_approval_completed_at + rand(1..2).days }
     end
   end
 end

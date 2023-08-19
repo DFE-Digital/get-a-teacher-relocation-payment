@@ -9,16 +9,18 @@ module Reports
     end
 
     def csv
-      CSV.generate do |csv|
+      csv_file = CSV.generate do |csv|
         csv << header
         rows.each { |row| csv << row }
       end
+      applications.update_all(payroll_csv_downloaded_at: Time.zone.now) # rubocop:disable Rails/SkipsModelValidations
+      csv_file
     end
 
   private
 
     def rows
-      candidates.pluck(
+      applications.pluck(
         "given_name",
         "family_name",
         "sex",
@@ -53,11 +55,12 @@ module Reports
       end
     end
 
-    def candidates
+    def applications
       Application
         .joins(:application_progress)
         .joins(applicant: :address)
         .where.not(application_progresses: { banking_approval_completed_at: nil })
+        .where(payroll_csv_downloaded_at: nil)
     end
 
     def header

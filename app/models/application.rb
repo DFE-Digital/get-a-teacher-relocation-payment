@@ -2,17 +2,20 @@
 #
 # Table name: applications
 #
-#  id                :bigint           not null, primary key
-#  application_date  :date
-#  application_route :string
-#  date_of_entry     :date
-#  start_date        :date
-#  subject           :string
-#  urn               :string
-#  visa_type         :string
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  applicant_id      :bigint
+#  id                              :bigint           not null, primary key
+#  application_date                :date
+#  application_route               :string
+#  date_of_entry                   :date
+#  home_office_csv_downloaded_at   :datetime
+#  payroll_csv_downloaded_at       :datetime
+#  standing_data_csv_downloaded_at :datetime
+#  start_date                      :date
+#  subject                         :string
+#  urn                             :string
+#  visa_type                       :string
+#  created_at                      :datetime         not null
+#  updated_at                      :datetime         not null
+#  applicant_id                    :bigint
 #
 # Foreign Keys
 #

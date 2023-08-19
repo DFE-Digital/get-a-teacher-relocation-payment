@@ -40,3 +40,4 @@ terraform.tfstate*
 bin/terrafile
 bin/konduit.sh
 bin/fetch_config.rb
+.byebug_history
