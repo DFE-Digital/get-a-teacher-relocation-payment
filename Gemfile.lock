@@ -181,6 +181,8 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
+    invisible_captcha (2.1.0)
+      rails (>= 5.2)
     io-console (0.6.0)
     irb (1.6.4)
       reline (>= 0.3.0)
@@ -255,7 +257,7 @@ GEM
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
     public_suffix (5.0.1)
-    puma (6.3.0)
+    puma (6.3.1)
       nio4r (~> 2.0)
     racc (1.7.1)
     rack (2.2.8)
@@ -429,6 +431,7 @@ DEPENDENCIES
   govuk-components (= 4.1.0)
   govuk_design_system_formbuilder
   httparty (~> 0.21)
+  invisible_captcha
   jbuilder
   launchy
   notifications-ruby-client
