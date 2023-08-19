@@ -81,6 +81,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_100957) do
     t.datetime "home_office_csv_downloaded_at"
     t.datetime "standing_data_csv_downloaded_at"
     t.datetime "payroll_csv_downloaded_at"
+    t.string("application_route")
     t.index ["applicant_id"], name: "index_applications_on_applicant_id"
   end
 

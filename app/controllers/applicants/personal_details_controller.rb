@@ -2,6 +2,7 @@
 
 module Applicants
   class PersonalDetailsController < ApplicationController
+    invisible_captcha only: %i[create], honeypot: :username
     before_action :check_application!
 
     def new

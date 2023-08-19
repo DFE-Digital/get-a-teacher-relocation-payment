@@ -35,6 +35,7 @@ gem "phonelib"
 gem "config", "~> 4.2"
 gem "devise", "~> 4.9"
 gem "httparty", "~> 0.21"
+gem "invisible_captcha"
 gem "omniauth-azure-activedirectory-v2"
 
 group :test do
