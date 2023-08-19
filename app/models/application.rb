@@ -22,10 +22,14 @@ class Application < ApplicationRecord
   belongs_to :applicant, optional: true
   has_one :application_progress, dependent: :destroy
   has_many :duplicates, inverse_of: :application, primary_key: :id, class_name: "DuplicateApplication"
+  has_many :qa_statuses, dependent: :destroy
 
   delegate :sla_breached?, to: :application_progress
+  delegate :status, to: :application_progress, allow_nil: false
 
+  default_scope { submitted }
   scope :submitted, -> { where.not(urn: nil) }
+  scope :in_progress, -> { unscoped.where(urn: nil) }
 
   scope :search, lambda { |term|
                    return if term.blank?
@@ -47,6 +51,14 @@ class Application < ApplicationRecord
 
                              joins(:application_progress).where(application_progresses: { status: ApplicationProgress.statuses[status] })
                            }
+
+  def qa?
+    qa_statuses.exists?(status: application_progress.status)
+  end
+
+  def mark_as_qa!
+    qa_statuses.create!(status: application_progress.status, date: Time.current)
+  end
 
   with_options if: :submitted? do
     validates(:application_date, presence: true)

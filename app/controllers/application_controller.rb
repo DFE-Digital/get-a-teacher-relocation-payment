@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_application
-    Application.find(session["application_id"])
+    Application.in_progress.find(session["application_id"])
   end
   helper_method :current_application
 
@@ -37,6 +37,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_service_open!
+    return if request.path == "/users/sign_out" # skip this for log out page
     return if Gatekeeper.application_open?
 
     redirect_to(closed_path)

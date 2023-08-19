@@ -13,16 +13,24 @@ module SystemAdmin
       .search(params[:search])
       .filter_by_status(params[:status])
       .order(created_at: :desc)
-      @pagy, @applications = pagy(results)
 
-      @applications = @applications.select(&:sla_breached?) if params[:sla_breached] == "true"
+      results = results.select(&:sla_breached?) if params[:sla_breached] == "true"
 
-      respond_to do |format|
-        format.html
-        format.csv do
-          send_data(@applications.to_csv, filename: "#{Time.zone.today}_GaIRP_applications.csv")
-        end
-      end
+      @pagy, @applications = pagy_array(results)
+      session[:filter_status] = params[:status]
+      session[:application_ids] = @applications.map(&:id)
+    end
+
+    def download_qa_csv
+      status = session[:filter_status]
+      application_ids = session[:application_ids]
+
+      applications = Application.where(id: application_ids).reject(&:qa?)
+
+      applications.each(&:mark_as_qa!)
+
+      report = Reports::QaReport.new(applications, status)
+      send_data(report.csv, filename: report.name)
     end
 
     def duplicates
@@ -65,6 +73,10 @@ module SystemAdmin
       @applicant = Applicant.find(params[:id])
       @application = @applicant.application
       @progress = @application.application_progress
+    end
+
+    def generate_csv_for(applications)
+      Reports::QaReport.new(applications).csv
     end
   end
 end

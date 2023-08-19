@@ -4,6 +4,7 @@
 #
 # $ bundle exec rails db:seed:replant
 #
+return if Rails.env.production?
 
 require "factory_bot_rails"
 
@@ -21,9 +22,7 @@ require "factory_bot_rails"
   FactoryBot.create_list(factory, 5, :with_initial_checks_completed)
 end
 
-if Rails.env.development?
-  AppSettings.create!(
-    service_start_date: 1.day.ago,
-    service_end_date: 1.year.from_now,
-  )
-end
+AppSettings.create!(
+  service_start_date: 1.day.ago,
+  service_end_date: 1.year.from_now,
+)

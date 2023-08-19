@@ -42,6 +42,7 @@ class ApplicationProgress < ApplicationRecord
     school_checks_failed: 4,
     standing_data_checks_failed: 5,
     no_longer_in_post: 6,
+    request_to_re_submit: 7,
   }
 
   before_save -> { self.status = StatusQuery.new(self).current_status }

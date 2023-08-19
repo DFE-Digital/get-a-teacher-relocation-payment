@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_230_816_100_957) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_16_100957) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -81,6 +81,16 @@ ActiveRecord::Schema[7.0].define(version: 20_230_816_100_957) do
     t.index ["applicant_id"], name: "index_applications_on_applicant_id"
   end
 
+  create_table "qa_statuses", force: :cascade do |t|
+    t.bigint "application_id"
+    t.string "status"
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["application_id", "status"], name: "index_qa_statuses_on_application_id_and_status", unique: true
+    t.index ["application_id"], name: "index_qa_statuses_on_application_id"
+  end
+
   create_table "schools", force: :cascade do |t|
     t.string "name"
     t.string "headteacher_name"
@@ -103,6 +113,7 @@ ActiveRecord::Schema[7.0].define(version: 20_230_816_100_957) do
 
   add_foreign_key "applicants", "schools"
   add_foreign_key "applications", "applicants"
+  add_foreign_key "qa_statuses", "applications"
 
   create_view "duplicate_applications", sql_definition: <<-SQL
       SELECT applications.id,

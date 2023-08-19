@@ -21,6 +21,7 @@ module Reports
       candidates.pluck(
         "urn",
         "given_name",
+        "middle_name",
         "family_name",
         Arel.sql("CONCAT('tel: ', applicants.phone_number)"),
         "email_address",
@@ -44,6 +45,8 @@ module Reports
       %w[
         URN
         Forename
+        Middle
+        Name
         Surname
         Telephone
         Email

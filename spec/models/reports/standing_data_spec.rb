@@ -50,12 +50,14 @@ module Reports
         expect(report.csv).not_to include(app.urn)
       end
 
+      # rubocop:disable RSpec/ExampleLength
       it "returns the data in CSV format" do
         application = create(:application, application_progress: progress)
 
         expect(report.csv).to include([
           application.urn,
           application.applicant.given_name,
+          application.applicant.middle_name,
           application.applicant.family_name,
           "tel: #{application.applicant.phone_number}",
           application.applicant.email_address,
@@ -68,6 +70,8 @@ module Reports
         expected_header = %w[
           URN
           Forename
+          Middle
+          Name
           Surname
           Telephone
           Email
@@ -78,5 +82,6 @@ module Reports
         expect(report.csv).to include(expected_header)
       end
     end
+    # rubocop:enable RSpec/ExampleLength
   end
 end
