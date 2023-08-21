@@ -16,11 +16,10 @@
 #  applicant_id      :bigint
 #
 class DuplicateApplication < ApplicationRecord
-  belongs_to :application, foreign_key: :id, inverse_of: :duplicates
+  belongs_to :application, foreign_key: :urn, primary_key: :urn, inverse_of: :duplicates
   belongs_to :applicant, optional: true
 
   delegate :application_progress, to: :application
-  delegate :urn, to: :application
   delegate :status, to: :application_progress
   delegate :phone_number, :passport_number, :email_address, to: :applicant
 
