@@ -34,7 +34,7 @@ module SystemAdmin
     end
 
     def duplicates
-      @pagy, @duplicates = pagy(DuplicateApplication.search(params[:search]).order(created_at: :desc))
+      @pagy, @duplicates = pagy(DuplicateApplication.search(params[:search]).select("DISTINCT ON (urn) *"))
     end
 
     def show; end
