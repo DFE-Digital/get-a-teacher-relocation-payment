@@ -10,7 +10,7 @@
   "dependencies": {
     "@ministryofjustice/frontend": "^1.8.0",
     "@rails/webpacker": "5.4.4",
-    "core-js": "^3.32.0",
+    "core-js": "^3.32.1",
     "govuk-frontend": "^4.7.0",
     "rails-ujs": "^5.2.8",
     "turbolinks": "^5.2.0",
