@@ -68,6 +68,11 @@ To create a new ADR, run:
 adr new "Title of ADR"
 ```
 
+### Contingency
+This service does not offer any out of hours SLAs and there will be not on call shift.
+
+Any incidents observed should follow [the incident reporting guidance](https://tech-docs.teacherservices.cloud/operating-a-service/incident-playbook.html) 
+
 ### Hosting
 
 TODO
