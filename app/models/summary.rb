@@ -1,155 +1,93 @@
-# frozen_string_literal: true
-
 class Summary
   include ActiveModel::Model
-  include ActionView::Helpers::TranslationHelper
 
-  def initialize(application:)
-    @application = application
+  def initialize(form)
+    @form = form
+    @personal_details_step = PersonalDetailsStep.new(form)
+    @employment_details_step = EmploymentDetailsStep.new(form)
   end
+  attr_reader :form
+
+  delegate :errors, to: :form
 
   def rows
-    [
-      application_route,
-      school_details,
-      contract_details,
-      contract_start_dates,
-      subjects,
-      visa,
-      entry_date,
-    ]
+    single_field_steps.map(&method(:format_single_row))
   end
 
   def personal_card
+    link = yield("Change", personal_details_step.path)
     {
-      title: t("applicants.personal_details.title"),
+      title: personal_details_step.question,
+      actions: [link],
     }
   end
 
   def personal_rows
-    displayed_personal_fields
-      .map do |field, value|
-      {
-        key: { text: t("applicants.personal_details.#{field}") },
-        value: { text: value },
-      }
-    end
+    personal_details_answers.map(&method(:format_answer))
   end
 
   def employment_card
+    link = yield("Change", employment_details_step.path)
     {
-      title: t("applicants.employment_details.title"),
+      title: employment_details_step.question,
+      actions: [link],
     }
   end
 
   def employment_rows
-    displayed_employment_fields
-      .map do |field, value|
-      {
-        key: { text: t("applicants.employment_details.#{field}") },
-        value: { text: value },
-      }
-    end
-  end
-
-  def application_route
-    {
-      key: { text: t("applicants.application_routes.title") },
-      value: { text: t("applicants.application_routes.radio_button.#{application.application_route}.text") },
-    }
-  end
-
-  def school_details
-    {
-      key: { text: t("applicants.school_details.title") },
-      value: { text: "Yes" },
-    }
-  end
-
-  def contract_details
-    {
-      key: { text: t("applicants.contract_details.title") },
-      value: { text: "Yes" },
-    }
-  end
-
-  def contract_start_dates
-    {
-      key: { text: t("applicants.contract_start_dates.title") },
-      value: { text: application.start_date },
-    }
-  end
-
-  def subjects
-    {
-      key: { text: t("applicants.subjects.title.#{application.application_route}") },
-      value: { text: application.subject },
-    }
-  end
-
-  def visa
-    {
-      key: { text: t("applicants.visa.title") },
-      value: { text: application.visa_type },
-    }
-  end
-
-  def entry_date
-    {
-      key: { text: t("applicants.entry_dates.title.#{application.application_route}") },
-      value: { text: application.date_of_entry },
-    }
+    employment_details_answers.map(&method(:format_answer))
   end
 
 private
 
-  attr_reader :application
+  attr_reader :personal_details_step, :employment_details_step
 
-  def displayed_personal_fields
-    applicant_attributes.merge(address_attributes(application.applicant&.address))
+  def reorder(answers, field_name, after:)
+    field_index = answers.index { _1.field_name == field_name }
+    field = answers.delete_at(field_index)
+    after_index = answers.index { _1.field_name == after }
+
+    answers.insert(after_index + 1, field)
+    answers
   end
 
-  def displayed_employment_fields
-    applicant_school_attributes.merge(address_attributes(application.applicant&.school&.address))
+  def personal_details_answers
+    a = reorder(personal_details_step.answers, :middle_name, after: :family_name)
+    reorder(a, :address_line_2, after: :address_line_1)
   end
 
-  def display_fields(model, fields)
-    return {} unless model
-
-    model
-      .attributes
-      .select { |k, _| fields.include?(k) }
+  def employment_details_answers
+    reorder(employment_details_step.answers, :school_address_line_2, after: :school_address_line_1)
   end
 
-  def applicant_attributes
-    fields = %w[
-      given_name
-      family_name
-      email_address
-      phone_number
-      date_of_birth
-      nationality
-      sex
-      passport_number
-    ]
-    attrs = display_fields(application.applicant, fields)
-    attrs["phone_number.title"] = attrs["phone_number"]
-    attrs.delete("phone_number")
-    attrs
+  def single_field_steps
+    application_route_steps - [PersonalDetailsStep, EmploymentDetailsStep]
   end
 
-  def address_attributes(address)
-    fields = %(
-      address_line_1
-      address_line_2
-      city
-      postcode
-      )
-    display_fields(address, fields)
+  def application_route_steps
+    return StepFlow.teacher_steps if form.teacher_route?
+
+    StepFlow.trainee_steps
   end
 
-  def applicant_school_attributes
-    school = application.applicant&.school
-    display_fields(school, %w[headteacher_name name])
+  def format_answer(answer)
+    {
+      key: { text: answer.label },
+      value: { text: answer.formatted_value },
+    }
+  end
+
+  def format_single_row(step_class)
+    step = step_class.new(form)
+    {
+      key: { text: step.question },
+      value: { text: step.answer&.formatted_value },
+      actions: [
+        {
+          href: step.path,
+          visually_hidden_text: step.class::ROUTE_KEY.sub("-", " "),
+        },
+      ],
+    }
   end
 end
