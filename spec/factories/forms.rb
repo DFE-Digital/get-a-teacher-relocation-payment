@@ -47,7 +47,7 @@ FactoryBot.define do
     trait :eligible do
       state_funded_secondary_school { true }
       one_year { true }
-      visa_type {
+      visa_type do
         [
           "Afghan Relocations and Assistance Policy",
           "Afghan citizens resettlement scheme",
@@ -61,10 +61,38 @@ FactoryBot.define do
           "Ukraine Sponsorship Scheme",
           "Youth Mobility Scheme",
         ].sample
-      }
-      start_date { Date.new(Date.current.year,9,1) }
-      date_of_entry { Date.new(Date.current.year,9,1) }
+      end
+      start_date { Date.new(Date.current.year, 9, 1) }
+      date_of_entry { Date.new(Date.current.year, 9, 1) }
       subject { "physics" }
+    end
+
+    trait :complete do
+      state_funded_secondary_school { true }
+      one_year { true }
+      visa_type { "British National (Overseas) visa" }
+      start_date { Date.new(Date.current.year, 9, 1) }
+      date_of_entry { Date.new(Date.current.year, 9, 1) }
+      subject { "physics" }
+      date_of_birth { rand(18..90).years.ago.to_date }
+      email_address { Faker::Internet.email }
+      family_name { Faker::Name.last_name }
+      given_name { Faker::Name.first_name }
+      middle_name { Faker::Name.middle_name }
+      phone_number { Faker::PhoneNumber.cell_phone_in_e164 }
+      sex { %w[female male].sample }
+      address_line_1 { Faker::Address.street_address }
+      address_line_2 { Faker::Address.secondary_address }
+      city { Faker::Address.city }
+      postcode { Faker::Address.postcode }
+      passport_number { Faker::Alphanumeric.alpha(number: 10) }
+      nationality { NATIONALITIES.sample }
+      school_headteacher_name { Faker::Name.name }
+      school_name { Faker::Educator.secondary_school }
+      school_address_line_1 { Faker::Address.street_address }
+      school_address_line_2 { Faker::Address.secondary_address }
+      school_city { Faker::Address.city }
+      school_postcode { Faker::Address.postcode }
     end
   end
 end
