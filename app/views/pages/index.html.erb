@@ -1,13 +1,13 @@
 <%= render 'shared/notices' %>
 
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds-from-desktop">
+  <div class="govuk-grid-column-full">
     <h1 class="govuk-heading-xl">Apply for the international relocation payment</h1>
   </div>
 </div>
 
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds-from-desktop">
+  <div class="govuk-grid-column-full">
     <p class="govuk-body">
       The
       <%= govuk_link_to "international relocation payment (IRP)", "https://www.gov.uk/government/publications/international-relocation-payments/international-relocation-payments", { target: "_blank" } %>
@@ -64,7 +64,7 @@
     </ul>
 
     <p class="govuk-body">
-      <%= govuk_link_to("Start", new_applicants_application_route_path, { class: "govuk-button" })%>
+      <%= govuk_link_to("Start", ApplicationRouteStep.path, { class: "govuk-button" })%>
     </p>
 
     <h2 class="govuk-heading-m">Contact us</h2>
