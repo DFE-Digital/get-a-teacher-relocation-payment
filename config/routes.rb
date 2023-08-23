@@ -3,6 +3,12 @@
 Rails.application.routes.draw do
   root to: "pages#start"
 
+  constraints(StepFlow) do
+    get "/step/:name", to: "step#new", as: 'step'
+    post "/step/:name", to: "step#create"
+    patch "/step/:name", to: "step#update"
+  end
+
   get "/ineligible", to: "pages#ineligible"
   get "/ineligible-salaried-course", to: "pages#ineligible_salaried_course"
   get "/closed", to: "pages#closed"
