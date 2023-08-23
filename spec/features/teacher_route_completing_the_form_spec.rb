@@ -33,7 +33,7 @@ describe "teacher route: completing the form" do
         and_i_complete_the_contract_details_question
         and_i_enter_an_invalid_date
 
-        expect(page).to have_text("Enter a valid date")
+        expect(page).to have_text("Enter your contract start date")
       end
     end
   end
