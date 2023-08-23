@@ -62,21 +62,21 @@ RSpec.shared_context "with common application form steps" do
   def and_i_enter_my_personal_details
     assert_i_am_in_the_personal_details_question
 
-    fill_in("applicants_personal_detail[given_name]", with: "Bob")
-    fill_in("applicants_personal_detail[family_name]", with: "Robertson")
-    fill_in("applicants_personal_detail[email_address]", with: "test@example.com")
-    fill_in("applicants_personal_detail[phone_number]", with: "01234567890")
+    fill_in("personal_details_step[given_name]", with: "Bob")
+    fill_in("personal_details_step[family_name]", with: "Robertson")
+    fill_in("personal_details_step[email_address]", with: "test@example.com")
+    fill_in("personal_details_step[phone_number]", with: "01234567890")
     fill_in("Day", with: 1)
     fill_in("Month", with: 1)
     fill_in("Year", with: 1990)
-    fill_in("applicants_personal_detail[phone_number]", with: "01234567890")
-    fill_in("applicants_personal_detail[address_line_1]", with: "12 Park Gardens")
-    fill_in("applicants_personal_detail[address_line_2]", with: "Office 20")
-    fill_in("applicants_personal_detail[city]", with: "London")
-    fill_in("applicants_personal_detail[postcode]", with: "AS1 1AA")
+    fill_in("personal_details_step[phone_number]", with: "01234567890")
+    fill_in("personal_details_step[address_line_1]", with: "12 Park Gardens")
+    fill_in("personal_details_step[address_line_2]", with: "Office 20")
+    fill_in("personal_details_step[city]", with: "London")
+    fill_in("personal_details_step[postcode]", with: "AS1 1AA")
     select("Senegalese")
     choose("Male")
-    fill_in("applicants_personal_detail[passport_number]", with: "000")
+    fill_in("personal_details_step[passport_number]", with: "000")
 
     click_button("Continue")
   end
@@ -84,12 +84,12 @@ RSpec.shared_context "with common application form steps" do
   def and_i_enter_my_employment_details
     assert_i_am_in_the_employment_details_question
 
-    fill_in("applicants_employment_detail[school_headteacher_name]", with: "Mr Headteacher")
-    fill_in("applicants_employment_detail[school_name]", with: "School name")
-    fill_in("applicants_employment_detail[school_address_line_1]", with: "1, McSchool Street")
-    fill_in("applicants_employment_detail[school_address_line_2]", with: "Schoolville")
-    fill_in("applicants_employment_detail[school_city]", with: "Schooltown")
-    fill_in("applicants_employment_detail[school_postcode]", with: "SC1 1AA")
+    fill_in("employment_details_step[school_headteacher_name]", with: "Mr Headteacher")
+    fill_in("employment_details_step[school_name]", with: "School name")
+    fill_in("employment_details_step[school_address_line_1]", with: "1, McSchool Street")
+    fill_in("employment_details_step[school_address_line_2]", with: "Schoolville")
+    fill_in("employment_details_step[school_city]", with: "Schooltown")
+    fill_in("employment_details_step[school_postcode]", with: "SC1 1AA")
 
     click_button("Continue")
   end
