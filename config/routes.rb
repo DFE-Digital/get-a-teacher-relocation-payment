@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: "pages#start"
+  root to: "pages#index"
 
   constraints(StepFlow) do
     get "/step/:name", to: "step#new", as: 'step'

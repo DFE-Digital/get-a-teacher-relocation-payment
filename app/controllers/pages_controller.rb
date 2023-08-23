@@ -2,6 +2,6 @@
 
 class PagesController < ApplicationController
   before_action :check_service_open!, except: %i[closed]
-  def start; end
+  def index; end
   def closed; end
 end
