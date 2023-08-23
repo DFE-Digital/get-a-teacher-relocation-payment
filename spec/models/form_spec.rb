@@ -39,13 +39,79 @@ RSpec.describe Form do
 
   context "teacher" do
     subject(:form) { build(:teacher_form) }
+
     it { is_expected.to be_teacher_route }
     it { is_expected.not_to be_trainee_route }
   end
 
   context "trainee" do
     subject(:form) { build(:trainee_form) }
+
     it { is_expected.to be_trainee_route }
     it { is_expected.not_to be_teacher_route }
+  end
+
+  describe "eligibile?" do
+    context "returns true when form eligible" do
+      subject(:form) { build(:form, :eligible) }
+
+      it { expect(form).to be_eligible }
+    end
+
+    context "returns false when form ineligible" do
+      subject(:form) { build(:form, :eligible, application_route: "other") }
+
+      it { expect(form).not_to be_eligible }
+    end
+  end
+
+  describe "complete?" do
+    context "returns true when form complete" do
+      subject(:form) { build(:form, :complete) }
+
+      it { expect(form).to be_complete }
+    end
+
+    context "returns false when form incomplete" do
+      subject(:form) { build(:form, :complete, application_route: nil) }
+
+      it { expect(form).not_to be_complete }
+    end
+  end
+
+  describe "validate_eligibility" do
+    before { form.validate_eligibility }
+
+    context "does not add any error when eligible" do
+      subject(:form) { build(:form, :eligible) }
+
+      it { expect(form.errors).to be_blank }
+    end
+
+    context "adds an error when ineligible" do
+      subject(:form) { build(:form, :eligible, application_route: "other") }
+
+      it { expect(form.errors[:base]).not_to be_blank }
+    end
+  end
+
+  describe "validate_completeness" do
+    before { form.validate_completeness }
+
+    context "does not add any error when complete" do
+      subject(:form) { build(:form, :complete) }
+
+      it { expect(form.errors).to be_blank }
+    end
+
+    context "adds an error when form incomplete" do
+      subject(:form) { build(:form, :complete, application_route: nil) }
+
+      it { expect(form.errors[:base]).not_to be_blank }
+    end
+  end
+
+  describe "deconstruct_keys" do
+    it { expect(form.deconstruct_keys(nil)).to eq(form.attributes.symbolize_keys) }
   end
 end
