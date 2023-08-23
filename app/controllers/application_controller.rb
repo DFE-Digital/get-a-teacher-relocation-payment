@@ -42,4 +42,8 @@ class ApplicationController < ActionController::Base
 
     redirect_to(closed_path)
   end
+
+  def current_form
+    @current_form ||= Form.find_by(id: session["form_id"])
+  end
 end
