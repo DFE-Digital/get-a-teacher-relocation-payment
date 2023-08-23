@@ -20,6 +20,7 @@ RSpec.describe PersonalDetailsStep, type: :model do
                      sex
                      nationality
                      passport_number
+                     student_loan
                    ],
                    optional_fields: %i[middle_name address_line_2],
                    question: "Personal information",

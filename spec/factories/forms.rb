@@ -27,6 +27,7 @@
 #  sex                           :string
 #  start_date                    :date
 #  state_funded_secondary_school :boolean
+#  student_loan                  :boolean
 #  subject                       :string
 #  visa_type                     :string
 #  created_at                    :datetime         not null
@@ -87,6 +88,7 @@ FactoryBot.define do
       postcode { Faker::Address.postcode }
       passport_number { Faker::Alphanumeric.alpha(number: 10) }
       nationality { NATIONALITIES.sample }
+      student_loan { true }
       school_headteacher_name { Faker::Name.name }
       school_name { Faker::Educator.secondary_school }
       school_address_line_1 { Faker::Address.street_address }

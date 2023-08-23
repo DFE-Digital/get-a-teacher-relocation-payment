@@ -14,6 +14,7 @@
 #  passport_number :text
 #  phone_number    :text
 #  sex             :text
+#  student_loan    :boolean
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  school_id       :bigint

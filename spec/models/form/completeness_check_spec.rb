@@ -10,6 +10,12 @@ RSpec.describe Form::CompletenessCheck do
       it { expect(check.failure_reason).to be_nil }
     end
 
+    context "when boolean field hold false value" do
+      let(:form) { build(:form, :complete, student_loan: false) }
+
+      it { expect(check.failure_reason).to be_nil }
+    end
+
     context "when incomplete" do
       context "for teacher" do
         %i[
@@ -31,6 +37,7 @@ RSpec.describe Form::CompletenessCheck do
           postcode
           passport_number
           nationality
+          student_loan
           school_headteacher_name
           school_name
           school_address_line_1
@@ -65,6 +72,7 @@ RSpec.describe Form::CompletenessCheck do
           postcode
           passport_number
           nationality
+          student_loan
           school_headteacher_name
           school_name
           school_address_line_1

@@ -19,7 +19,7 @@ class Form::CompletenessCheck
   end
 
   def failure_reason
-    return nil if missing_fields.blank?
+    return if missing_fields.blank?
 
     "missing fields: #{missing_fields.join(', ')}"
   end
@@ -37,6 +37,6 @@ private
   end
 
   def missing_fields
-    required_fields.select { form.public_send(_1).blank? }
+    required_fields.select { form.public_send(_1).to_s.blank? }
   end
 end

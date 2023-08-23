@@ -13,6 +13,7 @@ class PersonalDetailsStep < BaseStep
     sex
     nationality
     passport_number
+    student_loan
   ].freeze
 
   OPTIONAL_FIELDS = %i[
@@ -33,7 +34,13 @@ class PersonalDetailsStep < BaseStep
   def configure_step
     @question = t("steps.personal_details.question")
     @question_type = :multi
+    @student_loan_valid_answers = [
+      Answer.new(value: true, label: t("steps.contract_details.answers.yes.text")),
+      Answer.new(value: false, label: t("steps.contract_details.answers.no.text")),
+    ]
   end
+
+  attr_reader :student_loan_valid_answers
 
   def template
     "step/personal_details"

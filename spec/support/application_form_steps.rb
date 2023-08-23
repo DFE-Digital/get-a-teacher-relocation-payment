@@ -77,6 +77,7 @@ RSpec.shared_context "with common application form steps" do
     select("Senegalese")
     choose("Male")
     fill_in("personal_details_step[passport_number]", with: "000")
+    choose("No")
 
     click_button("Continue")
   end
