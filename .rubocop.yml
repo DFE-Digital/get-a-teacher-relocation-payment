@@ -55,6 +55,11 @@ Rails/HasManyOrHasOneDependent:
   Exclude:
     - 'app/models/application.rb'
 
+Performance/MethodObjectAsBlock:
+  Exclude:
+    - 'app/models/summary.rb'
+    - 'app/services/update_form/parsed_params.rb'
+
 Metrics/MethodLength:
   Exclude:
     - 'spec/features/*'
@@ -80,16 +85,14 @@ RSpec/MultipleExpectations:
   Exclude:
     - 'spec/queries/**/*'
     - 'spec/features/**/*'
-    
-RSpec/StubbedMock:
-  Exclude:
-    - 'spec/models/summary_spec.rb'
-  
+ 
 RSpec/MessageSpies:
   Exclude:
-    - 'spec/models/summary_spec.rb'
-  
-RSpec/SubjectStub:
+    - 'spec/services/update_form_spec.rb'
+
+RSpec/VerifiedDoubles:
   Exclude:
-    - 'spec/models/summary_spec.rb'
-  
+    - 'spec/services/step_flow_spec.rb'
+
+RSpec/NestedGroups:
+  Max: 4
