@@ -43,5 +43,28 @@ FactoryBot.define do
     factory :trainee_form do
       application_route { "salaried_trainee" }
     end
+
+    trait :eligible do
+      state_funded_secondary_school { true }
+      one_year { true }
+      visa_type {
+        [
+          "Afghan Relocations and Assistance Policy",
+          "Afghan citizens resettlement scheme",
+          "British National (Overseas) visa",
+          "Family visa",
+          "High Potential Individual visa",
+          "India Young Professionals Scheme visa",
+          "Skilled worker visa",
+          "UK Ancestry visa",
+          "Ukraine Family Scheme visa",
+          "Ukraine Sponsorship Scheme",
+          "Youth Mobility Scheme",
+        ].sample
+      }
+      start_date { Date.new(Date.current.year,9,1) }
+      date_of_entry { Date.new(Date.current.year,9,1) }
+      subject { "physics" }
+    end
   end
 end
