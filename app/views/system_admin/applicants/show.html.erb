@@ -102,6 +102,10 @@ end %>
           row.with_key(text: 'Passport number')
           row.with_value(text: @applicant.passport_number)
         end 
+        summary_list.with_row do |row|
+          row.with_key(text: 'Student Loan')
+          row.with_value(text: @applicant.student_loan ? "Yes" : "No")
+        end
     end %>
     <h4 class="govuk-heading-m">Applicant Address</h4>
     <%= govuk_summary_list(actions: false) do |summary_list|

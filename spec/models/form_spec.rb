@@ -27,6 +27,7 @@
 #  sex                           :string
 #  start_date                    :date
 #  state_funded_secondary_school :boolean
+#  student_loan                  :boolean
 #  subject                       :string
 #  visa_type                     :string
 #  created_at                    :datetime         not null

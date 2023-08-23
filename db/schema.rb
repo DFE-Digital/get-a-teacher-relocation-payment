@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_093918) do
     t.datetime "updated_at", null: false
     t.bigint "school_id"
     t.string "middle_name"
+    t.boolean "student_loan"
     t.index ["school_id"], name: "index_applicants_on_school_id"
   end
 
@@ -123,6 +124,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_093918) do
     t.string "school_postcode"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "student_loan"
   end
 
   create_table "schools", force: :cascade do |t|

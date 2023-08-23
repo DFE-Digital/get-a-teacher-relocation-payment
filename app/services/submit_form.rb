@@ -66,6 +66,7 @@ private
       sex: form.sex,
       passport_number: form.passport_number,
       nationality: form.nationality,
+      student_loan: form.student_loan,
       address_attributes: {
         address_line_1: form.address_line_1,
         address_line_2: form.address_line_2,

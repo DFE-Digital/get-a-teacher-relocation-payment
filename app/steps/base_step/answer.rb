@@ -1,4 +1,6 @@
 class BaseStep::Answer
+  include ActionView::Helpers::TranslationHelper
+
   def initialize(value:, label:, hint: nil, field_name: nil)
     @value = value
     @label = label
@@ -12,6 +14,7 @@ private
 
   def format(value)
     return value.strftime("%d-%m-%Y") if value.is_a?(Date)
+    return t("steps.#{value}") if [TrueClass, FalseClass].include?(value.class)
 
     value
   end

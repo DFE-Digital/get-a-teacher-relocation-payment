@@ -12,6 +12,7 @@
 #  passport_number :text
 #  phone_number    :text
 #  sex             :text
+#  student_loan    :boolean
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  school_id       :bigint
@@ -32,6 +33,7 @@ FactoryBot.define do
     nationality { Faker::Nation.nationality }
     passport_number { Faker::Number.number(digits: 9) }
     phone_number { Faker::PhoneNumber.cell_phone_in_e164 }
+    student_loan { [true, false].sample }
     sex { %w[female male].sample }
 
     school factory: %i[school], strategy: :create

@@ -28,6 +28,7 @@ RSpec.describe Summary do
       postcode: "EC1 2AA",
       passport_number: "OE75370015I",
       nationality: NATIONALITIES[31],
+      student_loan: true,
       school_headteacher_name: "Miss A. Morice",
       school_name: "School one",
       school_address_line_1: "line 3",
@@ -96,6 +97,7 @@ RSpec.describe Summary do
         { key: { text: "Select your sex" }, value: { text: "female" } },
         { key: { text: "Select your nationality" }, value: { text: "Bulgarian" } },
         { key: { text: "Enter your passport number, as it appears on your passport" }, value: { text: "OE75370015I" } },
+        { key: { text: "Are you currently repaying a student loan in England?" }, value: { text: "Yes" } },
       ]
     end
 
