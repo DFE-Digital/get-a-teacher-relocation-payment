@@ -17,7 +17,7 @@
       table.with_body do |body|
         @duplicates.each do |duplicate|
           body.with_row do |row|
-            row.with_cell(text: govuk_link_to(duplicate.urn, applicant_path(duplicate.id)))
+            row.with_cell(text: govuk_link_to(duplicate.urn, applicant_path(duplicate.applicant)))
             row.with_cell(text: govuk_link_to(duplicate.email_address, duplicates_path(search: duplicate.email_address)))
             row.with_cell(text: govuk_link_to(duplicate.phone_number, duplicates_path(search: duplicate.phone_number)))
             row.with_cell(text: govuk_link_to(duplicate.passport_number, duplicates_path(search: duplicate.passport_number)))
