@@ -1,8 +1,10 @@
 class StepController < ApplicationController
+  invisible_captcha only: %i[create], honeypot: :application_username
   before_action :check_service_open!,
                 :current_step
 
   def new
+    setup_invisible_captcha
     render(current_step.template)
   end
 
@@ -28,6 +30,10 @@ private
 
   def step_params
     params.fetch(@step.class.name.underscore, {}).permit(*@step.fields)
+  end
+
+  def setup_invisible_captcha
+    @add_invisible_captcha = true if current_step.form.new_record?
   end
 
   def update_session(step)

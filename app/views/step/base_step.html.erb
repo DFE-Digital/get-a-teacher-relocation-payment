@@ -4,11 +4,13 @@
 <% if flash[:alert] %>
   <%= content_tag :div, flash[:alert].html_safe, class: "flash alert" %>
 <% end %>
-
+<% if flash[:error] %>
+  <%= govuk_warning_text(text: flash[:error]) %>
+<% end %>
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
-    <%= form_with(url: @step.path, model: @step, method: :patch, local: true) do |f| %>
+    <%= form_with(url: @step.path, model: @step, method: form_method(@step), local: true) do |f| %>
     <%= f.govuk_error_summary %>
 
     <% if @step.radio_field? %>
@@ -28,6 +30,10 @@
 
        <% end %>
        <% end %>
+    <% end %>
+
+    <% if @add_invisible_captcha %>
+    <%= invisible_captcha :application_username %>
     <% end %>
 
     <% if @step.date_field? %>
