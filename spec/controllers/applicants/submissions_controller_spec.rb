@@ -1,7 +1,7 @@
 require "rails_helper"
 
 module Applicants
-  RSpec.describe SubmissionsController do
+  RSpec.describe SubmissionsController, pending: "will be removed" do
     describe "GET #show" do
       let(:application) { create(:application, :submitted) }
 

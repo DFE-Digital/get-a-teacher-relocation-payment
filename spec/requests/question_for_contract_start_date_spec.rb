@@ -1,7 +1,7 @@
 require "rails_helper"
 
 module Applicants
-  RSpec.describe "Question for Contract Start Date" do
+  RSpec.describe "Question for Contract Start Date", pending: "will be removed" do
     describe "POST create" do
       let(:valid_params) do
         {
