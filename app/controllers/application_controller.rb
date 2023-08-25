@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_service_open!
-    return if request.path == "/users/sign_out" # skip this for log out page
+    return if request.path == destroy_user_session_path # skip this for log out page
     return if Gatekeeper.application_open?
 
     redirect_to(closed_path)

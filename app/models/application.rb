@@ -60,7 +60,8 @@ class Application < ApplicationRecord
   end
 
   def mark_as_qa!
-    qa_statuses.create!(status: application_progress.status, date: Time.current)
+    qa_statuses.upsert({ status: application_progress.status, date: Time.current },
+                       unique_by: %i[application_id status])
   end
 
   with_options if: :submitted? do

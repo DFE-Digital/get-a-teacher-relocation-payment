@@ -74,9 +74,5 @@ module SystemAdmin
       @application = @applicant.application
       @progress = @application.application_progress
     end
-
-    def generate_csv_for(applications)
-      Reports::QaReport.new(applications).csv
-    end
   end
 end
