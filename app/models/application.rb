@@ -60,7 +60,7 @@ class Application < ApplicationRecord
   end
 
   def mark_as_qa!
-    qa_statuses.upsert({ status: application_progress.status, date: Time.current },
+    qa_statuses.upsert({ status: application_progress.status, date: Time.current }, # rubocop:disable Rails/SkipsModelValidations
                        unique_by: %i[application_id status])
   end
 
