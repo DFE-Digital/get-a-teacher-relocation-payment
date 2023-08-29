@@ -5,7 +5,7 @@ en:
     false: 'No'
     application_route:
       question: What is your employment status?
-      hint: Select one of the following options
+      hint: Select one of the following options.
       answers:
         teacher:
           text: I am employed as a teacher in a school in England
@@ -28,7 +28,7 @@ en:
 
     school_details:
       question: Are you employed by an English state secondary school?
-      hint: State schools receive funding from the UK government. Secondary schools teach children aged 11 to 16 or 18.
+      hint: State schools receive funding from the UK government. Secondary schools teach children aged 11 to 16, or 11 to 18. 
       answers:
         'yes':
           text: 'Yes'
@@ -53,7 +53,7 @@ en:
         salaried_trainee: What subject are you training to teach?
       hint:
         teacher:
-          Physics, general or combined science including physics, and languages can be combined with other subjects but must make up at least 50% of your time in the classroom. This will be validated by the Department for Education with your school.
+          Physics, general or combined science including physics, and languages can be combined with other subjects but must make up at least 50% of your time in the classroom. 
         salaried_trainee:
           Physics or languages can be combined with other subjects but must make up at least 50% of your course content. This will be validated by Department for Education with the school where you are training.
       answers:
@@ -79,7 +79,7 @@ en:
       given_name:
         text: Enter your given name, as it appears on your passport
       middle_name:
-        text: Enter your middle name, as it appears on your passport
+        text: Enter your middle name, as it appears on your passport (optional)
       family_name:
         text: Enter your family name, as it appears on your passport
       email_address:
@@ -159,7 +159,7 @@ en:
               invalid: Enter an email address in the correct format, like name@example.com
             phone_number:
               blank: Enter your phone number
-              invalid: Enter a telephone number, like 07700 900 982 or +34 626 587 210’
+              invalid: Enter a valid telephone number, for example, 07700 900 982 or +34 626 587 210
             date_of_birth:
               blank: Enter your date of birth
               invalid: Age must be below 80
@@ -177,10 +177,12 @@ en:
               blank: Enter your city
             postcode:
               blank: Enter your postcode
+              invalid: Enter a valid postcode, for example, BN1 1AA
             student_loan:
               blank: Choose the student loan option that applies to you
             school_postcode:
               blank: Enter your school's postcode
+              invalid: Enter a valid postcode, for example, BN1 1AA
             school_headteacher_name:
               blank: Enter the headteacher's name
             school_name:
