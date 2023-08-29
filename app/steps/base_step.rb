@@ -77,6 +77,7 @@ class BaseStep
     @answer = Answer.new(
       value: value,
       label: selected_answer&.label,
+      field_name: fields.first,
     )
   end
 
