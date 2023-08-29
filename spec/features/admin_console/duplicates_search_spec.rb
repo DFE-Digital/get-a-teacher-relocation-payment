@@ -6,8 +6,8 @@ RSpec.describe "Duplicates Search" do
 
   let!(:applicant_one) { build(:applicant, email_address: "test@example.com", passport_number: "123456", phone_number: "111222333") }
   let!(:applicant_two) { build(:applicant, email_address: "test@example.com", passport_number: "654321", phone_number: "444555666") }
-  let!(:applicant_three) { build(:applicant, email_address: "test@example.com", passport_number: "987654", phone_number: "444555666") }
-  let!(:applicant_four) { build(:applicant, email_address: "test@example.com", passport_number: "654321", phone_number: "999999999") }
+  let!(:applicant_three) { build(:applicant, email_address: "test1@example.com", passport_number: "987654", phone_number: "444555666") }
+  let!(:applicant_four) { build(:applicant, email_address: "test2@example.com", passport_number: "123456", phone_number: "999999999") }
 
   before do
     create(:application, :submitted, applicant: applicant_one)
@@ -52,11 +52,11 @@ RSpec.describe "Duplicates Search" do
     visit duplicates_path
     case type
     when "email"
-      all("a", text: "test@example.com").first.click
+      all("a", text: applicant_one.email_address).first.click
     when "phone number"
-      all("a", text: "111222333").first.click
+      all("a", text: applicant_two.phone_number).first.click
     when "passport number"
-      all("a", text: "123456").first.click
+      all("a", text: applicant_four.passport_number).first.click
     end
   end
 
@@ -82,7 +82,8 @@ RSpec.describe "Duplicates Search" do
 
   def then_i_see_matching_duplicates_by_phone_number
     expect(page).to have_content("test@example.com")
-    expect(page).to have_content("111222333")
+    expect(page).to have_content("test1@example.com")
+    expect(page).to have_content("444555666")
   end
 
   def then_i_see_matching_duplicates_by_passport_number

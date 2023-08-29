@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_16_100957) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_29_093918) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -76,12 +76,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_100957) do
     t.string "subject"
     t.string "visa_type"
     t.date "date_of_entry"
-    t.date("start_date")
-    t.string("application_route")
+    t.date "start_date"
+    t.string "application_route"
     t.datetime "home_office_csv_downloaded_at"
     t.datetime "standing_data_csv_downloaded_at"
-    t.datetime("payroll_csv_downloaded_at")
+    t.datetime "payroll_csv_downloaded_at"
     t.index ["applicant_id"], name: "index_applications_on_applicant_id"
+  end
+
+  create_table "qa_statuses", force: :cascade do |t|
+    t.bigint "application_id"
+    t.string "status"
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["application_id", "status"], name: "index_qa_statuses_on_application_id_and_status", unique: true
+    t.index ["application_id"], name: "index_qa_statuses_on_application_id"
   end
 
   create_table "schools", force: :cascade do |t|
@@ -106,69 +116,57 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_16_100957) do
 
   add_foreign_key "applicants", "schools"
   add_foreign_key "applications", "applicants"
+  add_foreign_key "qa_statuses", "applications"
 
   create_view "duplicate_applications", sql_definition: <<-SQL
-      SELECT applications.id,
-      applications.application_date,
-      applications.urn,
-      applications.applicant_id,
-      applications.created_at,
-      applications.updated_at,
-      applications.subject,
-      applications.visa_type,
-      applications.date_of_entry,
-      applications.start_date,
-      applications.application_route,
-      dup_email.email_address AS duplicate_email
-     FROM ((applications
-       JOIN applicants ON ((applications.applicant_id = applicants.id)))
-       JOIN ( SELECT applicants_1.email_address,
-              count(applicants_1.email_address) AS count
-             FROM applicants applicants_1
-            GROUP BY applicants_1.email_address
-           HAVING (count(applicants_1.email_address) > 1)) dup_email ON ((applicants.email_address = dup_email.email_address)))
-    WHERE (applications.urn IS NOT NULL)
-  UNION
-   SELECT applications.id,
-      applications.application_date,
-      applications.urn,
-      applications.applicant_id,
-      applications.created_at,
-      applications.updated_at,
-      applications.subject,
-      applications.visa_type,
-      applications.date_of_entry,
-      applications.start_date,
-      applications.application_route,
-      dup_phone.phone_number AS duplicate_email
-     FROM ((applications
-       JOIN applicants ON ((applications.applicant_id = applicants.id)))
-       JOIN ( SELECT applicants_1.phone_number,
-              count(applicants_1.phone_number) AS count
-             FROM applicants applicants_1
-            GROUP BY applicants_1.phone_number
-           HAVING (count(applicants_1.phone_number) > 1)) dup_phone ON ((applicants.phone_number = dup_phone.phone_number)))
-    WHERE (applications.urn IS NOT NULL)
-  UNION
-   SELECT applications.id,
-      applications.application_date,
-      applications.urn,
-      applications.applicant_id,
-      applications.created_at,
-      applications.updated_at,
-      applications.subject,
-      applications.visa_type,
-      applications.date_of_entry,
-      applications.start_date,
-      applications.application_route,
-      dup_passport.passport_number AS duplicate_email
-     FROM ((applications
-       JOIN applicants ON ((applications.applicant_id = applicants.id)))
-       JOIN ( SELECT applicants_1.passport_number,
-              count(applicants_1.passport_number) AS count
-             FROM applicants applicants_1
-            GROUP BY applicants_1.passport_number
-           HAVING (count(applicants_1.passport_number) > 1)) dup_passport ON ((applicants.passport_number = dup_passport.passport_number)))
-    WHERE (applications.urn IS NOT NULL);
+      SELECT sub_query.id,
+      sub_query.application_date,
+      sub_query.urn,
+      sub_query.applicant_id,
+      sub_query.created_at,
+      sub_query.updated_at,
+      sub_query.subject,
+      sub_query.visa_type,
+      sub_query.date_of_entry,
+      sub_query.start_date,
+      sub_query.application_route,
+      sub_query.home_office_csv_downloaded_at,
+      sub_query.standing_data_csv_downloaded_at,
+      sub_query.payroll_csv_downloaded_at,
+      sub_query.duplicate_email,
+      sub_query.duplicate_phone,
+      sub_query.duplicate_passport
+     FROM ( SELECT applications.id,
+              applications.application_date,
+              applications.urn,
+              applications.applicant_id,
+              applications.created_at,
+              applications.updated_at,
+              applications.subject,
+              applications.visa_type,
+              applications.date_of_entry,
+              applications.start_date,
+              applications.application_route,
+              applications.home_office_csv_downloaded_at,
+              applications.standing_data_csv_downloaded_at,
+              applications.payroll_csv_downloaded_at,
+                  CASE
+                      WHEN (count(*) OVER (PARTITION BY applicants.email_address) > 1) THEN applicants.email_address
+                      ELSE NULL::text
+                  END AS duplicate_email,
+                  CASE
+                      WHEN (count(*) OVER (PARTITION BY applicants.phone_number) > 1) THEN applicants.phone_number
+                      ELSE NULL::text
+                  END AS duplicate_phone,
+                  CASE
+                      WHEN (count(*) OVER (PARTITION BY applicants.passport_number) > 1) THEN applicants.passport_number
+                      ELSE NULL::text
+                  END AS duplicate_passport
+             FROM (applications
+               JOIN applicants ON ((applications.applicant_id = applicants.id)))
+            WHERE (applications.urn IS NOT NULL)
+            GROUP BY applications.id, applicants.email_address, applicants.phone_number, applicants.passport_number) sub_query
+    WHERE ((sub_query.duplicate_email IS NOT NULL) OR (sub_query.duplicate_phone IS NOT NULL) OR (sub_query.duplicate_passport IS NOT NULL))
+    ORDER BY sub_query.created_at DESC;
   SQL
 end

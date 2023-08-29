@@ -18,9 +18,25 @@
         @duplicates.each do |duplicate|
           body.with_row do |row|
             row.with_cell(text: govuk_link_to(duplicate.urn, applicant_path(duplicate.applicant)))
-            row.with_cell(text: govuk_link_to(duplicate.email_address, duplicates_path(search: duplicate.email_address)))
-            row.with_cell(text: govuk_link_to(duplicate.phone_number, duplicates_path(search: duplicate.phone_number)))
-            row.with_cell(text: govuk_link_to(duplicate.passport_number, duplicates_path(search: duplicate.passport_number)))
+
+            if duplicate.duplicate_email.present?
+              row.with_cell(text: govuk_link_to(duplicate.email_address, duplicates_path(search: duplicate.email_address)))
+            else
+              row.with_cell(text: duplicate.email_address)
+            end
+
+            if duplicate.duplicate_phone.present?
+              row.with_cell(text: govuk_link_to(duplicate.phone_number, duplicates_path(search: duplicate.phone_number)))
+            else
+              row.with_cell(text: duplicate.phone_number)
+            end
+
+            if duplicate.duplicate_passport.present?
+              row.with_cell(text: govuk_link_to(duplicate.passport_number, duplicates_path(search: duplicate.passport_number)))
+            else
+              row.with_cell(text: duplicate.passport_number)
+            end
+
             row.with_cell(text: duplicate.status.humanize)
           end 
         end 
