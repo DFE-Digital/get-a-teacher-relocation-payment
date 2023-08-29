@@ -2,18 +2,23 @@
 #
 # Table name: duplicate_applications
 #
-#  id                :bigint
-#  application_date  :date
-#  application_route :string
-#  date_of_entry     :date
-#  duplicate_email   :text
-#  start_date        :date
-#  subject           :string
-#  urn               :string
-#  visa_type         :string
-#  created_at        :datetime
-#  updated_at        :datetime
-#  applicant_id      :bigint
+#  id                              :bigint
+#  application_date                :date
+#  application_route               :string
+#  date_of_entry                   :date
+#  duplicate_email                 :text
+#  duplicate_passport              :text
+#  duplicate_phone                 :text
+#  home_office_csv_downloaded_at   :datetime
+#  payroll_csv_downloaded_at       :datetime
+#  standing_data_csv_downloaded_at :datetime
+#  start_date                      :date
+#  subject                         :string
+#  urn                             :string
+#  visa_type                       :string
+#  created_at                      :datetime
+#  updated_at                      :datetime
+#  applicant_id                    :bigint
 #
 require "rails_helper"
 
