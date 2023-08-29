@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get "/ineligible-salaried-course", to: "pages#ineligible_salaried_course"
   get "/closed", to: "pages#closed"
   get "/privacy", to: "pages#privacy"
+  get "/sitemap", to: "pages#sitemap"
 
   # namespace :applicants do
   #   resources :application_routes, only: %i[new create]
