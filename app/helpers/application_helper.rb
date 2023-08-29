@@ -16,4 +16,8 @@ module ApplicationHelper
   def mailto_irp_express_interest
     govuk_link_to("irp.expressinterest@education.gov.uk", "mailto:IRP.ExpressInterest@education.gov.uk")
   end
+
+  def banner_feedback_form
+    govuk_link_to("feedback", "https://forms.office.com/Pages/DesignPageV2.aspx?subpage=design&FormId=yXfS-grGoU2187O4s0qC-Tnlxmr1yO1PrmA0-r0QTJFUMTdUMURBNDJaNzVZVU4zQVdCNDhJUVA2Si4u")
+  end
 end

@@ -36,7 +36,9 @@
     <%= govuk_header(service_name: "Get an International Relocation Payment") %>
 
     <div class="govuk-width-container app-width-container--wide">
-      <%= govuk_phase_banner(tag: { text: "Alpha" }, text: "This is a new service – your feedback will help us to improve it. ") %>
+      <%= govuk_phase_banner(tag: { text: "Private Beta" }) do %>
+      This is a new service, your <%= banner_feedback_form %> will help us improve it.
+      <% end %>
       <div class="govuk-width-container">
         <%= yield :breadcrumbs %>
       </div>
