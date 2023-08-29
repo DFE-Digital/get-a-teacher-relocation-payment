@@ -1,4 +1,33 @@
 en:
+  summary:
+    address_line_1: Address line 1
+    address_line_2: Address line 2 (optional)
+    application_route: Application route
+    city: Town or city
+    date_of_birth: Date of birth
+    date_of_entry: Date of entry
+    email_address: Email address
+    family_name: Family name
+    given_name: Given name
+    middle_name: Middle name
+    nationality: Nationality
+    one_year: Employed for at least a year
+    passport_number: Passport number
+    phone_number: Telephone
+    postcode: Postcode
+    school_address_line_1: Address line 1
+    school_address_line_2: Address line 2 (optional)
+    school_city: Town or city
+    school_headteacher_name: Headteacher name
+    school_name: School name
+    school_postcode: Postcode
+    sex: Sex
+    start_date: Contract start date
+    state_funded_secondary_school: State funded secondary school
+    subject: Subject
+    visa_type: Visa type
+    student_loan: Student loan
+
   steps:
     back: Back
     true: 'Yes'

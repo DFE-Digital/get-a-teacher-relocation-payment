@@ -1,5 +1,6 @@
 class Summary
   include ActiveModel::Model
+  include ActionView::Helpers::TranslationHelper
 
   def initialize(form)
     @form = form
@@ -72,7 +73,7 @@ private
 
   def format_answer(answer)
     {
-      key: { text: answer.label },
+      key: { text: t("summary.#{answer.field_name}") },
       value: { text: answer.formatted_value },
     }
   end
@@ -80,12 +81,12 @@ private
   def format_single_row(step_class)
     step = step_class.new(form)
     {
-      key: { text: step.question },
+      key: { text: t("summary.#{step.answer.field_name}") },
       value: { text: step.answer&.formatted_value },
       actions: [
         {
           href: step.path,
-          visually_hidden_text: step.class::ROUTE_KEY.sub("-", " "),
+          visually_hidden_text: step.class::ROUTE_KEY.tr("-", " "),
         },
       ],
     }

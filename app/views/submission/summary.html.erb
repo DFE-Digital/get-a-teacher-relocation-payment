@@ -4,6 +4,11 @@
       <%= t("applicants.application_summary.title") %>
     </h1>
 
+    <p class="govuk-body">
+      Please check and make a note of your answers, as you may need to refer to
+      them during the application process.
+    </p>
+
     <%= form_with(model: @summary, url: new_submission_path, local: true) do |f| %>
       <%= f.govuk_error_summary link_base_errors_to: :email_address %>
 
