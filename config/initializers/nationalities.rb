@@ -73,7 +73,6 @@ NATIONALITIES = [
   "Ecuadorean",
   "Egyptian",
   "Emirati",
-  "English",
   "Equatorial Guinean",
   "Eritrean",
   "Estonian",
@@ -181,7 +180,6 @@ NATIONALITIES = [
   "Samoan",
   "Sao Tomean",
   "Saudi Arabian",
-  "Scottish",
   "Senegalese",
   "Serbian",
   "Sierra Leonean",
@@ -226,7 +224,6 @@ NATIONALITIES = [
   "Wallisian",
   "Vincentian",
   "Yemeni",
-  "Welsh",
   "Zimbabwean",
   "Zambian",
 ].freeze

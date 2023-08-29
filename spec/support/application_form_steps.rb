@@ -74,7 +74,7 @@ RSpec.shared_context "with common application form steps" do
     fill_in("applicants_personal_detail[address_line_2]", with: "Office 20")
     fill_in("applicants_personal_detail[city]", with: "London")
     fill_in("applicants_personal_detail[postcode]", with: "AS1 1AA")
-    select("English")
+    select("Senegalese")
     choose("Male")
     fill_in("applicants_personal_detail[passport_number]", with: "000")
 
