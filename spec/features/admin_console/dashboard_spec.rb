@@ -226,14 +226,14 @@ describe "Dashboard" do
 
   def then_i_can_see_the_average_age_widget
     within ".kpi-widget.age" do
-      expect(page).to have_content("Average Age")
+      expect(page).to have_content("Average age")
       expect(page).to have_content("44 years")
     end
   end
 
   def then_i_can_see_the_total_paid_widget
     within ".kpi-widget.paid" do
-      expect(page).to have_content("Payment Confirmations")
+      expect(page).to have_content("Payment confirmations")
       expect(page).to have_content("2")
     end
   end
@@ -260,7 +260,7 @@ describe "Dashboard" do
 
   def then_i_can_see_the_visa_breakdown_widget
     within ".kpi-widget.visas" do
-      expect(page).to have_content("Top 3 Visa Types")
+      expect(page).to have_content("Top 3 visa types")
       expect(page).to have_content(Applicants::Visa::VISA_OPTIONS[0])
       expect(page).to have_content(Applicants::Visa::VISA_OPTIONS[1])
       expect(page).to have_content(Applicants::Visa::VISA_OPTIONS[2])
@@ -273,7 +273,7 @@ describe "Dashboard" do
 
   def then_i_can_see_the_nationalities_breakdown_widget
     within ".kpi-widget.nationalities" do
-      expect(page).to have_content("Top 5 Nationalities")
+      expect(page).to have_content("Top 5 nationalities")
       expect(page).to have_content("Chadians")
       expect(page).to have_content("Libians")
       expect(page).to have_content("Uzbeks")
@@ -285,14 +285,14 @@ describe "Dashboard" do
 
   def then_i_can_see_the_gender_breakdown_widget
     within ".kpi-widget.genders" do
-      expect(page).to have_content("Gender")
+      expect(page).to have_content("Sex")
       expect(page).to have_content("Male").or have_content("Female")
     end
   end
 
   def then_i_can_see_the_rejection_reason_breakdown_widget
     within ".kpi-widget.rejection-reasons" do
-      expect(page).to have_content("Rejection Reasons")
+      expect(page).to have_content("Reasons for rejection")
       expect(page).to have_content("Suspected fraud")
       expect(page).to have_content("2")
       expect(page).to have_content("Ineligible school")
@@ -302,8 +302,8 @@ describe "Dashboard" do
 
   def then_i_can_see_the_initial_checks_approval_average_time_widget
     within ".kpi-widget.initial-checks-average" do
-      expect(page).to have_content("Initial Checks")
-      expect(page).to have_content("Average Completion Time")
+      expect(page).to have_content("Initial checks")
+      expect(page).to have_content("Average completion time")
       expect(page).to have_content("10 days")
       expect(page).to have_content("Min/Max")
       expect(page).to have_content("5 days/15 days")
@@ -312,8 +312,8 @@ describe "Dashboard" do
 
   def then_i_can_see_the_home_office_checks_time_widget
     within ".kpi-widget.home-office-checks-average" do
-      expect(page).to have_content("Home Office Checks")
-      expect(page).to have_content("Average Completion Time")
+      expect(page).to have_content("Home Office checks")
+      expect(page).to have_content("Average completion time")
       expect(page).to have_content("10 days")
       expect(page).to have_content("Min/Max")
       expect(page).to have_content("5 days/15 days")
@@ -322,8 +322,8 @@ describe "Dashboard" do
 
   def then_i_can_see_the_school_checks_time_widget
     within ".kpi-widget.school-checks-average" do
-      expect(page).to have_content("School Checks")
-      expect(page).to have_content("Average Completion Time")
+      expect(page).to have_content("School checks")
+      expect(page).to have_content("Average completion time")
       expect(page).to have_content("10 days")
       expect(page).to have_content("Min/Max")
       expect(page).to have_content("5 days/15 days")
@@ -333,7 +333,7 @@ describe "Dashboard" do
   def then_i_can_see_the_banking_approval_completed_time_widget
     within ".kpi-widget.banking-approval-average" do
       expect(page).to have_content("Bank details approved")
-      expect(page).to have_content("Average Completion Time")
+      expect(page).to have_content("Average completion time")
       expect(page).to have_content("10 days")
       expect(page).to have_content("Min/Max")
       expect(page).to have_content("5 days/15 days")
@@ -342,8 +342,8 @@ describe "Dashboard" do
 
   def then_i_can_see_the_payment_confirmation_time_widget
     within ".kpi-widget.payment-confirmation-average" do
-      expect(page).to have_content("Payment Confirmation")
-      expect(page).to have_content("Average Completion Time")
+      expect(page).to have_content("Payment confirmation")
+      expect(page).to have_content("Average completion time")
       expect(page).to have_content("10 days")
       expect(page).to have_content("Min/Max")
       expect(page).to have_content("5 days/15 days")

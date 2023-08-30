@@ -70,6 +70,6 @@ private
   end
 
   def then_i_should_see_the_settings_page
-    expect(page).to have_content("Application Settings")
+    expect(page).to have_content("IRP application management settings")
   end
 end

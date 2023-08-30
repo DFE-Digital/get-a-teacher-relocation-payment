@@ -69,7 +69,7 @@ RSpec.describe "Duplicates Search" do
   end
 
   def then_i_see_the_in_progress_applications
-    expect(page).to have_content("Duplicated Applications")
+    expect(page).to have_content("Duplicated applications")
   end
 
   def then_i_see_matching_duplicates
