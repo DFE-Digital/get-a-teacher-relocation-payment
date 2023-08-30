@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   get "/closed", to: "pages#closed"
   get "/privacy", to: "pages#privacy"
   get "/sitemap", to: "pages#sitemap"
-  get "/sentry", to: "pages#sentry"
 
   # namespace :applicants do
   #   resources :application_routes, only: %i[new create]
