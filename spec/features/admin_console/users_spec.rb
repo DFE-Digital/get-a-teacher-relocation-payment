@@ -51,7 +51,7 @@ private
   end
 
   def then_i_can_create_a_user
-    click_on "New user"
+    click_on "Add new user"
     fill_in "Email", with: "new_user@example.com"
     click_on "Save"
     expect(page).to have_content("User was successfully created.")
@@ -68,9 +68,9 @@ private
 
   def then_i_can_delete_a_user
     within(".users-table tbody tr:first-child") do
-      click_on "Delete"
+      click_on "Remove"
     end
-    expect(page).to have_content("User was successfully destroyed.")
+    expect(page).to have_content("User was successfully removed.")
     expect(page).not_to have_content("john@example.com")
   end
 end

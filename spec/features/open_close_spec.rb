@@ -22,7 +22,7 @@ describe "Open / Close service" do
       given_i_am_signed_as_an_admin
       visit applicants_path
 
-      expect(page).to have_text("List of Applications")
+      expect(page).to have_text("Applications")
     end
   end
 
@@ -41,7 +41,7 @@ describe "Open / Close service" do
       given_i_am_signed_as_an_admin
       visit applicants_path
 
-      expect(page).to have_text("List of Applications")
+      expect(page).to have_text("Applications")
     end
   end
 end

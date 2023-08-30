@@ -101,10 +101,10 @@ describe "Applications List" do
       expect(page).to have_content("URN")
       expect(page).to have_content("Name")
       expect(page).to have_content("Submitted")
-      expect(page).to have_content("Initial Checks")
-      expect(page).to have_content("Home Office Checks")
-      expect(page).to have_content("School Checks")
-      expect(page).to have_content("Bank Details Approved")
+      expect(page).to have_content("Initial checks")
+      expect(page).to have_content("Home Office checks")
+      expect(page).to have_content("School checks")
+      expect(page).to have_content("Bank details approved")
       expect(page).to have_content("Rejected")
     end
   end
