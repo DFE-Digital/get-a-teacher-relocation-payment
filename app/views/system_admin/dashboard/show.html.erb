@@ -1,4 +1,4 @@
-<div class="dashboard">
+<div class="dashboard govuk-body">
   <div class="kpi-widget applications">
     <h3 class="title">Applications</h3>
     <p class="value"><%= @kpis.total_applications %></p>
@@ -8,14 +8,14 @@
     <p class="value"><%= @kpis.total_rejections %></p>
   </div>
   <div class="kpi-widget paid">
-    <h3 class="title">Payment Confirmations</h3>
+    <h3 class="title">Payment confirmations</h3>
     <p class="value"><%= @kpis.total_paid %></p>
   </div>
 
   <div class="kpi-widget initial-checks-average">
     <% checks =  @kpis.time_to_initial_checks %>
-    <h3 class="title">Initial Checks</h3>
-    <h6 class="subtitle">Average Completion Time</h6>
+    <h3 class="title">Initial checks</h3>
+    <h6 class="subtitle">Average completion time</h6>
     <p class="value"><%= checks[:average] %></p>
     <hr>
     <h5 class="title">Min/Max</h5>
@@ -25,8 +25,8 @@
 
   <div class="kpi-widget home-office-checks-average">
     <% checks =  @kpis.time_to_home_office_checks %>
-    <h3 class="title">Home Office Checks</h3>
-    <h6 class="subtitle">Average Completion Time</h6>
+    <h3 class="title">Home Office checks</h3>
+    <h6 class="subtitle">Average completion time</h6>
     <p class="value"><%= checks[:average] %></p>
     <hr>
     <h5 class="title">Min/Max</h5>
@@ -36,8 +36,8 @@
 
   <div class="kpi-widget school-checks-average">
     <% checks =  @kpis.time_to_school_checks %>
-    <h3 class="title">School Checks</h3>
-    <h6 class="subtitle">Average Completion Time</h6>
+    <h3 class="title">School checks</h3>
+    <h6 class="subtitle">Average completion time</h6>
     <p class="value"><%= checks[:average] %></p>
     <hr>
     <h5 class="title">Min/Max</h5>
@@ -48,7 +48,7 @@
   <div class="kpi-widget banking-approval-average">
     <% checks =  @kpis.time_to_banking_approval %>
     <h3 class="title">Bank details approved</h3>
-    <h6 class="subtitle">Average Completion Time</h6>
+    <h6 class="subtitle">Average completion time</h6>
     <p class="value"><%= checks[:average] %></p>
     <hr>
     <h5 class="title">Min/Max</h5>
@@ -58,8 +58,8 @@
 
   <div class="kpi-widget payment-confirmation-average">
     <% checks =  @kpis.time_to_payment_confirmation %>
-    <h3 class="title">Payment Confirmation</h3>
-    <h6 class="subtitle">Average Completion Time</h6>
+    <h3 class="title">Payment confirmation</h3>
+    <h6 class="subtitle">Average completion time</h6>
     <p class="value"><%= checks[:average] %></p>
     <hr>
     <h5 class="title">Min/Max</h5>
@@ -67,7 +67,7 @@
   </div>
 
   <div class="kpi-widget age">
-    <h3 class="title">Average Age</h3>
+    <h3 class="title">Average age</h3>
     <p class="value"><%= @kpis.average_age %> years</p>
   </div>
   <div class="kpi-widget routes">
@@ -94,7 +94,7 @@
   </div>
 
   <div class="kpi-widget visas">
-    <h3 class="title">Top 3 Visa Types</h3>
+    <h3 class="title">Top 3 visa types</h3>
     <table class="kpi-table">
       <% @kpis.visa_breakdown.each do |k,v|%>
         <tr>
@@ -106,7 +106,7 @@
   </div>
 
   <div class="kpi-widget nationalities">
-    <h3 class="title">Top 5 Nationalities</h3>
+    <h3 class="title">Top 5 nationalities</h3>
     <table class="kpi-table">
       <% @kpis.nationality_breakdown.each do |k,v|%>
         <tr>
@@ -118,7 +118,7 @@
   </div>
 
   <div class="kpi-widget genders">
-    <h3 class="title">Gender</h3>
+    <h3 class="title">Sex</h3>
     <table class="kpi-table">
       <% @kpis.gender_breakdown.each do |k,v|%>
         <tr>
@@ -130,7 +130,7 @@
   </div>
 
   <div class="kpi-widget rejection-reasons">
-    <h3 class="title">Rejection Reasons</h3>
+    <h3 class="title">Reasons for rejection</h3>
     <table class="kpi-table">
       <% @kpis.rejection_reason_breakdown.each do |k,v|%>
         <tr>
