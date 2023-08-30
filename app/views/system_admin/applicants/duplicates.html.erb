@@ -3,12 +3,12 @@
   <%= f.govuk_submit 'Search', secondary: true %>
 <% end %>
 <%= govuk_table(classes: "duplicates-table") do |table|
-      table.with_caption(size: 'm', text: 'Duplicated Applications')
+      table.with_caption(size: 'm', text: 'Duplicated applications')
       table.with_head do |head|
         head.with_row do |row|
           row.with_cell(text: 'URN')
           row.with_cell(text: 'Email')
-          row.with_cell(text: 'Phone Number')
+          row.with_cell(text: 'Phone number')
           row.with_cell(text: 'Passport')
           row.with_cell(text: 'Status')
         end
