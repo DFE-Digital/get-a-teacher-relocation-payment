@@ -18,6 +18,6 @@ module ApplicationHelper
   end
 
   def banner_feedback_form
-    govuk_link_to("feedback", "https://forms.office.com/Pages/DesignPageV2.aspx?subpage=design&FormId=yXfS-grGoU2187O4s0qC-Tnlxmr1yO1PrmA0-r0QTJFUMTdUMURBNDJaNzVZVU4zQVdCNDhJUVA2Si4u")
+    govuk_link_to("feedback", "https://forms.office.com/e/p45Wm1Vmxg", target: "_blank")
   end
 end
