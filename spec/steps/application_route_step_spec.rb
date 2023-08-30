@@ -10,7 +10,7 @@ RSpec.describe ApplicationRouteStep, type: :model do
                    route_key: "application-route",
                    required_fields: %i[application_route],
                    question: "What is your employment status?",
-                   question_hint: "Select one of the following options",
+                   question_hint: "Select one of the following options.",
                    question_type: :radio,
                    valid_answers: [
                      "I am employed as a teacher in a school in England",

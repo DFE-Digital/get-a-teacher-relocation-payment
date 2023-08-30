@@ -8,7 +8,7 @@ RSpec.describe SubjectStep, type: :model do
   context "teacher" do
     let(:form) { build(:teacher_form) }
 
-    question_hint = "Physics, general or combined science including physics, and languages can be combined with other subjects but must make up at least 50% of your time in the classroom. This will be validated by the Department for Education with your school."
+    question_hint = "Physics, general or combined science including physics, and languages can be combined with other subjects but must make up at least 50% of your time in the classroom."
 
     include_examples "behaves like a step",
                      described_class,
