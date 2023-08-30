@@ -171,4 +171,45 @@ RSpec.describe Application do
       end
     end
   end
+
+  describe "#qa?" do
+    let(:application) { create(:application) }
+
+    context "when there is no QA status with the specified status" do
+      it "returns false" do
+        expect(application).not_to be_qa
+      end
+    end
+
+    context "when there is a QA status with the specified status" do
+      before do
+        application.mark_as_qa!
+      end
+
+      it "returns true" do
+        expect(application).to be_qa
+      end
+    end
+  end
+
+  describe "#mark_as_qa!" do
+    let(:application) { create(:application) }
+
+    it "adds a new QA status with the specified status" do
+      expect {
+        application.mark_as_qa!
+      }.to change { application.qa_statuses.count }.by(1)
+
+      expect(application.qa_statuses.last.status).to eq(application.status)
+    end
+
+    it "sets the date of the new QA status to the current date" do
+      current_date = Date.current
+      allow(Date).to receive(:current).and_return(current_date)
+
+      application.mark_as_qa!
+
+      expect(application.qa_statuses.last.date).to eq(current_date)
+    end
+  end
 end

@@ -1,4 +1,6 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  skip_before_action :check_service_open!
+
   def azure_activedirectory_v2
     response_params = request.env["omniauth.auth"]["info"]
     @user = User.find_by(email: response_params["email"])

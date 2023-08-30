@@ -65,11 +65,10 @@ module Applicants
 
     # rubocop:disable RSpec/AnyInstance
     def set_applicant_details!
-      # TODO: Remove this stub when we can use Factories via FactoryBot
-      # The current implementation users the user session to store attributes, which
+      # The current implementation uses the user session to store attributes, which
       # is not ideal and should be changed next. For now we are stubbing the session
       # to return the applicant details.
-      application = create(:application)
+      application = create(:application, urn: nil)
       allow_any_instance_of(EmploymentDetailsController).to receive(:session).and_return({
         "application_id" => application.id,
       })

@@ -30,7 +30,12 @@ Rails.application.routes.draw do
   end
 
   scope module: :system_admin, path: "system-admin" do
-    resources :applicants, only: %i[index show edit update]
+    resources :applicants, only: %i[index show edit update] do
+      collection do
+        get :download_qa_csv
+      end
+    end
+
     resources :users, except: %i[show]
     resource :settings, only: %i[edit update]
     get "/dashboard", to: "dashboard#show"
