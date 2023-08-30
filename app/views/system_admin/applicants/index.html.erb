@@ -5,18 +5,18 @@
 %>
 <%= form_with(url: applicants_path, method: :get, id: :search) do |f| %>
   <div class="full-width">
-    <%= f.govuk_text_field :search, value: params[:search], label: { text: 'Search' }, hint: { text: 'Search by full name, email, passport number or URN' } %>
+    <%= f.govuk_text_field :search, value: params[:search], label: { text: 'Search' }, hint: { text: 'Search by name, email, passport number or unique reference number (URN)' } %>
   </div>
 
   <div class="row">
     <div class="column">
-      <%= f.govuk_select :status, statuses, label: { text: "Status" }, hint: { text: "Filter by Application Status" } %>
+      <%= f.govuk_select :status, statuses, label: { text: "Filter by application status" } %>
     </div>
 
     <div class="column">
       <label class="govuk-form-group">
-        <%= f.label "SLA", class:"govuk-label" %>
-        <div class="govuk-hint" id="status-hint">Filter by Breached SLA</div>
+        <%= f.label "Filter by service level agreement (SLA)", class:"govuk-label" %>
+        <div class="govuk-hint" id="status-hint">Tick to see applications which have missed team SLAs</div>
         <%= f.govuk_check_box :sla_breached?, true, multiple: false, label: { text: "SLA Breached?" }, checked: params[:sla_breached] == "true" %>
       </label>
     </div>
@@ -28,17 +28,17 @@
 <% end %>
 
 <%= govuk_table(classes: "applicants-table") do |table|
-      table.with_caption(size: 'm', text: 'List of Applications')
+      table.with_caption(size: 'm', text: 'Applications')
       table.with_head do |head|
         head.with_row do |row|
           row.with_cell(text: 'URN')
           row.with_cell(text: 'Name')
           row.with_cell(text: 'Submitted')
-          row.with_cell(text: 'Initial Checks')
-          row.with_cell(text: 'Home Office Checks')
-          row.with_cell(text: 'School Checks')
-          row.with_cell(text: 'Bank Details Approved')
-          row.with_cell(text: 'Payment Confirmation')
+          row.with_cell(text: 'Initial checks')
+          row.with_cell(text: 'Home Office checks')
+          row.with_cell(text: 'School checks')
+          row.with_cell(text: 'Bank details approved')
+          row.with_cell(text: 'Payment confirmation')
           row.with_cell(text: 'Rejected')
         end
       end 
