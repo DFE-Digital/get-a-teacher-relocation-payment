@@ -63,6 +63,7 @@ module Reports
           application.applicant.email_address,
           application.applicant.address.address_line_1,
           application.applicant.address.postcode,
+          application.applicant.student_loan,
         ].join(","))
       end
 
@@ -70,13 +71,13 @@ module Reports
         expected_header = %w[
           URN
           Forename
-          Middle
-          Name
+          Middle_name
           Surname
           Telephone
           Email
           Address
           Postcode
+          Student_loan
         ].join(",")
 
         expect(report.csv).to include(expected_header)

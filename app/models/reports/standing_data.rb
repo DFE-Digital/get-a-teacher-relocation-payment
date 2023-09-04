@@ -29,6 +29,7 @@ module Reports
         "email_address",
         "address_line_1",
         "postcode",
+        "applicants.student_loan",
       )
     end
 
@@ -50,13 +51,13 @@ module Reports
       %w[
         URN
         Forename
-        Middle
-        Name
+        Middle_name
         Surname
         Telephone
         Email
         Address
         Postcode
+        Student_loan
       ]
     end
   end
