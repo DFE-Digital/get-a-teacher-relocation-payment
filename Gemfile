@@ -9,7 +9,7 @@ gem "bootsnap", require: false
 gem "foreman"
 gem "jbuilder"
 gem "okcomputer"
-gem "pg", "~> 1.1"
+gem "pg", "~> 1.5"
 gem "puma", "~> 6.3"
 gem "rails", "~> 7.0.7"
 gem "sprockets-rails"
