@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       name: Checkout
 
     - name: Set environment variables (push)
@@ -124,7 +124,7 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Deploy App to Review
       id: deploy_review
@@ -161,7 +161,7 @@ jobs:
         environment: [qa,staging]
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Deploy app to ${{ matrix.environment }}
       id: deploy_app_before_production
@@ -181,7 +181,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Deploy app to production
       id: deploy_production
