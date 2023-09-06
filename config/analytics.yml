@@ -1,0 +1,59 @@
+shared:
+  schools:
+    - id
+    - name
+    - headteacher_name
+    - created_at
+  application_progresses:
+    - id
+    - initial_checks_completed_at
+    - visa_investigation_required
+    - home_office_checks_completed_at
+    - school_investigation_required
+    - school_checks_completed_at
+    - application_id
+    - payment_confirmation_completed_at
+    - rejection_completed_at
+    - banking_approval_completed_at
+    - rejection_details
+    - status
+    - rejection_reason
+  applications:
+    - id
+    - application_date
+    - urn
+    - applicant_id
+    - created_at
+    - subject
+    - visa_type
+    - date_of_entry
+    - start_date
+    - application_route
+    - home_office_csv_downloaded_at
+    - standing_data_csv_downloaded_at
+    - payroll_csv_downloaded_at
+  applicants:
+    - id
+    - given_name
+    - family_name
+    - email_address
+    - phone_number
+    - passport_number
+    - updated_at
+    - middle_name
+    - date_of_birth
+    - nationality
+    - sex
+    - created_at
+    - school_id
+    - student_loan
+  addresses:
+    - id
+    - addressable_type
+    - addressable_id
+    - address_line_1
+    - address_line_2
+    - city
+    - postcode
+  users:
+    - email

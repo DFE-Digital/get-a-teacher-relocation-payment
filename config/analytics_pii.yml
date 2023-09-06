@@ -1,0 +1,10 @@
+shared:
+  schools:
+    - headteacher_name
+  applicants:
+    - given_name
+    - middle_name
+    - family_name
+    - email_address
+    - phone_number
+    - passport_number

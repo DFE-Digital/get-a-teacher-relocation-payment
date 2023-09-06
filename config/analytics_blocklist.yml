@@ -1,0 +1,40 @@
+---
+:shared:
+  :schools:
+    - updated_at
+  :duplicate_applications:
+    - id
+    - application_date
+    - urn
+    - applicant_id
+    - created_at
+    - updated_at
+    - subject
+    - visa_type
+    - date_of_entry
+    - start_date
+    - application_route
+    - home_office_csv_downloaded_at
+    - standing_data_csv_downloaded_at
+    - payroll_csv_downloaded_at
+    - duplicate_email
+    - duplicate_phone
+    - duplicate_passport
+  :application_progresses:
+    - created_at
+    - updated_at
+  :applications:
+    - updated_at
+  :app_settings:
+    - id
+    - service_start_date
+    - service_end_date
+    - created_at
+    - updated_at
+  :addresses:
+    - created_at
+    - updated_at
+  :users:
+    - id
+    - created_at
+    - updated_at
