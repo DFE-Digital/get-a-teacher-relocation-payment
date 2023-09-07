@@ -61,6 +61,7 @@ locals {
     local.kv_app_secrets,
     {
       DATABASE_URL        = module.postgres.url
+      REDIS_URL           = module.redis.url
     }
   )
 }
