@@ -1,0 +1,12 @@
+<%= govuk_table(classes: "audits-table") do |table|
+      table.with_caption(size: 'l', text: 'Audits')
+      table.with_body do |body|
+        @audits.each do |audit|
+          body.with_row do |row|
+            row.with_cell(text: audit_message(audit), colspan: 6)
+          end
+        end 
+      end
+ end %>
+
+<%= govuk_pagination(pagy: @pagy) %>

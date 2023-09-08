@@ -9,6 +9,7 @@
 #  updated_at         :datetime         not null
 #
 class AppSettings < ApplicationRecord
+  audited
   def self.current
     AppSettings.first_or_create!
   end

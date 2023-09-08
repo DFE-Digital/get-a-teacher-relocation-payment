@@ -4,6 +4,7 @@ module SystemAdmin
 
     def show
       report = find_report(params[:id])
+      create_audit(action: "Downloaded #{report.class.to_s.capitalize} report")
 
       send_data(report.csv, filename: report.name)
     end

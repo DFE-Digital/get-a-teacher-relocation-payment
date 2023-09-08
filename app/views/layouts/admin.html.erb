@@ -38,6 +38,7 @@
       <%= header.with_navigation_item(text: "Dashboard", href: dashboard_path, active: request.path.include?('/system-admin/dashboard') ) %>
       <%= header.with_navigation_item(text: "Users", href: users_path, active: request.path.include?('/system-admin/users') ) %>
       <%= header.with_navigation_item(text: "Settings", href: edit_settings_path, active: request.path.include?('/system-admin/settings')) %>
+      <%= header.with_navigation_item(text: "Audits", href: audits_path, active: request.path.include?('/system-admin/audits')) %>
       <%= header.with_navigation_item(text: "Logout", href: destroy_user_session_path, active: false) %>
     <% end %>
 
