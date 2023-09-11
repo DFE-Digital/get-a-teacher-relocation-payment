@@ -73,3 +73,7 @@ group :development do
   gem "binding_of_caller"
   gem "web-console"
 end
+
+gem "sidekiq", "~> 7.1"
+
+gem "sidekiq-cron", "~> 1.10"
