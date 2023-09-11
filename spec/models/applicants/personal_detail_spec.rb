@@ -190,6 +190,36 @@ module Applicants
           end
         end
       end
+
+      describe "passport_number validations" do
+        subject(:model) { described_class.new(passport_number:) }
+
+        before { model.valid? }
+
+        context "when passport_number is valid" do
+          valid_passports = %w[PAT34566 A345667 JS3445 434455AFT 2453454]
+
+          valid_passports.each do |valid_passport|
+            let(:passport_number) { valid_passport }
+
+            it "#{valid_passport} should be valid" do
+              expect(model.errors.messages_for(:passport_number)).to be_blank
+            end
+          end
+        end
+
+        context "when passport_number is invalid" do
+          invalid_passports = ["asdfasdf", "nil", "%$^%%^%"]
+
+          invalid_passports.each do |invalid_passport|
+            let(:passport_number) { invalid_passport }
+
+            it "#{invalid_passport} should be invalid" do
+              expect(model.errors.messages_for(:passport_number)).to include("passport number is invalid")
+            end
+          end
+        end
+      end
     end
   end
 end

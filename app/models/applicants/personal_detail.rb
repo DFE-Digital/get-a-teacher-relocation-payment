@@ -19,7 +19,8 @@ module Applicants
     validate :age_less_than_maximum
     validate :minimum_age
     validates :sex, presence: true, inclusion: { in: SEX_OPTIONS }
-    validates :passport_number, presence: true
+    validates :passport_number, presence: true, length: { maximum: 20, message: "passport number is invalid" } # rubocop:disable Rails/I18nLocaleTexts
+    validate :valid_passport_number
     validates :nationality, presence: true, inclusion: { in: NATIONALITIES }
     validates :address_line_1, presence: true
     validates :city, presence: true
@@ -89,6 +90,21 @@ module Applicants
       return unless date_of_birth.present? && (Date.current.year - date_of_birth.year) >= MAX_AGE
 
       errors.add(:date_of_birth)
+    end
+
+    def valid_passport_number
+      return if passport_number.blank?
+
+      # Reject if it contains any characters other than alphanumeric
+      unless /\A[a-zA-Z0-9]+\z/.match?(passport_number)
+        errors.add(:passport_number, "passport number is invalid")
+        return
+      end
+
+      # Reject if it doesn't contain at least one number
+      unless /\d/.match?(passport_number)
+        errors.add(:passport_number, "passport number is invalid")
+      end
     end
 
     def minimum_age

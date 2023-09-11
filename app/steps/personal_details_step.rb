@@ -27,6 +27,8 @@ class PersonalDetailsStep < BaseStep
   validates :nationality, inclusion: { in: NATIONALITIES }
   validates :sex, inclusion: { in: SEX_OPTIONS }
   validates :postcode, postcode: true
+  validates :passport_number, length: { maximum: 20, message: "passport number is invalid" } # rubocop:disable Rails/I18nLocaleTexts
+  validate :valid_passport_number
   validate :date_of_birth_not_in_future
   validate :age_less_than_maximum
   validate :minimum_age
@@ -58,6 +60,21 @@ private
     return unless date_of_birth.present? && (Date.current.year - date_of_birth.year) >= MAX_AGE
 
     errors.add(:date_of_birth)
+  end
+
+  def valid_passport_number
+    return if passport_number.blank?
+
+    # Reject if it contains any characters other than alphanumeric
+    unless /\A[a-zA-Z0-9]+\z/.match?(passport_number)
+      errors.add(:passport_number, "passport number is invalid")
+      return
+    end
+
+    # Reject if it doesn't contain at least one number
+    unless /\d/.match?(passport_number)
+      errors.add(:passport_number, "passport number is invalid")
+    end
   end
 
   def minimum_age

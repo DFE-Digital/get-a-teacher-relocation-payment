@@ -133,5 +133,64 @@ RSpec.describe PersonalDetailsStep, type: :model do
         it { expect(error).to be_blank }
       end
     end
+
+    describe "passport_number" do
+      let(:form) { build(:form, passport_number:) }
+      let(:error) { step.errors.messages_for(:passport_number) }
+
+      before { step.valid? }
+
+      context "numbers and letters" do
+        let(:passport_number) { "AB1234567" }
+
+        it "is valid" do
+          expect(error).to be_blank
+        end
+      end
+
+      context "only numbers" do
+        let(:passport_number) { "123456789" }
+
+        it "is valid" do
+          expect(error).to be_blank
+        end
+      end
+
+      context "only letters" do
+        let(:passport_number) { "ABCDEFGHI" }
+
+        it "is invalid" do
+          expect(error).to be_present
+        end
+      end
+
+      context "other characters" do
+        let(:passport_number) { "&^%$£*()" }
+
+        it "is invalid" do
+          expect(error).to be_present
+        end
+      end
+
+      context "length > 20" do
+        let(:passport_number) { "ABCDEEFGHIJKLMNOPQRSTUVWXYZ1234567890" }
+
+        it "is invalid" do
+          expect(error).to be_present
+        end
+      end
+    end
+
+    describe "private constants" do
+      it "has MAX_AGE set to 80" do
+        max_age = described_class.send(:const_get, :MAX_AGE)
+        expect(max_age).to eq(80)
+      end
+
+      it "has MIN_AGE set to 22" do
+        min_age = described_class.send(:const_get, :MIN_AGE)
+        expect(min_age).to eq(22)
+      end
+    end
   end
 end
