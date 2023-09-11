@@ -11,7 +11,7 @@ gem "jbuilder"
 gem "okcomputer"
 gem "pg", "~> 1.5"
 gem "puma", "~> 6.3"
-gem "rails", "~> 7.0.7"
+gem "rails", "~> 7.0.8"
 gem "sprockets-rails"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "webpacker"
