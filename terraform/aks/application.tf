@@ -34,3 +34,24 @@ module "application_configuration" {
   secret_variables      = local.app_secrets
   secret_yaml_key       = var.key_vault_app_secret_name
 }
+
+module "worker_application" {
+  source = "./vendor/modules/aks/aks/application"
+
+  name   = "worker"
+  is_web = false
+
+  namespace    = var.namespace
+  environment  = local.app_name_suffix
+  service_name = local.service_name
+
+  cluster_configuration_map = module.cluster_data.configuration_map
+
+  kubernetes_config_map_name = module.application_configuration.kubernetes_config_map_name
+  kubernetes_secret_name     = module.application_configuration.kubernetes_secret_name
+
+  docker_image  = var.app_docker_image
+  replicas      = 0
+#  command       = ["bundle", "exec", "sidekiq", "-C", "./config/sidekiq.yml"]
+#  probe_command = ["pgrep", "-f", "sidekiq"]
+}
