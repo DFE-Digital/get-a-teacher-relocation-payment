@@ -111,24 +111,24 @@ RSpec.describe PersonalDetailsStep, type: :model do
     describe "date_of_birth minimum age" do
       let(:form) { build(:form, date_of_birth: age) }
       let(:error) { step.errors.messages_for(:date_of_birth) }
-      let(:minimun_age) { 22 }
+      let(:minimum_age) { 22 }
 
       before { step.valid? }
 
-      context "invalid when younger than minimun age" do
-        let(:age) { minimun_age.years.ago + 1.day }
+      context "invalid when younger than minimum age" do
+        let(:age) { minimum_age.years.ago + 1.day }
 
         it { expect(error).to be_present }
       end
 
-      context "valid when exactly the minimun age" do
-        let(:age) { minimun_age.years.ago }
+      context "valid when exactly the minimum age" do
+        let(:age) { minimum_age.years.ago }
 
         it { expect(error).to be_blank }
       end
 
-      context "valid when older than minimun age" do
-        let(:age) { minimun_age.years.ago - 1.day }
+      context "valid when older than minimum age" do
+        let(:age) { minimum_age.years.ago - 1.day }
 
         it { expect(error).to be_blank }
       end
