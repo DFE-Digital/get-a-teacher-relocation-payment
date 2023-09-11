@@ -197,6 +197,7 @@ en:
               inclusion: Enter your sex 
             passport_number:
               blank: Enter your passport number
+              invalid: Invalid passport number
             nationality:
               blank: Choose your nationality
               inclusion: Choose your nationality

@@ -192,5 +192,24 @@ RSpec.describe PersonalDetailsStep, type: :model do
         expect(min_age).to eq(22)
       end
     end
+
+    describe "email_address" do
+      let(:form) { build(:form, email_address: email) }
+      let(:error) { step.errors.messages_for(:email_address) }
+
+      before { step.valid? }
+
+      context "valid" do
+        let(:email) { "email@address.com" }
+
+        it { expect(error).to be_blank }
+      end
+
+      context "invalid" do
+        let(:email) { "email@address" }
+
+        it { expect(error).to be_present }
+      end
+    end
   end
 end
