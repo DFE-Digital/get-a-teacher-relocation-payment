@@ -115,9 +115,9 @@ describe "Dashboard" do
   end
 
   def given_there_are_few_applications
-    create(:teacher_application, subject: Applicants::Subject::TEACHER_SUBJECTS[2])
-    create(:teacher_application, subject: Applicants::Subject::TEACHER_SUBJECTS[1])
-    create(:salaried_trainee_application, subject: Applicants::Subject::TEACHER_SUBJECTS[0])
+    create(:teacher_application, subject: "Languages")
+    create(:teacher_application, subject: "General or combined science, including physics")
+    create(:salaried_trainee_application, subject: "Physics")
   end
 
   def given_there_are_paid_applications
@@ -134,13 +134,13 @@ describe "Dashboard" do
   end
 
   def given_there_are_few_applications_with_visas
-    create(:applicant, application: create(:application, visa_type: Applicants::Visa::VISA_OPTIONS[0]))
-    create(:applicant, application: create(:application, visa_type: Applicants::Visa::VISA_OPTIONS[1]))
-    create(:applicant, application: create(:application, visa_type: Applicants::Visa::VISA_OPTIONS[1]))
-    create(:applicant, application: create(:application, visa_type: Applicants::Visa::VISA_OPTIONS[1]))
-    create(:applicant, application: create(:application, visa_type: Applicants::Visa::VISA_OPTIONS[2]))
-    create(:applicant, application: create(:application, visa_type: Applicants::Visa::VISA_OPTIONS[2]))
-    create(:applicant, application: create(:application, visa_type: Applicants::Visa::VISA_OPTIONS[3]))
+    create(:applicant, application: create(:application, visa_type: VisaStep::VALID_ANSWERS_OPTIONS[0]))
+    create(:applicant, application: create(:application, visa_type: VisaStep::VALID_ANSWERS_OPTIONS[1]))
+    create(:applicant, application: create(:application, visa_type: VisaStep::VALID_ANSWERS_OPTIONS[1]))
+    create(:applicant, application: create(:application, visa_type: VisaStep::VALID_ANSWERS_OPTIONS[1]))
+    create(:applicant, application: create(:application, visa_type: VisaStep::VALID_ANSWERS_OPTIONS[2]))
+    create(:applicant, application: create(:application, visa_type: VisaStep::VALID_ANSWERS_OPTIONS[2]))
+    create(:applicant, application: create(:application, visa_type: VisaStep::VALID_ANSWERS_OPTIONS[3]))
   end
 
   def given_there_are_rejected_applications
@@ -261,10 +261,10 @@ describe "Dashboard" do
   def then_i_can_see_the_visa_breakdown_widget
     within ".kpi-widget.visas" do
       expect(page).to have_content("Top 3 visa types")
-      expect(page).to have_content(Applicants::Visa::VISA_OPTIONS[0])
-      expect(page).to have_content(Applicants::Visa::VISA_OPTIONS[1])
-      expect(page).to have_content(Applicants::Visa::VISA_OPTIONS[2])
-      expect(page).not_to have_content(Applicants::Visa::VISA_OPTIONS[3])
+      expect(page).to have_content(VisaStep::VALID_ANSWERS_OPTIONS[0])
+      expect(page).to have_content(VisaStep::VALID_ANSWERS_OPTIONS[1])
+      expect(page).to have_content(VisaStep::VALID_ANSWERS_OPTIONS[2])
+      expect(page).not_to have_content(VisaStep::VALID_ANSWERS_OPTIONS[3])
       expect(page).to have_content("3")
       expect(page).to have_content("2")
       expect(page).to have_content("1")
