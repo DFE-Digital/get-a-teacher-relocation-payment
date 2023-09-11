@@ -32,7 +32,7 @@ module Applicants
       describe "date_of_birth minimum age" do
         subject { model.errors.messages_for(:date_of_birth) }
         let(:model) { described_class.new(params) }
-        let(:minimun_age) { 22 }
+        let(:minimum_age) { 22 }
         let(:params) do
           {
             day: age.day.to_s,
@@ -43,20 +43,20 @@ module Applicants
 
         before { model.valid? }
 
-        context "invalid when younger than minimun age" do
-          let(:age) { minimun_age.years.ago + 1.day }
+        context "invalid when younger than minimum age" do
+          let(:age) { minimum_age.years.ago + 1.day }
 
           it { is_expected.to be_present }
         end
 
-        context "valid when exactly the minimun age" do
-          let(:age) { minimun_age.years.ago }
+        context "valid when exactly the minimum age" do
+          let(:age) { minimum_age.years.ago }
 
           it { is_expected.to be_blank }
         end
 
-        context "valid when older than minimun age" do
-          let(:age) { minimun_age.years.ago - 1.day }
+        context "valid when older than minimum age" do
+          let(:age) { minimum_age.years.ago - 1.day }
 
           it { is_expected.to be_blank }
         end

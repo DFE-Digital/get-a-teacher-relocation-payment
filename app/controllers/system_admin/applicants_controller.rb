@@ -30,6 +30,7 @@ module SystemAdmin
       applications.each(&:mark_as_qa!)
 
       report = Reports::QaReport.new(applications, status)
+      create_audit(action: "Downloaded QA CSV report (#{status.humanize})")
       send_data(report.csv, filename: report.name)
     end
 

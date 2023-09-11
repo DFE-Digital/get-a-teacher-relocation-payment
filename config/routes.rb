@@ -36,5 +36,6 @@ Rails.application.routes.draw do
     get "/dashboard", to: "dashboard#show"
     resources "reports", only: %i[show index]
     get "/duplicates", to: "applicants#duplicates"
+    get "/audits", to: "audits#index"
   end
 end

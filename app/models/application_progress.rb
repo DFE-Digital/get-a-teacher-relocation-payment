@@ -21,6 +21,7 @@
 #  application_id                    :bigint
 #
 class ApplicationProgress < ApplicationRecord
+  audited
   belongs_to :application
 
   validates :rejection_reason, presence: true, if: :rejection_completed_at?
