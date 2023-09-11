@@ -24,4 +24,25 @@ RSpec.describe EntryDateStep, type: :model do
                      question: "Enter the date you moved to England to start your teacher training course",
                      question_type: :date
   end
+
+  describe "additional validations" do
+    describe "date_of_entry" do
+      let(:form) { build(:form, date_of_entry:) }
+      let(:error) { step.errors.messages_for(:date_of_entry) }
+
+      before { step.valid? }
+
+      context "when not in the future" do
+        let(:date_of_entry) { 1.day.ago }
+
+        it { expect(error).to be_blank }
+      end
+
+      context "when in the future" do
+        let(:date_of_entry) { 1.day.from_now }
+
+        it { expect(error).to be_present }
+      end
+    end
+  end
 end

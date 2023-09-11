@@ -23,11 +23,11 @@
 #
 FactoryBot.define do
   factory :application do
-    application_route { ApplicationRouteStep::VALID_ANSWERS_OPTIONS.reject { _1 == "other"}.sample }
+    application_route { ApplicationRouteStep::VALID_ANSWERS_OPTIONS.reject { _1 == "other" }.sample }
     application_date { Faker::Date.in_date_period }
     applicant
     application_progress strategy: :build, factory: :application_progress
-    subject { SubjectStep::VALID_ANSWERS_OPTIONS.reject { _1 == "other"}.sample }
+    subject { SubjectStep::VALID_ANSWERS_OPTIONS.reject { _1 == "other" }.sample }
     visa_type { VisaStep::VALID_ANSWERS_OPTIONS.reject { _1 == "Other" }.sample }
     date_of_entry { Time.zone.today }
     start_date { 1.month.from_now.to_date }
@@ -35,13 +35,13 @@ FactoryBot.define do
 
     factory :teacher_application do
       application_route { "teacher" }
-      subject { SubjectStep::VALID_ANSWERS_OPTIONS.reject { _1 == "other"}.sample }
+      subject { SubjectStep::VALID_ANSWERS_OPTIONS.reject { _1 == "other" }.sample }
       applicant strategy: :create, factory: :applicant
     end
 
     factory :salaried_trainee_application do
       application_route { "salaried_trainee" }
-      subject { SubjectStep::VALID_ANSWERS_OPTIONS.reject { _1 == "other"}.sample }
+      subject { SubjectStep::VALID_ANSWERS_OPTIONS.reject { _1 == "other" }.sample }
       applicant strategy: :create, factory: :applicant
     end
 

@@ -4,6 +4,7 @@ require "rails_helper"
 
 describe EmailFormatValidator do
   subject(:validator) { described_class.new(form) }
+
   let(:form) { build(:form) }
 
   before do
