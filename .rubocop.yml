@@ -96,3 +96,7 @@ RSpec/VerifiedDoubles:
 
 RSpec/NestedGroups:
   Max: 4
+
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/jobs/schedule_job_spec.rb'
