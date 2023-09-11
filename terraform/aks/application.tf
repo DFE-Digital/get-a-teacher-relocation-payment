@@ -52,6 +52,6 @@ module "worker_application" {
 
   docker_image  = var.app_docker_image
   replicas      = 0
-#  command       = ["bundle", "exec", "sidekiq", "-C", "./config/sidekiq.yml"]
-#  probe_command = ["pgrep", "-f", "sidekiq"]
+  command       = ["bundle", "exec", "sidekiq", "-C", "./config/sidekiq.yml"]
+  probe_command = ["pgrep", "-f", "sidekiq"]
 }
