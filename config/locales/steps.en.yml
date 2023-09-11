@@ -171,12 +171,14 @@ en:
               blank: Choose the option that applies to you
             start_date:
               blank: Enter your contract start date
+              not_in_future: Start date cannot be in the future
             subject:
               blank: Choose a subject
             visa_type:
               blank: Choose your visa type
             date_of_entry:
               blank: Enter your entry date
+              not_in_future: Date of entry cannot be in the future
             given_name:
               blank: Enter your given name(s)
             middle_name:
@@ -191,13 +193,16 @@ en:
               invalid: Enter a valid telephone number, for example, 07700 900 982 or +34 626 587 210
             date_of_birth:
               blank: Enter your date of birth
-              invalid: Age must be below 80
+              not_in_future: Date of birth cannot be in the future
+              over_max_age: Age must be below 80
+              below_min_age: Age must be above 22
             sex:
               blank: Enter your sex
               inclusion: Enter your sex 
             passport_number:
               blank: Enter your passport number
               invalid: Invalid passport number
+              too_long: Invalid passport number
             nationality:
               blank: Choose your nationality
               inclusion: Choose your nationality

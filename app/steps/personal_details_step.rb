@@ -29,12 +29,12 @@ class PersonalDetailsStep < BaseStep
   validates :postcode, postcode: true
   validates :passport_number, length: { maximum: 20 }
   validate :valid_passport_number
-  validate :date_of_birth_not_in_future
   validate :age_less_than_maximum
   validate :minimum_age
 
   validate do |record|
     EmailFormatValidator.new(record).validate
+    FutureDateValidator.new(record, :date_of_birth).validate
   end
 
   def configure_step
@@ -54,16 +54,10 @@ class PersonalDetailsStep < BaseStep
 
 private
 
-  def date_of_birth_not_in_future
-    return unless date_of_birth.present? && date_of_birth > Date.current
-
-    errors.add(:date_of_birth, "cannot be in the future")
-  end
-
   def age_less_than_maximum
     return unless date_of_birth.present? && (Date.current.year - date_of_birth.year) >= MAX_AGE
 
-    errors.add(:date_of_birth)
+    errors.add(:date_of_birth, :over_max_age)
   end
 
   def valid_passport_number
@@ -86,7 +80,7 @@ private
     return unless date_of_birth.present?
     # rubocop:enable Rails/Blank
 
-    errors.add(:date_of_birth, "must be at least #{MIN_AGE} years") if date_of_birth > MIN_AGE.years.ago.to_date
+    errors.add(:date_of_birth, :below_min_age) if date_of_birth > MIN_AGE.years.ago.to_date
   end
 
   MAX_AGE = 80

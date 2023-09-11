@@ -4,6 +4,7 @@ require "rails_helper"
 
 describe PostcodeValidator do
   subject(:employment) { EmploymentDetailsStep.new(form) }
+
   let(:form) { build(:form, school_postcode: postcode) }
 
   context "with a valid UK postcode" do
@@ -22,7 +23,7 @@ describe PostcodeValidator do
     it "adds an error" do
       employment.valid?
 
-    expect(employment.errors[:school_postcode]).not_to be_blank
+      expect(employment.errors[:school_postcode]).not_to be_blank
     end
   end
 end
