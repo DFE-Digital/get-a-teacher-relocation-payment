@@ -25,7 +25,7 @@ class EmailFormatValidator
   def validate
     return unless email
 
-    record.errors.add(:email_address, error_message) unless valid?
+    record.errors.add(:email_address, :invalid) unless valid?
   end
 
 private
@@ -77,9 +77,5 @@ private
 
   def parts
     @parts ||= hostname.split(".")
-  end
-
-  def error_message
-    I18n.t("activemodel.errors.models.applicants/personal_detail.attributes.email_address.invalid")
   end
 end
