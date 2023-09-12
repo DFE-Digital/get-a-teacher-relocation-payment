@@ -30,6 +30,10 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  mailer:
+    applicant_email:
+      subject: International relocation payment application successfully submitted
+
   activemodel:
     errors:
       validators:

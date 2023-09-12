@@ -40,5 +40,13 @@ module GetAnInternationalRelocationPayment
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.active_job.queue_adapter = :sidekiq
+
+    # notify mailer
+    config.action_mailer.delivery_method = :notify
+    config.action_mailer.notify_settings = {
+      api_key: ENV.fetch("GOVUK_NOTIFY_API_KEY"),
+    }
+
+    config.x.govuk_notify.mail_notify_template_id = ENV.fetch("GOVUK_NOTIFY_MAIL_NOTIFY_TEMPLATE_ID")
   end
 end
