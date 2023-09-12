@@ -2,35 +2,35 @@
 
 RSpec.shared_context "with common application form assertions" do
   def assert_i_am_in_the_subject_question(route)
-    expect(page).to have_text(I18n.t("applicants.subjects.title.#{route}"))
+    expect(page).to have_text(I18n.t("steps.subject.question.#{route}"))
   end
 
   def assert_i_am_in_the_contract_start_date_question
-    expect(page).to have_text(I18n.t("applicants.contract_start_dates.title"))
+    expect(page).to have_text(I18n.t("steps.start_date.question"))
   end
 
   def assert_i_am_in_the_employment_details_question
-    expect(page).to have_text(I18n.t("applicants.employment_details.title"))
+    expect(page).to have_text(I18n.t("steps.employment_details.question"))
   end
 
   def assert_i_am_in_the_personal_details_question
-    expect(page).to have_text(I18n.t("applicants.personal_details.title"))
+    expect(page).to have_text(I18n.t("steps.personal_details.question"))
   end
 
   def assert_i_am_in_the_entry_date_question(route)
-    expect(page).to have_text(I18n.t("applicants.entry_dates.title.#{route}"))
+    expect(page).to have_text(I18n.t("steps.entry_date.question.#{route}"))
   end
 
   def assert_i_am_in_the_visa_type_question
-    expect(page).to have_text(I18n.t("applicants.visa.title"))
+    expect(page).to have_text(I18n.t("steps.visa.question"))
   end
 
   def assert_i_am_in_the_application_route_question
-    expect(page).to have_text(I18n.t("applicants.application_routes.title"))
+    expect(page).to have_text(I18n.t("steps.application_route.question"))
   end
 
   def assert_i_am_in_the_trainee_employment_conditions_question
-    expect(page).to have_text(I18n.t("applicants.salaried_course.title"))
+    expect(page).to have_text(I18n.t("steps.trainee_details.question"))
   end
 
   def and_i_complete_the_state_school_question
@@ -50,10 +50,10 @@ RSpec.shared_context "with common application form assertions" do
   end
 
   def assert_i_am_in_the_state_school_question
-    expect(page).to have_text(I18n.t("applicants.school_details.title"))
+    expect(page).to have_text(I18n.t("steps.school_details.question"))
   end
 
   def assert_i_am_on_the_contract_details_question
-    expect(page).to have_text(I18n.t("applicants.contract_details.title"))
+    expect(page).to have_text(I18n.t("steps.contract_details.question"))
   end
 end
