@@ -96,17 +96,12 @@ private
   end
 
   def send_applicant_email
-    return if Rails.env.development?
-
-    # TODO: perform this in a job
-    template_id = ENV.fetch("GOVUK_NOTIFY_APPLICATION_SUBMITTED_TEMPLATE_ID")
-    email_address = application.applicant.email_address
-    application_id = application.urn
-
-    GovukNotify::Client.send_email(
-      template_id,
-      email_address,
-      application_id,
-    )
+    GovukNotifyMailer
+      .with(
+        email: application.applicant.email_address,
+        urn: application.urn,
+      )
+      .application_submission
+      .deliver_later
   end
 end

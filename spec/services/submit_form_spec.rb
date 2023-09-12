@@ -5,10 +5,6 @@ RSpec.describe SubmitForm do
 
   let(:form) { build(:form, :complete, :eligible) }
 
-  before do
-    allow(GovukNotify::Client).to receive(:send_email)
-  end
-
   describe "valid?" do
     context "returns true when form complete and eligible" do
       let(:form) { build(:form, :complete, :eligible) }
@@ -50,12 +46,28 @@ RSpec.describe SubmitForm do
       it { expect { service.submit_form! }.to change(Address, :count).by(2) }
       it { expect { service.submit_form! }.to change(Application, :count).by(1) }
       it { expect { service.submit_form! }.to change(Form, :count).from(1).to(0) }
-    end
 
-    context "send confirmation email" do
-      before { service.submit_form! }
+      context "applicant email" do
+        before do
+          allow(Urn).to receive(:generate).and_return(urn)
+        end
 
-      it { expect(GovukNotify::Client).to have_received(:send_email) }
+        let(:urn) { "SOMEURN" }
+        let(:expected_email_params) do
+          {
+            params: {
+              email: form.email_address,
+              urn: urn,
+            },
+            args: [],
+          }
+        end
+
+        it "enqueue mail job" do
+          expect { service.submit_form! }.to have_enqueued_job(ActionMailer::MailDeliveryJob)
+            .with("GovukNotifyMailer", "application_submission", "deliver_now", expected_email_params)
+        end
+      end
     end
   end
 end
