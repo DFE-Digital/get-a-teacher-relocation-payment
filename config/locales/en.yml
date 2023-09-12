@@ -31,7 +31,7 @@
 
 en:
   mailer:
-    applicant_email:
+    application_submission:
       subject: International relocation payment application successfully submitted
 
   activemodel:
