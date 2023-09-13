@@ -22,7 +22,7 @@ require "factory_bot_rails"
   FactoryBot.create_list(factory, 5, :with_initial_checks_completed)
 end
 
-AppSettings.create!(
+AppSettings.current.update!(
   service_start_date: 1.day.ago,
   service_end_date: 1.year.from_now,
 )
