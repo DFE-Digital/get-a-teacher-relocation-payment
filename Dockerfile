@@ -29,9 +29,6 @@ COPY . .
 RUN echo export PATH=/usr/local/bin:\$PATH > /root/.ashrc
 ENV ENV="/root/.ashrc"
 
-RUN bundle exec rake assets:precompile && \
-    rm -rf node_modules tmp
-
 ARG COMMIT_SHA
 ENV COMMIT_SHA=$COMMIT_SHA
 
@@ -43,6 +40,9 @@ ENV GOVUK_NOTIFY_APPLICATION_SUBMITTED_TEMPLATE_ID=$GOVUK_NOTIFY_APPLICATION_SUB
 
 ARG GOVUK_NOTIFY_GENERIC_EMAIL_TEMPLATE_ID
 ENV GOVUK_NOTIFY_GENERIC_EMAIL_TEMPLATE_ID=$GOVUK_NOTIFY_GENERIC_EMAIL_TEMPLATE_ID
+
+RUN bundle exec rake assets:precompile && \
+    rm -rf node_modules tmp
 
 CMD bundle exec rails db:migrate && \
     bundle exec rails server -b 0.0.0.0
