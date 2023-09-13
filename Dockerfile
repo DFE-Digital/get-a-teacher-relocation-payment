@@ -44,5 +44,4 @@ ENV GOVUK_NOTIFY_GENERIC_EMAIL_TEMPLATE_ID=$GOVUK_NOTIFY_GENERIC_EMAIL_TEMPLATE_
 RUN bundle exec rake assets:precompile && \
     rm -rf node_modules tmp
 
-CMD bundle exec rails db:migrate && \
-    bundle exec rails server -b 0.0.0.0
+CMD ./bin/app-startup.sh
