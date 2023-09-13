@@ -47,6 +47,6 @@ module GetAnInternationalRelocationPayment
       api_key: ENV.fetch("GOVUK_NOTIFY_API_KEY"),
     }
 
-    config.x.govuk_notify.mail_notify_template_id = ENV.fetch("GOVUK_NOTIFY_MAIL_NOTIFY_TEMPLATE_ID")
+    config.x.govuk_notify.generic_email_template_id = ENV.fetch("GOVUK_NOTIFY_GENERIC_EMAIL_TEMPLATE_ID")
   end
 end
