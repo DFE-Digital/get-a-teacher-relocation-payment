@@ -26,3 +26,6 @@ AppSettings.current.update!(
   service_start_date: 1.day.ago,
   service_end_date: 1.year.from_now,
 )
+
+local_user_email = ENV.fetch("LOCAL_USER_EMAIL", nil)
+User.create!(email: local_user_email) if local_user_email

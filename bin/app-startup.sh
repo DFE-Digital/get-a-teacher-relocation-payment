@@ -3,11 +3,13 @@
 # Dockerfile application startup script
 #
 
+set -e
+
 # run migrations
 bundle exec rails db:migrate
 
 # add seed data in review environment
-if [ "$RAILS_ENV" = "review" ]; then
+if [[ "$RAILS_ENV" = "review" || "$RAILS_ENV" = "development" ]]; then
     echo "Running rails db:seed"
     bundle exec rails db:seed
 fi
