@@ -32,6 +32,7 @@ asdf plugin add ruby
 asdf plugin add nodejs
 asdf plugin add yarn
 asdf plugin add bundler
+asdf plugin add tilt
 asdf install
 ```
 
@@ -46,6 +47,16 @@ newer versions of tools.
 3. Run `bin/rails db:setup` to set up the database development and test schemas
 4. Run `bundle exec rails server` to launch the app on <http://localhost:3000>
 5. Run `./bin/webpack-dev-server` in a separate shell for faster compilation of assets
+
+
+## Setup using Tilt
+To have a development environment setup quickly with all the dependencies you can use [Tilt](https://tilt.dev/).
+1. Create your local `.env` file from `.env.example`
+2. Update your local `.env` with relevant information
+3. Add your education.gov.uk email address to `LOCAL_USER_EMAIL` in `.env`
+4. Run `tilt up` to start the server
+
+For development convenience you should use `tilt up -- --local-app`
 
 ## Running specs
 
