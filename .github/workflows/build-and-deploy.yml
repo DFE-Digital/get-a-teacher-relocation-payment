@@ -88,7 +88,6 @@ jobs:
         build-args: |
           COMMIT_SHA=${{ env.IMAGE_TAG }}
           GOVUK_NOTIFY_API_KEY=${{ secrets.GOVUK_NOTIFY_API_KEY }}
-          GOVUK_NOTIFY_APPLICATION_SUBMITTED_TEMPLATE_ID=${{ secrets.GOVUK_NOTIFY_APPLICATION_SUBMITTED_TEMPLATE_ID }}
           GOVUK_NOTIFY_GENERIC_EMAIL_TEMPLATE_ID=${{ secrets.GOVUK_NOTIFY_GENERIC_EMAIL_TEMPLATE_ID }}
 
     - name: Push ${{ env.DOCKER_IMAGE }} images for review
