@@ -35,6 +35,10 @@ variable "gov_uk_host_names" {
   type    = list(any)
 }
 variable "azure_enable_backup_storage" { default = true }
+variable "statuscake_alerts" {
+  type    = map(any)
+  default = {}
+}
 
 locals {
   service_name = "teacher-relocation-payment"
