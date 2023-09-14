@@ -51,7 +51,7 @@ module "worker_application" {
   kubernetes_secret_name     = module.application_configuration.kubernetes_secret_name
 
   docker_image  = var.app_docker_image
-  replicas      = 0
+  replicas      = 1
   command       = ["bundle", "exec", "sidekiq", "-C", "./config/sidekiq.yml"]
   probe_command = ["pgrep", "-f", "sidekiq"]
 }
