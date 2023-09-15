@@ -7,6 +7,7 @@
 #  email_address   :text
 #  family_name     :text
 #  given_name      :text
+#  ip_address      :string
 #  middle_name     :string
 #  nationality     :text
 #  passport_number :text

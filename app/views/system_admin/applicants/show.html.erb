@@ -71,6 +71,10 @@ end %>
 
     <%= govuk_summary_list(actions: false) do |summary_list|
         summary_list.with_row do |row|
+          row.with_key(text: 'Ip address')
+          row.with_value(text: @applicant.ip_address)
+        end
+        summary_list.with_row do |row|
           row.with_key(text: 'Given name')
           row.with_value(text: @applicant.given_name)
         end 
