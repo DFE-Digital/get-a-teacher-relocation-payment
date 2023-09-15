@@ -37,5 +37,9 @@ Rails.application.routes.draw do
     resources "reports", only: %i[show index]
     get "/duplicates", to: "applicants#duplicates"
     get "/audits", to: "audits#index"
+
+    constraints CanAccessFlipperUI do
+      mount Flipper::UI.app(Flipper) => '/features'
+    end
   end
 end
