@@ -60,8 +60,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_030846) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "application_id"
-    t.date "payment_confirmation_completed_at"
     t.date "rejection_completed_at"
+    t.date "payment_confirmation_completed_at"
     t.date "banking_approval_completed_at"
     t.text "rejection_details"
     t.integer "status", default: 0
@@ -152,13 +152,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_030846) do
   create_table "schools", force: :cascade do |t|
     t.string "name"
     t.string "headteacher_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "settings", force: :cascade do |t|
-    t.date "service_start_date"
-    t.date "service_end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
