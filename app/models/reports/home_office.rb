@@ -27,8 +27,8 @@ module Reports
           application.applicant.date_of_birth,
           application.applicant.nationality,
           application.applicant.passport_number,
-          application.visa_type,
-          application.date_of_entry,
+          nil,
+          nil,
         ]
       end
     end
