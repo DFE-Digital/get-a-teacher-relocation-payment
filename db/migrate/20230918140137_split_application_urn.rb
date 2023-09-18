@@ -1,8 +1,6 @@
 # rubocop:disable Rails/SkipsModelValidations
-class ChangeApplicationUrn < ActiveRecord::Migration[7.0]
+class SplitApplicationUrn < ActiveRecord::Migration[7.0]
   def up
-    execute("CREATE SEQUENCE urn_sequence;")
-
     add_column :applications, :urn_prefix, :string, null: false, default: "IRP"
     add_column :applications, :urn_code, :string
     add_column :applications, :urn_suffix, :string, unique: true, default: -> { "nextval('urn_sequence')" }
@@ -20,8 +18,6 @@ class ChangeApplicationUrn < ActiveRecord::Migration[7.0]
     remove_column :applications, :urn_prefix
     remove_column :applications, :urn_code
     remove_column :applications, :urn_suffix
-
-    execute("DROP SEQUENCE urn_sequence;")
   end
 end
 # rubocop:enable Rails/SkipsModelValidations

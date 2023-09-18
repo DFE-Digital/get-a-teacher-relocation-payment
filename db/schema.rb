@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_06_030846) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_18_140137) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -82,6 +82,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_06_030846) do
     t.datetime "home_office_csv_downloaded_at"
     t.datetime "standing_data_csv_downloaded_at"
     t.datetime "payroll_csv_downloaded_at"
+    t.string "urn_prefix", default: "IRP", null: false
+    t.string "urn_code"
+    t.string "urn_suffix", default: -> { "nextval('urn_sequence'::regclass)" }
     t.index ["applicant_id"], name: "index_applications_on_applicant_id"
   end
 
