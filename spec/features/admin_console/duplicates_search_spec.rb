@@ -10,10 +10,10 @@ RSpec.describe "Duplicates Search" do
   let!(:applicant_four) { build(:applicant, email_address: "test2@example.com", passport_number: "123456", phone_number: "999999999") }
 
   before do
-    create(:application, :submitted, applicant: applicant_one)
-    create(:application, :submitted, applicant: applicant_two)
-    create(:application, :submitted, applicant: applicant_three)
-    create(:application, :submitted, applicant: applicant_four)
+    create(:application, applicant: applicant_one)
+    create(:application, applicant: applicant_two)
+    create(:application, applicant: applicant_three)
+    create(:application, applicant: applicant_four)
   end
 
   it "Admin can search for duplicates by email" do

@@ -31,7 +31,6 @@ FactoryBot.define do
     visa_type { VisaStep::VALID_ANSWERS_OPTIONS.reject { _1 == "Other" }.sample }
     date_of_entry { Time.zone.today }
     start_date { 1.month.from_now.to_date }
-    submitted
 
     factory :teacher_application do
       application_route { "teacher" }
@@ -43,14 +42,6 @@ FactoryBot.define do
       application_route { "salaried_trainee" }
       subject { SubjectStep::VALID_ANSWERS_OPTIONS.reject { _1 == "other" }.sample }
       applicant strategy: :create, factory: :applicant
-    end
-
-    trait :submitted do
-      urn { Urn.generate(application_route) }
-    end
-
-    trait :not_submitted do
-      urn { nil }
     end
 
     trait :with_initial_checks_completed do

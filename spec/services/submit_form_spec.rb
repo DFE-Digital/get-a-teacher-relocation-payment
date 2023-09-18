@@ -48,16 +48,11 @@ RSpec.describe SubmitForm do
       it { expect { service.submit_form! }.to change(Form, :count).from(1).to(0) }
 
       context "applicant email" do
-        before do
-          allow(Urn).to receive(:generate).and_return(urn)
-        end
-
-        let(:urn) { "SOMEURN" }
         let(:expected_email_params) do
           {
             params: {
               email: form.email_address,
-              urn: urn,
+              urn: kind_of(String),
             },
             args: [],
           }
