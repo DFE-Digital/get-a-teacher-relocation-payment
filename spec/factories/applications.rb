@@ -12,6 +12,9 @@
 #  start_date                      :date
 #  subject                         :string
 #  urn                             :string
+#  urn_code                        :string
+#  urn_prefix                      :string           default("IRP"), not null
+#  urn_suffix                      :string
 #  visa_type                       :string
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null
@@ -31,15 +34,19 @@ FactoryBot.define do
     visa_type { VisaStep::VALID_ANSWERS_OPTIONS.reject { _1 == "Other" }.sample }
     date_of_entry { Time.zone.today }
     start_date { 1.month.from_now.to_date }
+    urn_prefix { "IRP" }
+    urn_code { "TE" }
 
     factory :teacher_application do
       application_route { "teacher" }
+      urn_code { "TE" }
       subject { SubjectStep::VALID_ANSWERS_OPTIONS.reject { _1 == "other" }.sample }
       applicant strategy: :create, factory: :applicant
     end
 
     factory :salaried_trainee_application do
       application_route { "salaried_trainee" }
+      urn_code { "ST" }
       subject { SubjectStep::VALID_ANSWERS_OPTIONS.reject { _1 == "other" }.sample }
       applicant strategy: :create, factory: :applicant
     end

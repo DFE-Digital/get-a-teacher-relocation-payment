@@ -12,6 +12,9 @@
 #  start_date                      :date
 #  subject                         :string
 #  urn                             :string
+#  urn_code                        :string
+#  urn_prefix                      :string           default("IRP"), not null
+#  urn_suffix                      :string
 #  visa_type                       :string
 #  created_at                      :datetime         not null
 #  updated_at                      :datetime         not null
