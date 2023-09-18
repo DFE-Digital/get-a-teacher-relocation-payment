@@ -7,11 +7,12 @@ class SubmitForm
     service
   end
 
-  def initialize(form)
+  def initialize(form, ip_address)
     @form = form
+    @ip_address = ip_address
     @success = false
   end
-  attr_reader :form, :application
+  attr_reader :form, :ip_address, :application
 
   delegate :errors, to: :form
 
@@ -57,6 +58,7 @@ private
 
   def create_applicant(school)
     Applicant.create!(
+      ip_address: ip_address,
       given_name: form.given_name,
       middle_name: form.middle_name,
       family_name: form.family_name,

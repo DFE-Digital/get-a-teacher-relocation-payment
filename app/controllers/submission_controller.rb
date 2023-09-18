@@ -16,7 +16,7 @@ class SubmissionController < ApplicationController
   end
 
   def create
-    service = SubmitForm.call(current_form)
+    service = SubmitForm.call(current_form, request.remote_ip)
     if service.success?
       update_session(service)
       redirect_to(submission_path)
