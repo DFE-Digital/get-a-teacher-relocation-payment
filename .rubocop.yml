@@ -75,6 +75,7 @@ RSpec/ExampleLength:
   Max: 10
   Exclude:
     - 'spec/features/*'
+    - 'spec/models/reports/home_office_spec.rb'
 
 RSpec/NoExpectationExample:
   Exclude:
