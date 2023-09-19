@@ -30,6 +30,9 @@ class SubmitForm
     create_application_records
     send_applicant_email
     @success = true
+  rescue StandardError => e
+    Sentry.capture_exception(e)
+    errors.add(:base, :technical_error, message: "We are unable to submit your application at the moment. Please try again later")
   end
 
 private
@@ -75,20 +78,20 @@ private
         city: form.city,
         postcode: form.postcode,
       },
-      school: @school,
+      school: school,
     )
   end
 
   def create_application
     @application = Application.create!(
-      applicant: @applicant,
+      applicant: applicant,
       application_date: Date.current.to_s,
       application_route: form.application_route,
       application_progress: ApplicationProgress.new,
       date_of_entry: form.date_of_entry,
       start_date: form.start_date,
       subject: SubjectStep.new(form).answer.formatted_value,
-      urn: Urn.generate(form.application_route),
+      urn: Urn.call(form.application_route),
       visa_type: form.visa_type,
     )
   end
@@ -100,10 +103,12 @@ private
   def send_applicant_email
     GovukNotifyMailer
       .with(
-        email: @applicant.email_address,
+        email: applicant.email_address,
         urn: application.urn,
       )
       .application_submission
       .deliver_later
   end
+
+  attr_reader :school, :applicant
 end

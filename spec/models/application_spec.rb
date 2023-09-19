@@ -35,6 +35,8 @@ RSpec.describe Application do
       it { expect(application).to validate_presence_of(:subject) }
       it { expect(application).to validate_presence_of(:visa_type) }
       it { expect(application).to validate_presence_of(:applicant) }
+      it { expect(application).to validate_presence_of(:urn) }
+      it { expect(application).to validate_uniqueness_of(:urn) }
     end
   end
 

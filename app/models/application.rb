@@ -67,4 +67,5 @@ class Application < ApplicationRecord
   validates(:subject, presence: true)
   validates(:visa_type, presence: true)
   validates(:applicant, presence: true)
+  validates(:urn, presence: true, uniqueness: true)
 end

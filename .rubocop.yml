@@ -55,6 +55,10 @@ Rails/HasManyOrHasOneDependent:
   Exclude:
     - 'app/models/application.rb'
 
+Rails/UniqueValidationWithoutIndex:
+  Exclude:
+    - 'app/models/application.rb'
+
 Performance/MethodObjectAsBlock:
   Exclude:
     - 'app/models/summary.rb'

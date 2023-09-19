@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_15_100841) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_19_103917) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -84,6 +84,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_15_100841) do
     t.datetime "standing_data_csv_downloaded_at"
     t.datetime "payroll_csv_downloaded_at"
     t.index ["applicant_id"], name: "index_applications_on_applicant_id"
+    t.index ["urn"], name: "index_applications_on_urn"
   end
 
   create_table "audits", force: :cascade do |t|
