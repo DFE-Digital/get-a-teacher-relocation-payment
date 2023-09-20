@@ -1,6 +1,6 @@
 class NationalityBreakdownQuery
   def initialize(relation = Applicant.all)
-    @relation = relation.joins(:application).merge(Application.submitted)
+    @relation = relation.joins(:application).merge(Application.all)
   end
 
   def call
