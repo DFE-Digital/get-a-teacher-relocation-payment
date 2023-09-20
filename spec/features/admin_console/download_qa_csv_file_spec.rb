@@ -36,7 +36,7 @@ describe "Download QA CSV functionality" do
   end
 
   def given_there_are_few_applications
-    create_list(:application, 5)
+    create_list(:application, 5, :submitted)
   end
 
   def when_i_am_in_the_applications_list_page

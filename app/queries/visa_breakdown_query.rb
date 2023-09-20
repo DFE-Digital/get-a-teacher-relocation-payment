@@ -1,6 +1,6 @@
 class VisaBreakdownQuery
   def initialize(relation = Application.all)
-    @relation = relation
+    @relation = relation.submitted
   end
 
   def call

@@ -4,7 +4,7 @@ class Kpis
   end
 
   def total_applications
-    Application.count
+    Application.submitted.count
   end
 
   def total_rejections

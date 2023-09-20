@@ -30,6 +30,10 @@ class Application < ApplicationRecord
   delegate :sla_breached?, to: :application_progress
   delegate :status, to: :application_progress, allow_nil: false
 
+  default_scope { submitted }
+  scope :submitted, -> { where.not(urn: nil) }
+  scope :in_progress, -> { unscoped.where(urn: nil) }
+
   scope :search, lambda { |term|
                    return if term.blank?
 
@@ -60,11 +64,22 @@ class Application < ApplicationRecord
                        unique_by: %i[application_id status])
   end
 
-  validates(:application_date, presence: true)
-  validates(:application_route, presence: true)
-  validates(:date_of_entry, presence: true)
-  validates(:start_date, presence: true)
-  validates(:subject, presence: true)
-  validates(:visa_type, presence: true)
-  validates(:applicant, presence: true)
+  with_options if: :submitted? do
+    validates(:application_date, presence: true)
+    validates(:application_route, presence: true)
+    validates(:date_of_entry, presence: true)
+    validates(:start_date, presence: true)
+    validates(:subject, presence: true)
+    validates(:visa_type, presence: true)
+    validates(:urn, presence: true)
+    validates(:applicant, presence: true)
+  end
+
+  def assign_urn!
+    update!(urn: Urn.generate(application_route))
+  end
+
+  def submitted?
+    urn.present?
+  end
 end
