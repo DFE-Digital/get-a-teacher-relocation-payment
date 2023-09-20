@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     get "/audits", to: "audits#index"
 
     constraints CanAccessFlipperUI do
-      mount Flipper::UI.app(Flipper) => '/features'
+      mount Flipper::UI.app(Flipper) => "/features"
     end
   end
 end

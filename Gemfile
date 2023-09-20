@@ -35,13 +35,13 @@ gem "phonelib"
 gem "audited", "~> 5.3", ">= 5.3.3"
 gem "config", "~> 4.2"
 gem "devise", "~> 4.9"
+gem "flipper"
+gem "flipper-active_record"
+gem "flipper-ui"
 gem "httparty", "~> 0.21"
 gem "invisible_captcha"
 gem "omniauth-azure-activedirectory-v2"
 gem "sentry-rails", "~> 5.11"
-gem 'flipper'
-gem 'flipper-active_record'
-gem 'flipper-ui'
 
 group :test do
   gem "shoulda-matchers", "~> 5.0"
