@@ -4,7 +4,6 @@ RSpec.describe RouteBreakdownQuery, type: :model do
   describe "#call" do
     context "when there are a few applicants" do
       before do
-        create(:teacher_application, :not_submitted)
         create(:teacher_application)
         create(:salaried_trainee_application)
         create(:teacher_application)

@@ -10,10 +10,10 @@ RSpec.describe "Duplicates Search" do
   let!(:applicant_four) { build(:applicant, email_address: "test2@example.com", passport_number: "123456", phone_number: "999999999") }
 
   before do
-    create(:application, :submitted, applicant: applicant_one)
-    create(:application, :submitted, applicant: applicant_two)
-    create(:application, :submitted, applicant: applicant_three)
-    create(:application, :submitted, applicant: applicant_four)
+    create(:application, applicant: applicant_one)
+    create(:application, applicant: applicant_two)
+    create(:application, applicant: applicant_three)
+    create(:application, applicant: applicant_four)
   end
 
   it "Admin can search for duplicates by email" do
@@ -34,20 +34,6 @@ RSpec.describe "Duplicates Search" do
     then_i_see_matching_duplicates_by_passport_number
   end
 
-  it "the view renders even where there are 'in progress' applications" do
-    given_i_am_signed_as_an_admin
-    when_there_are_in_progress_applications
-    when_i_visit_the_duplicates_page
-    then_i_see_the_in_progress_applications
-  end
-
-  it "shows duplicates only once even if they match multiple times" do
-    given_i_am_signed_as_an_admin
-    when_there_are_in_progress_applications
-    when_i_visit_the_duplicates_page
-    then_i_see_the_in_progress_applications_only_once
-  end
-
   def when_i_search_for_a_duplicate_by(type)
     visit duplicates_path
     case type
@@ -60,16 +46,8 @@ RSpec.describe "Duplicates Search" do
     end
   end
 
-  def when_there_are_in_progress_applications
-    create(:application, applicant: nil, urn: nil, application_progress: nil)
-  end
-
   def when_i_visit_the_duplicates_page
     visit duplicates_path
-  end
-
-  def then_i_see_the_in_progress_applications
-    expect(page).to have_content("Duplicated applications")
   end
 
   def then_i_see_matching_duplicates

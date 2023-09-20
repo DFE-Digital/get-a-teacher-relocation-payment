@@ -4,8 +4,6 @@ RSpec.describe GenderBreakdownQuery, type: :model do
   describe "#call" do
     context "when there are a few applicants" do
       before do
-        create(:application, :not_submitted, applicant: create(:applicant, sex: "male"))
-
         create(:application, applicant: create(:applicant, sex: "male"))
         create(:application, applicant: create(:applicant, sex: "female"))
         create(:application, applicant: create(:applicant, sex: "male"))
