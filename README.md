@@ -32,6 +32,7 @@ asdf plugin add ruby
 asdf plugin add nodejs
 asdf plugin add yarn
 asdf plugin add bundler
+asdf plugin add tilt
 asdf install
 ```
 
@@ -39,13 +40,30 @@ When the versions are updated on the `main` branch run `asdf install` again to u
 installation. Use `asdf plugin update --all` to update plugins and get access to
 newer versions of tools.
 
-## Setting up the app in development
+Create your `.env` from the `.env.example` template
+* GOVUK_NOTIFY_API_KEY, using the citest api key
+* GOVUK_NOTIFY_GENERIC_EMAIL_TEMPLATE_ID, template id used by mail-notify
+* AZURE_CLIENT_ID, to access application platform
+* AZURE_CLIENT_SECRET
+* AZURE_TENANT_ID
+* REDIS_URL, redis url for sidekiq
+* LOCAL_USER_EMAIL, your education.gov.uk email address to access the system_admin section
+
+### Manual development setup
 
 1. Run `bundle install` to install the gem dependencies
 2. Run `yarn` to install node dependencies
 3. Run `bin/rails db:setup` to set up the database development and test schemas
-4. Run `bundle exec rails server` to launch the app on <http://localhost:3000>
-5. Run `./bin/webpack-dev-server` in a separate shell for faster compilation of assets
+4. Run `bundle exec foreman start -f Procfile.dev` to launch the app on <http://localhost:3000>
+
+
+### Docker based development setup
+1. Run `tilt up -- --local-app` to launch the app on <http://localhost:3000>
+
+You can also run `tilt up` that way you will be building the image definied by the Dockerfile
+
+This option will start the application and run the `db/seed.rb` file.
+
 
 ## Running specs
 
@@ -54,6 +72,34 @@ Run the full test suite with:
 ```bash
 bundle exec rake
 ```
+
+
+## Platform
+
+You need to request `digitalauth.education.gov.uk` account before being able to access a deployed
+instance.
+Once your account active you need to request your temporary access token at
+[portal.azure.com](https://portal.azure.com/#view/Microsoft_Azure_PIMCommon/ActivationMenuBlade/~/azurerbac)
+
+The following environment are available on the platform:
+* qa
+* review, deployed on demand by adding the `deploy` label on a PR
+* staging
+* production
+
+
+### Environment variables
+
+When adding / removing or editing along side the code changes you will need to update the all the
+available environments.
+Run the following command `make <environment> edit-app-secrets`
+
+
+### SSH access
+
+Access a deploy with the command `make <environment> ssh`.
+
+
 
 ## Architectural Decision Record
 
@@ -71,8 +117,4 @@ adr new "Title of ADR"
 ### Contingency
 This service does not offer any out of hours SLAs and there will be not on call shift.
 
-Any incidents observed should follow [the incident reporting guidance](https://tech-docs.teacherservices.cloud/operating-a-service/incident-playbook.html) 
-
-### Hosting
-
-TODO
+Any incidents observed should follow [the incident reporting guidance](https://tech-docs.teacherservices.cloud/operating-a-service/incident-playbook.html)

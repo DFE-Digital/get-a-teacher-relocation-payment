@@ -100,3 +100,7 @@ RSpec/NestedGroups:
 RSpec/DescribeClass:
   Exclude:
     - 'spec/jobs/schedule_job_spec.rb'
+
+RSpec/AnyInstance:
+  Exclude:
+    - 'spec/requests/submission_spec.rb'
