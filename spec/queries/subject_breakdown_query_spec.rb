@@ -4,6 +4,7 @@ RSpec.describe SubjectBreakdownQuery, type: :model do
   describe "#call" do
     context "when there are a few applicants" do
       before do
+        create(:application, :not_submitted)
         create(:application, subject: :physics)
         create(:application, subject: :languages)
         create(:application, subject: :general_science)

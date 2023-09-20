@@ -4,6 +4,8 @@ RSpec.describe NationalityBreakdownQuery, type: :model do
   describe "#call" do
     context "when there are a few applicants" do
       before do
+        create(:application, :not_submitted, applicant: create(:applicant, nationality: "Nationality 1"))
+
         create(:application, applicant: create(:applicant, nationality: "Nationality 1"))
         create(:application, applicant: create(:applicant, nationality: "Nationality 3"))
         create(:application, applicant: create(:applicant, nationality: "Nationality 4"))

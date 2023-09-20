@@ -60,13 +60,13 @@ describe "Applications List" do
   def given_there_are_few_applications
     # Create 2 specific applications for search tests
     unique_applicant = create(:applicant, given_name: "Unique Given Name", middle_name: "Unique Middle Name", family_name: "Unique Family Name", email_address: "unique@example.com")
-    create(:application, applicant: unique_applicant, urn: "Unique Urn 1")
+    create(:application, :submitted, applicant: unique_applicant, urn: "Unique Urn 1")
 
     another_applicant = create(:applicant, given_name: "Another Given Name", middle_name: "Another Middle Name", family_name: "Another Family Name", email_address: "another@example.com")
-    create(:application, applicant: another_applicant, urn: "Unique Urn 2")
+    create(:application, :submitted, applicant: another_applicant, urn: "Unique Urn 2")
 
     # Create 19 more applications for pagination test
-    create_list(:application, 19)
+    create_list(:application, 19, :submitted)
   end
 
   def given_there_is_an_application_that_breached_sla

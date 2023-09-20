@@ -9,7 +9,7 @@ module SystemAdmin
     include Pagy::Backend
 
     def index
-      results = Application.all
+      results = Application.submitted
       .search(params[:search])
       .filter_by_status(params[:status])
       .order(created_at: :desc)

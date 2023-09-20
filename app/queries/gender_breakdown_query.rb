@@ -1,6 +1,6 @@
 class GenderBreakdownQuery
   def initialize(relation = Applicant.all)
-    @relation = relation.joins(:application).merge(Application.all)
+    @relation = relation.joins(:application).merge(Application.submitted)
   end
 
   def call
