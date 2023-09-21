@@ -64,6 +64,7 @@ module Reports
           nil,
           nil,
           nil,
+          nil,
         ].join(","))
       end
 
@@ -76,6 +77,7 @@ module Reports
           "Nationality",
           "Place of Birth",
           "Passport Number",
+          "National Insurance Number",
           "Address",
           "Postcode",
           "Email",
