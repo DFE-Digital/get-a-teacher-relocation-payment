@@ -18,7 +18,7 @@ module SystemAdmin
 
       @pagy, @applications = pagy_array(results)
       session[:filter_status] = params[:status]
-      session[:application_ids] = @applications.map(&:id)
+      session[:application_ids] = results.map(&:id)
     end
 
     def download_qa_csv
