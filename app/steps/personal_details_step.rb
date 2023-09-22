@@ -80,10 +80,10 @@ private
     return unless date_of_birth.present?
     # rubocop:enable Rails/Blank
 
-    errors.add(:date_of_birth, :below_min_age) if date_of_birth > MIN_AGE.years.ago.to_date
+    errors.add(:date_of_birth, :below_min_age) unless date_of_birth <= MIN_AGE.years.ago.to_date
   end
 
   MAX_AGE = 80
-  MIN_AGE = 22
+  MIN_AGE = 21
   private_constant :MAX_AGE, :MIN_AGE
 end
