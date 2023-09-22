@@ -111,7 +111,7 @@ RSpec.describe PersonalDetailsStep, type: :model do
     describe "date_of_birth minimum age" do
       let(:form) { build(:form, date_of_birth: age) }
       let(:error) { step.errors.messages_for(:date_of_birth) }
-      let(:minimum_age) { 22 }
+      let(:minimum_age) { 21 }
 
       before { step.valid? }
 
@@ -189,7 +189,7 @@ RSpec.describe PersonalDetailsStep, type: :model do
 
       it "has MIN_AGE set to 22" do
         min_age = described_class.send(:const_get, :MIN_AGE)
-        expect(min_age).to eq(22)
+        expect(min_age).to eq(21)
       end
     end
 
