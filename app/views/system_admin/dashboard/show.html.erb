@@ -141,4 +141,17 @@
     </table>
   </div>
 
+  <div class="kpi-widget status-breakdown">
+    <h3 class="title">Statuses</h3>
+    <table class="kpi-table">
+      <% @kpis.status_breakdown.each do |k,v|%>
+        <tr>
+          <td><%= link_to(k.titleize, applicants_path(search: nil, status: k)) %></td>
+          <td><%= v %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+
 </div>
