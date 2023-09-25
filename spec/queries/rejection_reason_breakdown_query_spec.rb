@@ -8,7 +8,6 @@ RSpec.describe RejectionReasonBreakdownQuery, type: :model do
         create(:application_progress, application: create(:application, applicant:), rejection_reason: "suspected_fraud")
         create(:application_progress, application: create(:application, applicant:), rejection_reason: "suspected_fraud")
         create(:application_progress, application: create(:application, applicant:), rejection_reason: "ineligible_school")
-        create(:application_progress, application: create(:application, :not_submitted, applicant:), rejection_reason: "duplicate_submission") # This one should not be included in the count because the associated application is not submitted
       end
 
       it "returns the correct rejection reason breakdown" do

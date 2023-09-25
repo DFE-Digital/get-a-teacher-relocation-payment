@@ -1,8 +1,3 @@
-<% statuses = options_for_select(
-        ApplicationProgress.statuses.keys.map { |status| [status.humanize, status] }.unshift(['All statuses', '']),
-        selected: params[:status]
-      )
-%>
 <%= form_with(url: applicants_path, method: :get, id: :search) do |f| %>
   <div class="full-width">
     <%= f.govuk_text_field :search, value: params[:search], label: { text: 'Search' }, hint: { text: 'Search by name, email, passport number or unique reference number (URN)' } %>
@@ -10,7 +5,7 @@
 
   <div class="row">
     <div class="column">
-      <%= f.govuk_select :status, statuses, label: { text: "Filter by application status" } %>
+      <%= f.govuk_select :status, application_statuses_options(selected: params[:status], all_statuses: true), label: { text: "Filter by application status" } %>
     </div>
 
     <div class="column">
@@ -25,9 +20,6 @@
   <div class="full-width">
     <%= f.govuk_submit 'Search', secondary: true %>
   </div>
-  <% if session[:filter_status].present? %>
-    <%= link_to "Download QA CSV", download_qa_csv_applicants_path, class: "govuk-button" %>
-  <% end %>
 <% end %>
 
 <%= govuk_table(classes: "applicants-table") do |table|

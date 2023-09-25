@@ -195,7 +195,7 @@ en:
               blank: Enter your date of birth
               not_in_future: Date of birth cannot be in the future
               over_max_age: Age must be below 80
-              below_min_age: Age must be above 22
+              below_min_age: Age must be above 21
             sex:
               blank: Enter your sex
               inclusion: Enter your sex 

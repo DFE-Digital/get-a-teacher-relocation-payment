@@ -25,17 +25,16 @@ Rails.application.routes.draw do
   end
 
   scope module: :system_admin, path: "system-admin" do
-    resources :applicants, only: %i[index show edit update] do
-      collection do
-        get :download_qa_csv
-      end
-    end
-
+    resources :applicants, only: %i[index show edit update]
     resources :users, except: %i[show]
     resource :settings, only: %i[edit update]
     get "/dashboard", to: "dashboard#show"
     resources "reports", only: %i[show index]
     get "/duplicates", to: "applicants#duplicates"
     get "/audits", to: "audits#index"
+
+    constraints CanAccessFlipperUI do
+      mount Flipper::UI.app(Flipper) => "/features"
+    end
   end
 end

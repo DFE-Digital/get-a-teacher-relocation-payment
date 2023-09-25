@@ -10,6 +10,7 @@
           row.with_cell(text: 'Email')
           row.with_cell(text: 'Phone number')
           row.with_cell(text: 'Passport')
+          row.with_cell(text: 'IP Address')
           row.with_cell(text: 'Status')
         end
       end 
@@ -37,8 +38,15 @@
               row.with_cell(text: duplicate.passport_number)
             end
 
+            if duplicate.applicant.ip_address.present?
+              row.with_cell(text: govuk_link_to(duplicate.applicant.ip_address, duplicates_path(search: duplicate.applicant.ip_address)))
+            else
+              row.with_cell(text: duplicate.applicant.ip_address)
+            end
             row.with_cell(text: duplicate.status.humanize)
           end 
         end 
       end
  end %>
+
+<%= govuk_pagination(pagy: @pagy) %>

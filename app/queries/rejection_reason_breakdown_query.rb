@@ -1,6 +1,6 @@
 class RejectionReasonBreakdownQuery
   def initialize(relation = ApplicationProgress.all)
-    @relation = relation.joins(:application).merge(Application.submitted).where.not(rejection_reason: nil)
+    @relation = relation.joins(:application).merge(Application.all).where.not(rejection_reason: nil)
   end
 
   def call

@@ -4,7 +4,7 @@ class Kpis
   end
 
   def total_applications
-    Application.submitted.count
+    Application.count
   end
 
   def total_rejections
@@ -61,5 +61,9 @@ class Kpis
 
   def time_to_payment_confirmation
     TimeToPaymentConfirmationQuery.new.call
+  end
+
+  def status_breakdown
+    StatusBreakdownQuery.call
   end
 end

@@ -9,7 +9,7 @@ module SystemAdmin
     include Pagy::Backend
 
     def index
-      results = Application.submitted
+      results = Application.all
       .search(params[:search])
       .filter_by_status(params[:status])
       .order(created_at: :desc)
@@ -18,20 +18,7 @@ module SystemAdmin
 
       @pagy, @applications = pagy_array(results)
       session[:filter_status] = params[:status]
-      session[:application_ids] = @applications.map(&:id)
-    end
-
-    def download_qa_csv
-      status = session[:filter_status]
-      application_ids = session[:application_ids]
-
-      applications = Application.where(id: application_ids).reject(&:qa?)
-
-      applications.each(&:mark_as_qa!)
-
-      report = Reports::QaReport.new(applications, status)
-      create_audit(action: "Downloaded QA CSV report (#{status.humanize})")
-      send_data(report.csv, filename: report.name)
+      session[:application_ids] = results.map(&:id)
     end
 
     def duplicates

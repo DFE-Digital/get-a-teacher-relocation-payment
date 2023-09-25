@@ -25,8 +25,14 @@ module Reports
           application.urn,
           application.applicant.full_name,
           application.applicant.date_of_birth,
+          nil,
           application.applicant.nationality,
+          nil,
           application.applicant.passport_number,
+          nil,
+          nil,
+          nil,
+          nil,
           nil,
           nil,
         ]
@@ -49,13 +55,19 @@ module Reports
 
     def header
       [
-        "URN",
+        "ID",
         "Full Name",
         "DOB",
+        "Gender",
         "Nationality",
+        "Place of Birth",
         "Passport Number",
-        "Visa Type",
-        "Date of UK entry",
+        "National Insurance Number",
+        "Address",
+        "Postcode",
+        "Email",
+        "Telephone",
+        "Reference",
       ]
     end
   end
