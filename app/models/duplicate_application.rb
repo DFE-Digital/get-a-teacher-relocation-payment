@@ -35,7 +35,8 @@ class DuplicateApplication < ApplicationRecord
                    joins(:applicant).where(
                      "applicants.email_address ILIKE :term OR
                      applicants.passport_number ILIKE :term OR
-                     applicants.phone_number ILIKE :term",
+                     applicants.phone_number ILIKE :term OR
+                     applicants.ip_address ILIKE :term",
                      term:,
                    )
                  }
