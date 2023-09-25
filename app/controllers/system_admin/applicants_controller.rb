@@ -21,19 +21,6 @@ module SystemAdmin
       session[:application_ids] = results.map(&:id)
     end
 
-    def download_qa_csv
-      status = session[:filter_status]
-      application_ids = session[:application_ids]
-
-      applications = Application.where(id: application_ids).reject(&:qa?)
-
-      applications.each(&:mark_as_qa!)
-
-      report = Reports::QaReport.new(applications, status)
-      create_audit(action: "Downloaded QA CSV report (#{status.humanize})")
-      send_data(report.csv, filename: report.name)
-    end
-
     def duplicates
       @pagy, @duplicates = pagy(DuplicateApplication.search(params[:search]).select("DISTINCT ON (urn) *"))
     end
