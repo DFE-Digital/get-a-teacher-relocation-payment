@@ -3,22 +3,16 @@ module SystemAdmin
     def index; end
 
     def show
-      report = find_report(params[:id])
-      create_audit(action: "Downloaded #{report.class.to_s.capitalize} report")
+      service = Report.call(params[:id], **report_params)
+      create_audit(action: "Downloaded #{service.report_name} report")
 
-      # TODO: Execute report is background job
-      send_data(report.csv, filename: report.name)
+      send_data(service.data, filename: service.filename)
     end
 
   private
 
-    def find_report(report_id)
-      {
-        home_office: Reports::HomeOffice.new,
-        standing_data: Reports::StandingData.new,
-        payroll: Reports::Payroll.new,
-        applications: Reports::Applications.new,
-      }.with_indifferent_access.fetch(report_id)
+    def report_params
+      params.permit(:id, :status)
     end
   end
 end

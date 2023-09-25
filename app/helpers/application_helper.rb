@@ -20,4 +20,18 @@ module ApplicationHelper
   def banner_feedback_form
     govuk_link_to("feedback", "https://forms.office.com/e/p45Wm1Vmxg", target: "_blank")
   end
+
+  def application_statuses
+    ApplicationProgress
+      .statuses
+      .keys
+      .map { |status| [status.humanize, status] }
+  end
+
+  def application_statuses_options(selected: nil, all_statuses: false)
+    statuses = application_statuses
+    statuses = application_statuses.unshift(["All statuses", ""]) if all_statuses
+
+    options_for_select(statuses, selected:)
+  end
 end

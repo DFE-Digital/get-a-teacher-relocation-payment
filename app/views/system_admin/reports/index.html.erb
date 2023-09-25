@@ -38,3 +38,23 @@
     <%= link_to "Download", report_path(:applications), class: "govuk-button" %>
   </p>
 </div>
+
+<div class="applications-qa">
+  <h2 class="govuk-heading-m">QA reports</h2>
+  <p class="govuk-body">
+    Download a QA CSV file
+  </p>
+  <p>
+
+    <%= form_with(url: report_path(:qa), method: :get) do |f| %>
+    <div class="row">
+      <div class="column">
+        <%= f.govuk_select :status, application_statuses_options, label: { text: "Filter by application status" } %>
+      </div>
+      <div class="full-width">
+        <%= f.govuk_submit 'Download', class: "govuk-button"%>
+      </div>
+    </div>
+    <% end %>
+  </p>
+</div>
