@@ -47,6 +47,7 @@ shared:
     - created_at
     - school_id
     - student_loan
+    - ip_address
   addresses:
     - id
     - addressable_type
@@ -57,3 +58,41 @@ shared:
     - postcode
   users:
     - email
+  qa_statuses:
+    - id
+    - application_id
+    - status
+    - date
+    - created_at
+    - updated_at
+  forms:
+    - id
+    - given_name
+    - middle_name
+    - family_name
+    - email_address
+    - phone_number
+    - date_of_birth
+    - nationality
+    - sex
+    - passport_number
+    - subject
+    - visa_type
+    - date_of_entry
+    - start_date
+    - address_line_1
+    - address_line_2
+    - city
+    - postcode
+    - application_route
+    - state_funded_secondary_school
+    - one_year
+    - school_name
+    - school_headteacher_name
+    - school_address_line_1
+    - school_address_line_2
+    - school_city
+    - school_postcode
+    - created_at
+    - updated_at
+    - student_loan

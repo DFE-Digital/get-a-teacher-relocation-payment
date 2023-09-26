@@ -38,3 +38,31 @@
     - id
     - created_at
     - updated_at
+  :audits:
+    - id
+    - auditable_id
+    - auditable_type
+    - associated_id
+    - associated_type
+    - user_id
+    - user_type
+    - username
+    - action
+    - audited_changes
+    - version
+    - comment
+    - remote_address
+    - request_uuid
+    - created_at
+  :flipper_gates:
+    - id
+    - feature_key
+    - key
+    - value
+    - created_at
+    - updated_at
+  :flipper_features:
+    - id
+    - key
+    - created_at
+    - updated_at

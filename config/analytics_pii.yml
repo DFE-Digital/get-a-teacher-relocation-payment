@@ -8,3 +8,18 @@ shared:
     - email_address
     - phone_number
     - passport_number
+  forms:
+    - given_name
+    - middle_name
+    - family_name
+    - email_address
+    - phone_number
+    - nationality
+    - sex
+    - passport_number
+    - visa_type
+    - address_line_1
+    - address_line_2
+    - city
+    - postcode
+    - school_headteacher_name
