@@ -1,39 +1,60 @@
-# frozen_string_literal: true
-
+# == Schema Information
+#
+# Table name: urns
+#
+#  id         :bigint           not null, primary key
+#  code       :string
+#  prefix     :string
+#  suffix     :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 require "rails_helper"
 
 RSpec.describe Urn do
-  subject(:urn) { described_class.next(applicant_type) }
+  describe "next" do
+    subject(:next_urn) { described_class.next(route) }
 
-  describe ".next" do
-    context 'when applicant type is "teacher"' do
-      let(:applicant_type) { "teacher" }
+    context "for application route teacher" do
+      let(:route) { "teacher" }
 
-      it "generates a URN with the correct prefix and suffix" do
-        expect(urn).to match(/^IRPTE[0-9]{5}$/)
-      end
+      before { create(:urn, code: "TE") }
 
-      it "generates a Urn with a suffix of only characters in the CHARSET" do
-        charset = %w[0 1 2 3 4 5 6 7 8 9]
-
-        expect(urn[5..9].chars).to all(be_in(charset))
-      end
+      it { expect(next_urn).to match(/IRPTE\d{5}/) }
     end
 
-    context 'when applicant type is "salaried_trainee"' do
-      let(:applicant_type) { "salaried_trainee" }
+    context "for application route salaried_trainee" do
+      let(:route) { "salaried_trainee" }
 
-      it "generates a URN with the correct prefix and suffix" do
-        expect(urn).to match(/^IRPST[0-9]{5}$/)
-      end
+      before { create(:urn, code: "ST") }
+
+      it { expect(next_urn).to match(/IRPST\d{5}/) }
     end
 
-    context "when an invalid applicant type is provided" do
-      let(:applicant_type) { "invalid_type" }
+    context "when bad application route" do
+      let(:route) { "badroute" }
 
-      it "raises an ArgumentError" do
-        expect { urn }.to raise_error(ArgumentError, 'Invalid route: invalid_type, must be one of ["teacher", "salaried_trainee"]')
-      end
+      it { expect { next_urn }.to raise_error(ArgumentError) }
     end
+
+    context "when there is no more urn available to assign" do
+      let(:route) { "salaried_trainee" }
+
+      before do
+        allow(described_class).to receive(:find_by!).and_raise(ActiveRecord::RecordNotFound)
+      end
+
+      it { expect { next_urn }.to raise_error(Urn::NoUrnAvailableError) }
+    end
+  end
+
+  describe ".to_s" do
+    subject(:urn) { described_class.new(prefix:, code:, suffix:) }
+
+    let(:prefix) { "AST" }
+    let(:code) { "FF" }
+    let(:suffix) { 65 }
+
+    it { expect(urn.to_s).to eq("ASTFF00065") }
   end
 end
