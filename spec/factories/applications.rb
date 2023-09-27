@@ -31,7 +31,7 @@ FactoryBot.define do
     visa_type { VisaStep::VALID_ANSWERS_OPTIONS.reject { _1 == "Other" }.sample }
     date_of_entry { Time.zone.today }
     start_date { 1.month.from_now.to_date }
-    urn { Urn.generate(application_route) }
+    urn { Urn.next(application_route) }
 
     factory :teacher_application do
       application_route { "teacher" }
