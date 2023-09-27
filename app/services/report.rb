@@ -29,7 +29,7 @@ class Report
   end
 
   def data
-    report.csv
+    @data ||= report.csv
   end
 
 private
