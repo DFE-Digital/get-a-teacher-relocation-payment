@@ -31,7 +31,7 @@ RSpec.describe Report do
     let(:status) { "initial_checks" }
 
     context "report_name" do
-      it { expect(service.report_name).to eq("Reports::qareport") }
+      it { expect(service.name).to eq("reports-qa-report-initial_checks") }
     end
 
     context "filename" do
@@ -39,7 +39,7 @@ RSpec.describe Report do
       it "returns the name of the Report" do
         frozen_time = Time.zone.local(2023, 7, 17, 12, 30, 45)
         travel_to frozen_time do
-          expected_name = "QA-Report-initial_checks-2023_07_17-12_30_45.csv"
+          expected_name = "reports-qa-report-initial_checks-20230717-123045.csv"
 
           expect(service.filename).to eq(expected_name)
         end
@@ -55,7 +55,7 @@ RSpec.describe Report do
         service.data
       end
 
-      it { expect(Reports::QaReport).to have_received(:new).with(kind_of(Array), status) }
+      it { expect(Reports::QaReport).to have_received(:new).with(status:) }
       it { expect(report).to have_received(:csv) }
     end
 
