@@ -1,11 +1,5 @@
 module Reports
-  class Applications
-    def name
-      current_time = Time.zone.now.strftime("%Y%m%d-%H%M%S")
-
-      "Applications-Report-#{current_time}.csv"
-    end
-
+  class Applications < Base
     def csv
       CSV.generate do |csv|
         csv << header

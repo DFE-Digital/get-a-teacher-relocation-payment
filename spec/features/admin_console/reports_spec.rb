@@ -50,31 +50,31 @@ private
   def then_the_standing_data_csv_report_is_downloaded
     expect(page.response_headers["Content-Type"]).to match(/text\/csv/)
     expect(page.response_headers["Content-Disposition"]).to include "attachment"
-    expect(page.response_headers["Content-Disposition"]).to match(/filename="Standing-Data-Report.*/)
+    expect(page.response_headers["Content-Disposition"]).to match(/filename="reports-standing-data.*/)
   end
 
   def then_the_home_office_csv_report_is_downloaded
     expect(page.response_headers["Content-Type"]).to match(/text\/csv/)
     expect(page.response_headers["Content-Disposition"]).to include "attachment"
-    expect(page.response_headers["Content-Disposition"]).to match(/filename="Home-Office-Report.*/)
+    expect(page.response_headers["Content-Disposition"]).to match(/filename="reports-home-office.*/)
   end
 
   def then_the_payroll_data_csv_report_is_downloaded
     expect(page.response_headers["Content-Type"]).to match(/text\/csv/)
     expect(page.response_headers["Content-Disposition"]).to include "attachment"
-    expect(page.response_headers["Content-Disposition"]).to match(/filename="Payroll-Report.*/)
+    expect(page.response_headers["Content-Disposition"]).to match(/filename="reports-payroll.*/)
   end
 
   def then_the_applications_csv_report_is_downloaded
     expect(page.response_headers["Content-Type"]).to match(/text\/csv/)
     expect(page.response_headers["Content-Disposition"]).to include "attachment"
-    expect(page.response_headers["Content-Disposition"]).to match(/filename="Applications-Report.*/)
+    expect(page.response_headers["Content-Disposition"]).to match(/filename="reports-applications.*/)
   end
 
   def then_the_qa_report_csv_report_is_downloaded
     expect(page.response_headers["Content-Type"]).to match(/text\/csv/)
     expect(page.response_headers["Content-Disposition"]).to include "attachment"
-    expect(page.response_headers["Content-Disposition"]).to match(/filename="QA-Report-initial_checks*/)
+    expect(page.response_headers["Content-Disposition"]).to match(/filename="reports-qa-report-initial_checks*/)
   end
 
   def and_i_click_on_the_home_office_csv_link

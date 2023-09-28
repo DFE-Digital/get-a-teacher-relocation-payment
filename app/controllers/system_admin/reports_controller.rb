@@ -3,10 +3,10 @@ module SystemAdmin
     def index; end
 
     def show
-      service = Report.call(params[:id], **report_params)
-      create_audit(action: "Downloaded #{service.report_name} report")
+      report = Report.call(params[:id], **report_params)
+      create_audit(action: "Downloaded #{report.name} report")
 
-      send_data(service.data, filename: service.filename)
+      send_data(report.data, filename: report.filename)
     end
 
   private
