@@ -12,7 +12,6 @@
 require "rails_helper"
 
 RSpec.describe Urn do
-
   describe "next" do
     subject(:next_urn) { described_class.next(route) }
 
@@ -40,6 +39,10 @@ RSpec.describe Urn do
 
     context "when there is no more urn available to assign" do
       let(:route) { "salaried_trainee" }
+
+      before do
+        allow(described_class).to receive(:find_by!).and_raise(ActiveRecord::RecordNotFound)
+      end
 
       it { expect { next_urn }.to raise_error(Urn::NoUrnAvailableError) }
     end
