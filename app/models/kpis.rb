@@ -1,7 +1,10 @@
 class Kpis
-  def initialize
-    @applications = Applicant.all
+  def initialize(unit: "hours", range_start: "24", range_end: "0")
+    @date_range_params = parse_date_range(unit:, range_start:, range_end:)
+    @date_range = to_date_range(**@date_range_params)
   end
+
+  attr_reader :date_range, :date_range_params
 
   def total_applications
     Application.count
@@ -65,5 +68,55 @@ class Kpis
 
   def status_breakdown
     StatusBreakdownQuery.call
+  end
+
+  def forms_funnel
+    forms_funnel_query
+  end
+
+  def ineligible_forms_funnel
+    forms_funnel_query.select { |_, hsh| hsh.fetch(:ineligible, nil) }
+  end
+
+  def funnel_date_range_title
+    return funnel_title_last_n if date_range_params.fetch(:range_end).zero?
+
+    [
+      "between",
+      date_range_params.fetch(:range_start),
+      "and",
+      date_range_params.fetch(:range_end),
+      date_range_params.fetch(:unit),
+      "ago",
+    ].join(" ")
+  end
+
+private
+
+  def funnel_title_last_n
+    ["last", date_range_params.fetch(:range_start), date_range_params.fetch(:unit)].join(" ")
+  end
+
+  def parse_date_range(unit:, range_start:, range_end:)
+    raise(ArgumentError, "invalid unit value, must be hours or days") unless %w[hours days].include?(unit)
+
+    range_end = range_end.to_i
+    range_start = range_start.to_i
+
+    raise(ArgumentError, "range_end and range_start must be positive numbers") if range_start.negative? || range_end.negative?
+    raise(ArgumentError, "range_end must be lower than range_start") if range_end >= range_start
+
+    { unit:, range_start:, range_end: }
+  end
+
+  def to_date_range(unit:, range_start:, range_end:)
+    Range.new(
+      range_start.public_send(unit).ago,
+      range_end.public_send(unit).ago,
+    )
+  end
+
+  def forms_funnel_query
+    @forms_funnel_query ||= FormsFunnelQuery.call(date_range:)
   end
 end
