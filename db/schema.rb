@@ -108,6 +108,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_02_115920) do
     t.index ["user_id", "user_type"], name: "user_index"
   end
 
+  create_table "events", force: :cascade do |t|
+    t.string "action"
+    t.string "entity_class"
+    t.integer "entity_id"
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entity_class"], name: "index_events_on_entity_class"
+  end
+
   create_table "flipper_features", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "created_at", null: false
