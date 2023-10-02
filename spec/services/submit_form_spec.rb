@@ -32,7 +32,10 @@ RSpec.describe SubmitForm do
     end
 
     context "returns true when form is submitted" do
-      before { service.submit_form! }
+      before do
+        form.save
+        service.submit_form!
+      end
 
       it { expect(service).to be_success }
     end

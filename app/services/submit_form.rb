@@ -95,6 +95,7 @@ private
 
   def delete_form
     form.destroy!
+    Event.publish(:deleted, form)
   end
 
   def send_applicant_email
