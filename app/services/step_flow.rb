@@ -30,6 +30,7 @@ class StepFlow
     end
 
     def current_step(form, requested_step_name)
+      return if form.blank? && requested_step_name != ApplicationRouteStep::ROUTE_KEY
       return ApplicationRouteStep.new(Form.new) unless form
 
       STEPS.fetch(requested_step_name).new(form)
