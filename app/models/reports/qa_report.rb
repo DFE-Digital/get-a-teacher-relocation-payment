@@ -48,7 +48,7 @@ module Reports
 
       [
         app.application_progress.rejection_reason&.humanize,
-        app.application_progress.rejection_details,
+        app.application_progress.comments,
       ]
     end
 

@@ -32,7 +32,7 @@
       <%= f.govuk_date_field :payment_confirmation_completed_at, legend: { text: "Payment Confirmation (payslip)", size: "s" } %>
       <%= f.govuk_date_field :rejection_completed_at, legend: { text: "Rejection Date", size: "s" } %>
       <%= f.govuk_select :rejection_reason, rejection_reasons, label: { text: "Rejection Reason" } %>
-      <%= f.govuk_text_area :rejection_details, label: { text: 'Rejection Details' }, rows: 3 %>
+      <%= f.govuk_text_area :comments, label: { text: 'Comments' }, rows: 3 %>
 
       <%= f.govuk_submit("Update") %>
     <% end %>

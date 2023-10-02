@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_15_100841) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_02_115920) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -64,7 +64,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_15_100841) do
     t.date "rejection_completed_at"
     t.date "payment_confirmation_completed_at"
     t.date "banking_approval_completed_at"
-    t.text "rejection_details"
+    t.text "comments"
     t.integer "status", default: 0
     t.integer "rejection_reason"
   end
