@@ -32,7 +32,7 @@ gem "uk_postcode"
 gem "phonelib"
 ###############
 
-gem "audited", "~> 5.3", ">= 5.3.3"
+gem "audited", "~> 5.4"
 gem "config", "~> 4.2"
 gem "devise", "~> 4.9"
 gem "flipper"
