@@ -11,7 +11,7 @@ module Reports
 
     def header
       %i[
-        ip_address
+        urn
         given_name
         middle_name
         family_name
@@ -32,15 +32,16 @@ module Reports
         date_of_entry
         start_date
         subject
-        urn
         visa_type
+        rejection_reason
+        ip_address
       ].map { _1.to_s.titleize }
     end
 
     def columns(application)
       applicant = application.applicant
       [
-        applicant.ip_address,
+        application.urn,
         applicant.given_name,
         applicant.middle_name,
         applicant.family_name,
@@ -61,8 +62,9 @@ module Reports
         application.date_of_entry,
         application.start_date,
         application.subject,
-        application.urn,
         application.visa_type,
+        application.application_progress.rejection_reason,
+        applicant.ip_address,
       ]
     end
 
