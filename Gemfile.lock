@@ -72,8 +72,8 @@ GEM
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
     ast (2.4.2)
-    audited (5.3.3)
-      activerecord (>= 5.0, < 7.1)
+    audited (5.4.0)
+      activerecord (>= 5.0, < 7.2)
       request_store (~> 1.2)
     base64 (0.1.1)
     bcrypt (3.1.19)
@@ -467,7 +467,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
-  audited (~> 5.3, >= 5.3.3)
+  audited (~> 5.4)
   binding_of_caller
   bootsnap
   brakeman
