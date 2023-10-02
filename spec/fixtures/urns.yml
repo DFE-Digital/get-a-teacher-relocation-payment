@@ -1,0 +1,90 @@
+te_one:
+  suffix: 5668
+  prefix: IRP
+  code: TE
+
+te_two:
+  suffix: 21368
+  prefix: IRP
+  code: TE
+
+te_three:
+  suffix: 5
+  prefix: IRP
+  code: TE
+
+te_four:
+  suffix: 76998
+  prefix: IRP
+  code: TE
+
+te_five:
+  suffix: 6559
+  prefix: IRP
+  code: TE
+   
+te_six:
+  suffix: 6
+  prefix: IRP
+  code: TE
+
+te_seven:
+  suffix: 2298
+  prefix: IRP
+  code: TE
+
+te_eight:
+  suffix: 1159
+  prefix: IRP
+  code: TE
+ 
+te_nine:
+  suffix: 79298
+  prefix: IRP
+  code: TE
+
+te_ten:
+  suffix: 19549
+  prefix: IRP
+  code: TE
+   
+st_one:
+  suffix: 5668
+  prefix: IRP
+  code: ST
+
+st_two:
+  suffix: 29968
+  prefix: IRP
+  code: ST
+
+st_three:
+  suffix: 5
+  prefix: IRP
+  code: ST
+
+st_four:
+  suffix: 76998
+  prefix: IRP
+  code: ST
+
+st_five:
+  suffix: 6559
+  prefix: IRP
+  code: ST
+   
+st_six:
+  suffix: 6
+  prefix: IRP
+  code: ST
+
+st_seven:
+  suffix: 28
+  prefix: IRP
+  code: ST
+
+st_eight:
+  suffix: 159
+  prefix: IRP
+  code: ST
+ 
