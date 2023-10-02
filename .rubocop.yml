@@ -106,3 +106,9 @@ RSpec/DescribeClass:
 RSpec/AnyInstance:
   Exclude:
     - 'spec/requests/submission_spec.rb'
+
+RSpec/MultipleMemoizedHelpers:
+  Exclude:
+    - 'spec/models/event_spec.rb'
+
+ 
