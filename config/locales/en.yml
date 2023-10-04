@@ -56,8 +56,8 @@ en:
         report_template:
           attributes:
             file:
-              invalid: "File parsing error"
+              ho_invalid: "File parsing error"
             config:
-              missing_header_mappings: "config.header_mappings must be present"
-              missing_worksheet_name: "config.worksheet_name must be present"
-              invalid_worksheet_name: "config.worksheet_name not present in file"
+              ho_missing_header_mappings: "config.header_mappings must be present"
+              ho_missing_worksheet_name: "config.worksheet_name must be present"
+              ho_invalid_worksheet_name: "config.worksheet_name not present in file"
