@@ -17,7 +17,7 @@ module SystemAdmin
 
     def create
       @user = User.new(user_params)
-      @user.roles = [] 
+      @user.roles = []
       params[:user][:role_ids].each do |role_id|
         @user.add_role(Role.find(role_id).name) if role_id.present?
       end
@@ -31,7 +31,7 @@ module SystemAdmin
 
     def update
       if @user.update(user_params)
-        @user.roles = [] 
+        @user.roles = []
         params[:user][:role_ids].each do |role_id|
           @user.add_role(Role.find(role_id).name) if role_id.present?
         end

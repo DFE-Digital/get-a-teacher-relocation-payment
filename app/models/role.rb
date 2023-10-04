@@ -10,18 +10,17 @@
 #  resource_id   :bigint
 #
 class Role < ApplicationRecord
-  ROLES_LIST = [:spectator, :servant, :manager, :admin, :super_admin]
+  ROLES_LIST = %i[spectator servant manager admin super_admin].freeze
 
-  has_and_belongs_to_many :users, :join_table => :users_roles
-  
+  has_many :users, through: :users_roles
+
   belongs_to :resource,
-             :polymorphic => true,
-             :optional => true
-  
+             polymorphic: true,
+             optional: true
 
   validates :resource_type,
-            :inclusion => { :in => Rolify.resource_types },
-            :allow_nil => true
+            inclusion: { in: Rolify.resource_types },
+            allow_nil: true
 
   scopify
 end
