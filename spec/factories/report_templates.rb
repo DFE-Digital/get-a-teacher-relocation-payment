@@ -27,10 +27,28 @@ FactoryBot.define do
       report_class { "Reports::HomeOffice" }
       config do
         {
-          "worksheet_name" => "Data",
+          "worksheet_name" => "TestData",
           "header_mappings" => {
             "Column A" => %w[urn],
             "bar" => %w[applicants.given_name applicants.family_name],
+          },
+        }
+      end
+    end
+
+    factory :mocked_home_office_report_template do
+      file { Rails.root.join("spec/fixtures/test_homeoffice_template.xlsx").read }
+      filename { "test_homeoffice_template.xlsx" }
+      report_class { "Reports::HomeOffice" }
+      config do
+        {
+          "worksheet_name" => "Data",
+          "header_mappings" => {
+            "ID (Mandatory)" => %w[urn],
+            "Full Name/ Organisation Name" => %w[applicants.given_name applicants.middle_name applicants.family_name],
+            "DOB" => %w[applicants.date_of_birth],
+            "Nationality" => %w[applicants.nationality],
+            "Passport Number" => %w[applicants.passport_number],
           },
         }
       end
