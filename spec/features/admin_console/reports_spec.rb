@@ -54,7 +54,7 @@ private
   end
 
   def then_the_home_office_csv_report_is_downloaded
-    expect(page.response_headers["Content-Type"]).to match(/text\/csv/)
+    expect(page.response_headers["Content-Type"]).to match(/application\/vnd.openxmlformats-officedocument.spreadsheetml.sheet/)
     expect(page.response_headers["Content-Disposition"]).to include "attachment"
     expect(page.response_headers["Content-Disposition"]).to match(/filename="reports-home-office.*/)
   end

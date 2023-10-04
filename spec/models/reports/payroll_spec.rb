@@ -21,26 +21,26 @@ module Reports
       end
     end
 
-    describe "#csv" do
+    describe "#generate" do
       let(:progress) { build(:application_progress, banking_approval_completed_at: Time.zone.now) }
 
       it "returns applicants who have banking details approved" do
         app = create(:application, application_progress: progress)
 
-        expect(report.csv).to include(app.applicant.family_name)
+        expect(report.generate).to include(app.applicant.family_name)
       end
 
       it "does not return applicants who have not the bankind details approved" do
         progress.banking_approval_completed_at = nil
         app = create(:application, application_progress: progress)
 
-        expect(report.csv).not_to include(app.urn)
+        expect(report.generate).not_to include(app.urn)
       end
 
       it "returns the data in CSV format" do
         application = create(:application, application_progress: progress)
 
-        expect(report.csv).to include([
+        expect(report.generate).to include([
           "", # No.
           "Prof", # TITLE
           application.applicant.given_name, # FORENAME
@@ -116,12 +116,12 @@ module Reports
           RIGHT_TO_WORK_CONFIRM_STATUS
         ].join(",")
 
-        expect(report.csv).to include(expected_header)
+        expect(report.generate).to include(expected_header)
       end
 
       context "includes applications from the csv before invoking `post_generation_hook`" do
         let(:app) { create(:application, application_progress: progress) }
-        let(:csv) { report.csv }
+        let(:csv) { report.generate }
 
         before { app }
 

@@ -26,7 +26,7 @@ class Report
   delegate :post_generation_hook, to: :report
 
   def data
-    @data ||= report.csv
+    @data ||= report.generate
   end
 
 private

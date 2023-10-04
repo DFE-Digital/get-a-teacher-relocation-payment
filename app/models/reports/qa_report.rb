@@ -5,7 +5,7 @@ module Reports
       @name = [@name, status].join("-")
     end
 
-    def csv
+    def generate
       CSV.generate do |csv|
         csv << header
         rows.each { |row| csv << row }

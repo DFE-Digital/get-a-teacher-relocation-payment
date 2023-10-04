@@ -25,7 +25,7 @@ module Reports
         it "returns the data in CSV format" do
           application = create(:application)
 
-          expect(report.csv).to include([
+          expect(report.generate).to include([
             application.urn,
             application.applicant.full_name,
             application.applicant.date_of_birth.strftime("%d/%m/%Y"),
@@ -49,7 +49,8 @@ module Reports
 
         it "returns the data including rejection reasons in CSV format" do
           application = create(:application, application_progress: build(:application_progress, rejection_completed_at: Time.zone.now, status: :rejected, rejection_reason: :request_to_re_submit, comments: "Some details"))
-          expect(report.csv).to include([
+
+          expect(report.generate).to include([
             application.urn,
             application.applicant.full_name,
             application.applicant.date_of_birth.strftime("%d/%m/%Y"),
@@ -84,7 +85,7 @@ module Reports
         ]
         expected_header += ["Rejection Reason", "Rejection Details"] if status == "rejected"
 
-        expect(report.csv).to include(expected_header.join(","))
+        expect(report.generate).to include(expected_header.join(","))
       end
     end
   end

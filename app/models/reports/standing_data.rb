@@ -2,7 +2,7 @@
 
 module Reports
   class StandingData < Base
-    def csv
+    def generate
       CSV.generate do |csv|
         csv << header
         rows.each { |row| csv << row }

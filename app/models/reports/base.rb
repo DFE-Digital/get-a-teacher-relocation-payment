@@ -7,13 +7,23 @@ module Reports
 
     attr_reader :name, :kwargs
 
+    class << self
+      def file_ext(value)
+        @file_ext = value
+      end
+
+      def get_file_ext
+        @file_ext || "csv"
+      end
+    end
+
     def filename
       current_time = Time.zone.now.strftime("%Y%m%d-%H%M%S")
 
-      "#{name}-#{current_time}.csv"
+      "#{name}-#{current_time}.#{self.class.get_file_ext}"
     end
 
-    def csv; end
+    def generate; end
 
     def post_generation_hook; end
   end
