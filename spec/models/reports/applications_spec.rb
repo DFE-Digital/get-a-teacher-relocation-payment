@@ -67,17 +67,17 @@ module Reports
           ].join(",")
         end
 
-        it { expect(report.csv).to include(header) }
+        it { expect(report.generate).to include(header) }
       end
 
       context "returns all applications" do
-        it { expect(report.csv).to include(application.urn) }
-        it { expect(report.csv).to include(initial.urn) }
-        it { expect(report.csv).to include(home_office.urn) }
-        it { expect(report.csv).to include(school.urn) }
-        it { expect(report.csv).to include(banking.urn) }
-        it { expect(report.csv).to include(paid.urn) }
-        it { expect(report.csv).to include(rejected.urn) }
+        it { expect(report.generate).to include(application.urn) }
+        it { expect(report.generate).to include(initial.urn) }
+        it { expect(report.generate).to include(home_office.urn) }
+        it { expect(report.generate).to include(school.urn) }
+        it { expect(report.generate).to include(banking.urn) }
+        it { expect(report.generate).to include(paid.urn) }
+        it { expect(report.generate).to include(rejected.urn) }
       end
     end
   end

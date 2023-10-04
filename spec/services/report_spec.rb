@@ -56,7 +56,7 @@ RSpec.describe Report do
       end
 
       it { expect(Reports::QaReport).to have_received(:new).with(status:) }
-      it { expect(report).to have_received(:csv) }
+      it { expect(report).to have_received(:generate) }
     end
 
     context "other report data" do
@@ -69,7 +69,7 @@ RSpec.describe Report do
       end
 
       it { expect(Reports::HomeOffice).to have_received(:new) }
-      it { expect(report).to have_received(:csv) }
+      it { expect(report).to have_received(:generate) }
     end
     # rubocop:enable RSpec/VerifiedDoubles
   end

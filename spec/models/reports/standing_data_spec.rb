@@ -20,41 +20,41 @@ module Reports
       end
     end
 
-    describe "#csv" do
+    describe "#generate" do
       let(:progress) { build(:application_progress, school_checks_completed_at: Time.zone.now, banking_approval_completed_at: nil) }
 
       it "returns applicants who have completed initial checks but not home office checks" do
         app = create(:application, application_progress: progress)
 
-        expect(report.csv).to include(app.urn)
+        expect(report.generate).to include(app.urn)
       end
 
       it "does not return rejected applicants" do
         progress.rejection_completed_at = Time.zone.now
         app = create(:application, application_progress: progress)
 
-        expect(report.csv).not_to include(app.urn)
+        expect(report.generate).not_to include(app.urn)
       end
 
       it "does not return applicants who have not completed initial checks" do
         progress.school_checks_completed_at = nil
         app = create(:application, application_progress: progress)
 
-        expect(report.csv).not_to include(app.urn)
+        expect(report.generate).not_to include(app.urn)
       end
 
       it "does not return applicants who have completed home office checks" do
         progress.banking_approval_completed_at = Time.zone.now
         app = create(:application, application_progress: progress)
 
-        expect(report.csv).not_to include(app.urn)
+        expect(report.generate).not_to include(app.urn)
       end
 
       # rubocop:disable RSpec/ExampleLength
       it "returns the data in CSV format" do
         application = create(:application, application_progress: progress)
 
-        expect(report.csv).to include([
+        expect(report.generate).to include([
           application.urn,
           application.applicant.given_name,
           application.applicant.middle_name,
@@ -80,12 +80,12 @@ module Reports
           Student_loan
         ].join(",")
 
-        expect(report.csv).to include(expected_header)
+        expect(report.generate).to include(expected_header)
       end
 
       context "includes applications from the csv before invoking `post_generation_hook`" do
         let(:app) { create(:application, application_progress: progress) }
-        let(:csv) { report.csv }
+        let(:csv) { report.generate }
 
         before { app }
 

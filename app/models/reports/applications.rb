@@ -1,6 +1,6 @@
 module Reports
   class Applications < Base
-    def csv
+    def generate
       CSV.generate do |csv|
         csv << header
         rows.find_each(batch_size: 50) { |row| csv << columns(row) }
