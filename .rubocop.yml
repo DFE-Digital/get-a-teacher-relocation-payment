@@ -110,5 +110,3 @@ RSpec/AnyInstance:
 RSpec/MultipleMemoizedHelpers:
   Exclude:
     - 'spec/models/event_spec.rb'
-
- 

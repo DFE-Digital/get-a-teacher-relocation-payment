@@ -50,3 +50,14 @@ en:
     no_account: 'You have not yet an account!'
   errors:
     access_denied: 'You do not have permission to access this page'
+  activerecord:
+    errors:
+      models:
+        report_template:
+          attributes:
+            file:
+              invalid: "File parsing error"
+            config:
+              missing_header_mappings: "config.header_mappings must be present"
+              missing_worksheet_name: "config.worksheet_name must be present"
+              invalid_worksheet_name: "config.worksheet_name not present in file"

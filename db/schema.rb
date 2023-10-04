@@ -178,6 +178,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_09_110217) do
     t.index ["application_id"], name: "index_qa_statuses_on_application_id"
   end
 
+  create_table "report_templates", force: :cascade do |t|
+    t.string "report_class"
+    t.string "filename"
+    t.binary "file"
+    t.jsonb "config"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["report_class"], name: "index_report_templates_on_report_class", unique: true
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
