@@ -153,6 +153,7 @@
     </table>
   </div>
 
+  <% if Flipper.enabled? :display_form_analytics, current_user %>
   <div class="kpi-widget form-funnel">
     <h3 class="title">Forms funnel</h3>
     <h6 class="subtitle"><%= @kpis.funnel_date_range_title %></h6>
@@ -178,5 +179,6 @@
       <% end %>
     </table>
   </div>
+  <% end %>
 
 </div>
