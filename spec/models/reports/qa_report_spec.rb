@@ -7,17 +7,16 @@ module Reports
   describe QaReport do
     include ActiveSupport::Testing::TimeHelpers
 
-    subject(:report) { described_class.new(applications, status) }
+    subject(:report) { described_class.new(status:) }
 
-    let(:applications) { [] }
-    let(:status) { "submitted" }
+    let(:status) { "initial_checks" }
 
-    it "returns the name of the Report" do
+    it "returns the filename of the Report" do
       frozen_time = Time.zone.local(2023, 7, 17, 12, 30, 45)
       travel_to frozen_time do
-        expected_name = "QA-Report-submitted-2023_07_17-12_30_45.csv"
+        expected_name = "reports-qa-report-initial_checks-20230717-123045.csv"
 
-        expect(report.name).to eq(expected_name)
+        expect(report.filename).to eq(expected_name)
       end
     end
 
@@ -25,7 +24,6 @@ module Reports
       context "when the status is not 'rejected'" do
         it "returns the data in CSV format" do
           application = create(:application)
-          applications << application
 
           expect(report.csv).to include([
             application.urn,
@@ -51,8 +49,6 @@ module Reports
 
         it "returns the data including rejection reasons in CSV format" do
           application = create(:application, application_progress: build(:application_progress, rejection_completed_at: Time.zone.now, status: :rejected, rejection_reason: :request_to_re_submit, comments: "Some details"))
-          applications << application
-
           expect(report.csv).to include([
             application.urn,
             application.applicant.full_name,

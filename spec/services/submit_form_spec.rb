@@ -133,7 +133,7 @@ RSpec.describe SubmitForm do
 
       context "applicant email" do
         before do
-          allow(Urn).to receive(:generate).and_return(urn)
+          allow(Urn).to receive(:next).and_return(urn)
         end
 
         let(:urn) { "SOMEURN" }

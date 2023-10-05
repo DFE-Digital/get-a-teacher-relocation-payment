@@ -1,15 +1,8 @@
 module Reports
-  class QaReport
-    attr_reader :applications, :status
-
-    def initialize(applications, status)
-      @applications = applications
-      @status = status
-    end
-
-    def name
-      current_time = Time.zone.now.strftime("%Y_%m_%d-%H_%M_%S")
-      "QA-Report-#{status}-#{current_time}.csv"
+  class QaReport < Base
+    def initialize(...)
+      super(...)
+      @name = [@name, status].join("-")
     end
 
     def csv
@@ -19,7 +12,26 @@ module Reports
       end
     end
 
+    def post_generation_hook
+      applications.each(&:mark_as_qa!)
+    end
+
+    def status
+      kwargs.fetch(:status)
+    end
+
   private
+
+    def applications
+      @applications ||= Application
+                          .includes(
+                            :applicant,
+                            :application_progress,
+                            applicant: :address,
+                          )
+                          .filter_by_status(status)
+                          .reject(&:qa?)
+    end
 
     def rows
       applications.map do |application|

@@ -1,20 +1,16 @@
 # frozen_string_literal: true
 
 module Reports
-  class StandingData
-    def name
-      current_time = Time.zone.now.strftime("%Y%m%d-%H%M%S")
-
-      "Standing-Data-Report-#{current_time}.csv"
-    end
-
+  class StandingData < Base
     def csv
-      csv_file = CSV.generate do |csv|
+      CSV.generate do |csv|
         csv << header
         rows.each { |row| csv << row }
       end
+    end
+
+    def post_generation_hook
       applications.update_all(standing_data_csv_downloaded_at: Time.zone.now) # rubocop:disable Rails/SkipsModelValidations
-      csv_file
     end
 
   private
@@ -34,7 +30,7 @@ module Reports
     end
 
     def applications
-      Application
+      @applications ||= Application
         .joins(:application_progress)
         .joins(applicant: :address)
         .where.not(application_progresses: { school_checks_completed_at: nil })

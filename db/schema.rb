@@ -173,6 +173,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_02_115920) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "urns", force: :cascade do |t|
+    t.string "prefix"
+    t.string "code"
+    t.integer "suffix"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_urns_on_code"
+  end
+
   create_table "users", force: :cascade do |t|
     t.citext "email"
     t.datetime "created_at", null: false

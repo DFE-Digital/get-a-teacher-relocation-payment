@@ -6,13 +6,13 @@ module Reports
 
     subject(:report) { described_class.new }
 
-    it "returns the name of the Report" do
+    it "returns the filename of the Report" do
       frozen_time = Time.zone.local(2023, 7, 17, 12, 30, 45)
       travel_to frozen_time do
-        expected_name = "Applications-Report-20230717-123045.csv"
+        expected_name = "reports-applications-20230717-123045.csv"
 
         report = described_class.new
-        actual_name = report.name
+        actual_name = report.filename
 
         expect(actual_name).to eq(expected_name)
       end
@@ -40,7 +40,7 @@ module Reports
       context "returns file with header" do
         let(:header) do
           [
-            "Ip Address",
+            "Urn",
             "Given Name",
             "Middle Name",
             "Family Name",
@@ -61,8 +61,9 @@ module Reports
             "Date Of Entry",
             "Start Date",
             "Subject",
-            "Urn",
             "Visa Type",
+            "Rejection Reason",
+            "Ip Address",
           ].join(",")
         end
 
