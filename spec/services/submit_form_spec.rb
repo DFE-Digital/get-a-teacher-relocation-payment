@@ -32,7 +32,10 @@ RSpec.describe SubmitForm do
     end
 
     context "returns true when form is submitted" do
-      before { service.submit_form! }
+      before do
+        form.save
+        service.submit_form!
+      end
 
       it { expect(service).to be_success }
     end
@@ -133,7 +136,7 @@ RSpec.describe SubmitForm do
 
       context "applicant email" do
         before do
-          allow(Urn).to receive(:generate).and_return(urn)
+          allow(Urn).to receive(:next).and_return(urn)
         end
 
         let(:urn) { "SOMEURN" }

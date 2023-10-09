@@ -48,8 +48,7 @@ module Reports
         let(:status) { "rejected" }
 
         it "returns the data including rejection reasons in CSV format" do
-          application = create(:application, application_progress: build(:application_progress, rejection_completed_at: Time.zone.now, status: :rejected, rejection_reason: :request_to_re_submit, rejection_details: "Some details"))
-
+          application = create(:application, application_progress: build(:application_progress, rejection_completed_at: Time.zone.now, status: :rejected, rejection_reason: :request_to_re_submit, comments: "Some details"))
           expect(report.csv).to include([
             application.urn,
             application.applicant.full_name,
@@ -66,7 +65,7 @@ module Reports
             application.visa_type,
             application.date_of_entry.strftime("%d/%m/%Y"),
             application.application_progress.rejection_reason&.humanize,
-            application.application_progress.rejection_details,
+            application.application_progress.comments,
           ].join(","))
         end
       end

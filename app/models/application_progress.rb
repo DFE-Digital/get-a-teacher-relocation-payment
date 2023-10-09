@@ -6,11 +6,11 @@
 #
 #  id                                :bigint           not null, primary key
 #  banking_approval_completed_at     :date
+#  comments                          :text
 #  home_office_checks_completed_at   :date
 #  initial_checks_completed_at       :date
 #  payment_confirmation_completed_at :date
 #  rejection_completed_at            :date
-#  rejection_details                 :text
 #  rejection_reason                  :integer
 #  school_checks_completed_at        :date
 #  school_investigation_required     :boolean          default(FALSE), not null

@@ -4,6 +4,7 @@ class UpdateForm
     return service unless service.valid?
 
     service.update_form!
+    service.capture_form_analytics
     service
   end
 
@@ -25,6 +26,14 @@ class UpdateForm
 
   def update_form!
     form.update(**parsed_params)
+  end
+
+  def capture_form_analytics
+    changes = form.saved_changes
+    action = :updated
+    action = :created if changes.key?(:id)
+
+    Event.publish(action, form, changes) if changes.present?
   end
 
 private

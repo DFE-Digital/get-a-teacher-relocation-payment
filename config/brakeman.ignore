@@ -1,0 +1,190 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "11ae20225165e9dc40bab1c95be13ca9ef9c4abd4d679f115a485d1108773615",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/queries/forms_funnel_query.rb",
+      "line": 102,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "base_query.where(\"data->'#{field}' IS NOT NULL\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "FormsFunnelQuery",
+        "method": "submitted_field_query"
+      },
+      "user_input": "field",
+      "confidence": "Weak",
+      "cwe_id": [
+        89
+      ],
+      "note": "This is a false positive because the field argument in the method is provided by the Step class required_fields."
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "1c01eb4e2a6db1a525163bdfe3a4c6b54d05d4718ce043e8c905c83eb11290eb",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/queries/forms_funnel_query.rb",
+      "line": 109,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "base_query.where(\"data->'#{field}' @> ?\", \"[true]\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "FormsFunnelQuery",
+        "method": "boolean_query"
+      },
+      "user_input": "field",
+      "confidence": "Weak",
+      "cwe_id": [
+        89
+      ],
+      "note": "This is a false positive because the field argument in the method is provided by the Step class required_fields."
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "2a886d32b08f7c555636327c5130a0d091103cc1a95d151531c6df62d47db647",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/queries/forms_funnel_query.rb",
+      "line": 116,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "base_query.where(\"data->'#{field}' @> ?\", \"[\\\"other\\\"]\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "FormsFunnelQuery",
+        "method": "other_query"
+      },
+      "user_input": "field",
+      "confidence": "Weak",
+      "cwe_id": [
+        89
+      ],
+      "note": "This is a false positive because the field argument in the method is provided by the Step class required_fields."
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "552ceb7070f1b47b878b61ba6e12330df5928ca6ccae0b91d2a0bbe5c9516bec",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/queries/forms_funnel_query.rb",
+      "line": 115,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "base_query.where(\"data->'#{field}' IS NOT NULL\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "FormsFunnelQuery",
+        "method": "other_query"
+      },
+      "user_input": "field",
+      "confidence": "Weak",
+      "cwe_id": [
+        89
+      ],
+      "note": "This is a false positive because the field argument in the method is provided by the Step class required_fields."
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "77111270d3f370d388ca700d58b3985b87e71b5716b56f526154b89d27b9f3e8",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/queries/forms_funnel_query.rb",
+      "line": 98,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "Arel.sql(\"data->'#{field}'->1\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "FormsFunnelQuery",
+        "method": "extract_dates"
+      },
+      "user_input": "field",
+      "confidence": "Medium",
+      "cwe_id": [
+        89
+      ],
+      "note": "This is a false positive because the field argument in the method is provided by the Step class required_fields."
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "9fe4738a94be085ce81e41086b23e0fa35300a79267909d7c3f6a6083346219c",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/queries/forms_funnel_query.rb",
+      "line": 97,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "base_query.where(\"data->'#{field}' IS NOT NULL\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "FormsFunnelQuery",
+        "method": "extract_dates"
+      },
+      "user_input": "field",
+      "confidence": "Weak",
+      "cwe_id": [
+        89
+      ],
+      "note": "This is a false positive because the field argument in the extract_dates method is provided by the Step class."
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "b205b9967732ba2d64494d600f884760570c0f38069b950bf4a82a2c030b8505",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/queries/forms_funnel_query.rb",
+      "line": 117,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "base_query.where(\"data->'#{field}' @> ?\", \"[\\\"Other\\\"]\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "FormsFunnelQuery",
+        "method": "other_query"
+      },
+      "user_input": "field",
+      "confidence": "Weak",
+      "cwe_id": [
+        89
+      ],
+      "note": "This is a false positive because the field argument in the method is provided by the Step class required_fields."
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
+      "fingerprint": "e4843f22abc60f8f48a6b7b9997b49c45e69885c59f93837d5bd2a8138029d94",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/queries/forms_funnel_query.rb",
+      "line": 108,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "base_query.where(\"data->'#{field}' @> ?\", \"[false]\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "FormsFunnelQuery",
+        "method": "boolean_query"
+      },
+      "user_input": "field",
+      "confidence": "Weak",
+      "cwe_id": [
+        89
+      ],
+      "note": "This is a false positive because the field argument in the method is provided by the Step class required_fields."
+    }
+  ],
+  "updated": "2023-10-02 14:11:36 +0100",
+  "brakeman_version": "6.0.1"
+}

@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema[7.0].define(version: 2023_10_03_024901) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -64,7 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_03_024901) do
     t.date "rejection_completed_at"
     t.date "payment_confirmation_completed_at"
     t.date "banking_approval_completed_at"
-    t.text "rejection_details"
+    t.text "comments"
     t.integer "status", default: 0
     t.integer "rejection_reason"
   end
@@ -106,6 +107,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_03_024901) do
     t.index ["created_at"], name: "index_audits_on_created_at"
     t.index ["request_uuid"], name: "index_audits_on_request_uuid"
     t.index ["user_id", "user_type"], name: "user_index"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "action"
+    t.string "entity_class"
+    t.integer "entity_id"
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entity_class"], name: "index_events_on_entity_class"
   end
 
   create_table "flipper_features", force: :cascade do |t|
@@ -181,6 +192,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_03_024901) do
     t.string "headteacher_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "urns", force: :cascade do |t|
+    t.string "prefix"
+    t.string "code"
+    t.integer "suffix"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_urns_on_code"
   end
 
   create_table "users", force: :cascade do |t|

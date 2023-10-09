@@ -40,7 +40,7 @@ module Reports
       context "returns file with header" do
         let(:header) do
           [
-            "Ip Address",
+            "Urn",
             "Given Name",
             "Middle Name",
             "Family Name",
@@ -61,8 +61,9 @@ module Reports
             "Date Of Entry",
             "Start Date",
             "Subject",
-            "Urn",
             "Visa Type",
+            "Rejection Reason",
+            "Ip Address",
           ].join(",")
         end
 
