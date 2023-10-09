@@ -3,9 +3,9 @@
 require "rails_helper"
 
 RSpec.describe Urn do
-  subject(:urn) { described_class.generate(applicant_type) }
+  subject(:urn) { described_class.next(applicant_type) }
 
-  describe ".generate" do
+  describe ".next" do
     context 'when applicant type is "teacher"' do
       let(:applicant_type) { "teacher" }
 
@@ -32,7 +32,7 @@ RSpec.describe Urn do
       let(:applicant_type) { "invalid_type" }
 
       it "raises an ArgumentError" do
-        expect { urn }.to raise_error(ArgumentError, "Invalid applicant type: invalid_type")
+        expect { urn }.to raise_error(ArgumentError, 'Invalid route: invalid_type, must be one of ["teacher", "salaried_trainee"]')
       end
     end
   end
