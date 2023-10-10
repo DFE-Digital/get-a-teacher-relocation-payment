@@ -41,6 +41,7 @@ gem "flipper-ui"
 gem "httparty", "~> 0.21"
 gem "invisible_captcha"
 gem "omniauth-azure-activedirectory-v2"
+gem "rolify"
 gem "sentry-rails", "~> 5.11"
 
 group :test do
