@@ -81,8 +81,8 @@ GEM
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
     ast (2.4.2)
-    audited (5.3.3)
-      activerecord (>= 5.0, < 7.1)
+    audited (5.4.0)
+      activerecord (>= 5.0, < 7.2)
       request_store (~> 1.2)
     base64 (0.1.1)
     bcrypt (3.1.19)
@@ -316,13 +316,13 @@ GEM
       omniauth (~> 2.0)
     orm_adapter (0.5.0)
     os (1.1.4)
-    pagy (6.0.4)
+    pagy (6.1.0)
     parallel (1.23.0)
     parser (3.2.2.3)
       ast (~> 2.4.1)
       racc
     pg (1.5.4)
-    phonelib (0.8.3)
+    phonelib (0.8.4)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -388,6 +388,7 @@ GEM
       railties (>= 5.2)
     retriable (3.1.2)
     rexml (3.2.6)
+    rolify (6.0.1)
     rspec-core (3.12.2)
       rspec-support (~> 3.12.0)
     rspec-expectations (3.12.3)
@@ -524,7 +525,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
-  audited (~> 5.3, >= 5.3.3)
+  audited (~> 5.4)
   binding_of_caller
   bootsnap
   brakeman
@@ -557,6 +558,7 @@ DEPENDENCIES
   pry-byebug
   puma (~> 6.4)
   rails (~> 7.0.8)
+  rolify
   rspec-rails
   rubocop-govuk
   rubocop-performance

@@ -88,13 +88,14 @@ private
       date_of_entry: form.date_of_entry,
       start_date: form.start_date,
       subject: SubjectStep.new(form).answer.formatted_value,
-      urn: Urn.generate(form.application_route),
+      urn: Urn.next(form.application_route),
       visa_type: form.visa_type,
     )
   end
 
   def delete_form
     form.destroy!
+    Event.publish(:deleted, form)
   end
 
   def send_applicant_email

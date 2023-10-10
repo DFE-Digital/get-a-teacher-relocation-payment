@@ -82,6 +82,13 @@ RSpec.describe StepFlow do
       let(:form) { nil }
       let(:step_name) { "personal-details" }
 
+      it { is_expected.to be_nil }
+    end
+
+    context "when form is nil and requested step is application-route" do
+      let(:form) { nil }
+      let(:step_name) { "application-route" }
+
       it { is_expected.to be_instance_of(ApplicationRouteStep) }
     end
 

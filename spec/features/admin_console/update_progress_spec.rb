@@ -93,7 +93,7 @@ private
   def when_i_submit_a_rejection_with_reason_and_details
     fill_in_rejection_date
     select "Suspected fraud", from: "application_progress[rejection_reason]"
-    fill_in "application_progress[rejection_details]", with: "suspected_fraud"
+    fill_in "application_progress[comments]", with: "I suspected fraud on this application"
     click_button "Update"
   end
 

@@ -7,6 +7,8 @@ set -e
 
 # run migrations
 bundle exec rails db:migrate
+# Front load urn generation
+bundle exec rake urn:generate
 
 # add seed data in review environment
 if [[ "$RAILS_ENV" = "review" || "$RAILS_ENV" = "development" ]]; then

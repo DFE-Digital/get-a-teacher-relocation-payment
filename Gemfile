@@ -32,7 +32,7 @@ gem "uk_postcode"
 gem "phonelib"
 ###############
 
-gem "audited", "~> 5.3", ">= 5.3.3"
+gem "audited", "~> 5.4"
 gem "config", "~> 4.2"
 gem "devise", "~> 4.9"
 gem "dfe-analytics", github: "DFE-Digital/dfe-analytics", tag: "v1.10.1"
@@ -42,6 +42,7 @@ gem "flipper-ui"
 gem "httparty", "~> 0.21"
 gem "invisible_captcha"
 gem "omniauth-azure-activedirectory-v2"
+gem "rolify"
 gem "sentry-rails", "~> 5.11"
 
 group :test do

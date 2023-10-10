@@ -153,5 +153,32 @@
     </table>
   </div>
 
+  <% if Flipper.enabled? :display_form_analytics, current_user %>
+  <div class="kpi-widget form-funnel">
+    <h3 class="title">Forms funnel</h3>
+    <h6 class="subtitle"><%= @kpis.funnel_date_range_title %></h6>
+    <table class="kpi-table">
+      <% @kpis.forms_funnel.each do |path,v|%>
+        <tr>
+          <td><%= path %></td>
+          <td><%= v[:eligible] %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="kpi-widget ineligibility-funnel">
+    <h3 class="title">Ineligible forms funnel</h3>
+    <h6 class="subtitle"><%= @kpis.funnel_date_range_title %></h6>
+    <table class="kpi-table">
+      <% @kpis.ineligible_forms_funnel.each do |path,v|%>
+        <tr>
+          <td><%= path %></td>
+          <td><%= v[:ineligible] %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <% end %>
 
 </div>

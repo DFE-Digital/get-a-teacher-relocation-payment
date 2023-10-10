@@ -58,8 +58,8 @@
       row.with_value(text: @progress.rejection_reason&.humanize ) 
     end
     summary_list.with_row do |row|
-      row.with_key(text: 'Rejection Details')
-      row.with_value(text: @progress.rejection_details ) 
+      row.with_key(text: 'Comments')
+      row.with_value(text: @progress.comments ) 
     end
   end
 end %>

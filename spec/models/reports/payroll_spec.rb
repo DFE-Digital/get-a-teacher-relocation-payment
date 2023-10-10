@@ -9,13 +9,13 @@ module Reports
 
     subject(:report) { described_class.new }
 
-    it "returns the name of the Report" do
+    it "returns the filename of the Report" do
       frozen_time = Time.zone.local(2023, 7, 17, 12, 30, 45)
       travel_to frozen_time do
-        expected_name = "Payroll-Report-20230717-123045.csv"
+        expected_name = "reports-payroll-20230717-123045.csv"
 
         report = described_class.new
-        actual_name = report.name
+        actual_name = report.filename
 
         expect(actual_name).to eq(expected_name)
       end
@@ -119,16 +119,19 @@ module Reports
         expect(report.csv).to include(expected_header)
       end
 
-      it "excludes applications from the csv after they've been downloaded once" do
-        app = create(:application, application_progress: progress)
+      context "includes applications from the csv before invoking `post_generation_hook`" do
+        let(:app) { create(:application, application_progress: progress) }
+        let(:csv) { report.csv }
 
-        first_csv = report.csv
+        before { app }
 
-        expect(first_csv).to include(app.applicant.email_address)
+        it { expect(csv).to include(app.applicant.email_address) }
 
-        second_csv = report.csv
+        context "excludes applications from the csv after invoking `post_generation_hook`" do
+          before { report.post_generation_hook }
 
-        expect(second_csv).not_to include(app.applicant.email_address)
+          it { expect(csv).not_to include(app.urn) }
+        end
       end
     end
   end

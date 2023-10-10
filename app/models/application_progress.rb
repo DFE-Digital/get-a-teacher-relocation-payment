@@ -6,11 +6,11 @@
 #
 #  id                                :bigint           not null, primary key
 #  banking_approval_completed_at     :date
+#  comments                          :text
 #  home_office_checks_completed_at   :date
 #  initial_checks_completed_at       :date
 #  payment_confirmation_completed_at :date
 #  rejection_completed_at            :date
-#  rejection_details                 :text
 #  rejection_reason                  :integer
 #  school_checks_completed_at        :date
 #  school_investigation_required     :boolean          default(FALSE), not null
@@ -44,6 +44,7 @@ class ApplicationProgress < ApplicationRecord
     standing_data_checks_failed: 5,
     no_longer_in_post: 6,
     request_to_re_submit: 7,
+    unable_complete_school_checks: 8,
   }
 
   before_save -> { self.status = StatusQuery.new(self).current_status }

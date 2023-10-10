@@ -8,9 +8,10 @@ class Report
   }.freeze
 
   def self.call(...)
-    service = new(...)
-    service.data
-    service
+    report = new(...)
+    report.data
+    report.post_generation_hook
+    report
   end
 
   def initialize(report_id, **kwargs)
@@ -20,16 +21,12 @@ class Report
     raise(ArgumentError, "Invalid report id #{report_id}")
   end
 
-  def report_name
-    report_class.to_s.capitalize
-  end
-
-  def filename
-    report.name
-  end
+  delegate :name, to: :report
+  delegate :filename, to: :report
+  delegate :post_generation_hook, to: :report
 
   def data
-    report.csv
+    @data ||= report.csv
   end
 
 private
@@ -37,25 +34,6 @@ private
   attr_reader :report_class, :kwargs
 
   def report
-    return @report if @report
-    return @report = report_class.new(*report_args) if report_args
-
-    @report = report_class.new
-  end
-
-  def report_args
-    return qa_report_args if report_class == Reports::QaReport
-
-    nil
-  end
-
-  def qa_report_args
-    return @qa_report_args if @qa_report_args
-
-    status = kwargs.fetch(:status)
-    applications = Application.filter_by_status(status).reject(&:qa?)
-    applications.each(&:mark_as_qa!)
-
-    @qa_report_args = [applications, status]
+    @report ||= report_class.new(**kwargs)
   end
 end
