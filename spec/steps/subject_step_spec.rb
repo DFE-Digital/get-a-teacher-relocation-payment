@@ -28,7 +28,7 @@ RSpec.describe SubjectStep, type: :model do
   context "salaried_trainee" do
     let(:form) { build(:trainee_form) }
 
-    question_hint = "Physics or languages can be combined with other subjects but must make up at least 50% of your course content. This will be validated by Department for Education with the school where you are training."
+    question_hint = "Physics or languages can be combined with other subjects but must make up at least 50% of your course content."
 
     include_examples "behaves like a step",
                      described_class,
