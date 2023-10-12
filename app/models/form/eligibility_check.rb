@@ -40,6 +40,8 @@ class Form::EligibilityCheck
   end
 
   def date_of_entry_eligible?(date_of_entry, start_date)
+    return false unless date_of_entry && start_date
+
     date_of_entry >= start_date - 3.months
   end
 
