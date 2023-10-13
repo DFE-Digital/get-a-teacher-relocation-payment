@@ -42,4 +42,16 @@ RSpec.describe ApplicationProgressValidator, type: :model do
   end
 
   it_behaves_like "requires a rejection reason"
+
+  context "date really out of range" do
+    let(:date_param) { ApplicationProgressValidator::DATE_PARAMS.first }
+    let(:params) { { "#{date_param}(3i)" => "31", "#{date_param}(2i)" => "1", "#{date_param}(1i)" => "23" } }
+
+    it "adds an error for the invalid date" do
+      validator = described_class.new(progress, params)
+
+      expect(validator.valid?).to be false
+      expect(progress.errors.details[date_param]).to include(error: "out of range")
+    end
+  end
 end
