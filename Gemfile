@@ -14,7 +14,6 @@ gem "puma", "~> 6.4"
 gem "rails", "~> 7.0.8"
 gem "sprockets-rails"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
-gem "webpacker"
 
 gem "pagy"
 gem "scenic"
@@ -83,3 +82,7 @@ gem "sidekiq", "~> 6.5"
 gem "sidekiq-cron", "~> 1.10"
 
 gem "mail-notify", "~> 1.1"
+
+gem "dartsass-rails", "~> 0.5.0"
+
+gem "importmap-rails", "~> 1.2"
