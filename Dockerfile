@@ -1,4 +1,4 @@
-FROM ruby:3.1.3-alpine3.15
+FROM ruby:3.1.4-alpine
 
 ENV APP_HOME /app
 RUN mkdir $APP_HOME
@@ -16,9 +16,6 @@ RUN apk add --update --no-cache --virtual build-dependances \
     bundle install --jobs=4 && \
     rm -rf /usr/local/bundle/cache && \
     apk del build-dependances
-
-# Remove once base image ruby:3.1.3-alpine3.15 has been updated with latest libraries
-RUN apk add --no-cache ncurses-libs=6.3_p20211120-r2
 
 COPY package.json yarn.lock ./
 RUN  yarn install --frozen-lockfile && \
