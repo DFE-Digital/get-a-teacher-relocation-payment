@@ -1,31 +1,6 @@
 {
-  "engines": {
-    "node": "16.x"
-  },
-  "scripts": {
-    "js:lint": "standard --fix",
-    "test": "jest",
-    "test:ci": "jest --ci --runInBand --coverage"
-  },
   "dependencies": {
-    "@ministryofjustice/frontend": "^1.8.0",
-    "@rails/webpacker": "5.4.4",
-    "core-js": "^3.33.0",
-    "govuk-frontend": "^4.7.0",
-    "rails-ujs": "^5.2.8",
-    "turbolinks": "^5.2.0",
-    "webpack": "^4.46.0",
-    "webpack-cli": "^4.10.0"
-  },
-  "devDependencies": {
-    "jest": "^29.7.0",
-    "standard": "^17.1.0",
-    "webpack-dev-server": "^4"
-  },
-  "standard": {
-    "env": [
-      "jest"
-    ]
-  },
+    "govuk-frontend": "^4.7.0"
+ },
   "license": "MIT"
 }
