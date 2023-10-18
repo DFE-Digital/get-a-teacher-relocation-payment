@@ -66,7 +66,7 @@ private
   end
 
   def date_out_range?(field_date)
-    field_date < 12.months.ago || 12.months.from_now > field_date
+    field_date < 12.months.ago || 12.months.from_now < field_date
   end
 
   def parse_date(year, month, day)
