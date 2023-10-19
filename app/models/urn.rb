@@ -77,7 +77,7 @@ class Urn
   private
 
     def routes
-      @routes ||= Hash.new do |hash, route|
+      @routes ||= Concurrent::Hash.new do |hash, route|
         hash[route] = urn_enumerator(
           config.codes.fetch(route),
           config.seeds.fetch(route, Random.new_seed),
@@ -102,7 +102,7 @@ class Urn
     end
 
     def urn_enumerator(code, seed, used_urns)
-      list = available_urns(code, seed, used_urns)
+      list = Concurrent::Array.new(available_urns(code, seed, used_urns))
       error_msg = "you have exhausted urn for code #{code} you need to increase the size of the suffix"
 
       Enumerator.new do |yielder|

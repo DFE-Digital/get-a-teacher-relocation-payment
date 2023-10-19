@@ -32,6 +32,8 @@ gem "phonelib"
 ###############
 
 gem "audited", "~> 5.4"
+gem "concurrent-ruby", require: "concurrent"
+gem "concurrent-ruby-ext"
 gem "config", "~> 4.2"
 gem "devise", "~> 4.9"
 gem "flipper"
