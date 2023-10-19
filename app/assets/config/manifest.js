@@ -2,4 +2,4 @@
 //= link_tree ../builds
 //= link_tree ../../javascript .js
 //= link_tree ../../../vendor/javascript .js
-//= link_tree ../../../vendor/assets
+//= link_tree ../../../node_modules
