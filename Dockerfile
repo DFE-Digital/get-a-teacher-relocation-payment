@@ -18,8 +18,6 @@ RUN apk add --update --no-cache --virtual build-dependances \
     apk del build-dependances
 
 COPY package.json yarn.lock ./
-RUN  yarn install --frozen-lockfile && \
-     yarn cache clean
 
 COPY . .
 
@@ -36,6 +34,7 @@ ARG GOVUK_NOTIFY_GENERIC_EMAIL_TEMPLATE_ID
 ENV GOVUK_NOTIFY_GENERIC_EMAIL_TEMPLATE_ID=$GOVUK_NOTIFY_GENERIC_EMAIL_TEMPLATE_ID
 
 RUN bundle exec rake assets:precompile && \
-    rm -rf tmp
+    rm -rf node_modules tmp && \
+    apk del yarn nodejs
 
 CMD ./bin/app-startup.sh
