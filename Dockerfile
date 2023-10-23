@@ -18,6 +18,8 @@ RUN apk add --update --no-cache --virtual build-dependances \
     apk del build-dependances
 
 COPY package.json yarn.lock ./
+RUN  yarn install --frozen-lockfile && \
+     yarn cache clean
 
 COPY . .
 
