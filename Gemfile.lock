@@ -290,6 +290,11 @@ GEM
       racc
     pg (1.5.4)
     phonelib (0.8.4)
+    propshaft (0.7.0)
+      actionpack (>= 7.0.0)
+      activesupport (>= 7.0.0)
+      rack
+      railties (>= 7.0.0)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -435,13 +440,6 @@ GEM
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
-    sprockets (4.2.0)
-      concurrent-ruby (~> 1.0)
-      rack (>= 2.2.4, < 4)
-    sprockets-rails (3.4.2)
-      actionpack (>= 5.2)
-      activesupport (>= 5.2)
-      sprockets (>= 3.0.0)
     thor (1.2.2)
     timeout (0.4.0)
     tzinfo (2.0.6)
@@ -505,6 +503,7 @@ DEPENDENCIES
   pagy
   pg (~> 1.5)
   phonelib
+  propshaft (~> 0.7.0)
   pry-byebug
   puma (~> 6.4)
   rails (~> 7.0.8)
@@ -520,7 +519,6 @@ DEPENDENCIES
   sidekiq (~> 6.5)
   sidekiq-cron (~> 1.10)
   simplecov
-  sprockets-rails
   tzinfo-data
   uk_postcode
   web-console

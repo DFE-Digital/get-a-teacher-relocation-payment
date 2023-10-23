@@ -1,15 +1,6 @@
-# frozen_string_literal: true
+# Dartsass load-path
+Rails.application.config.dartsass.build_options << " --load-path #{Rails.root.join('node_modules')} "
 
-# Be sure to restart your server when you modify this file.
-
-# Version of your assets, change this if you want to expire all your assets.
-Rails.application.config.assets.version = "1.0"
-Rails.application.config.assets.paths << Rails.root.join("node_modules")
-
-# Add additional assets to the asset load path.
-# Rails.application.config.assets.paths << Emoji.images_path
-
-# Precompile additional assets.
-# application.js, application.css, and all non-JS/CSS in the app/assets
-# folder are already added.
-# Rails.application.config.assets.precompile += %w( admin.js admin.css )
+## Propshaft
+Rails.application.config.assets.paths << Rails.root.join("vendor/assets")
+Rails.application.config.assets.excluded_paths << Rails.root.join("app/assets/stylesheets")
