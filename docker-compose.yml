@@ -34,7 +34,9 @@ services:
     environment:
       - DATABASE_URL=postgresql://gtrp:gtrp@database/get_an_international_relocation_payment_development
       - REDIS_URL=redis://redis
-      - RAILS_ENV=development
+      - RAILS_ENV=production
+      - SECRET_KEY_BASE=123476927954
+      - RAILS_SERVE_STATIC_FILES=true
     env_file:
       - .env
 
@@ -43,5 +45,22 @@ services:
     ports:
       - 3001:3001
     command: ./bin/worker-startup.sh
+
+  nginx:
+    image: nginx:1.25
+    networks:
+      - gtrp
+    depends_on: [ app ]
+    ports:
+      - 443:443
+      - 80:80
+    environment:
+      - BACKEND_HOST=app
+      - BACKEND_PORT=3000
+    volumes:
+      - ./nginx/nginx.conf.template:/etc/nginx/templates/default.conf.template:ro
+      - ./nginx/cert.pem:/etc/ssl/certs/site.crt
+      - ./nginx/key.pem:/etc/ssl/private/site.dec.key
+
 networks:
   gtrp:

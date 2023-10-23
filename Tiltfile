@@ -11,11 +11,13 @@ resources = [
     "redis",
     "database",
     "app",
-    "worker"
+    "worker",
+    "nginx"
 ]
 
 
 if local_app:
+    resources.remove("nginx")
     resources.remove("app")
     resources.remove("worker")
     local_resource(
