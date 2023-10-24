@@ -71,9 +71,27 @@ class Urn
     end
 
     def next(route)
-      config.mutex.synchronize { routes[route].next }
+      config.mutex.synchronize { routes.fetch(route.to_sym).next }
     rescue KeyError
       raise(ArgumentError, "Invalid route: #{route}, must be one of #{config.codes.keys}")
+    end
+
+    def initialize_routes!
+      return unless Application.connected? && Application.table_exists?
+
+      @routes = Concurrent::Hash.new
+
+      @routes[:teacher] = urn_enumerator(
+        config.codes.fetch(:teacher),
+        config.seeds.fetch(:teacher, Random.new_seed),
+        config.urns.call(:teacher),
+      )
+
+      @routes[:salaried_trainee] = urn_enumerator(
+        config.codes.fetch(:salaried_trainee),
+        config.seeds.fetch(:salaried_trainee, Random.new_seed),
+        config.urns.call(:salaried_trainee),
+      )
     end
 
   private
