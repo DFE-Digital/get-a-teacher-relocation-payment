@@ -28,9 +28,11 @@ class Urn
         salaried_trainee: "ST",
       }.with_indifferent_access
       @default_urns = ->(_) { [] }
+      @mutex = Mutex.new
     end
 
     attr_writer :prefix, :codes, :max_suffix, :seeds, :urns, :padding_size
+    attr_reader :mutex
 
     def prefix
       @prefix || @default_prefix
@@ -69,7 +71,7 @@ class Urn
     end
 
     def next(route)
-      routes[route].next
+      config.mutex.synchronize { routes[route].next }
     rescue KeyError
       raise(ArgumentError, "Invalid route: #{route}, must be one of #{config.codes.keys}")
     end
