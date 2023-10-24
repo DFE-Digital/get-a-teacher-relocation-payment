@@ -21,11 +21,11 @@ module SystemAdmin
       case params[:id]
       when "home_office", "standing_data", "payroll"
         unless current_user.has_role?(:manager)
-          redirect_to(root_path, alert: "You do not have permission to access this page")
+          redirect_to(root_path, alert: t("errors.access_denied"))
         end
       when "applications", "qa"
         unless current_user.has_role?(:admin)
-          redirect_to(root_path, alert: "You do not have permission to access this page")
+          redirect_to(root_path, alert: t("errors.access_denied"))
         end
       end
     end

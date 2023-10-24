@@ -48,3 +48,5 @@ en:
       success: 'User was successfully removed.'
   omniauth_callbacks:
     no_account: 'You have not yet an account!'
+  errors:
+    access_denied: 'You do not have permission to access this page'

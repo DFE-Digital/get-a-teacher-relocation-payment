@@ -66,7 +66,7 @@ module SystemAdmin
 
     def check_user_roles
       unless current_user.has_role?(:servant)
-        redirect_to(root_path, alert: "You do not have permission to access this page")
+        redirect_to(root_path, alert: t("errors.access_denied"))
       end
     end
   end
