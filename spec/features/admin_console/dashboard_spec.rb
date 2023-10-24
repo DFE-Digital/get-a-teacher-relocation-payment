@@ -7,105 +7,105 @@ describe "Dashboard" do
 
   it "shows the Total Applications widget" do
     given_there_are_5_applications
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:expectator)
     when_i_am_in_the_dashboard_page
     then_i_can_see_the_applications_widget
   end
 
   it "shows the Total Rejections widget" do
     given_there_are_rejected_applications
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:expectator)
     when_i_am_in_the_dashboard_page
     then_i_can_see_the_total_rejections_widget
   end
 
   it "shows the Average Age widget" do
     given_there_are_3_applicants_with_ages
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:expectator)
     when_i_am_in_the_dashboard_page
     then_i_can_see_the_average_age_widget
   end
 
   it "shows the Total Paid widget" do
     given_there_are_paid_applications
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:expectator)
     when_i_am_in_the_dashboard_page
     then_i_can_see_the_total_paid_widget
   end
 
   it "shows the Route Breakdown widget" do
     given_there_are_few_applications
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:expectator)
     when_i_am_in_the_dashboard_page
     then_i_can_see_the_route_breakdown_widget
   end
 
   it "shows the Subject Breakdown widget" do
     given_there_are_few_applications
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:expectator)
     when_i_am_in_the_dashboard_page
     then_i_can_see_the_subject_breakdown_widget
   end
 
   it "shows the Visa Breakdown widget" do
     given_there_are_few_applications_with_visas
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:expectator)
     when_i_am_in_the_dashboard_page
     then_i_can_see_the_visa_breakdown_widget
   end
 
   it "shows the Nationalities Breakdown widget" do
     given_there_are_few_applications_with_nationalities
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:expectator)
     when_i_am_in_the_dashboard_page
     then_i_can_see_the_nationalities_breakdown_widget
   end
 
   it "shows the Gender Breakdown widget" do
     given_there_are_few_applications
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:expectator)
     when_i_am_in_the_dashboard_page
     then_i_can_see_the_gender_breakdown_widget
   end
 
   it "shows the Rejection Reason Breakdown widget" do
     given_there_are_applications_with_rejection_reasons
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:expectator)
     when_i_am_in_the_dashboard_page
     then_i_can_see_the_rejection_reason_breakdown_widget
   end
 
   it "shows the Initial Checks Approval time widget" do
     given_there_are_applications_with_initial_checks
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:expectator)
     when_i_am_in_the_dashboard_page
     then_i_can_see_the_initial_checks_approval_average_time_widget
   end
 
   it "shows the Home Office Checks Approval time widget" do
     given_there_are_applications_with_home_office_checks
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:expectator)
     when_i_am_in_the_dashboard_page
     then_i_can_see_the_home_office_checks_time_widget
   end
 
   it "shows the School Checks Approval time widget" do
     given_there_are_applications_with_school_checks
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:expectator)
     when_i_am_in_the_dashboard_page
     then_i_can_see_the_school_checks_time_widget
   end
 
   it "shows the Banking Approval time widget" do
     given_there_are_applications_with_banking_approval
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:expectator)
     when_i_am_in_the_dashboard_page
     then_i_can_see_the_banking_approval_completed_time_widget
   end
 
   it "shows the Payment Confirmation time widget" do
     given_there_are_applications_with_payment_confirmation
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:expectator)
     when_i_am_in_the_dashboard_page
     then_i_can_see_the_payment_confirmation_time_widget
   end

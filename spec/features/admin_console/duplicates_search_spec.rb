@@ -17,19 +17,19 @@ RSpec.describe "Duplicates Search" do
   end
 
   it "Admin can search for duplicates by email" do
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:servant)
     when_i_search_for_a_duplicate_by("email")
     then_i_see_matching_duplicates
   end
 
   it "Admin can search for duplicates by phone number" do
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:servant)
     when_i_search_for_a_duplicate_by("phone number")
     then_i_see_matching_duplicates_by_phone_number
   end
 
   it "Admin can search for duplicates by passport number" do
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:servant)
     when_i_search_for_a_duplicate_by("passport number")
     then_i_see_matching_duplicates_by_passport_number
   end

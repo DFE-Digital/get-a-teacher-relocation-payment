@@ -7,13 +7,13 @@ describe "Settings" do
   include_context "with common application form steps"
 
   it "shows the app_settings page" do
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:admin)
     when_i_visit_the_settings_page
     then_i_should_see_the_settings_page
   end
 
   it "updates the app_settings page" do
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:admin)
     when_i_visit_the_settings_page
     and_i_update_the_settings_page
     then_i_should_see_the_settings_updated

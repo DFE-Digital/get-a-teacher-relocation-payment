@@ -5,7 +5,7 @@ describe "Application Progress" do
   let(:application) { create(:application) }
 
   it "validates the date fields" do
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:servant)
     given_i_am_on_the_edit_application_page
     when_i_submit_an_invalid_date
     then_i_see_an_error_message
@@ -15,7 +15,7 @@ describe "Application Progress" do
   end
 
   it "validates the rejection reason and details fields" do
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:servant)
 
     given_i_am_on_the_edit_application_page
     when_i_submit_a_rejection_without_reason
