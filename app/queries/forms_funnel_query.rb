@@ -63,7 +63,7 @@ class FormsFunnelQuery
 
     form_dates = date_of_entries.each_with_object([]) do |(id, date_of_entry), list|
       entry = start_dates.detect { |(sid, _)| sid == id }
-      list << [date_of_entry.to_date, entry.last.to_date]
+      list << [date_of_entry.to_date, entry&.last&.to_date]
       list
     end
 

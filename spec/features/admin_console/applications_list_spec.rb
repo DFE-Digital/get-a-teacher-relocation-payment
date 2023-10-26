@@ -59,8 +59,6 @@ describe "Applications List" do
 
   def given_there_are_few_applications
     # Create 2 specific applications for search tests
-    create_list(:urn, 5, code: "TE")
-    create_list(:urn, 5, code: "ST")
     unique_applicant = create(:applicant, given_name: "Unique Given Name", middle_name: "Unique Middle Name", family_name: "Unique Family Name", email_address: "unique@example.com")
     create(:application, applicant: unique_applicant, urn: "Unique Urn 1")
 
@@ -72,16 +70,12 @@ describe "Applications List" do
   end
 
   def given_there_is_an_application_that_breached_sla
-    create_list(:urn, 5, code: "TE")
-    create_list(:urn, 5, code: "ST")
     applicant = create(:applicant)
     application = create(:application, applicant:)
     application.application_progress.update(initial_checks_completed_at: 4.days.ago)
   end
 
   def given_there_are_applications_with_different_dates
-    create_list(:urn, 5, code: "TE")
-    create_list(:urn, 5, code: "ST")
     create(:application, application_progress: build(:application_progress, :initial_checks_completed, status: :initial_checks))
     create(:application, application_progress: build(:application_progress, :home_office_checks_completed, status: :home_office_checks))
   end

@@ -31,9 +31,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.14.0'
+          node-version: '18.18.2'
       - name: Setup yarn
         run: npm install -g yarn
       - name: Install Node packages
@@ -41,7 +41,7 @@ jobs:
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.1.3
+          ruby-version: 3.1.4
           bundler-cache: true
       - name: Precompile assets
         run: bundle exec rails assets:precompile
@@ -60,7 +60,7 @@ jobs:
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.1.3
+          ruby-version: 3.1.4
           bundler-cache: true
       # Add or replace any other lints here
       - name: Security audit dependencies

@@ -27,18 +27,19 @@ class ApplicationProgressValidator
 private
 
   def process_date_params
-    DATE_PARAMS.each do |date_param|
-      day, month, year = extract_date_components(date_param)
+    DATE_PARAMS.each { |date_param| process_date_param(date_param) }
+  end
 
-      if year.blank? && month.blank? && day.blank?
-        @progress[date_param] = nil
-      elsif valid_date?(year, month, day)
-        @progress[date_param] = Date.new(year.to_i, month.to_i, day.to_i)
-      else
-        @progress.errors.add(date_param, "is not a valid date")
-        @progress[date_param] = InvalidDate.new(day:, month:, year:)
-      end
-    end
+  def process_date_param(date_param)
+    day, month, year = extract_date_components(date_param)
+    return if year.blank? && month.blank? && day.blank?
+
+    field_date = parse_date(year, month, day)
+
+    return invalid_date(date_param, day, month, year) unless field_date
+    return invalid_date_range(date_param, field_date) if date_out_range?(field_date)
+
+    @progress[date_param] = field_date
   end
 
   def extract_date_components(date_param)
@@ -54,9 +55,23 @@ private
     remaining_params.each { |param, value| @progress[param] = value }
   end
 
-  def valid_date?(year, month, day)
+  def invalid_date(date_param, day, month, year)
+    @progress.errors.add(date_param, "is not a valid date")
+    @progress[date_param] = InvalidDate.new(day:, month:, year:)
+  end
+
+  def invalid_date_range(date_param, field_date)
+    @progress.errors.add(date_param, "out of range")
+    @progress[date_param] = field_date
+  end
+
+  def date_out_range?(field_date)
+    field_date < 12.months.ago || 12.months.from_now < field_date
+  end
+
+  def parse_date(year, month, day)
     Date.new(year.to_i, month.to_i, day.to_i)
   rescue StandardError
-    false
+    nil
   end
 end

@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[7.0].define(version: 2023_10_03_024901) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_09_110217) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "plpgsql"
@@ -85,6 +84,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_03_024901) do
     t.datetime "standing_data_csv_downloaded_at"
     t.datetime "payroll_csv_downloaded_at"
     t.index ["applicant_id"], name: "index_applications_on_applicant_id"
+    t.index ["application_route"], name: "index_applications_on_application_route"
+    t.index ["urn"], name: "index_applications_on_urn", unique: true
   end
 
   create_table "audits", force: :cascade do |t|
@@ -192,15 +193,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_03_024901) do
     t.string "headteacher_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "urns", force: :cascade do |t|
-    t.string "prefix"
-    t.string "code"
-    t.integer "suffix"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["code"], name: "index_urns_on_code"
   end
 
   create_table "users", force: :cascade do |t|

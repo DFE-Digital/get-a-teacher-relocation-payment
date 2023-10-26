@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.3"
+ruby "3.1.4"
 
 gem "bootsnap", require: false
 gem "foreman"
@@ -12,9 +12,7 @@ gem "okcomputer"
 gem "pg", "~> 1.5"
 gem "puma", "~> 6.4"
 gem "rails", "~> 7.0.8"
-gem "sprockets-rails"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
-gem "webpacker"
 
 gem "pagy"
 gem "scenic"
@@ -33,7 +31,9 @@ gem "phonelib"
 ###############
 
 gem "audited", "~> 5.4"
-gem "config", "~> 4.2"
+gem "concurrent-ruby", require: "concurrent"
+gem "concurrent-ruby-ext"
+gem "config", "~> 5.0"
 gem "devise", "~> 4.9"
 gem "dfe-analytics", github: "DFE-Digital/dfe-analytics", tag: "v1.10.1"
 gem "flipper"
@@ -43,7 +43,7 @@ gem "httparty", "~> 0.21"
 gem "invisible_captcha"
 gem "omniauth-azure-activedirectory-v2"
 gem "rolify"
-gem "sentry-rails", "~> 5.11"
+gem "sentry-rails", "~> 5.12"
 
 group :test do
   gem "shoulda-matchers", "~> 5.0"
@@ -83,4 +83,10 @@ gem "sidekiq", "~> 6.5"
 
 gem "sidekiq-cron", "~> 1.10"
 
-gem "mail-notify", "~> 1.1"
+gem "mail-notify", "~> 1.2"
+
+gem "dartsass-rails", "~> 0.5.0"
+
+gem "importmap-rails", "~> 1.2"
+
+gem "propshaft", "~> 0.8.0"
