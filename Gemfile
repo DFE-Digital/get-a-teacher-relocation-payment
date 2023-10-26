@@ -88,4 +88,4 @@ gem "dartsass-rails", "~> 0.5.0"
 
 gem "importmap-rails", "~> 1.2"
 
-gem "propshaft", "~> 0.7.0"
+gem "propshaft", "~> 0.8.0"
