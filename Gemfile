@@ -82,7 +82,7 @@ gem "sidekiq", "~> 6.5"
 
 gem "sidekiq-cron", "~> 1.10"
 
-gem "mail-notify", "~> 1.1"
+gem "mail-notify", "~> 1.2"
 
 gem "dartsass-rails", "~> 0.5.0"
 
