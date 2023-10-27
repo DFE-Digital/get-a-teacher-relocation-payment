@@ -1,4 +1,4 @@
-FROM ruby:3.1.4-alpine
+FROM ruby:3.2.2-alpine
 
 ENV APP_HOME /app
 RUN mkdir $APP_HOME
@@ -12,7 +12,7 @@ COPY .tool-versions Gemfile Gemfile.lock ./
 
 RUN apk add --update --no-cache --virtual build-dependances \
     postgresql-dev build-base && \
-    apk add --update --no-cache libpq yarn && \
+    apk add --update --no-cache libpq yarn yaml-dev && \
     bundle install --jobs=4 && \
     rm -rf /usr/local/bundle/cache && \
     apk del build-dependances
