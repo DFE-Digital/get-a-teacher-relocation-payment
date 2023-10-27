@@ -120,6 +120,7 @@ NATIONALITIES = [
   "Lao",
   "Latvian",
   "Lebanese",
+  "Lesotho",
   "Liberian",
   "Libyan",
   "Liechtenstein citizen",
