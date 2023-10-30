@@ -67,10 +67,15 @@ RSpec.describe Application do
   end
 
   describe "#urn" do
-    it "is blank before creation" do
-      application = described_class.new
+    let(:application) { build(:application) }
 
+    it "is blank before creation" do
       expect(application.urn).to be_blank
+    end
+
+    it "is set after creation" do
+      application.save
+      expect(application.urn).not_to be_blank
     end
   end
 

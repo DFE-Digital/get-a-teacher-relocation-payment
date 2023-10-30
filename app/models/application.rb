@@ -60,6 +60,8 @@ class Application < ApplicationRecord
                        unique_by: %i[application_id status])
   end
 
+  after_create :set_urn
+
   validates(:application_date, presence: true)
   validates(:application_route, presence: true)
   validates(:date_of_entry, presence: true)
@@ -67,5 +69,11 @@ class Application < ApplicationRecord
   validates(:subject, presence: true)
   validates(:visa_type, presence: true)
   validates(:applicant, presence: true)
-  validates(:urn, uniqueness: true)
+  validates(:urn, uniqueness: true, allow_blank: true)
+
+private
+
+  def set_urn
+    update(urn: Urn.new(self).urn) if urn.blank?
+  end
 end
