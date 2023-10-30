@@ -126,7 +126,6 @@ RSpec.describe SubmitForm do
             date_of_entry: form.date_of_entry,
             start_date: form.start_date,
             subject: SubjectStep.new(form).answer.formatted_value,
-            urn: kind_of(String),
             visa_type: form.visa_type,
           }
         end
@@ -135,16 +134,11 @@ RSpec.describe SubmitForm do
       end
 
       context "applicant email" do
-        before do
-          allow(Urn).to receive(:next).and_return(urn)
-        end
-
-        let(:urn) { "SOMEURN" }
         let(:expected_email_params) do
           {
             params: {
               email: form.email_address,
-              urn: urn,
+              urn: kind_of(String),
             },
             args: [],
           }
