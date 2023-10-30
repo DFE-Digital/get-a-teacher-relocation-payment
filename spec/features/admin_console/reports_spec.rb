@@ -6,7 +6,7 @@ describe "Reports - export to CSV" do
   include AdminHelpers
 
   it "exports Home Office CSV" do
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:manager)
     when_i_am_in_the_reports_page
     and_i_click_on_the_home_office_csv_link
 
@@ -14,7 +14,7 @@ describe "Reports - export to CSV" do
   end
 
   it "exports Standing Data CSV" do
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:manager)
     when_i_am_in_the_reports_page
     and_i_click_on_the_standing_data_csv_link
 
@@ -22,7 +22,7 @@ describe "Reports - export to CSV" do
   end
 
   it "exports Payroll Data CSV" do
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:manager)
     when_i_am_in_the_reports_page
     and_i_click_on_the_payroll_data_csv_link
 
@@ -30,7 +30,7 @@ describe "Reports - export to CSV" do
   end
 
   it "exports Application CSV" do
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:admin)
     when_i_am_in_the_reports_page
     and_i_click_on_the_applications_csv_link
 
@@ -38,7 +38,7 @@ describe "Reports - export to CSV" do
   end
 
   it "exports Qa report CSV" do
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:admin)
     when_i_am_in_the_reports_page
     and_i_click_on_the_qa_report_csv_button
 

@@ -27,5 +27,13 @@ AppSettings.current.update!(
   service_end_date: 1.year.from_now,
 )
 
+Role::ROLES_LIST.each do |role_name|
+  Role.find_or_create_by(name: role_name)
+end
+
 local_user_email = ENV.fetch("LOCAL_USER_EMAIL", nil)
-User.create!(email: local_user_email) if local_user_email
+if local_user_email
+  user = User.create!(email: local_user_email)
+  user.roles = Role.all
+  user.save!
+end

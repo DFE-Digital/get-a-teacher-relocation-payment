@@ -19,7 +19,7 @@ describe "Open / Close service" do
     end
 
     it "allows the user access to the admin tool" do
-      given_i_am_signed_as_an_admin
+      given_i_am_signed_with_role(:admin)
       visit applicants_path
 
       expect(page).to have_text("Applications")
@@ -38,7 +38,7 @@ describe "Open / Close service" do
     end
 
     it "allows the user access to the admin tool" do
-      given_i_am_signed_as_an_admin
+      given_i_am_signed_with_role(:admin)
       visit applicants_path
 
       expect(page).to have_text("Applications")

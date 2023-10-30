@@ -7,21 +7,21 @@ describe "Applications List" do
 
   it "shows the correct columns" do
     given_there_are_few_applications
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:servant)
     when_i_am_in_the_applications_list_page
     then_i_can_see_the_correct_columns
   end
 
   it "shows the pagination" do
     given_there_are_few_applications
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:servant)
     when_i_am_in_the_applications_list_page
     then_i_can_see_the_pagination
   end
 
   it "allows searching" do
     given_there_are_few_applications
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:servant)
     when_i_am_in_the_applications_list_page
     then_i_can_see_the_search_form
     then_i_can_search_by_urn
@@ -29,14 +29,14 @@ describe "Applications List" do
 
   it "highlights applications that breached SLA" do
     given_there_is_an_application_that_breached_sla
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:servant)
     when_i_am_in_the_applications_list_page
     then_i_can_see_the_application_is_highlighted
   end
 
   it "allows filtering by status" do
     given_there_are_applications_with_different_dates
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:servant)
     when_i_am_in_the_applications_list_page
     then_i_can_see_the_status_filter_form
     then_i_can_filter_by_status
@@ -44,14 +44,14 @@ describe "Applications List" do
 
   it "displays timestamps correctly" do
     given_there_is_an_application_with_all_dates
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:servant)
     when_i_am_in_the_applications_list_page
     then_i_can_see_correct_timestamps
   end
 
   it "allows filtering by breached SLA" do
     given_there_is_an_application_that_breached_sla
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:servant)
     when_i_am_in_the_applications_list_page
     then_i_can_see_the_sla_filter_form
     then_i_can_filter_by_sla_breach

@@ -7,27 +7,27 @@ describe "CRUD USERS" do
 
   it "List Users" do
     given_there_are_users
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:admin)
     when_i_am_in_the_users_page
     then_i_can_see_the_users_list
   end
 
   it "Create User" do
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:admin)
     when_i_am_in_the_users_page
     then_i_can_create_a_user
   end
 
   it "Update User" do
     given_there_are_users
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:admin)
     when_i_am_in_the_users_page
     then_i_can_update_a_user
   end
 
   it "Delete User" do
     given_there_are_users
-    given_i_am_signed_as_an_admin
+    given_i_am_signed_with_role(:admin)
     when_i_am_in_the_users_page
     then_i_can_delete_a_user
   end

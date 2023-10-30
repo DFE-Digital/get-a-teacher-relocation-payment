@@ -4,6 +4,7 @@ module SystemAdmin
   class ApplicantsController < AdminController
     default_form_builder GOVUKDesignSystemFormBuilder::FormBuilder
 
+    before_action :check_user_roles
     before_action :find_applicant, only: %i[show edit update]
 
     include Pagy::Backend
@@ -61,6 +62,12 @@ module SystemAdmin
       @applicant = Applicant.find(params[:id])
       @application = @applicant.application
       @progress = @application.application_progress
+    end
+
+    def check_user_roles
+      unless current_user.has_role?(:servant)
+        redirect_to(root_path, alert: t("errors.access_denied"))
+      end
     end
   end
 end
