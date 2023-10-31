@@ -141,6 +141,29 @@
     {
       "warning_type": "SQL Injection",
       "warning_code": 0,
+      "fingerprint": "a656b2b6c44e404c3fc2d9410ba8c247a14332dbbdbb015904d14fdbc46e75da",
+      "check_name": "SQL",
+      "message": "Possible SQL injection",
+      "file": "app/models/reports/home_office_excel.rb",
+      "line": 86,
+      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
+      "code": "Arel.sql(\"CONCAT(#{cols.join(\", ' ', \")})\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Reports::HomeOfficeExcel",
+        "method": "dataset_fields"
+      },
+      "user_input": "cols.join(\", ' ', \")",
+      "confidence": "Medium",
+      "cwe_id": [
+        89
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "SQL Injection",
+      "warning_code": 0,
       "fingerprint": "b205b9967732ba2d64494d600f884760570c0f38069b950bf4a82a2c030b8505",
       "check_name": "SQL",
       "message": "Possible SQL injection",
@@ -183,31 +206,8 @@
         89
       ],
       "note": "This is a false positive because the field argument in the method is provided by the Step class required_fields."
-    },
-    {
-      "warning_type": "SQL Injection",
-      "warning_code": 0,
-      "fingerprint": "8df93197e95285f7b6b35ce2d819c93bcd71204a260dbd1b84e59a4962ec5e43",
-      "check_name": "SQL",
-      "message": "Possible SQL injection",
-      "file": "app/models/reports/home_office.rb",
-      "line": 86,
-      "link": "https://brakemanscanner.org/docs/warning_types/sql_injection/",
-      "code": "Arel.sql(\"CONCAT(#{cols.join(\", ' ', \")})\")",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Reports::HomeOffice",
-        "method": "dataset_fields"
-      },
-      "user_input": "cols.join(\", ' ', \")",
-      "confidence": "Weak",
-      "cwe_id": [
-        89
-      ],
-      "note": ""
     }
   ],
-  "updated": "2023-10-05 14:55:00 +0100",
+  "updated": "2023-10-31 14:11:54 +0000",
   "brakeman_version": "6.0.1"
 }
