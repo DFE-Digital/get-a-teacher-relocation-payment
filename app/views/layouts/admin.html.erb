@@ -38,7 +38,7 @@
       <%= header.with_navigation_item(text: "Users", href: users_path, active: request.path.include?('/system-admin/users')) if current_user.has_role?(:admin) %>
       <%= header.with_navigation_item(text: "Settings", href: edit_settings_path, active: request.path.include?('/system-admin/settings')) if current_user.has_role?(:admin) %>
       <%= header.with_navigation_item(text: "Audits", href: audits_path, active: request.path.include?('/system-admin/audits')) if current_user.has_role?(:admin) %>
-      <%= header.with_navigation_item(text: "Feature Flags", href: '/system_admin/features') if current_user.has_role?(:super_admin) %>
+      <%= header.with_navigation_item(text: "Feature Flags", href: '/system_admin/features/') if current_user.has_role?(:super_admin) %>
       <%= header.with_navigation_item(text: "Logout", href: destroy_user_session_path, active: false) %>
     <% end %>
 
