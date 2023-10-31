@@ -13,7 +13,7 @@ COPY .tool-versions Gemfile Gemfile.lock ./
 RUN apk add --update --no-cache --virtual build-dependances \
     postgresql-dev build-base && \
     apk add --update --no-cache libpq yarn yaml-dev && \
-    bundle install --jobs=4 && \
+    bundle install --without=test development --jobs=4 && \
     rm -rf /usr/local/bundle/cache && \
     apk del build-dependances
 
@@ -35,7 +35,9 @@ ENV GOVUK_NOTIFY_API_KEY=$GOVUK_NOTIFY_API_KEY
 ARG GOVUK_NOTIFY_GENERIC_EMAIL_TEMPLATE_ID
 ENV GOVUK_NOTIFY_GENERIC_EMAIL_TEMPLATE_ID=$GOVUK_NOTIFY_GENERIC_EMAIL_TEMPLATE_ID
 
-RUN bundle exec rake assets:precompile && \
+RUN RAILS_ENV=production \
+    SECRET_KEY_BASE=required_but_does_not_matter_for_assets \
+    bundle exec rake assets:precompile && \
     rm -rf node_modules tmp && \
     apk del yarn nodejs
 
