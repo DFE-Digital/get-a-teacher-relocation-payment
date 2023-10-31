@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Reports
-  class HomeOffice < Base
+  class HomeOfficeExcel < Base
     file_ext "xlsx"
 
     HEADER_MAPPINGS_KEY = "header_mappings"

@@ -3,7 +3,7 @@
 require "rails_helper"
 
 module Reports
-  describe HomeOffice do
+  describe HomeOfficeExcel do
     include ActiveSupport::Testing::TimeHelpers
 
     before { create(:mocked_home_office_report_template) }
@@ -15,7 +15,7 @@ module Reports
     it "returns the filename of the Report" do
       frozen_time = Time.zone.local(2023, 7, 17, 12, 30, 45)
       travel_to frozen_time do
-        expected_name = "reports-home-office-20230717-123045.xlsx"
+        expected_name = "reports-home-office-excel-20230717-123045.xlsx"
 
         report = described_class.new
         actual_name = report.filename

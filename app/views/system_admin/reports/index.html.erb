@@ -1,7 +1,12 @@
 <div class="home-office">
   <h2 class="govuk-heading-m">Home office report</h2>
   <p class="govuk-body">
+  <% if Flipper.enabled? :home_office_excel %>
+    Download a home office Excel file of applicants who have passed initial checks and can now be sent to the Home Office for verification.
+  <% else %>
     Download a CSV file of applicants who have passed initial checks and can now be sent to the Home Office for verification.
+
+  <% end %>
   </p>
 
   <p>

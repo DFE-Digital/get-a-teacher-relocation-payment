@@ -7,12 +7,13 @@ RSpec.describe Report do
     subject(:registered_reports) { described_class::REGISTERED_REPORTS }
 
     let(:expected_ids) do
-      %i[home_office standing_data payroll applications qa]
+      %i[home_office home_office_excel standing_data payroll applications qa]
     end
 
     let(:expected_classes) do
       [
-        Reports::HomeOffice,
+        Reports::HomeOfficeCsv,
+        Reports::HomeOfficeExcel,
         Reports::StandingData,
         Reports::Payroll,
         Reports::Applications,
@@ -59,16 +60,31 @@ RSpec.describe Report do
       it { expect(report).to have_received(:generate) }
     end
 
-    context "other report data" do
+    context "home office csv report" do
       let(:report_id) { "home_office" }
-      let(:report) { spy(Reports::HomeOffice) }
+      let(:report) { spy(Reports::HomeOfficeCsv) }
 
       before do
-        allow(Reports::HomeOffice).to receive(:new).and_return(report)
+        allow(Reports::HomeOfficeCsv).to receive(:new).and_return(report)
         service.data
       end
 
-      it { expect(Reports::HomeOffice).to have_received(:new) }
+      it { expect(Reports::HomeOfficeCsv).to have_received(:new) }
+      it { expect(report).to have_received(:generate) }
+    end
+
+    context "home office excel report" do
+      let(:report_id) { "home_office" }
+      let(:report) { spy(Reports::HomeOfficeExcel) }
+
+      before do
+        Flipper.enable :home_office_excel
+        allow(Reports::HomeOfficeExcel).to receive(:new).and_return(report)
+        service.data
+        Flipper.disable :home_office_excel
+      end
+
+      it { expect(Reports::HomeOfficeExcel).to have_received(:new) }
       it { expect(report).to have_received(:generate) }
     end
     # rubocop:enable RSpec/VerifiedDoubles

@@ -1,6 +1,7 @@
 class Report
   REGISTERED_REPORTS = {
-    home_office: Reports::HomeOffice,
+    home_office: Reports::HomeOfficeCsv,
+    home_office_excel: Reports::HomeOfficeExcel,
     standing_data: Reports::StandingData,
     payroll: Reports::Payroll,
     applications: Reports::Applications,
@@ -16,6 +17,9 @@ class Report
 
   def initialize(report_id, **kwargs)
     @kwargs = kwargs&.symbolize_keys || {}
+    if Flipper.enabled?(:home_office_excel) && report_id.to_sym == :home_office
+      report_id = :home_office_excel
+    end
     @report_class = REGISTERED_REPORTS.with_indifferent_access.fetch(report_id)
   rescue KeyError
     raise(ArgumentError, "Invalid report id #{report_id}")

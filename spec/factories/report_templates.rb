@@ -24,7 +24,7 @@ FactoryBot.define do
     factory :home_office_report_template do
       file { Rails.root.join("spec/fixtures/test_homeoffice_template.xlsx").read }
       filename { "test_homeoffice_template.xlsx" }
-      report_class { "Reports::HomeOffice" }
+      report_class { "Reports::HomeOfficeExcel" }
       config do
         {
           "worksheet_name" => "TestData",
@@ -39,7 +39,7 @@ FactoryBot.define do
     factory :mocked_home_office_report_template do
       file { Rails.root.join("spec/fixtures/test_homeoffice_template.xlsx").read }
       filename { "test_homeoffice_template.xlsx" }
-      report_class { "Reports::HomeOffice" }
+      report_class { "Reports::HomeOfficeExcel" }
       config do
         {
           "worksheet_name" => "Data",

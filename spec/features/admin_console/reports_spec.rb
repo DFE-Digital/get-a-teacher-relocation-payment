@@ -79,9 +79,11 @@ private
 
   def and_i_click_on_the_home_office_csv_link
     create(:mocked_home_office_report_template)
+    Flipper.enable :home_office_excel
     within ".home-office" do
       click_on "Download"
     end
+    Flipper.disable :home_office_excel
   end
 
   def and_i_click_on_the_standing_data_csv_link
