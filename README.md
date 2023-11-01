@@ -59,9 +59,20 @@ Create your `.env` from the `.env.example` template
 
 ### Docker based development setup
 
-1. Run `tilt up -- --local-app` to launch the app on <http://localhost:3000>
+There are two ways to use this approach:
 
-You can also run `tilt up` that way you will be building the image definied by the Dockerfile
+1. Run `tilt up -- --local-app` to launch the app on <http://localhost:3000>
+   This will setup all the dependencies for you and run the server locally ie not in a docker image
+   It is convienient when developing because you do not have to constantly rebuilt the docker image.
+
+2. Run `tilt up` that way you will be building the image defined by the Dockerfile
+   This approach is more closely aligned with a production environment.
+   You will need to create you own certificates in the nginx folder.
+
+   Using the [mkcert tool](https://github.com/FiloSottile/mkcert) you can acheive this with the following command
+   `$ cd nginx && mkcert -key-file key.pem -cert-file cert.pem itrp.local *.itrp.local`
+   and update your `/etc/hosts` file with `127.0.0.1       itrp.local`
+
 
 This option will start the application and run the `db/seed.rb` file.
 
