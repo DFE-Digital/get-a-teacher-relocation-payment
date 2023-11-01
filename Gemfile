@@ -78,7 +78,7 @@ group :development do
   gem "web-console"
 end
 
-gem "sidekiq", "~> 6.5"
+gem "sidekiq", "~> 7.2"
 
 gem "sidekiq-cron", "~> 1.10"
 
