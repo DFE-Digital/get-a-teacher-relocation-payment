@@ -304,7 +304,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.4)
-    phonelib (0.8.4)
+    phonelib (0.8.5)
     propshaft (0.8.0)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
