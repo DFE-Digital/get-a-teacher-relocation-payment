@@ -42,7 +42,7 @@ gem "httparty", "~> 0.21"
 gem "invisible_captcha"
 gem "omniauth-azure-activedirectory-v2"
 gem "rolify"
-gem "sentry-rails", "~> 5.12"
+gem "sentry-rails", "~> 5.13"
 
 group :test do
   gem "shoulda-matchers", "~> 5.0"
