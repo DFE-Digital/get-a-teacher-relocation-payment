@@ -1,0 +1,6 @@
+application progress
+<%= govuk_tag(
+text: govuk_link_to(audit.auditable&.application&.urn, applicant_path(audit.auditable&.application&.applicant)),
+colour: "orange") %>.
+
+<%= render("changed_summary", audit: audit) %>

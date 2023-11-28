@@ -59,6 +59,7 @@ RSpec.describe Report do
       let(:expected_params) do
         {
           action: "Downloaded #{service.name} report",
+          auditable_type: "Report",
           user: user,
           comment: {
             resettable: true,
