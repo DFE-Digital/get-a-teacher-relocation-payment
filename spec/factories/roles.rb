@@ -12,5 +12,17 @@
 FactoryBot.define do
   factory :role do
     name { "Admin" }
+
+    factory :admin_role do
+      name { "admin" }
+    end
+
+    factory :super_admin_role do
+      name { "super_admin" }
+    end
+
+    factory :manager_role do
+      name { "manager" }
+    end
   end
 end

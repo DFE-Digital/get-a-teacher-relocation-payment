@@ -1,0 +1,16 @@
+<div>
+Changed fields:
+
+  <dl class="govuk-summary-list govuk-!-margin-left-7">
+    <% audit.audited_changes.except("status").each do |key, (from, to)| %>
+    <% next if changed_value(from) == changed_value(to) %>
+    <div class="audit">
+      <dt class="govuk-summary-list__key audit-key"><%= key %> </dt>
+      <dd class="govuk-summary-list__value">
+        from: <span class="govuk-tag--pink govuk-!-padding-left-1"> <%= changed_value(from) %> </span>,
+        to: <span class="govuk-tag--green govuk-!-padding-right-1 govuk-!-padding-left-1"> <%= changed_value(to) %> </span>
+      </dd>
+    </div>
+    <% end %>
+  </dl>
+</div>

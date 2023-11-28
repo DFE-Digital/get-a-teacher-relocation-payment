@@ -110,3 +110,4 @@ RSpec/AnyInstance:
 RSpec/MultipleMemoizedHelpers:
   Exclude:
     - 'spec/models/event_spec.rb'
+    - 'spec/helpers/audit_message_helper_spec.rb'

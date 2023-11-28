@@ -1,62 +1,15 @@
 module AuditMessageHelper
-  def audit_message(audit)
-    method = routing_map[audit.auditable_type] || :generic_audit_message
-    message = send(method, audit)
-    message += "#{timestamp(audit)} (#{time_ago_in_words(audit.created_at)} ago)"
-    message.html_safe # rubocop:disable Rails/OutputSafety
-  end
+  # rubocop:disable Layout/HashAlignment
+  TEMPLATE_MAP = {
+    "ApplicationProgress" => "application_progress",
+    "User"                => "user",
+    "AppSettings"         => "app_settings",
+    "Report"              => "report",
+  }.freeze
+  # rubocop:enable Layout/HashAlignment
 
-private
-
-  def routing_map
-    {
-      "ApplicationProgress" => :application_progress_audit_message,
-      "User" => :user_audit_message,
-      "AppSettings" => :app_settings_audit_message,
-    }
-  end
-
-  def application_progress_audit_message(audit)
-    email_tag = govuk_tag(text: audit.user&.email || "unknown", colour: "grey")
-    urn_text = govuk_link_to(audit.auditable&.application&.urn, applicant_path(audit.auditable&.application&.applicant))
-    urn_tag = govuk_tag(text: urn_text, colour: "orange")
-    "#{email_tag} #{action_tag(audit)} application progress #{urn_tag}.</br>It changed: <ul>#{audited_changes_summary(audit)}</ul>"
-  end
-
-  def app_settings_audit_message(audit)
-    email_tag = govuk_tag(text: audit.user&.email || "unknown", colour: "grey")
-    "#{email_tag} #{action_tag(audit)} application settings.</br>It changed: <ul>#{audited_changes_summary(audit)}</ul>"
-  end
-
-  def user_audit_message(audit)
-    email_tag = govuk_tag(text: audit.user&.email || "unknown", colour: "grey")
-    case audit.action
-    when "create"
-      "#{email_tag} #{action_tag(audit)} a new User entity #{govuk_tag(text: audit.audited_changes['email'], colour: 'yellow')}"
-    when "update"
-      "#{email_tag} #{action_tag(audit)} User entity.</br>It changed: <ul>#{audited_changes_summary(audit)}</ul>"
-    when "destroy"
-      "#{email_tag} #{action_tag(audit)} User entity #{govuk_tag(text: audit.audited_changes['email'], colour: 'yellow')}<br />"
-    end
-  end
-
-  def generic_audit_message(audit)
-    email_tag = govuk_tag(text: audit.user&.email || "unknown", colour: "grey")
-    "#{email_tag} #{action_tag(audit)}<br />"
-  end
-
-  def audited_changes_summary(audit)
-    audit.audited_changes.except("status").map { |key, value|
-      "<li>#{key} (from: \"#{changed_value(value.first)}\", to: \"#{changed_value(value.last)}\")</li>"
-    }.join
-  end
-
-  def timestamp(audit)
-    govuk_tag(text: audit.created_at.strftime("%d/%m/%Y %H:%M:%S"), colour: "grey")
-  end
-
-  def action_tag(audit)
-    govuk_tag(text: past_tense_action(audit.action), colour: action_colour(audit.action))
+  def audit_template(audit)
+    TEMPLATE_MAP.fetch(audit.auditable_type, "generic")
   end
 
   def past_tense_action(action)
@@ -75,9 +28,26 @@ private
     }[action]
   end
 
+  def display_reset_button?(audit)
+    return false if audit.comment.blank?
+
+    comment = JSON.parse(audit.comment)
+
+    Flipper.enabled?(:reset_reports) &&
+      current_user.has_role?(:admin) &&
+      comment.fetch("resettable", false)
+  rescue StandardError
+    false
+  end
+
+  def report_name_args(audit)
+    comment = JSON.parse(audit.comment)
+
+    [comment.fetch("id"), comment.fetch("status")]
+  end
+
   def changed_value(value)
-    return "&lt;empty&gt;" if value.nil?
-    return "&lt;empty&gt;" if value.blank?
+    return "empty" if value.blank?
 
     value
   end

@@ -1,0 +1,14 @@
+<% if audit.action == "create" %>
+a new user entity
+<%= govuk_tag(text: audit.audited_changes['email'], colour: 'yellow') %>
+<% end %>
+
+<% if audit.action == "update" %>
+user entity
+<%= render("changed_summary", audit: audit) %>
+<% end %>
+
+<% if audit.action == "destroy" %>
+user entity
+<%= govuk_tag(text: audit.audited_changes['email'], colour: 'yellow') %>
+<% end %>

@@ -46,6 +46,7 @@ class Report
     return reset_audit_trail if report.timestamp
 
     Audited::Audit.create(
+      auditable_type: "Report",
       action: "Downloaded #{name} report",
       user: user,
       comment: {

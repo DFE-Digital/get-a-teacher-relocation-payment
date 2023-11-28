@@ -1,0 +1,10 @@
+<% if display_reset_button?(audit) %>
+<% name, qa_status = report_name_args(audit) %>
+
+<%= form_tag(reset_report_path(id: name), method: :post) do  %>
+  <%= hidden_field_tag(:arid, audit.id) %>
+  <%= hidden_field_tag(:timestamp, audit.created_at) %>
+  <%= (qa_status ? hidden_field_tag(:status, qa_status) : nil) %>
+  <%= button_tag("Reset report", class: govuk_button_classes) %>
+<% end %>
+<% end %>

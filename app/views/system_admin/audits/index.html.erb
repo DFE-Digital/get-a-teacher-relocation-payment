@@ -1,12 +1,19 @@
-<%= govuk_table(classes: "audits-table") do |table|
-      table.with_caption(size: 'l', text: 'Audits')
-      table.with_body do |body|
-        @audits.each do |audit|
-          body.with_row do |row|
-            row.with_cell(text: audit_message(audit), colspan: 6)
-          end
-        end 
-      end
- end %>
+<ul class="govuk-list govuk-list--bullet">
+  <% @audits.each do |audit| %>
+  <li>
+    <div class="govuk-body govuk-!-margin-top-4">
+      <%= govuk_tag(text: audit.user&.email || "unknown", colour: "grey") %>
+      <%= govuk_tag(text: past_tense_action(audit.action), colour: action_colour(audit.action)) %>
+
+      <%= render(audit_template(audit), audit: audit) %>
+      <div>
+        <%= govuk_tag(text: audit.created_at.strftime("%d/%m/%Y %H:%M:%S"), colour: "grey") %>
+        (<%= time_ago_in_words(audit.created_at) %> ago)
+      </div>
+    </div>
+  </li>
+  <%= govuk_section_break(visible: true) %>
+  <% end %>
+</ul>
 
 <%= govuk_pagination(pagy: @pagy) %>
