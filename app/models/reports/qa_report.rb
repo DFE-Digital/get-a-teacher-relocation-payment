@@ -20,6 +20,10 @@ module Reports
       kwargs.fetch(:status)
     end
 
+    def reset
+      QaStatus.where(status: status, date: timestamp_range).delete_all
+    end
+
   private
 
     def applications

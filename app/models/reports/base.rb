@@ -26,5 +26,20 @@ module Reports
     def generate; end
 
     def post_generation_hook; end
+
+    def reset; end
+
+    def timestamp
+      kwargs&.fetch(:timestamp, nil)
+    end
+
+  private
+
+    def timestamp_range
+      return unless timestamp
+
+      t = Time.zone.parse(timestamp)
+      Range.new(t - 1.second, t + 1.second)
+    end
   end
 end
