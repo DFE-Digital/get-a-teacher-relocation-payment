@@ -6,15 +6,22 @@ module SystemAdmin
 
     def show
       report = Report.call(params[:id], **report_params)
-      create_audit(action: "Downloaded #{report.name} report")
-
       send_data(report.data, filename: report.filename)
+    end
+
+    def reset
+      Report.reset(params[:id], **reset_report_params)
+      redirect_to(audits_path)
     end
 
   private
 
     def report_params
-      params.permit(:id, :status)
+      params.permit(:id, :status).merge(user: current_user)
+    end
+
+    def reset_report_params
+      params.permit(:id, :status, :timestamp, :arid).merge(user: current_user)
     end
 
     def check_user_roles

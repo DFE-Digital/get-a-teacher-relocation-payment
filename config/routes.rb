@@ -29,7 +29,11 @@ Rails.application.routes.draw do
     resources :users, except: %i[show]
     resource :settings, only: %i[edit update]
     get "/dashboard", to: "dashboard#show"
-    resources "reports", only: %i[show index]
+    resources "reports", only: %i[show index] do
+      member do
+        post "reset"
+      end
+    end
     get "/duplicates", to: "applicants#duplicates"
     get "/audits", to: "audits#index"
 
