@@ -130,7 +130,26 @@ module Reports
         context "excludes applications from the csv after invoking `post_generation_hook`" do
           before { report.post_generation_hook }
 
-          it { expect(csv).not_to include(app.urn) }
+          it { expect(csv).not_to include(app.applicant.email_address) }
+        end
+      end
+    end
+
+    describe "reset" do
+      let(:progress) { build(:application_progress, banking_approval_completed_at: Time.zone.now) }
+      let(:app) { create(:application, application_progress: progress) }
+
+      before { app }
+
+      it "allows previously downloaded applications in a report to be downloaded again" do
+        travel_to(Time.zone.local(2023, 7, 17, 12, 30, 45)) do
+          expect(report.generate).to include(app.applicant.email_address)
+
+          report.post_generation_hook
+
+          described_class.new(timestamp: Time.zone.now.to_s).reset
+
+          expect(report.generate).to include(app.applicant.email_address)
         end
       end
     end

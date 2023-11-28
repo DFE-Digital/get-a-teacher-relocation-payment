@@ -8,6 +8,8 @@ module Reports
 
     subject(:report) { described_class.new }
 
+    let(:progress) { build(:application_progress, school_checks_completed_at: Time.zone.now, banking_approval_completed_at: nil) }
+
     it "returns the filename of the Report" do
       frozen_time = Time.zone.local(2023, 7, 17, 12, 30, 45)
       travel_to frozen_time do
@@ -99,5 +101,23 @@ module Reports
       end
     end
     # rubocop:enable RSpec/ExampleLength
+
+    describe "reset" do
+      let(:app) { create(:application, application_progress: progress) }
+
+      before { app }
+
+      it "allows previously downloaded applications in a report to be downloaded again" do
+        travel_to(Time.zone.local(2023, 7, 17, 12, 30, 45)) do
+          expect(report.generate).to include(app.urn)
+
+          report.post_generation_hook
+
+          described_class.new(timestamp: Time.zone.now.to_s).reset
+
+          expect(report.generate).to include(app.urn)
+        end
+      end
+    end
   end
 end

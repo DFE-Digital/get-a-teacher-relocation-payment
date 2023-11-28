@@ -13,6 +13,12 @@ module Reports
       applications.update_all(payroll_csv_downloaded_at: Time.zone.now) # rubocop:disable Rails/SkipsModelValidations
     end
 
+    def reset
+      Application
+        .where(payroll_csv_downloaded_at: timestamp_range)
+        .update_all(payroll_csv_downloaded_at: nil) # rubocop:disable Rails/SkipsModelValidations
+    end
+
   private
 
     def rows

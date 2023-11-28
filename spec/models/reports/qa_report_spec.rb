@@ -88,6 +88,24 @@ module Reports
         expect(report.generate).to include(expected_header.join(","))
       end
     end
+
+    describe "reset" do
+      let(:app) { create(:application) }
+
+      before { app }
+
+      it "allows previously downloaded applications in a report to be downloaded again" do
+        travel_to(Time.zone.local(2023, 7, 17, 12, 30, 45)) do
+          expect(report.generate).to include(app.urn)
+
+          report.post_generation_hook
+
+          described_class.new(status: status, timestamp: Time.zone.now.to_s).reset
+
+          expect(report.generate).to include(app.urn)
+        end
+      end
+    end
   end
 end
 # rubocop:enable Metrics/ExampleLength
