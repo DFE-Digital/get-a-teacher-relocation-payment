@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+#
+# Application smoke test script
+#
+
+set -e
+
+bundle exec rspec spec/features/smoke_spec.rb --tag smoke_test

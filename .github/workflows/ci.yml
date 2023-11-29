@@ -50,7 +50,7 @@ jobs:
       - name: Copy env file
         run: cp .env.example .env
       - name: Run tests
-        run: bin/rspec
+        run: bin/rspec --tag ~smoke_test
 
   Lint:
     runs-on: ubuntu-latest
