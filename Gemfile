@@ -80,7 +80,7 @@ end
 
 gem "sidekiq", "~> 6.5"
 
-gem "sidekiq-cron", "~> 1.10"
+gem "sidekiq-cron", "~> 1.11"
 
 gem "mail-notify", "~> 1.2"
 

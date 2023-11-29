@@ -199,7 +199,7 @@ GEM
       rack-protection (>= 1.5.3, <= 4.0.0)
       sanitize (< 7)
     foreman (0.87.2)
-    fugit (1.8.1)
+    fugit (1.9.0)
       et-orbi (~> 1, >= 1.2.7)
       raabro (~> 1.4)
     globalid (1.2.1)
@@ -455,7 +455,7 @@ GEM
       connection_pool (>= 2.2.5, < 3)
       rack (~> 2.0)
       redis (>= 4.5.0, < 5)
-    sidekiq-cron (1.10.1)
+    sidekiq-cron (1.11.0)
       fugit (~> 1.8)
       globalid (>= 1.0.1)
       sidekiq (>= 6)
@@ -548,7 +548,7 @@ DEPENDENCIES
   sentry-rails (~> 5.12)
   shoulda-matchers (~> 5.0)
   sidekiq (~> 6.5)
-  sidekiq-cron (~> 1.10)
+  sidekiq-cron (~> 1.11)
   simplecov
   tzinfo-data
   uk_postcode
