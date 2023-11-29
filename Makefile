@@ -1,6 +1,6 @@
 TERRAFILE_VERSION=0.8
 ARM_TEMPLATE_TAG=1.1.0
-RG_TAGS={"Product" : "Teacher services cloud"}
+RG_TAGS={"Product" : "International Relocation Payment"}
 SERVICE_SHORT=trp
 
 .PHONY: install-konduit

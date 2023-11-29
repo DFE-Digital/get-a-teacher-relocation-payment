@@ -42,7 +42,7 @@ gem "httparty", "~> 0.21"
 gem "invisible_captcha"
 gem "omniauth-azure-activedirectory-v2"
 gem "rolify"
-gem "sentry-rails", "~> 5.12"
+gem "sentry-rails", "~> 5.14"
 
 group :test do
   gem "shoulda-matchers", "~> 5.0"
@@ -80,7 +80,7 @@ end
 
 gem "sidekiq", "~> 6.5"
 
-gem "sidekiq-cron", "~> 1.10"
+gem "sidekiq-cron", "~> 1.11"
 
 gem "mail-notify", "~> 1.2"
 
