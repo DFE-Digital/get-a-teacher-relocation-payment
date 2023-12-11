@@ -82,7 +82,7 @@ end
 # only update the sidekiq gem when the available azure redis version is 7.x or above
 gem "sidekiq", "~> 6.5" # /!\ sidekiq version 7 has dropped support for redis version 6 which is the latest redis version on azure.
 
-gem "sidekiq-cron", "~> 1.11"
+gem "sidekiq-cron", "~> 1.12"
 
 gem "mail-notify", "~> 1.2"
 
