@@ -100,7 +100,7 @@ RSpec.describe Form::EligibilityCheck do
                 start_date: Date.new(2023, 10, 31),
                 date_of_entry: Date.new(2023, 10, 31))
         end
-        let(:expected) { "contract must start within the last five months"}
+        let(:expected) { "contract must start within the last five months" }
 
         it { expect(check.failure_reason).to eq(expected) }
       end
