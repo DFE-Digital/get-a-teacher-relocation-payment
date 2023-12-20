@@ -17,9 +17,6 @@ RUN apk add --update --no-cache --virtual build-dependances \
     rm -rf /usr/local/bundle/cache && \
     apk del build-dependances
 
-# Remove once base image has been updated with latest libraries
-RUN apk add --no-cache openssl=3.1.4-r1
-
 COPY package.json yarn.lock ./
 RUN  yarn install --frozen-lockfile && \
      yarn cache clean
