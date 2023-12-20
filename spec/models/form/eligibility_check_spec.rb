@@ -12,6 +12,110 @@ RSpec.describe Form::EligibilityCheck do
       it { expect(check.failure_reason).to be_nil }
     end
 
+    context "in the Jan/Feb 2024 window" do
+      before do
+        travel_to Time.zone.local(2024, 1, 2)
+        AppSettings.current.update!(
+          service_start_date: Time.zone.today,
+          service_end_date: 1.month.from_now.end_of_month,
+        )
+        travel_to Time.zone.local(2024, 2, 29)
+      end
+
+      let(:form) { build(:form, :eligible) }
+
+      context "when the contract start date is September 2023" do
+        let(:form) do
+          build(:form, :eligible,
+                start_date: Date.new(2023, 9, 2),
+                date_of_entry: Date.new(2023, 9, 2))
+        end
+
+        it { expect(check.failure_reason).to be_nil }
+      end
+
+      context "when the contract start date is Jan 2024" do
+        let(:form) do
+          build(:form, :eligible,
+                start_date: Date.new(2024, 1, 1),
+                date_of_entry: Date.new(2024, 1, 1))
+        end
+
+        it { expect(check.failure_reason).to be_nil }
+      end
+
+      context "when the contract start date is July 2023" do
+        let(:form) do
+          build(:form, :eligible,
+                start_date: Date.new(2023, 7, 1),
+                date_of_entry: Date.new(2023, 7, 1))
+        end
+
+        it { expect(check.failure_reason).to be_nil }
+      end
+
+      context "when the contract start date is June 2023" do
+        let(:form) do
+          build(:form, :eligible,
+                start_date: Date.new(2023, 6, 30),
+                date_of_entry: Date.new(2023, 6, 30))
+        end
+        let(:expected) { "contract must start within the last six months" }
+
+        it { expect(check.failure_reason).to eq(expected) }
+      end
+    end
+
+    context "in the Apr/May 2024 window" do
+      before do
+        travel_to Time.zone.local(2024, 4, 1)
+        AppSettings.current.update!(
+          service_start_date: Time.zone.today,
+          service_end_date: 1.month.from_now.end_of_month,
+        )
+        travel_to Time.zone.local(2024, 5, 31)
+        Rails.configuration.x.form_eligibility.contract_start_months_limit = 5
+      end
+
+      after do
+        Rails.configuration.x.form_eligibility.contract_start_months_limit = 6
+      end
+
+      let(:form) { build(:form, :eligible) }
+
+      context "when the contract start date is September 2023" do
+        let(:form) do
+          build(:form, :eligible,
+                start_date: Date.new(2023, 9, 30),
+                date_of_entry: Date.new(2023, 9, 30))
+        end
+        let(:expected) { "contract must start within the last five months" }
+
+        it { expect(check.failure_reason).to eq(expected) }
+      end
+
+      context "when the contract start date is October 2023" do
+        let(:form) do
+          build(:form, :eligible,
+                start_date: Date.new(2023, 10, 31),
+                date_of_entry: Date.new(2023, 10, 31))
+        end
+        let(:expected) { "contract must start within the last five months" }
+
+        it { expect(check.failure_reason).to eq(expected) }
+      end
+
+      context "when the contract start date is Jan 2024" do
+        let(:form) do
+          build(:form, :eligible,
+                start_date: Date.new(2024, 1, 1),
+                date_of_entry: Date.new(2024, 1, 1))
+        end
+
+        it { expect(check.failure_reason).to be_nil }
+      end
+    end
+
     context "when ineligible" do
       context "because of chosen application_route" do
         let(:form) { build(:form, application_route: "other") }
@@ -49,8 +153,8 @@ RSpec.describe Form::EligibilityCheck do
       end
 
       context "because of start date too early" do
-        let(:form) { build(:form, start_date: Date.new(Date.current.year, 6, 30)) }
-        let(:expected) { "contract must start after the first monday of July of this year" }
+        let(:form) { build(:form, start_date: 8.months.ago) }
+        let(:expected) { "contract must start within the last six months" }
 
         it { expect(check.failure_reason).to eq(expected) }
       end
@@ -59,8 +163,8 @@ RSpec.describe Form::EligibilityCheck do
         let(:form) do
           build(
             :form,
-            start_date: Date.new(Date.current.year, 8, 30),
-            date_of_entry: Date.new(Date.current.year, 5, 29),
+            start_date: 1.month.ago,
+            date_of_entry: 5.months.ago,
           )
         end
         let(:expected) { "cannot enter the UK more than 3 months before your contract start date" }

@@ -63,8 +63,8 @@ FactoryBot.define do
           "Youth Mobility Scheme",
         ].sample
       end
-      start_date { Date.new(Date.current.year, 9, 1) }
-      date_of_entry { Date.new(Date.current.year, 9, 1) }
+      start_date { 1.month.ago }
+      date_of_entry { 1.month.ago }
       subject { "physics" }
     end
 
@@ -72,8 +72,8 @@ FactoryBot.define do
       state_funded_secondary_school { true }
       one_year { true }
       visa_type { "British National (Overseas) visa" }
-      start_date { Date.new(Date.current.year, 9, 1) }
-      date_of_entry { Date.new(Date.current.year, 9, 1) }
+      start_date { 1.month.ago }
+      date_of_entry { 1.month.ago }
       subject { "physics" }
       date_of_birth { rand(18..90).years.ago.to_date }
       email_address { Faker::Internet.email }
