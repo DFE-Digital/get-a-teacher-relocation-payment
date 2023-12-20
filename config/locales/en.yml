@@ -61,3 +61,4 @@ en:
               ho_missing_header_mappings: "config.header_mappings must be present"
               ho_missing_worksheet_name: "config.worksheet_name must be present"
               ho_invalid_worksheet_name: "config.worksheet_name not present in file"
+  contract_must_start_within_months: contract must start within the last %{count} months

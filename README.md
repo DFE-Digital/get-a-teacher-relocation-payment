@@ -104,6 +104,12 @@ When adding / removing or editing along side the code changes you will need to u
 available environments.
 Run the following command `make <environment> edit-app-secrets`
 
+#### Contract Start Date
+The environment variable `CONTRACT_START_MONTHS_LIMIT` can be set to `5` to override 
+the default of six months prior to the current service start date.
+`AppSettings.current.service_start_date`.
+This can be set to either `5` or `6` anything else will default to `6`.
+
 ### SSH access
 
 Access a deploy with the command `make <environment> ssh`.

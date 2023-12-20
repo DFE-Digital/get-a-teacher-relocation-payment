@@ -31,7 +31,7 @@ class Form::EligibilityCheck
     in visa_type: "Other"
       "visa not accepted"
     in start_date: Date unless contract_start_date_eligible?(form.start_date)
-      "contract must start after the first monday of July of this year"
+      I18n.t("contract_must_start_within_months", count: months_limit_in_words)
     in date_of_entry: Date, start_date: Date unless date_of_entry_eligible?(form.date_of_entry, form.start_date)
       "cannot enter the UK more than 3 months before your contract start date"
     else
@@ -46,11 +46,24 @@ class Form::EligibilityCheck
   end
 
   def contract_start_date_eligible?(start_date)
-    current_year = Date.current.year
-    first_monday_in_july = Date.new(current_year, 7, 1)
-                             .beginning_of_month
-                             .next_occurring(:monday)
+    months_before_service_start = AppSettings.current.service_start_date.months_ago(months_limit).beginning_of_month
+    start_date >= months_before_service_start
+  end
 
-    start_date >= first_monday_in_july
+private
+
+  # default to 6 and only allow 5 or 6. anything else results in 6.
+  def months_limit
+    limit = ENV.fetch("CONTRACT_START_MONTHS_LIMIT", 6).to_i
+    [5, 6].include?(limit) ? limit : 6
+  end
+
+  def months_limit_in_words
+    case months_limit
+    when 5
+      "five"
+    else
+      "six"
+    end
   end
 end
