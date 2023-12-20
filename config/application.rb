@@ -49,5 +49,6 @@ module GetAnInternationalRelocationPayment
 
     config.x.govuk_notify.generic_email_template_id = ENV.fetch("GOVUK_NOTIFY_GENERIC_EMAIL_TEMPLATE_ID")
     config.x.events.filtered_attributes = YAML.load_file(Rails.root.join("config/events/filtered_attributes.yml"))
+    config.x.form_eligibility.contract_start_months_limit = 6
   end
 end

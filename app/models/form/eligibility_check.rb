@@ -54,16 +54,11 @@ private
 
   # default to 6 and only allow 5 or 6. anything else results in 6.
   def months_limit
-    limit = ENV.fetch("CONTRACT_START_MONTHS_LIMIT", 6).to_i
+    limit = Rails.configuration.x.form_eligibility.contract_start_months_limit.to_i
     [5, 6].include?(limit) ? limit : 6
   end
 
   def months_limit_in_words
-    case months_limit
-    when 5
-      "five"
-    else
-      "six"
-    end
+    months_limit == 5 ? "five" : "six"
   end
 end

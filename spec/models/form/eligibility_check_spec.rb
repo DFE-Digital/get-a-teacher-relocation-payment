@@ -74,11 +74,11 @@ RSpec.describe Form::EligibilityCheck do
           service_end_date: 1.month.from_now.end_of_month,
         )
         travel_to Time.zone.local(2024, 5, 31)
-        ENV["CONTRACT_START_MONTHS_LIMIT"] = "5"
+        Rails.configuration.x.form_eligibility.contract_start_months_limit = 5
       end
 
       after do
-        ENV.delete("CONTRACT_START_MONTHS_LIMIT")
+        Rails.configuration.x.form_eligibility.contract_start_months_limit = 6
       end
 
       let(:form) { build(:form, :eligible) }

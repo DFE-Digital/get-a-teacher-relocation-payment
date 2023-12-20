@@ -105,10 +105,10 @@ available environments.
 Run the following command `make <environment> edit-app-secrets`
 
 #### Contract Start Date
-The environment variable `CONTRACT_START_MONTHS_LIMIT` can be set to `5` to override 
+The custom configuration entry `config.x.form_eligibility.contract_start_months_limit` can be set to `5` to override 
 the default of six months prior to the current service start date.
 `AppSettings.current.service_start_date`.
-This can be set to either `5` or `6` anything else will default to `6`.
+This should be set to either `5` or `6` anything else will default to `6`.
 
 ### SSH access
 
