@@ -22,7 +22,7 @@ gem "scenic"
 ###############
 # Used to build our forms and style them using govuk-frontend class names
 gem "govuk-components", "5.0.0"
-gem "govuk_design_system_formbuilder"
+gem "govuk_design_system_formbuilder", "5.0.0"
 gem "notifications-ruby-client"
 # UK postcode parsing and validation for Ruby
 gem "uk_postcode"
