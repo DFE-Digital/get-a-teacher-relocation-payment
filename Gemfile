@@ -88,7 +88,7 @@ gem "mail-notify", "~> 1.2"
 
 gem "dartsass-rails", "~> 0.5.0"
 
-gem "importmap-rails", "~> 1.2"
+gem "importmap-rails", "~> 2.0"
 
 gem "propshaft", "~> 0.8.0"
 
