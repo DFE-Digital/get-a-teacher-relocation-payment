@@ -1,6 +1,10 @@
 class StatusBreakdownQuery
-  def self.call
-    new.execute
+  def self.call(scope = ApplicationProgress.all)
+    new(scope).execute
+  end
+
+  def initialize(scope)
+    @scope = scope
   end
 
   def execute
@@ -10,7 +14,7 @@ class StatusBreakdownQuery
 private
 
   def status_breakdown
-    ApplicationProgress.group(:status).count
+    @scope.group(:status).count
   end
 
   def ordered_with_defaults(breakdown)

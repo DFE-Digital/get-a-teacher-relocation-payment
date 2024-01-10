@@ -1,73 +1,74 @@
 class Kpis
-  def initialize(unit: "hours", range_start: "24", range_end: "0")
+  def initialize(unit: "hours", range_start: "24", range_end: "0", window: "all")
     @date_range_params = parse_date_range(unit:, range_start:, range_end:)
     @date_range = to_date_range(**@date_range_params)
+    @window = window
   end
 
   attr_reader :date_range, :date_range_params
 
   def total_applications
-    Application.count
+    filtered_applications_by_date.count
   end
 
   def total_rejections
-    ApplicationProgress.where.not(rejection_completed_at: nil).count
+    filter_by_date_range(ApplicationProgress.where.not(rejection_completed_at: nil)).count
   end
 
   def average_age
-    AverageAgeQuery.new.call
+    AverageAgeQuery.new(filtered_applications_by_date).call
   end
 
   def total_paid
-    ApplicationProgress.where.not(banking_approval_completed_at: nil).count
+    filter_by_date_range(ApplicationProgress.where.not(banking_approval_completed_at: nil)).count
   end
 
   def route_breakdown
-    RouteBreakdownQuery.new.call
+    RouteBreakdownQuery.new(filtered_applications_by_date).call
   end
 
   def subject_breakdown
-    SubjectBreakdownQuery.new.call
+    SubjectBreakdownQuery.new(filtered_applications_by_date).call
   end
 
   def visa_breakdown
-    VisaBreakdownQuery.new.call.first(3)
+    VisaBreakdownQuery.new(filtered_applications_by_date).call.first(3)
   end
 
   def nationality_breakdown
-    NationalityBreakdownQuery.new.call.first(5)
+    NationalityBreakdownQuery.new(filtered_applications_by_date).call.first(5)
   end
 
   def gender_breakdown
-    GenderBreakdownQuery.new.call
+    GenderBreakdownQuery.new(filtered_applications_by_date).call
   end
 
   def rejection_reason_breakdown
-    RejectionReasonBreakdownQuery.new.call
+    RejectionReasonBreakdownQuery.new(filtered_applications_by_date).call
   end
 
   def time_to_initial_checks
-    TimeToInitialChecksQuery.new.call
+    TimeToInitialChecksQuery.new(filtered_progress_by_date).call
   end
 
   def time_to_home_office_checks
-    TimeToHomeOfficeChecksQuery.new.call
+    TimeToHomeOfficeChecksQuery.new(filtered_progress_by_date).call
   end
 
   def time_to_school_checks
-    TimeToSchoolChecksQuery.new.call
+    TimeToSchoolChecksQuery.new(filtered_progress_by_date).call
   end
 
   def time_to_banking_approval
-    TimeToBankingApprovalQuery.new.call
+    TimeToBankingApprovalQuery.new(filtered_progress_by_date).call
   end
 
   def time_to_payment_confirmation
-    TimeToPaymentConfirmationQuery.new.call
+    TimeToPaymentConfirmationQuery.new(filtered_progress_by_date).call
   end
 
   def status_breakdown
-    StatusBreakdownQuery.call
+    StatusBreakdownQuery.call(filtered_progress_by_date)
   end
 
   def forms_funnel
@@ -118,5 +119,28 @@ private
 
   def forms_funnel_query
     @forms_funnel_query ||= FormsFunnelQuery.call(date_range:)
+  end
+
+  def date_ranges
+    {
+      "sept_oct" => Date.new(2023, 9, 1).beginning_of_day..Date.new(2023, 10, 31).end_of_day,
+      "jan_feb" => Date.new(2024, 1, 1).beginning_of_day..Date.new(2024, 3, 1).end_of_day,
+    }
+  end
+
+  def filter_by_date_range(scope)
+    if date_ranges.key?(@window)
+      scope.where(created_at: date_ranges[@window])
+    else
+      scope
+    end
+  end
+
+  def filtered_applications_by_date
+    filter_by_date_range(Application.all)
+  end
+
+  def filtered_progress_by_date
+    filter_by_date_range(ApplicationProgress.all)
   end
 end
