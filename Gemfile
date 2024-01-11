@@ -10,7 +10,7 @@ gem "foreman"
 gem "jbuilder"
 gem "okcomputer"
 gem "pg", "~> 1.5"
-gem "puma", "~> 6.4.2"
+gem "puma", "~> 6.4"
 gem "rails", "~> 7.1"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
@@ -21,7 +21,7 @@ gem "scenic"
 # GOVUK GEMS ##
 ###############
 # Used to build our forms and style them using govuk-frontend class names
-gem "govuk-components", "~> 5.0", ">= 5.0.2"
+gem "govuk-components", "4.1.2"
 gem "govuk_design_system_formbuilder"
 gem "notifications-ruby-client"
 # UK postcode parsing and validation for Ruby
