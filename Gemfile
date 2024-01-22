@@ -45,7 +45,7 @@ gem "rolify"
 gem "sentry-rails", "~> 5.15"
 
 group :test do
-  gem "shoulda-matchers", "~> 5.0"
+  gem "shoulda-matchers", "~> 6.1"
   gem "simplecov", require: false
 end
 gem "factory_bot_rails"
