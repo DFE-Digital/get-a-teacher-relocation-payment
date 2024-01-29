@@ -37,7 +37,7 @@ jobs:
     - name: K8 setup
       shell: bash
       run: |
-        az aks get-credentials -g s189p01-tsc-pd-rg -n s189p01-tsc-production-aks
+        make ci production get-cluster-credentials
         make install-konduit
 
     - name: Setup postgres client
