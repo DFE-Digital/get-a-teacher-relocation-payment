@@ -5,7 +5,7 @@ class Kpis
     @window = window
   end
 
-  attr_reader :date_range, :date_range_params
+  attr_reader :date_range, :date_range_params, :window
 
   def total_applications
     filtered_applications_by_date.count
@@ -129,8 +129,8 @@ private
   end
 
   def filter_by_date_range(scope)
-    if date_ranges.key?(@window)
-      scope.where(created_at: date_ranges[@window])
+    if date_ranges.key?(window)
+      scope.where(created_at: date_ranges[window])
     else
       scope
     end
