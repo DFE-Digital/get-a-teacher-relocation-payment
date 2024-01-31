@@ -29,6 +29,10 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS_PRODUCTION }}
 
+    - uses: DFE-Digital/github-actions/set-kubelogin-environment@master
+      with:
+        azure-credentials: ${{ secrets.AZURE_CREDENTIALS_PRODUCTION }}
+
     - name: Install kubectl
       uses: azure/setup-kubectl@v3
       with:
