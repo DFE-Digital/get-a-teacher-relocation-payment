@@ -53,11 +53,10 @@ Select account for az:
 $ az account set -s s189-teacher-services-cloud-test
 ```
 
-Get access credentials for a managed Kubernetes cluster (passing the
-resource group and the name):
+Get access credentials for a managed Kubernetes cluster (passing the app environment):
 
 ```
-$ az aks get-credentials -g s189t01-tsc-ts-rg -n s189t01-tsc-test-aks
+$ make qa get-cluster-credentials
 ```
 
 When you have multiple cluster credentials loaded, you can switch between clusters

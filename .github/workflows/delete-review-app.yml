@@ -58,7 +58,7 @@ jobs:
       #       ${{ env.key_vault_app_secret_name }}
       #       ${{ env.key_vault_infra_secret_name }}
 
-      - uses: DFE-Digital/github-actions/set-arm-environment-variables@master
+      - uses: DFE-Digital/github-actions/set-kubelogin-environment@master
         if: env.TF_STATE_EXISTS == 'true'
         with:
           azure-credentials: ${{ secrets.AZURE_CREDENTIALS_REVIEW }}
