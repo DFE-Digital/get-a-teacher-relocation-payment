@@ -34,4 +34,13 @@ module ApplicationHelper
 
     options_for_select(statuses, selected:)
   end
+
+  def dashboard_link(window_param, label)
+    current_window = params[:window] || "all"
+    if current_window == window_param
+      content_tag(:strong, label)
+    else
+      link_to(label, dashboard_path(window: window_param))
+    end
+  end
 end

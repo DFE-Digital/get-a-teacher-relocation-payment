@@ -51,7 +51,7 @@ RSpec.describe Summary do
           value: { text: "Yes" },
           actions: [{ href: "/step/contract-details", visually_hidden_text: "contract details" }] },
         { key: { text: "Contract start date" },
-          value: { text: "01-09-2023" },
+          value: { text: "01-09-2024" },
           actions: [{ href: "/step/start-date", visually_hidden_text: "start date" }] },
         { key: { text: "Subject" },
           value: { text: "Physics" },
@@ -60,7 +60,7 @@ RSpec.describe Summary do
           value: { text: "British National (Overseas) visa" },
           actions: [{ href: "/step/visa", visually_hidden_text: "visa" }] },
         { key: { text: "Date of entry" },
-          value: { text: "01-09-2023" },
+          value: { text: "01-09-2024" },
           actions: [{ href: "/step/entry-date", visually_hidden_text: "entry date" }] },
       ]
     end

@@ -52,9 +52,7 @@ RSpec.shared_context "with common application form steps" do
   def and_i_enter_my_entry_date(route)
     assert_i_am_in_the_entry_date_question(route)
 
-    fill_in("Day", with: 12)
-    fill_in("Month", with: 6)
-    fill_in("Year", with: 2023)
+    fill_in_date
 
     click_button("Continue")
   end
@@ -114,9 +112,7 @@ RSpec.shared_context "with common application form steps" do
   def and_i_enter_my_contract_start_date
     assert_i_am_in_the_contract_start_date_question
 
-    fill_in("Day", with: 12)
-    fill_in("Month", with: 7)
-    fill_in("Year", with: 2023)
+    fill_in_date
 
     click_button("Continue")
   end
@@ -138,4 +134,12 @@ RSpec.shared_context "with common application form steps" do
 
     click_button("Continue")
   end
+end
+
+def fill_in_date
+  three_months_ago = Time.zone.today - 3.months
+
+  fill_in("Day", with: three_months_ago.day)
+  fill_in("Month", with: three_months_ago.month)
+  fill_in("Year", with: three_months_ago.year)
 end

@@ -54,4 +54,6 @@ Rails.application.configure do
 
   # config/initializers/dartsass.rb
   config.dartsass.build_options << " --quiet-deps"
+
+  config.hosts << "www.example.com"
 end
