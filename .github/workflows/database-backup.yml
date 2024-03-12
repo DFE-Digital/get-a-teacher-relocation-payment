@@ -34,7 +34,7 @@ jobs:
         azure-credentials: ${{ secrets.AZURE_CREDENTIALS_PRODUCTION }}
 
     - name: Install kubectl
-      uses: azure/setup-kubectl@v3
+      uses: azure/setup-kubectl@v4
       with:
         version: "v1.26.1" # default is latest stable
 
