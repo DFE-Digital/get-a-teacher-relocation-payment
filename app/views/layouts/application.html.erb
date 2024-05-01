@@ -49,10 +49,11 @@
       </main>
     </div>
 
-    <%= govuk_footer(meta_items_title: "Helpful links", meta_items: { 
-      "Help" => "#", "Cookies" => "#", "Contact" => "#", "Terms and Conditions" => "#", "Privacy" => privacy_path
-      }) 
-    %>
+    <%= govuk_footer(meta_items_title: "Helpful links", meta_items: {
+      "Cookies" => "https://www.gov.uk/help/cookies",
+      "Contact" => "mailto:teach.inengland@education.gov.uk",
+      "Privacy" => privacy_path
+    }) %>
   </body>
 
 </html>
