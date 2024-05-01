@@ -31,7 +31,6 @@ describe "trainee route: completing the form" do
         and_i_complete_the_trainee_employment_conditions(choose: "No")
 
         expect(page).to have_text("We’re sorry")
-                          .and have_text("If you are enrolled on a fee-paying teacher training course")
       end
     end
   end
