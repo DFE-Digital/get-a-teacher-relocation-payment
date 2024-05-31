@@ -10,12 +10,12 @@ RUN apk add --update --no-cache tzdata && \
 
 COPY .tool-versions Gemfile Gemfile.lock ./
 
-RUN apk add --update --no-cache --virtual build-dependances \
+RUN apk add --update --no-cache --virtual build-dependencies \
     postgresql-dev build-base && \
     apk add --update --no-cache libpq yarn yaml-dev && \
     bundle install --without=test development --jobs=4 && \
     rm -rf /usr/local/bundle/cache && \
-    apk del build-dependances
+    apk del build-dependencies
 
 COPY package.json yarn.lock ./
 RUN  yarn install --frozen-lockfile && \
