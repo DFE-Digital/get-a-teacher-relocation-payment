@@ -93,3 +93,6 @@ gem "importmap-rails", "~> 1.2"
 gem "propshaft", "~> 0.8.0"
 
 gem "rubyXL", "~> 3.4"
+
+gem "nokogiri", "~> 1.16.5"
+gem "rexml", "~> 3.2.7"
