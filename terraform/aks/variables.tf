@@ -40,6 +40,8 @@ variable "statuscake_alerts" {
   default = {}
 }
 
+variable "enable_logit" { default = false }
+
 locals {
   service_name = "teacher-relocation-payment"
   version      = "1.9.7"
@@ -55,7 +57,7 @@ locals {
 
   app_env_values = merge(
     local.app_config,
-  #  sslmode not defined in database.yml?
+    #  sslmode not defined in database.yml?
     { DB_SSLMODE = local.postgres_ssl_mode }
   )
 

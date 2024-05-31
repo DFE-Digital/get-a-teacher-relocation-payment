@@ -19,6 +19,7 @@ module "web_application" {
   probe_path    = var.probe_path
 
   web_external_hostnames = var.gov_uk_host_names
+  enable_logit           = var.enable_logit
 }
 
 module "application_configuration" {
@@ -54,4 +55,5 @@ module "worker_application" {
   replicas      = 1
   command       = ["/bin/sh", "-c", "./bin/worker-startup.sh"]
   probe_command = ["pgrep", "-f", "sidekiq"]
+  enable_logit  = var.enable_logit
 }
