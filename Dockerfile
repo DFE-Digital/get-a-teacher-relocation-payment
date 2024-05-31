@@ -4,20 +4,23 @@ ENV APP_HOME /app
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
+# Set timezone
 RUN apk add --update --no-cache tzdata && \
     cp /usr/share/zoneinfo/Europe/London /etc/localtime && \
     echo "Europe/London" > /etc/timezone
 
 # Install build dependencies
 RUN apk add --update --no-cache --virtual .build-deps \
-    postgresql-dev build-base \
-    && apk add --update --no-cache libpq yarn yaml-dev
+    postgresql-dev build-base
+
+# Install runtime dependencies
+RUN apk add --update --no-cache libpq yarn yaml-dev
 
 # Copy Gemfile and Gemfile.lock before bundle install
 COPY .tool-versions Gemfile Gemfile.lock ./
 
-# Install gems
-RUN bundle install --without=test development --jobs=4
+# Install gems with verbose logging
+RUN bundle install --without=test development --jobs=4 --verbose
 
 # Clean up bundler cache
 RUN rm -rf /usr/local/bundle/cache
@@ -27,11 +30,13 @@ RUN apk del .build-deps
 
 # Copy package.json and yarn.lock and install yarn packages
 COPY package.json yarn.lock ./
-RUN  yarn install --frozen-lockfile && \
+RUN yarn install --frozen-lockfile && \
     yarn cache clean
 
+# Copy application code
 COPY . .
 
+# Set environment variables
 RUN echo export PATH=/usr/local/bin:\$PATH > /root/.ashrc
 ENV ENV="/root/.ashrc"
 
