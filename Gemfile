@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.3"
 
+gem "actiontext", ">= 7.1.3.3"
 gem "bootsnap", require: false
 gem "foreman"
 gem "jbuilder"
