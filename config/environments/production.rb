@@ -43,13 +43,6 @@ Rails.application.configure do
   config.force_ssl = true
   config.ssl_options = { redirect: { exclude: ->(request) { request.path.include?("healthcheck") } } }
 
-  # Include generic and useful information about system operation, but avoid logging too much
-  # information to avoid inadvertent exposure of personally identifiable information (PII).
-  config.log_level = :info
-
-  # Prepend all log lines with the following tags.
-  config.log_tags = [:request_id]
-
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
@@ -61,21 +54,21 @@ Rails.application.configure do
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
 
+  # Include generic and useful information about system operation, but avoid logging too much
+  # information to avoid inadvertent exposure of personally identifiable information (PII).
+  config.log_level = :info
+
   # Don't log any deprecations.
   config.active_support.report_deprecations = false
 
-  # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = Logger::Formatter.new
+  # Set format for semantic logger, see config/initializers/semantic_logger.rb
+  config.log_format = :json
 
-  # Use a different logger for distributed setups.
-  # require "syslog/logger"
-  # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new "app-name")
+  # Don't log to file
+  config.rails_semantic_logger.add_file_appender = false
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
-    logger           = ActiveSupport::Logger.new($stdout)
-    logger.formatter = config.log_formatter
-    config.logger    = ActiveSupport::TaggedLogging.new(logger)
-  end
+  # Don't log SQL
+  config.active_record.logger = nil
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false

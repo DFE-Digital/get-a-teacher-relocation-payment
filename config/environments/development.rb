@@ -62,5 +62,12 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
+  # Or :info
+  config.log_level = :debug
+  # Console colorised non-json output
+  config.log_format = :color
+  # Show file and line number (expensive: not for production)
+  config.semantic_logger.backtrace_level = :debug
+
   config.hosts << "itrp.local"
 end

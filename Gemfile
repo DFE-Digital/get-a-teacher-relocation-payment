@@ -30,6 +30,7 @@ gem "uk_postcode"
 gem "phonelib"
 ###############
 
+gem "amazing_print"
 gem "audited", "~> 5.4"
 gem "concurrent-ruby", require: "concurrent"
 gem "concurrent-ruby-ext"
@@ -41,6 +42,7 @@ gem "flipper-ui"
 gem "httparty", "~> 0.21"
 gem "invisible_captcha"
 gem "omniauth-azure-activedirectory-v2"
+gem "rails_semantic_logger"
 gem "rolify"
 gem "sentry-rails", "~> 5.17"
 
