@@ -39,7 +39,7 @@ variable "statuscake_alerts" {
   type    = map(any)
   default = {}
 }
-variable "enable_logit" { default = false }
+
 locals {
   service_name = "teacher-relocation-payment"
   version      = "1.9.7"
