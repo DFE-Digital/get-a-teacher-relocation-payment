@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "govuk-frontend": "^4.7.0"
+    "govuk-frontend": "^5.4.1"
  },
   "license": "MIT"
 }
