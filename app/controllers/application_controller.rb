@@ -9,7 +9,10 @@ class ApplicationController < ActionController::Base
     return if request.path == destroy_user_session_path # skip this for log out page
     return if Gatekeeper.application_open?
 
-    redirect_to(closed_path)
+    redirect_to(
+      "https://getintoteaching.education.gov.uk/non-uk-teachers/get-an-international-relocation-payment",
+      allow_other_host: true,
+    )
   end
 
   def current_form
