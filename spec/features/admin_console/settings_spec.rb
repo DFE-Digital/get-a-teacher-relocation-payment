@@ -22,7 +22,7 @@ describe "Settings" do
   it "does allow access to non-admin if Service is closed" do
     given_the_service_is_closed
     visit root_path
-    then_i_should_see_the_service_closed_page
+    then_i_should_see_offsite_guidance_page
   end
 
 private
@@ -31,8 +31,8 @@ private
     AppSettings.current.update!(service_start_date: 2.days.from_now)
   end
 
-  def then_i_should_see_the_service_closed_page
-    expect(page).to have_current_path("/closed")
+  def then_i_should_see_offsite_guidance_page
+    expect(page.current_url).to eql("https://getintoteaching.education.gov.uk/non-uk-teachers/get-an-international-relocation-payment")
   end
 
   def when_i_visit_the_settings_page

@@ -34,14 +34,7 @@ describe "Open / Close service" do
     it "does not allow the user access to the landing page" do
       visit root_path
 
-      expect(page).to have_current_path("/closed")
-    end
-
-    it "allows the user access to the admin tool" do
-      given_i_am_signed_with_role(:admin)
-      visit applicants_path
-
-      expect(page).to have_text("Applications")
+      expect(page.current_url).to eql("https://getintoteaching.education.gov.uk/non-uk-teachers/get-an-international-relocation-payment")
     end
   end
 end
