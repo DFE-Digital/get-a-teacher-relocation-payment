@@ -221,16 +221,16 @@ GEM
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
-    i18n (1.14.5)
+    i18n (1.14.6)
       concurrent-ruby (~> 1.0)
-    importmap-rails (1.2.3)
+    importmap-rails (2.0.3)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
     invisible_captcha (2.1.0)
       rails (>= 5.2)
     io-console (0.7.2)
-    irb (1.13.2)
+    irb (1.14.1)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     jbuilder (2.11.5)
@@ -261,7 +261,7 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.7)
-    minitest (5.23.1)
+    minitest (5.25.1)
     msgpack (1.7.2)
     multi_xml (0.6.0)
     mutex_m (0.2.0)
@@ -275,7 +275,7 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.3)
-    nokogiri (1.16.6)
+    nokogiri (1.16.7)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     notifications-ruby-client (5.4.0)
@@ -322,7 +322,7 @@ GEM
     puma (6.4.3)
       nio4r (~> 2.0)
     raabro (1.4.0)
-    racc (1.8.0)
+    racc (1.8.1)
     rack (2.2.9)
     rack-protection (3.1.0)
       rack (~> 2.2, >= 2.2.4)
@@ -372,7 +372,7 @@ GEM
       psych (>= 4.0.0)
     redis (4.8.1)
     regexp_parser (2.8.1)
-    reline (0.5.9)
+    reline (0.5.10)
       io-console (~> 0.5)
     request_store (1.5.1)
       rack (>= 1.4)
@@ -477,7 +477,7 @@ GEM
       hashie
       version_gem (~> 1.1, >= 1.1.1)
     stringio (3.1.1)
-    thor (1.3.1)
+    thor (1.3.2)
     timeout (0.4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -501,7 +501,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.16)
+    zeitwerk (2.6.18)
 
 PLATFORMS
   ruby
@@ -532,7 +532,7 @@ DEPENDENCIES
   govuk-components (= 4.1.2)
   govuk_design_system_formbuilder
   httparty (~> 0.21)
-  importmap-rails (~> 1.2)
+  importmap-rails (~> 2.0)
   invisible_captcha
   jbuilder
   launchy
