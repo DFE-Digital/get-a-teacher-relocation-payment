@@ -16,9 +16,6 @@ inputs:
   slack-webhook:
     required: false
 
-outputs:
-  deploy-url:
-    value: ${{ steps.set_env_var.outputs.deploy_url }}
 
 runs:
   using: composite

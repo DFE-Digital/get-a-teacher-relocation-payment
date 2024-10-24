@@ -16,96 +16,32 @@ permissions:
   packages: write
   pull-requests: write
 
+env:
+  TF_PATH: terraform/aks
+
 jobs:
   build:
     name: Build
     env:
       DOCKER_IMAGE: ghcr.io/dfe-digital/international-teacher-relocation-payment
     outputs:
-      docker_image: ${{ env.DOCKER_IMAGE }}
-      image_tag: ${{ env.IMAGE_TAG }}
+      docker-image-tag: ${{ steps.build-image.outputs.tag }}
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
       name: Checkout
 
-    - name: Set environment variables (push)
-      if: github.event_name == 'push'
-      run: |
-        GIT_BRANCH=${GITHUB_REF##*/}
-        echo "BRANCH_TAG=$GIT_BRANCH" >> $GITHUB_ENV # GIT_BRANCH will be main for refs/heads/main
-        echo "IMAGE_TAG=${{ github.sha }}" >> $GITHUB_ENV
-
-    - name: Set environment variables (pull_request)
-      if: github.event_name == 'pull_request'
-      run: |
-        GIT_BRANCH=${GITHUB_HEAD_REF##*/}
-        echo "BRANCH_TAG=$GIT_BRANCH" >> $GITHUB_ENV
-        echo "IMAGE_TAG=${{ github.event.pull_request.head.sha }}" >> $GITHUB_ENV
-
-    - name: Set KV environment variables
-      if: github.actor != 'dependabot[bot]'
-      run: |
-        # tag build to the review env for vars and secrets
-        tf_vars_file=terraform/aks/config/review.tfvars.json
-        echo "KEY_VAULT_NAME=$(jq -r '.key_vault_name' ${tf_vars_file})" >> $GITHUB_ENV
-        echo "KEY_VAULT_INFRA_SECRET_NAME=$(jq -r '.key_vault_infra_secret_name' ${tf_vars_file})" >> $GITHUB_ENV
-
-    - name: Login to GitHub Container Registry
-      uses: docker/login-action@v3
+    - name: Build and push docker image
+      id: build-image
+      uses: DFE-Digital/github-actions/build-docker-image@2088-create-github-workflow-templates
       with:
-        registry: ghcr.io
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-
-    - uses: azure/login@v2
-      if: github.actor != 'dependabot[bot]'
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS_REVIEW }}
-
-    - uses: DFE-Digital/keyvault-yaml-secret@v1
-      if: github.actor != 'dependabot[bot]'
-      id: get-secret
-      with:
-        keyvault: ${{ env.KEY_VAULT_NAME }}
-        secret: ${{ env.KEY_VAULT_INFRA_SECRET_NAME }}
-        key: SNYK_TOKEN
-
-    - name: Build Docker Image
-      uses: docker/build-push-action@v6
-      with:
-        tags: |
-          ${{env.DOCKER_IMAGE}}:${{env.IMAGE_TAG}}
-          ${{env.DOCKER_IMAGE}}:${{env.BRANCH_TAG}}
-        push: false
-        load: true
-        cache-to: type=inline
-        cache-from: |
-          type=registry,ref=${{env.DOCKER_IMAGE}}:main
-          type=registry,ref=${{env.DOCKER_IMAGE}}:${{env.IMAGE_TAG}}
-          type=registry,ref=${{env.DOCKER_IMAGE}}:${{env.BRANCH_TAG}}
-        build-args: |
-          COMMIT_SHA=${{ env.IMAGE_TAG }}
-          GOVUK_NOTIFY_API_KEY=${{ secrets.GOVUK_NOTIFY_API_KEY }}
-          GOVUK_NOTIFY_GENERIC_EMAIL_TEMPLATE_ID=${{ secrets.GOVUK_NOTIFY_GENERIC_EMAIL_TEMPLATE_ID }}
-
-    - name: Push ${{ env.DOCKER_IMAGE }} images for review
-      if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'deploy') }}
-      run: docker image push --all-tags ${{ env.DOCKER_IMAGE }}
-
-    - name: Run Snyk to check Docker image for vulnerabilities
-      if: github.actor != 'dependabot[bot]'
-      uses: snyk/actions/docker@master
-      env:
-        SNYK_TOKEN: ${{ steps.get-secret.outputs.snyk_token }}
-      with:
-        image: ${{ env.DOCKER_IMAGE }}:${{ env.IMAGE_TAG }}
-        args: --file=Dockerfile --severity-threshold=high --exclude-app-vulns
-
-    - name: Push ${{ env.DOCKER_IMAGE }} images
-      if: ${{ success() && !contains(github.event.pull_request.labels.*.name, 'deploy') }}
-      run: docker image push --all-tags ${{ env.DOCKER_IMAGE }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        context: .
+        docker-repository: ${{ env.DOCKER_IMAGE }}
+        max-cache: true
+        reuse-cache: true
+#        snyk-token: ${{ secrets.SNYK_TOKEN }}
 
   deploy-review-app:
     name: Deployment To Review
@@ -113,80 +49,67 @@ jobs:
     if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'deploy') }}
     needs: [build]
     runs-on: ubuntu-latest
-    steps:
-    - name: Start review-${{ github.event.pull_request.number }} Deployment
-      uses: bobheadxi/deployments@v1
-      id: deployment
-      with:
-        env: review-${{ github.event.pull_request.number }}
-        ref: ${{ github.head_ref }}
-        step:  start
-        token: ${{ secrets.GITHUB_TOKEN }}
+    environment:
+      name: review
+      url: ${{ steps.deploy_review.outputs.environment_url }}
 
+    steps:
     - name: Checkout
       uses: actions/checkout@v4
 
     - name: Deploy App to Review
       id: deploy_review
-      uses: ./.github/actions/deploy/
+      uses: DFE-Digital/github-actions/deploy-to-aks@2088-create-github-workflow-templates
       with:
         azure-credentials:  ${{ secrets.AZURE_CREDENTIALS_REVIEW }}
         environment: review
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         pr-number: ${{ github.event.pull_request.number }}
-        sha: ${{ needs.build.outputs.IMAGE_TAG }}
+        sha: ${{ needs.build.outputs.docker-image-tag }}
+        terraform-base: ${{ env.TF_PATH }}
+        healthcheck: 'healthcheck/all'
+        # db-seed: true
 
-    - name: Update review-${{ github.event.pull_request.number }} status
-      if: always()
-      uses: bobheadxi/deployments@v1
-      with:
-        env:  review-${{ github.event.pull_request.number }}
-        ref: ${{ github.head_ref }}
-        step: finish
-        token:  ${{ secrets.GITHUB_TOKEN }}
-        status: ${{ job.status }}
-        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-        env_url: ${{ steps.deploy_review.outputs.deploy-url }}
+  # deploy-before-production:
+  #   name: Parallel deployment before production
+  #   environment:
+  #     name: ${{ matrix.environment }}
+  #     url: ${{ steps.deploy_app_before_production.outputs.deploy-url }}
+  #   if: ${{ success() && github.ref == 'refs/heads/main' }}
+  #   needs: [build]
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       environment: [qa,staging]
+  #   steps:
+  #   - name: Checkout
+  #     uses: actions/checkout@v4
 
-  deploy-before-production:
-    name: Parallel deployment before production
-    environment:
-      name: ${{ matrix.environment }}
-      url: ${{ steps.deploy_app_before_production.outputs.deploy-url }}
-    if: ${{ success() && github.ref == 'refs/heads/main' }}
-    needs: [build]
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        environment: [qa,staging]
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+  #   - name: Deploy app to ${{ matrix.environment }}
+  #     id: deploy_app_before_production
+  #     uses: ./.github/actions/deploy/
+  #     with:
+  #       azure-credentials: ${{ secrets[format('AZURE_CREDENTIALS_{0}', matrix.environment)] }}
+  #       environment: ${{ matrix.environment }}
+  #       sha: ${{ github.sha }}
 
-    - name: Deploy app to ${{ matrix.environment }}
-      id: deploy_app_before_production
-      uses: ./.github/actions/deploy/
-      with:
-        azure-credentials: ${{ secrets[format('AZURE_CREDENTIALS_{0}', matrix.environment)] }}
-        environment: ${{ matrix.environment }}
-        sha: ${{ github.sha }}
+  # deploy-production:
+  #   name: Production deployment
+  #   environment:
+  #     name: production
+  #     url: ${{ steps.deploy_production.outputs.deploy-url }}
+  #   if: ${{ success() && github.ref == 'refs/heads/main' }}
+  #   needs: [deploy-before-production]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Checkout
+  #     uses: actions/checkout@v4
 
-  deploy-production:
-    name: Production deployment
-    environment:
-      name: production
-      url: ${{ steps.deploy_production.outputs.deploy-url }}
-    if: ${{ success() && github.ref == 'refs/heads/main' }}
-    needs: [deploy-before-production]
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-
-    - name: Deploy app to production
-      id: deploy_production
-      uses: ./.github/actions/deploy/
-      with:
-        azure-credentials: ${{ secrets.AZURE_CREDENTIALS_PRODUCTION }}
-        environment: production
-        sha: ${{ github.sha }}
+  #   - name: Deploy app to production
+  #     id: deploy_production
+  #     uses: ./.github/actions/deploy/
+  #     with:
+  #       azure-credentials: ${{ secrets.AZURE_CREDENTIALS_PRODUCTION }}
+  #       environment: production
+  #       sha: ${{ github.sha }}

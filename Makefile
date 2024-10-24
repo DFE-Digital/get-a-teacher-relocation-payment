@@ -17,9 +17,10 @@ install-fetch-config:
 		|| true
 
 review:
-	$(if $(APP_NAME), , $(error Missing environment variable "APP_NAME", Please specify a pr number for your review app))
+	$(if $(PR_NUMBER), , $(error Missing environment variable "PR_NUMBER", Please specify a pr number for your review app))
 	$(eval include global_config/review.sh)
 	$(eval DEPLOY_ENV=review)
+	$(eval APP_NAME=pr-${PR_NUMBER})
 	$(eval export TF_VAR_app_name=$(APP_NAME))
 	echo https://teacher-relocation-payment-$(APP_NAME).test.teacherservices.cloud will be created in aks
 
@@ -36,7 +37,10 @@ production:
 	$(eval DEPLOY_ENV=production)
 
 ci:	## Run in automation environment
-	$(eval export AUTO_APPROVE=-auto-approve)
+	$(eval DISABLE_PASSCODE=true)
+	$(eval AUTO_APPROVE=-auto-approve)
+	$(eval SP_AUTH=true)
+	$(eval SKIP_AZURE_LOGIN=true)
 
 install-terrafile: ## Install terrafile to manage terraform modules
 	[ ! -f bin/terrafile ] \
@@ -45,7 +49,7 @@ install-terrafile: ## Install terrafile to manage terraform modules
 		|| true
 
 set-azure-account:
-	az account set -s ${AZ_SUBSCRIPTION}
+	[ "${SKIP_AZURE_LOGIN}" != "true" ] && az account set -s ${AZ_SUBSCRIPTION} || true
 
 terraform-init: install-terrafile set-azure-account
 	$(if $(IMAGE_TAG), , $(eval export IMAGE_TAG=main))
@@ -163,3 +167,14 @@ domain-azure-resources: set-azure-account
 	az deployment sub create -l "UK South" --template-uri "https://raw.githubusercontent.com/DFE-Digital/tra-shared-services/${ARM_TEMPLATE_TAG}/azure/resourcedeploy.json" \
 		--name "${DNS_ZONE}domains-$(shell date +%Y%m%d%H%M%S)" --parameters "resourceGroupName=${RESOURCE_NAME_PREFIX}-${DNS_ZONE}domains-rg" 'tags=${RG_TAGS}' \
 			"tfStorageAccountName=${RESOURCE_NAME_PREFIX}${DNS_ZONE}domainstf" "tfStorageContainerName=${DNS_ZONE}domains-tf"  "keyVaultName=${RESOURCE_NAME_PREFIX}-${DNS_ZONE}domains-kv" ${WHAT_IF}
+
+db-seed: get-cluster-credentials
+	$(if $(APP_NAME), , $(error can only run with PR_NUMBER))
+	kubectl -n ${NAMESPACE} exec deployment/teacher-relocation-payment-${APP_NAME} -- /bin/sh -c "cd /app && bundle exec rake db:version"
+
+smoke-test: get-cluster-credentials
+	$(if $(APP_NAME), $(eval export APP_ID=$(APP_NAME)) , $(eval export APP_ID=$(CONFIG_LONG)))
+#	kubectl -n ${NAMESPACE} exec deployment/teacher-relocation-payment-${APP_ID} -- /bin/sh -c "RAILS_ENV=${CONFIG} bundle exec rspec spec/smoke"
+	RAILS_ENV=${CONFIG} bin/rspec spec/requests/healthchecks_spec.rb"
+
+printvar-%: ; @echo $($*)
