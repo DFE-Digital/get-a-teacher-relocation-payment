@@ -17,9 +17,10 @@ install-fetch-config:
 		|| true
 
 review:
-	$(if $(APP_NAME), , $(error Missing environment variable "APP_NAME", Please specify a pr number for your review app))
+	$(if $(PR_NUMBER), , $(error Missing environment variable "PR_NUMBER", Please specify a pr number for your review app))
 	$(eval include global_config/review.sh)
 	$(eval DEPLOY_ENV=review)
+	$(eval APP_NAME=pr-${PR_NUMBER})
 	$(eval export TF_VAR_app_name=$(APP_NAME))
 	echo https://teacher-relocation-payment-$(APP_NAME).test.teacherservices.cloud will be created in aks
 
