@@ -10,12 +10,6 @@ on:
     - main
     types: [opened, reopened, synchronize, labeled]
 
-permissions:
-  contents: write
-  deployments: write
-  packages: write
-  pull-requests: write
-
 env:
   TF_PATH: terraform/aks
 
@@ -49,13 +43,16 @@ jobs:
     if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'deploy') }}
     needs: [build]
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      pull-requests: write
     environment:
       name: review
       url: ${{ steps.deploy_review.outputs.environment_url }}
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+    # - name: Checkout
+    #   uses: actions/checkout@v4
 
     - name: Deploy App to Review
       id: deploy_review
@@ -63,11 +60,13 @@ jobs:
       with:
         azure-credentials:  ${{ secrets.AZURE_CREDENTIALS_REVIEW }}
         environment: review
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        # github-token: ${{ secrets.GITHUB_TOKEN }}
         pr-number: ${{ github.event.pull_request.number }}
         sha: ${{ needs.build.outputs.docker-image-tag }}
         terraform-base: ${{ env.TF_PATH }}
         healthcheck: 'healthcheck/all'
+        # gcp-wip: ${{ vars.GCP_WIP }}
+        # gcp-project-id: ${{ vars.GCP_PROJECT_ID }}
         # db-seed: true
 
   # deploy-before-production:

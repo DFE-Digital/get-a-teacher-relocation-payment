@@ -53,8 +53,12 @@ locals {
   infra_secrets     = yamldecode(data.azurerm_key_vault_secret.infra_secrets.value)
   app_config        = yamldecode(file(var.app_config_file))[var.environment]
 
+  environment_variables = yamldecode(file("${path.module}/config/${var.environment}.yml"))
+  external_url = try(local.environment_variables["EXTERNAL_URL"], module.web_application.url)
+
   app_env_values = merge(
     local.app_config,
+    local.environment_variables,
   #  sslmode not defined in database.yml?
     { DB_SSLMODE = local.postgres_ssl_mode }
   )
