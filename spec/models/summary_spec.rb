@@ -39,6 +39,12 @@ RSpec.describe Summary do
   end
 
   describe "rows" do
+    around do |example|
+      travel_to Date.new(2024, 7, 1) do
+        example.run
+      end
+    end
+
     let(:expected_rows) do
       [
         { key: { text: "Application route" },

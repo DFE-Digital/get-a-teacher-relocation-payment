@@ -55,8 +55,7 @@ Rails.application.configure do
   # config/initializers/dartsass.rb
   config.dartsass.build_options << " --quiet-deps"
 
-  # Or :info
-  config.log_level = :debug
+  config.log_level = :warn
   # Console colorised non-json output
   config.log_format = :color
   # Show file and line number (expensive: not for production)
