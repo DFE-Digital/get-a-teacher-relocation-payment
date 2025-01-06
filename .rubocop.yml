@@ -87,7 +87,7 @@ RSpec/MultipleExpectations:
   Exclude:
     - 'spec/queries/**/*'
     - 'spec/features/**/*'
- 
+
 RSpec/MessageSpies:
   Exclude:
     - 'spec/services/update_form_spec.rb'
@@ -111,3 +111,6 @@ RSpec/MultipleMemoizedHelpers:
   Exclude:
     - 'spec/models/event_spec.rb'
     - 'spec/helpers/audit_message_helper_spec.rb'
+
+RSpec/Rails/TravelAround:
+  Enabled: false
