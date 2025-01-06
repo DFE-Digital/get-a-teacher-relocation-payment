@@ -64,6 +64,12 @@ module Reports
             "Visa Type",
             "Rejection Reason",
             "Ip Address",
+            "School Name",
+            "School Headteacher",
+            "School Address Line 1",
+            "School Address Line 2",
+            "School City",
+            "School Postcode",
           ].join(",")
         end
 
@@ -78,6 +84,17 @@ module Reports
         it { expect(report.generate).to include(banking.urn) }
         it { expect(report.generate).to include(paid.urn) }
         it { expect(report.generate).to include(rejected.urn) }
+      end
+
+      it "generates correct data" do
+        csv = CSV.parse(report.generate, headers: true)
+
+        expect(csv[6]["School Name"]).to eql(application.applicant.school.name)
+        expect(csv[6]["School Headteacher"]).to eql(application.applicant.school.headteacher_name)
+        expect(csv[6]["School Address Line 1"]).to eql(application.applicant.school.address.address_line_1)
+        expect(csv[6]["School Address Line 2"]).to eql(application.applicant.school.address.address_line_2)
+        expect(csv[6]["School City"]).to eql(application.applicant.school.address.city)
+        expect(csv[6]["School Postcode"]).to eql(application.applicant.school.address.postcode)
       end
     end
   end
