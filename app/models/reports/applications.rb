@@ -35,6 +35,12 @@ module Reports
         visa_type
         rejection_reason
         ip_address
+        school_name
+        school_headteacher
+        school_address_line_1
+        school_address_line_2
+        school_city
+        school_postcode
       ].map { _1.to_s.titleize }
     end
 
@@ -65,6 +71,12 @@ module Reports
         application.visa_type,
         application.application_progress.rejection_reason,
         applicant.ip_address,
+        applicant.school.name,
+        applicant.school.headteacher_name,
+        applicant.school.address.address_line_1,
+        applicant.school.address.address_line_2,
+        applicant.school.address.city,
+        applicant.school.address.postcode,
       ]
     end
 
