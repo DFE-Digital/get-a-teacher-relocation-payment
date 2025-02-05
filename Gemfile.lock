@@ -97,7 +97,8 @@ GEM
       debug_inspector (>= 0.0.1)
     bootsnap (1.17.0)
       msgpack (~> 1.2)
-    brakeman (6.1.0)
+    brakeman (6.2.1)
+      racc
     brow (0.4.1)
     builder (3.3.0)
     bundler-audit (0.9.1)
