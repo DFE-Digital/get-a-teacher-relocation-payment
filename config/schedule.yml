@@ -1,3 +1,0 @@
-delete_stale_forms:
-  cron: "0 1 * * *"
-  class: DeleteStaleFormsJob
